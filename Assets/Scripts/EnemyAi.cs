@@ -83,19 +83,7 @@ public class EnemyAi : MonoBehaviour
 
                     if(waitTimer <= 0)
                     {
-                        float lastDist = Vector3.Distance(transform.position, waypoints[0]);
-
-                        for (int i = 0; i < waypoints.Length; i++)
-                        {
-                            float distance = Vector3.Distance(transform.position, waypoints[i]);
-
-                            if (lastDist > distance)
-                            {
-                                transform.LookAt(waypoints[i]);
-                                c_FollowPath = StartCoroutine(FollowPath(waypoints, i));
-                                break;
-                            }
-                        }
+                        DistanceCheck();
                         waitTimer = 5;
                     }
                 }
@@ -139,6 +127,29 @@ public class EnemyAi : MonoBehaviour
         //    timer = 10;
         //}
 
+    }
+
+    private void DistanceCheck()
+    {
+        int closestNode = -1;
+        float closestNodeDis = float.MaxValue;
+
+        for (int i = 0; i < waypoints.Length; i++)
+        {
+            //float lastDist = (transform.position - waypoints[i - 1]).magnitude;
+            //Debug.Log(lastDist);
+
+            float distance = (transform.position - waypoints[i]).magnitude;
+
+            if (distance < closestNodeDis)
+            {
+                closestNode = i;
+                closestNodeDis = distance;
+            }
+        }
+
+        transform.LookAt(waypoints[closestNode]);
+        c_FollowPath = StartCoroutine(FollowPath(waypoints, closestNode));
     }
 
     //This function is used to detect the player within the cone of vision of the spotlight
