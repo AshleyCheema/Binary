@@ -35,6 +35,7 @@ public class EnemyAi : MonoBehaviour
     private Vector3 lastKnownPos;
     private Vector3 targetWaypoint;
     private Vector3[] waypoints;
+    public bool alive = true;
 
     void Start()
     {
@@ -186,10 +187,10 @@ public class EnemyAi : MonoBehaviour
         //targetWaypointIndex = 1;
         targetWaypoint = waypoints[targetWaypointIndex];
 
-        while (true)
+        while (alive)
         {
-            transform.position = Vector3.MoveTowards(transform.position, targetWaypoint, speed * Time.deltaTime);
-            if (transform.position == targetWaypoint)
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(targetWaypoint.x, transform.position.y, targetWaypoint.z), speed * Time.deltaTime);
+            if (transform.position.x == targetWaypoint.x)
             {
                 targetWaypointIndex = (targetWaypointIndex + 1) % waypoints.Length;
                 targetWaypoint = waypoints[targetWaypointIndex];
@@ -208,14 +209,17 @@ public class EnemyAi : MonoBehaviour
     //instead of staying in the same facing position throughout
     IEnumerator LookAtPatrol(Vector3 lookTarget)
     {
-        Vector3 directionLook = (lookTarget - transform.position).normalized;
-        float targetAngle = 90 - Mathf.Atan2(directionLook.z, directionLook.x) * Mathf.Rad2Deg;
-
-        while (Mathf.Abs(Mathf.DeltaAngle(transform.eulerAngles.y, targetAngle)) > 0.05f)
+        if (alive)
         {
-            float angle = Mathf.MoveTowardsAngle(transform.eulerAngles.y, targetAngle, turnSpeed * Time.deltaTime);
-            transform.eulerAngles = Vector3.up * angle;
-            yield return null;
+            Vector3 directionLook = (lookTarget - transform.position).normalized;
+            float targetAngle = 90 - Mathf.Atan2(directionLook.z, directionLook.x) * Mathf.Rad2Deg;
+
+            while (Mathf.Abs(Mathf.DeltaAngle(transform.eulerAngles.y, targetAngle)) > 0.05f)
+            {
+                float angle = Mathf.MoveTowardsAngle(transform.eulerAngles.y, targetAngle, turnSpeed * Time.deltaTime);
+                transform.eulerAngles = Vector3.up * angle;
+                yield return null;
+            }
         }
     }
 

@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ladder
+  - Terminal
+  - Enemy
   layers:
   - Default
   - TransparentFX
