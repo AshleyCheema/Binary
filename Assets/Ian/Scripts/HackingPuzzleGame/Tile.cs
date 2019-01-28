@@ -43,7 +43,7 @@ public class Tile
         openDirections = new bool[4];
         for (int i = 0; i < openDirections.Length; i++)
         {
-            openDirections[i] = false;
+            openDirections[i] = true;
         }
 
         gameObject = GameObject.Find("IMG_Tile_" + a_index);

@@ -34,11 +34,6 @@ public class HackingPuzzleManager : MonoBehaviour
 
         startTile.ChangeColour(Color.blue);
         endTile.ChangeColour(Color.red);
-
-        startTile.OpenDirections = new bool []
-        { false, true, false, false };
-        tiles[0, 1].OpenDirections = new bool[]
-        {false, false, false, true};
     }
 
     private void Update()
@@ -61,20 +56,31 @@ public class HackingPuzzleManager : MonoBehaviour
         List<Tile> closedTiles = new List<Tile>();
 
         openTiles.Add(startTile);
+        Tile cTile = openTiles[0];
 
-        while(openTiles.Count > 0)
+        while (openTiles.Count > 0)
         {
-            Tile cTile = openTiles[0];
             openTiles.Remove(cTile);
             closedTiles.Add(cTile);
+
+            if(cTile == endTile)
+            {
+                Debug.Break();
+            }
 
             List<Tile> neighbours = GetNeighbours(cTile);
             for (int i = 0; i < neighbours.Count; i++)
             {
-                if(!openTiles.Contains(neighbours[i]))
+                if(!closedTiles.Contains(neighbours[i]) && 
+                    !openTiles.Contains(neighbours[i]))
                 {
                     openTiles.Add(neighbours[i]);
                 }
+            }
+
+            if (openTiles.Count > 0)
+            {
+                cTile = openTiles[0];
             }
         }
 
@@ -92,35 +98,42 @@ public class HackingPuzzleManager : MonoBehaviour
     private List<Tile> GetNeighbours(Tile a_tile)
     {
         List<Tile> returnNeighbours = new List<Tile>();
-        float tileX = 0;
-        float tileY = 0;
+        int tileX = (int)a_tile.X;
+        int tileY = (int)a_tile.Y;
 
-        for (int x = -1; x <= 1; x++)
+        if (tileY - 1 >= 0)
         {
-            for (int y = -1; y <= 1; y++)
+            //check top
+            if (a_tile.OpenDirections[0] == true && tiles[tileX, tileY - 1].OpenDirections[2] == true)
             {
-                if (x == 0 && y == 0 || x == y)
-                {
-                    continue;
-                }
+                returnNeighbours.Add(tiles[tileX, tileY - 1]);
+            }
+        }
 
-                tileX = a_tile.X + x;
-                tileY = a_tile.Y + y;
+        if (tileY + 1 < 4)
+        {
+            //check bottom
+            if (a_tile.OpenDirections[2] == true && tiles[tileX, tileY + 1].OpenDirections[0] == true)
+            {
+                returnNeighbours.Add(tiles[tileX, tileY + 1]);
+            }
+        }
 
-                //check top
-                if (tileY >= 0 && tileY < 4 && tileX >= 0 && tileX < 5)
-                {
-                    if (a_tile.OpenDirections[0] == true && tiles[x, y].OpenDirections[2] == true)
-                    {
-                        returnNeighbours.Add(tiles[x, y]);
-                    }
+        if (tileX - 1 >= 0)
+        {
+            //check left
+            if (a_tile.OpenDirections[3] == true && tiles[tileX - 1, tileY].OpenDirections[1] == true)
+            {
+                returnNeighbours.Add(tiles[tileX - 1, tileY]);
+            }
+        }
 
-                    //check right
-                    if (a_tile.OpenDirections[1] == true && tiles[x, y].OpenDirections[3] == true)
-                    {
-                        returnNeighbours.Add(tiles[x, y]);
-                    }
-                }
+        if (tileX + 1 < 4)
+        {
+            //check right
+            if (a_tile.OpenDirections[1] == true && tiles[tileX + 1, tileY].OpenDirections[3] == true)
+            {
+                returnNeighbours.Add(tiles[tileX + 1, tileY]);
             }
         }
         return returnNeighbours;
