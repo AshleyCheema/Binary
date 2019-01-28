@@ -13,7 +13,8 @@ public class GameController : MonoBehaviour
     private bool _isClimbing = false;
     private bool enemySelected = false;
     public GameObject drone;
-    private bool isDrone = false;
+    public bool isDrone = false;
+    public bool isTerminal = false;
  
     // Use this for initialization
     void Start ()
@@ -44,12 +45,7 @@ public class GameController : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.H))
         {
-            if (isDrone)
-            {
-                drone.SetActive(false);
-                isDrone = false;
-            }
-            else
+            if (!isDrone)
             {
                 drone.transform.position = gameObject.transform.position + new Vector3(2, 0, 0);
                 drone.SetActive(true);
@@ -133,6 +129,15 @@ public class GameController : MonoBehaviour
         //    //_isClimbing = true;
         //    //xNavMeshAgent.enabled = false;
         //}
+
+        if(other.gameObject.tag == "Terminal")
+        {
+            isTerminal = true;
+        }
+        else
+        {
+            isTerminal = false;
+        }
 
         if(enemySelected == true)
         {
