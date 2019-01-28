@@ -12,12 +12,16 @@ public class GameController : MonoBehaviour
     private Ray ray;
     private bool _isClimbing = false;
     private bool enemySelected = false;
+    public GameObject drone;
+    private bool isDrone = false;
  
     // Use this for initialization
     void Start ()
     {
         xNavMeshAgent = GetComponent<NavMeshAgent>();
         xNavMeshAgent.updateRotation = false;
+        drone = GameObject.Find("Drone");
+        drone.SetActive(false);
     }
 	
 	// Update is called once per frame
@@ -37,6 +41,22 @@ public class GameController : MonoBehaviour
                 xNavMeshAgent.SetDestination(hit.point);
             }
         }
+
+        if(Input.GetKeyDown(KeyCode.H))
+        {
+            if (isDrone)
+            {
+                drone.SetActive(false);
+                isDrone = false;
+            }
+            else
+            {
+                drone.transform.position = gameObject.transform.position + new Vector3(2, 0, 0);
+                drone.SetActive(true);
+                isDrone = true;
+            }
+        }
+ 
 
         if(Input.GetMouseButtonDown(1))
         {
