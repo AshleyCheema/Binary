@@ -10,4 +10,17 @@ public static class ExtensionFunctions
         Debug.Log(a_message);
 #endif
     }
+
+    /// <summary>
+    /// Extension Method for material to change the colour of an object
+    /// </summary>
+    /// <param name="a_material"></param>
+    /// <param name="a_color"></param>
+    public static void SetColor(this Material a_material, Color a_color)
+    {
+        if (a_material.HasProperty("_BaseColor"))
+        {
+            a_material.SetColor("_BaseColor", a_color);
+        }
+    }
 }
