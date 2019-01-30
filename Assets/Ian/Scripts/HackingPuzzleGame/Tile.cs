@@ -32,6 +32,22 @@ public class Tile
     public GameObject GameObject
     { get { return gameObject; } }
 
+    //Variables for pathfind on the grid
+    private int gCost;
+    public int GCost
+    { get { return gCost; } set { gCost = value; } }
+
+    private int hCost;
+    public int HCost
+    { get { return hCost; } set { hCost = value; } }
+
+    public int FCost
+    { get { return GCost + HCost; } }
+
+    private Tile parent;
+    public Tile Parent
+    { get { return parent; } set { parent = value; } }
+
     /// <summary>
     /// Constructor
     /// </summary>
@@ -40,13 +56,31 @@ public class Tile
         x = a_index / 6;
         y = a_index % 6;
 
+        gameObject = GameObject.Find("IMG_Tile_" + a_index);
+
         openDirections = new bool[4];
         for (int i = 0; i < openDirections.Length; i++)
         {
-            openDirections[i] = true;
+            openDirections[i] = false;
         }
+        TileEditor te = gameObject.GetComponent<TileEditor>();
 
-        gameObject = GameObject.Find("IMG_Tile_" + a_index);
+        if(te.TopOpening)
+        {
+            openDirections[0] = true;
+        }
+        if (te.RightOpening)
+        {
+            openDirections[1] = true;
+        }
+        if (te.BottomOpening)
+        {
+            openDirections[2] = true;
+        }
+        if (te.LeftOpening)
+        {
+            openDirections[3] = true;
+        }
     }
 
     /// <summary>
@@ -73,6 +107,8 @@ public class Tile
         }
 
         openDirections = newOpenDirections;
+        gameObject.transform.rotation *= Quaternion.Euler(0, 0, -90);
+        gameObject.GetComponent<TileEditor>().SetValues(openDirections);
     }
 
     /// <summary>

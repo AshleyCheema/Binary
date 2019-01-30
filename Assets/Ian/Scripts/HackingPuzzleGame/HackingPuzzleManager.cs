@@ -56,37 +56,73 @@ public class HackingPuzzleManager : MonoBehaviour
         List<Tile> closedTiles = new List<Tile>();
 
         openTiles.Add(startTile);
-        Tile cTile = openTiles[0];
-
+        Tile cTile = null;
         while (openTiles.Count > 0)
         {
-            openTiles.Remove(cTile);
-            closedTiles.Add(cTile);
+            cTile = openTiles[0];
 
-            if(cTile == endTile)
+            for (int i = 0; i < openTiles.Count; i++)
             {
-                Debug.Break();
-            }
-
-            List<Tile> neighbours = GetNeighbours(cTile);
-            for (int i = 0; i < neighbours.Count; i++)
-            {
-                if(!closedTiles.Contains(neighbours[i]) && 
-                    !openTiles.Contains(neighbours[i]))
+                if(openTiles[i].FCost < cTile.FCost || openTiles[i].HCost < cTile.HCost)
                 {
-                    openTiles.Add(neighbours[i]);
+                    cTile = openTiles[i];
                 }
             }
 
-            if (openTiles.Count > 0)
+            if(cTile == endTile)
             {
-                cTile = openTiles[0];
+                break;
+            }
+
+            openTiles.Remove(cTile);
+            closedTiles.Add(cTile);
+
+            List<Tile> neighbours = GetNeighbours(cTile);
+            foreach(Tile n in neighbours)
+            {
+                if(closedTiles.Contains(n))
+                {
+                    continue;
+                }
+
+                int newCost = cTile.GCost + GetDistance(cTile, n);
+
+                if(newCost < n.GCost || !openTiles.Contains(n))
+                {
+                    n.GCost = newCost;
+                    n.HCost = GetDistance(cTile, n);
+                    n.Parent = cTile;
+
+                    if(!openTiles.Contains(n))
+                    {
+                        openTiles.Add(n);
+                    }
+                }
             }
         }
 
-        for (int i = 0; i < closedTiles.Count; i++)
+        while(cTile != null)
         {
-            closedTiles[i].ChangeColour(Color.green);
+            cTile.ChangeColour(Color.green);
+            cTile = cTile.Parent;
+        }
+    }
+
+    private int GetDistance(Tile a_tileOne, Tile a_tileTwo)
+    {
+        //Get both the distance on the x and y axis
+        int dstX = (int)Mathf.Abs(a_tileOne.X - a_tileTwo.X);
+        int dstY = (int)Mathf.Abs(a_tileOne.Y - a_tileTwo.Y);
+
+        //if the x is greater thent the y fartheraway do this
+        if (dstX > dstY)
+        {
+            return 14 * dstY + 10 * (dstX - dstY);
+        }
+        //else do this
+        else
+        {
+            return 14 * dstX + 10 * (dstY - dstX);
         }
     }
 
@@ -101,28 +137,10 @@ public class HackingPuzzleManager : MonoBehaviour
         int tileX = (int)a_tile.X;
         int tileY = (int)a_tile.Y;
 
-        if (tileY - 1 >= 0)
-        {
-            //check top
-            if (a_tile.OpenDirections[0] == true && tiles[tileX, tileY - 1].OpenDirections[2] == true)
-            {
-                returnNeighbours.Add(tiles[tileX, tileY - 1]);
-            }
-        }
-
-        if (tileY + 1 < 4)
-        {
-            //check bottom
-            if (a_tile.OpenDirections[2] == true && tiles[tileX, tileY + 1].OpenDirections[0] == true)
-            {
-                returnNeighbours.Add(tiles[tileX, tileY + 1]);
-            }
-        }
-
         if (tileX - 1 >= 0)
         {
-            //check left
-            if (a_tile.OpenDirections[3] == true && tiles[tileX - 1, tileY].OpenDirections[1] == true)
+            //check top
+            if (a_tile.OpenDirections[0] == true && tiles[tileX - 1, tileY].OpenDirections[2] == true)
             {
                 returnNeighbours.Add(tiles[tileX - 1, tileY]);
             }
@@ -130,10 +148,28 @@ public class HackingPuzzleManager : MonoBehaviour
 
         if (tileX + 1 < 4)
         {
-            //check right
-            if (a_tile.OpenDirections[1] == true && tiles[tileX + 1, tileY].OpenDirections[3] == true)
+            //check bottom
+            if (a_tile.OpenDirections[2] == true && tiles[tileX + 1, tileY].OpenDirections[0] == true)
             {
                 returnNeighbours.Add(tiles[tileX + 1, tileY]);
+            }
+        }
+
+        if (tileY - 1 >= 0)
+        {
+            //check left
+            if (a_tile.OpenDirections[3] == true && tiles[tileX, tileY - 1].OpenDirections[1] == true)
+            {
+                returnNeighbours.Add(tiles[tileX, tileY - 1]);
+            }
+        }
+
+        if (tileY + 1 < 6)
+        {
+            //check right
+            if (a_tile.OpenDirections[1] == true && tiles[tileX, tileY + 1].OpenDirections[3] == true)
+            {
+                returnNeighbours.Add(tiles[tileX, tileY + 1]);
             }
         }
         return returnNeighbours;
