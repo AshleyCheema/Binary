@@ -1,5 +1,7 @@
 ﻿/*
- * 
+ * Hacking mini game maanger. 
+ * This class will handle what should happen when a hacking mini game is displayed.
+ * This class currently should be used per a canvas
  * 
  */
 
@@ -48,8 +50,9 @@ public class HackingPuzzleManager : MonoBehaviour
     /// Start the puzzle. This will go though all the tiles and check for a path to the 
     /// end tile
     /// </summary>
-    private void StartPuzzle()
+    public bool StartPuzzle()
     {
+        bool isCompleted = false;
         //Store all the tiles which need to be updated
         List<Tile> openTiles = new List<Tile>();
         //Store all the tiles that have been updated
@@ -71,6 +74,7 @@ public class HackingPuzzleManager : MonoBehaviour
 
             if(cTile == endTile)
             {
+                isCompleted = true;
                 break;
             }
 
@@ -106,6 +110,8 @@ public class HackingPuzzleManager : MonoBehaviour
             cTile.ChangeColour(Color.green);
             cTile = cTile.Parent;
         }
+
+        return isCompleted;
     }
 
     private int GetDistance(Tile a_tileOne, Tile a_tileTwo)

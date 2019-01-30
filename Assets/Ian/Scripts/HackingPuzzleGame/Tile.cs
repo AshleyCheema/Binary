@@ -1,5 +1,7 @@
 ﻿/*
  * 
+ * Tile object for the hacking mini game.
+ * 
  */
 
 using System.Collections;
@@ -80,6 +82,12 @@ public class Tile
         if (te.LeftOpening)
         {
             openDirections[3] = true;
+        }
+
+        int randomSteps = Random.Range(0, 4);
+        for (int i = 0; i < randomSteps; i++)
+        {
+            RotateTile();
         }
     }
 

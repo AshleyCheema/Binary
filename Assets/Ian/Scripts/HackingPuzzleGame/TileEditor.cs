@@ -1,4 +1,9 @@
-﻿using System.Collections;
+﻿/*
+ * 
+ * Tile Editor class. Used in the editor to setup the hacking mini game.
+ * 
+ */
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
