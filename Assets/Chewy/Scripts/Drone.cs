@@ -35,19 +35,23 @@ public class Drone : MonoBehaviour
         //Movement keys
 	    if(Input.GetKey(KeyCode.W))
         {
-            transform.Translate(new Vector3(0, 0, 1) * 0.05f);
+            transform.Translate(Vector3.right * 0.05f);
         }
         if(Input.GetKey(KeyCode.S))
         {
-            transform.Translate(new Vector3(0, 0, 1) * -0.05f);
+            transform.Translate(Vector3.right * -0.05f);
         }
         if(Input.GetKey(KeyCode.A))
         {
-            transform.Rotate(Vector3.down * 1);
+            //transform.Rotate(Vector3.down * 1);
+            transform.Translate(Vector3.forward * 0.05f);
+
         }
         if (Input.GetKey(KeyCode.D))
         {
-            transform.Rotate(Vector3.up * 1);
+            //transform.Rotate(Vector3.up * 1);
+            transform.Translate(Vector3.forward * -0.05f);
+
         }
     }
 
@@ -58,6 +62,8 @@ public class Drone : MonoBehaviour
         {
             if(other.gameObject.tag == "Enemy")
             {
+                other.gameObject.GetComponent<Renderer>().material.SetColor(Color.black);
+                other.gameObject.GetComponent<EnemyAi>().StopCoro();
                 Debug.Log("Phaser Set to Stun");
             }
         }

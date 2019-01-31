@@ -38,6 +38,8 @@ public class HackingPuzzleManager : MonoBehaviour
         endTile.ChangeColour(Color.red);
     }
 
+
+
     /// <summary>
     /// Start the puzzle. This will go though all the tiles and check for a path to the 
     /// end tile

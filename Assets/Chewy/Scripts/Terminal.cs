@@ -10,14 +10,16 @@ public class Terminal : MonoBehaviour
     //public Camera camera;
     private Renderer renderer;
     private GameController gameController;
+    [SerializeField]
+    private GameObject hackingCanvas;
+    [SerializeField]
+    private GameObject hackOutput;
 
     // Use this for initialization
     void Start ()
     {
         renderer = GetComponent<Renderer>();
         gameController = GameObject.FindGameObjectWithTag("Player").GetComponent<GameController>();
-        m = this.renderer.material;
-
     }
 	
 	// Update is called once per frame
@@ -35,21 +37,50 @@ public class Terminal : MonoBehaviour
         //}
     }
 
+    public void Enable()
+    {
+        if (hackOutput.activeInHierarchy == true)
+        {
+            Debug.Log("Terminal is enabled");
+            hackingCanvas.SetActive(true);
+            gameController.enabled = false;
+        }
+
+    }
+
+    public void Hack()
+    {
+        bool result = hackingCanvas.GetComponent<HackingPuzzleManager>().StartPuzzle();
+
+        hackingCanvas.SetActive(false);
+        gameController.enabled = true;
+
+        if(result)
+        {
+            Debug.Log("Hack Complete");
+            hackOutput.SetActive(false);
+        }
+        else
+        {
+            Debug.Log("Hack Failed");
+        }
+    }
+
     //Hover mouse over gameobject, this will change it's colour.
     //If the player is close enough to the gameobject it is hackable
     private void OnMouseOver()
     {
-        m.SetColor(Color.red);
+        renderer.material.SetColor(Color.red);
         if (gameController.isTerminal == true)
         {
-            if (Input.GetMouseButtonDown(1))
-            {
+            //if (Input.GetMouseButtonDown(1))
+            //{
                 //disable player controller
                 gameController.enabled = false;
                 //pop up canvas 
                 hackingCanvas.SetActive(true);
                 //camera.enabled = true;
-            }
+            //}
         }
     }
 
@@ -61,6 +92,6 @@ public class Terminal : MonoBehaviour
     //Change back to original colour when no longer hovered over
     private void OnMouseExit()
     {
-        m.SetColor(Color.white);
+        renderer.material.SetColor(Color.white);
     }
 }

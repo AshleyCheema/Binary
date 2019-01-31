@@ -156,27 +156,50 @@ public class EnemyAi : MonoBehaviour
     //This function is used to detect the player within the cone of vision of the spotlight
     bool CanSeePlayer()
      {
-        if (Vector3.Distance(transform.position, player.position) < viewDistance)
+        if (!player.gameObject.GetComponent<GameController>().isTerminal)
         {
-            Vector3 dirToPlayer = (player.position - transform.position).normalized;
-            float angleBetween = Vector3.Angle(transform.forward, dirToPlayer);
-
-            if(angleBetween < viewAngle / 2f)
+            if (Vector3.Distance(transform.position, player.position) < viewDistance)
             {
-                if(!Physics.Linecast(transform.position, player.position, out hit, viewMask))
-                {
-                    //lastKnownPos = new Vector3(player.position.x, transform.position.y, player.position.y); //new Vector3(hit.point.x, transform.position.y, hit.point.z);
+                Vector3 dirToPlayer = (player.position - transform.position).normalized;
+                float angleBetween = Vector3.Angle(transform.forward, dirToPlayer);
 
-                    if(c_FollowPath != null)
+                if (angleBetween < viewAngle / 2f)
+                {
+                    if (!Physics.Linecast(transform.position, player.position, out hit, viewMask))
                     {
-                        StopCoroutine(c_FollowPath);
-                        c_FollowPath = null;
+                        //lastKnownPos = new Vector3(player.position.x, transform.position.y, player.position.y); //new Vector3(hit.point.x, transform.position.y, hit.point.z);
+
+                        if (c_FollowPath != null)
+                        {
+                            StopCoroutine(c_FollowPath);
+                            c_FollowPath = null;
+                        }
+                        return true;
                     }
-                    return true;
                 }
             }
         }
         return false;
+    }
+
+    public void StopCoro()
+    {
+        if (alive)
+        {
+            StopCoroutine(c_FollowPath);
+            StopCoroutine(c_Rotating);
+
+            Invoke(nameof(StartCoro), 5.0f);
+        }
+        alive = false;
+
+    }
+
+    public void StartCoro()
+    {
+        alive = true;
+        GetComponent<Renderer>().material.SetColor(Color.red);
+        c_FollowPath = StartCoroutine(FollowPath(waypoints, 0));
     }
 
     //The function is used to make the AI patrol a certain route in the level
