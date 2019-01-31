@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 /// <summary>
@@ -7,10 +7,9 @@ using UnityEngine;
 /// </summary>
 public class Terminal : MonoBehaviour
 {
-    public Camera camera;
+    //public Camera camera;
     private Renderer renderer;
     private GameController gameController;
-    private Material m;
 
     // Use this for initialization
     void Start ()
@@ -25,15 +24,15 @@ public class Terminal : MonoBehaviour
 	void Update ()
     {
         //Check if the camera is enabled
-        if (camera.enabled == true)
-        {
-            //if so and the escape is pressed then turn off camera and re-enable player controls
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                gameController.enabled = true;
-                camera.enabled = false;
-            }
-        }
+        //if (camera.enabled == true)
+        //{
+        //    //if so and the escape is pressed then turn off camera and re-enable player controls
+        //    if (Input.GetKeyDown(KeyCode.Escape))
+        //    {
+        //        gameController.enabled = true;
+        //        camera.enabled = false;
+        //    }
+        //}
     }
 
     //Hover mouse over gameobject, this will change it's colour.
@@ -45,10 +44,18 @@ public class Terminal : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(1))
             {
+                //disable player controller
                 gameController.enabled = false;
-                camera.enabled = true;
+                //pop up canvas 
+                hackingCanvas.SetActive(true);
+                //camera.enabled = true;
             }
         }
+    }
+
+    private void HackingCompleted(bool a_result)
+    {
+
     }
 
     //Change back to original colour when no longer hovered over

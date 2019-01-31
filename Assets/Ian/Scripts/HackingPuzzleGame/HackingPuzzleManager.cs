@@ -38,14 +38,6 @@ public class HackingPuzzleManager : MonoBehaviour
         endTile.ChangeColour(Color.red);
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            StartPuzzle();
-        }
-    }
-
     /// <summary>
     /// Start the puzzle. This will go though all the tiles and check for a path to the 
     /// end tile
