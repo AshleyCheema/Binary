@@ -15,6 +15,8 @@ public class GameController : MonoBehaviour
     public GameObject drone;
     public bool isDrone = false;
     public bool isTerminal = false;
+    private GameObject throwable;
+    private bool isThrowing;
  
     // Use this for initialization
     void Start ()
@@ -22,6 +24,8 @@ public class GameController : MonoBehaviour
         xNavMeshAgent = GetComponent<NavMeshAgent>();
         xNavMeshAgent.updateRotation = false;
         drone = GameObject.Find("Drone");
+        throwable = GameObject.Find("Throwable");
+        throwable.SetActive(false);
         drone.SetActive(false);
     }
 	
@@ -52,9 +56,47 @@ public class GameController : MonoBehaviour
                 isDrone = true;
             }
         }
- 
 
-        if(Input.GetMouseButtonDown(1))
+        if(Input.GetKeyDown(KeyCode.E))
+        {
+            if (!isThrowing)
+            {
+                throwable.SetActive(true);
+                isThrowing = true;
+            }
+            else
+            {
+                isThrowing = false;
+                throwable.SetActive(false);
+            }
+        }
+
+        if(isThrowing)
+        {
+            if(Physics.Raycast(ray, out hit))
+            {
+                float radius = 10;
+                Vector3 centerPosition = transform.position;
+                float distance = Vector3.Distance(hit.point, centerPosition);
+
+                if(distance > radius)
+                {
+                    Vector3 fromOrigin = hit.point - centerPosition;
+                    fromOrigin *= radius / distance;
+                    hit.point = centerPosition + fromOrigin;
+                }
+
+                throwable.transform.position = new Vector3(hit.point.x, 0, hit.point.z);
+
+                if(Input.GetMouseButtonDown(1))
+                {
+                    isThrowing = false;
+                }
+            }
+        }
+
+
+        if (Input.GetMouseButtonDown(1))
         {
             //ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         
@@ -112,11 +154,11 @@ public class GameController : MonoBehaviour
         if (Physics.Raycast(ray, out hit))
         {
             Vector3 playerToMouse = hit.point - transform.position;
-
+    
             playerToMouse.y = 0f;
-
+    
             Quaternion newRotation = Quaternion.LookRotation(playerToMouse);
-
+    
             transform.rotation = newRotation;
         }
     }

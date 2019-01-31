@@ -10,13 +10,16 @@ public class Terminal : MonoBehaviour
     public Camera camera;
     private Renderer renderer;
     private GameController gameController;
+    private Material m;
 
-	// Use this for initialization
-	void Start ()
+    // Use this for initialization
+    void Start ()
     {
         renderer = GetComponent<Renderer>();
         gameController = GameObject.FindGameObjectWithTag("Player").GetComponent<GameController>();
-	}
+        m = this.renderer.material;
+
+    }
 	
 	// Update is called once per frame
 	void Update ()
@@ -37,7 +40,7 @@ public class Terminal : MonoBehaviour
     //If the player is close enough to the gameobject it is hackable
     private void OnMouseOver()
     {
-        renderer.material.color = Color.red;
+        m.SetColor(Color.red);
         if (gameController.isTerminal == true)
         {
             if (Input.GetMouseButtonDown(1))
@@ -51,6 +54,6 @@ public class Terminal : MonoBehaviour
     //Change back to original colour when no longer hovered over
     private void OnMouseExit()
     {
-        renderer.material.color = Color.white;
+        m.SetColor(Color.white);
     }
 }

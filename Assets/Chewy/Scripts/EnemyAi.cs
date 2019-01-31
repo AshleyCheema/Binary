@@ -266,6 +266,17 @@ public class EnemyAi : MonoBehaviour
         }
     }
 
+    private void OnTriggerStay(Collider other)
+    {
+        if(other.gameObject.tag == "Distraction")
+        {
+            //StopCoroutine(c_FollowPath);
+
+            //gameObject.transform.position = new Vector3(other.gameObject.transform.position.x, gameObject.transform.position.y, other.gameObject.transform.position.z);
+            transform.position = Vector3.MoveTowards(gameObject.transform.position, new Vector3(other.gameObject.transform.position.x, transform.position.y, other.gameObject.transform.position.z), speed * Time.deltaTime);
+        }
+    }
+
     private void OnDrawGizmos()
     {
         Vector3 startPosition = pathHolder.GetChild(0).position;
