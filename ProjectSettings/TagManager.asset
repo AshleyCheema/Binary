@@ -8,6 +8,7 @@ TagManager:
   - Terminal
   - Enemy
   - Distraction
+  - LightSource
   layers:
   - Default
   - TransparentFX

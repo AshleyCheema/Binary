@@ -340,10 +340,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsStart: 0
   IsEnd: 0
-  TopOpening: 0
-  RightOpening: 0
+  TopOpening: 1
+  RightOpening: 1
   BottomOpening: 0
-  LeftOpening: 0
+  LeftOpening: 1
 --- !u!1 &8317855513406607760
 GameObject:
   m_ObjectHideFlags: 0
@@ -488,9 +488,9 @@ MonoBehaviour:
   IsStart: 0
   IsEnd: 0
   TopOpening: 0
-  RightOpening: 0
+  RightOpening: 1
   BottomOpening: 0
-  LeftOpening: 0
+  LeftOpening: 1
 --- !u!1 &8317855513555378067
 GameObject:
   m_ObjectHideFlags: 0
@@ -781,10 +781,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsStart: 0
   IsEnd: 0
-  TopOpening: 0
+  TopOpening: 1
   RightOpening: 0
   BottomOpening: 0
-  LeftOpening: 0
+  LeftOpening: 1
 --- !u!1 &8317855513746435821
 GameObject:
   m_ObjectHideFlags: 0
@@ -1076,9 +1076,9 @@ MonoBehaviour:
   IsStart: 0
   IsEnd: 0
   TopOpening: 0
-  RightOpening: 0
+  RightOpening: 1
   BottomOpening: 0
-  LeftOpening: 0
+  LeftOpening: 1
 --- !u!1 &8317855513958185913
 GameObject:
   m_ObjectHideFlags: 0
@@ -1262,9 +1262,9 @@ MonoBehaviour:
   IsStart: 0
   IsEnd: 0
   TopOpening: 0
-  RightOpening: 0
+  RightOpening: 1
   BottomOpening: 0
-  LeftOpening: 0
+  LeftOpening: 1
 --- !u!1 &8317855514056645264
 GameObject:
   m_ObjectHideFlags: 0
@@ -1557,8 +1557,8 @@ MonoBehaviour:
   IsEnd: 0
   TopOpening: 1
   RightOpening: 0
-  BottomOpening: 1
-  LeftOpening: 0
+  BottomOpening: 0
+  LeftOpening: 1
 --- !u!1 &8317855514213242882
 GameObject:
   m_ObjectHideFlags: 0
@@ -1890,10 +1890,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsStart: 0
   IsEnd: 0
-  TopOpening: 0
+  TopOpening: 1
   RightOpening: 1
-  BottomOpening: 0
-  LeftOpening: 1
+  BottomOpening: 1
+  LeftOpening: 0
 --- !u!1 &8317855514364398162
 GameObject:
   m_ObjectHideFlags: 0
@@ -2331,10 +2331,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsStart: 0
   IsEnd: 0
-  TopOpening: 0
-  RightOpening: 0
+  TopOpening: 1
+  RightOpening: 1
   BottomOpening: 0
-  LeftOpening: 0
+  LeftOpening: 1
 --- !u!1 &8317855514642722646
 GameObject:
   m_ObjectHideFlags: 0
@@ -2739,8 +2739,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsStart: 0
   IsEnd: 0
-  TopOpening: 0
-  RightOpening: 1
+  TopOpening: 1
+  RightOpening: 0
   BottomOpening: 0
   LeftOpening: 1
 --- !u!1 &8317855514814413540
@@ -3180,9 +3180,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsStart: 0
   IsEnd: 0
-  TopOpening: 0
-  RightOpening: 1
-  BottomOpening: 1
+  TopOpening: 1
+  RightOpening: 0
+  BottomOpening: 0
   LeftOpening: 1
 --- !u!1 &8317855515015800775
 GameObject:
@@ -3327,10 +3327,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsStart: 0
   IsEnd: 0
-  TopOpening: 0
-  RightOpening: 0
-  BottomOpening: 0
-  LeftOpening: 0
+  TopOpening: 1
+  RightOpening: 1
+  BottomOpening: 1
+  LeftOpening: 1
 --- !u!1 &8317855515107380705
 GameObject:
   m_ObjectHideFlags: 0
@@ -3548,10 +3548,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsStart: 0
   IsEnd: 0
-  TopOpening: 0
+  TopOpening: 1
   RightOpening: 0
   BottomOpening: 0
-  LeftOpening: 0
+  LeftOpening: 1
 --- !u!1 &8317855515155059178
 GameObject:
   m_ObjectHideFlags: 0
@@ -3736,8 +3736,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsStart: 0
   IsEnd: 0
-  TopOpening: 0
-  RightOpening: 0
+  TopOpening: 1
+  RightOpening: 1
   BottomOpening: 0
   LeftOpening: 0
 --- !u!1 &8317855515293614715
@@ -4112,7 +4112,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsStart: 0
   IsEnd: 0
-  TopOpening: 0
-  RightOpening: 0
+  TopOpening: 1
+  RightOpening: 1
   BottomOpening: 0
-  LeftOpening: 0
+  LeftOpening: 1
