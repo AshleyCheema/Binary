@@ -9,6 +9,9 @@ using UnityEngine;
 
 public class TileEditor : MonoBehaviour
 {
+    public bool IsStart;
+    public bool IsEnd;
+
     public bool TopOpening;
     public bool RightOpening;
     public bool BottomOpening;

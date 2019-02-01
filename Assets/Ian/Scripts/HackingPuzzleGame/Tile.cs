@@ -23,6 +23,16 @@ public class Tile
     public float Y
     { get { return y; } }
 
+    //Is this tile the start tile for the puzzle
+    private bool isStart;
+    public bool IsStart
+    { get { return isStart; } }
+
+    //Is this tile the end tile for the puzzle
+    private bool isEnd;
+    public bool IsEnd
+    { get { return isEnd; } }
+
     //array for if a direction is open
     //TOP, RIGHT, BOTTOM, LEFT
     private bool[] openDirections;
@@ -67,7 +77,10 @@ public class Tile
         }
         TileEditor te = gameObject.GetComponent<TileEditor>();
 
-        if(te.TopOpening)
+        isStart = te.IsStart;
+        isEnd = te.IsEnd;
+
+        if (te.TopOpening)
         {
             openDirections[0] = true;
         }

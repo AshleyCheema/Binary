@@ -31,14 +31,57 @@ public class HackingPuzzleManager : MonoBehaviour
             }
         }
 
-        startTile = tiles[0, 0];
-        endTile = tiles[3, 5];
+        startTile = FindStartTile();
+        endTile = FindEndTile();
 
         startTile.ChangeColour(Color.blue);
         endTile.ChangeColour(Color.red);
     }
 
+    /// <summary>
+    /// Find the tile which has the bool IsStart set to true 
+    /// </summary>
+    /// <returns></returns>
+    private Tile FindStartTile()
+    {
+        for (int i = 0; i < tiles.GetLength(0); i++)
+        {
+            for (int j = 0; j < tiles.GetLength(1); j++)
+            {
+                if(tiles[i, j].IsStart)
+                {
+                    return tiles[i, j];
+                }
+            }
+        }
+        return null;
+    }
 
+    /// <summary>
+    /// Find the tile which has the bool IsEnd set to false
+    /// </summary>
+    /// <returns></returns>
+    private Tile FindEndTile()
+    {
+        for (int i = 0; i < tiles.GetLength(0); i++)
+        {
+            for (int j = 0; j < tiles.GetLength(1); j++)
+            {
+                if (tiles[i, j].IsEnd)
+                {
+                    return tiles[i, j];
+                }
+            }
+        }
+        return null;
+    }
+
+    public void TESTFUNC()
+    {
+        bool re = StartPuzzle();
+
+        Debug.Log(re);
+    }
 
     /// <summary>
     /// Start the puzzle. This will go though all the tiles and check for a path to the 
@@ -46,6 +89,15 @@ public class HackingPuzzleManager : MonoBehaviour
     /// </summary>
     public bool StartPuzzle()
     {
+        //reset all the colours 
+        for (int i = 0; i < tiles.GetLength(0); i++)
+        {
+            for (int j = 0; j < tiles.GetLength(1); j++)
+            {
+                tiles[i, j].ChangeColour(Color.white);
+            }
+        }
+
         bool isCompleted = false;
         //Store all the tiles which need to be updated
         List<Tile> openTiles = new List<Tile>();
