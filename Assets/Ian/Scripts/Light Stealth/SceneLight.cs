@@ -8,8 +8,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(SphereCollider))]
 public class SceneLight : MonoBehaviour
-{ 
+{
+    private SphereCollider collider;
+    public SphereCollider Collider
+    { get { return collider; } }
 
+    private void Start()
+    {
+        collider = GetComponent<SphereCollider>();
+    }
 }
