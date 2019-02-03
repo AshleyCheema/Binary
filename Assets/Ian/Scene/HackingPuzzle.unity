@@ -191,6 +191,7 @@ GameObject:
   - component: {fileID: 1267250812}
   - component: {fileID: 1267250811}
   - component: {fileID: 1267250815}
+  - component: {fileID: 1267250816}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -338,6 +339,18 @@ MonoBehaviour:
       enableFptlForForwardOpaque: 1
       enableBigTilePrepass: 1
       isFptlEnabled: 1
+--- !u!114 &1267250816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1267250810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b5ca9e30bf00714ab490d477695ccb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1328161378 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8317855514642722645, guid: 76c7ac058efff7e4c95a002bb09dd6f3,
@@ -506,6 +519,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3089329131508515656, guid: 76c7ac058efff7e4c95a002bb09dd6f3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8317855513958185913, guid: 76c7ac058efff7e4c95a002bb09dd6f3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8317855515107380705, guid: 76c7ac058efff7e4c95a002bb09dd6f3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 76c7ac058efff7e4c95a002bb09dd6f3, type: 3}
