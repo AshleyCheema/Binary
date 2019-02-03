@@ -179,51 +179,62 @@ public class HackingPuzzleManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Return a list of tiles which are valid 
+    /// Return a list of tiles which are neigbours and valid 
     /// </summary>
     /// <param name="a_tile"></param>
     /// <returns></returns>
     private List<Tile> GetNeighbours(Tile a_tile)
     {
+        //Setup a new List of tiles for all valid neighbours
         List<Tile> returnNeighbours = new List<Tile>();
+        //Get the x and y values of a_tile in the array
         int tileX = (int)a_tile.X;
         int tileY = (int)a_tile.Y;
 
+        //Check if there is a tile above us
         if (tileX - 1 >= 0)
         {
-            //check top
+            //check TOP. Check if a_tile's TOP is open and the tile above us BOTTOM is open
+            //If both are true then add the tile above us as it is valid
             if (a_tile.OpenDirections[0] == true && tiles[tileX - 1, tileY].OpenDirections[2] == true)
             {
                 returnNeighbours.Add(tiles[tileX - 1, tileY]);
             }
         }
 
+        //Check if there is a tile below us
         if (tileX + 1 < 4)
         {
-            //check bottom
+            //check BOTTOM. Check if a_tile's BOTTOM is open and the tile below us TOP is open
+            //If both are true then add the tile above us as it is valid
             if (a_tile.OpenDirections[2] == true && tiles[tileX + 1, tileY].OpenDirections[0] == true)
             {
                 returnNeighbours.Add(tiles[tileX + 1, tileY]);
             }
         }
 
+        //Check if there is a tile to our left
         if (tileY - 1 >= 0)
         {
-            //check left
+            //check LEFT. Check if a_tile's LEFT is open and the tile to our left is open on the RIGHT
+            //If both are true then add the tile above us as it is valid
             if (a_tile.OpenDirections[3] == true && tiles[tileX, tileY - 1].OpenDirections[1] == true)
             {
                 returnNeighbours.Add(tiles[tileX, tileY - 1]);
             }
         }
 
+        //Check if there is a tile to our right
         if (tileY + 1 < 6)
         {
-            //check right
+            //check RIGHT. Check if a_tile's RIGHT is open and the tile to our RIGHT is open on the LEFT
+            //If both are true then add the tile above us as it is valid
             if (a_tile.OpenDirections[1] == true && tiles[tileX, tileY + 1].OpenDirections[3] == true)
             {
                 returnNeighbours.Add(tiles[tileX, tileY + 1]);
             }
         }
+        //return all neighbours
         return returnNeighbours;
     }
 

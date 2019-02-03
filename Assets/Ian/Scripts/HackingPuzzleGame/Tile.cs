@@ -4,21 +4,19 @@
  * 
  */
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Tile
 {
-    //Each tile is store in a row then collumn
+    //Each tile is store in a row then column
 
-    //x position in tiles array
+    //x position in tiles array (row)
     private float x;
     public float X
     { get { return x; } }
 
-    //y position in tiles array
+    //y position in tiles array (column)
     private float y;
     public float Y
     { get { return y; } }
@@ -45,17 +43,21 @@ public class Tile
     { get { return gameObject; } }
 
     //Variables for pathfind on the grid
+    //AStar - Cost from start tile to this tile
     private int gCost;
     public int GCost
     { get { return gCost; } set { gCost = value; } }
 
+    //AStar - Cost from this tile to the end tile
     private int hCost;
     public int HCost
     { get { return hCost; } set { hCost = value; } }
 
+    //AStar - Total cost of this tile
     public int FCost
     { get { return GCost + HCost; } }
 
+    //AStar - If on the path set a parent to retrace the path
     private Tile parent;
     public Tile Parent
     { get { return parent; } set { parent = value; } }
@@ -106,13 +108,16 @@ public class Tile
 
     /// <summary>
     /// Rotate the tile. This will rotate 90 deg clockwise
-    /// The openDirections must be change to acomadate this
+    /// The openDirections are changed to acomadate this
     /// </summary>
     public void RotateTile()
     {
+        //setup a new bool array for the new directions
         bool[] newOpenDirections = new bool[4]
         {false, false, false, false };
 
+        //Loop though RIGHT, BOTTOM and LEFT directions
+        //If TOP direction is true then set RIGHT to true etc..
         for (int i = 1; i < openDirections.Length; i++)
         {
             if(openDirections[i - 1] == true)
@@ -121,14 +126,17 @@ public class Tile
             }
         }
 
-        //check position 0 
+        //check if LEFT is true then set TOP to true
         if (openDirections[3] == true)
         {
             newOpenDirections[0] = true;
         }
 
+        //Set openDirections to newOpenDirections
         openDirections = newOpenDirections;
+        //Rotate the gameObejct's rotation by 90 deg
         gameObject.transform.rotation *= Quaternion.Euler(0, 0, -90);
+        //Assign the editor script values to openDirections
         gameObject.GetComponent<TileEditor>().SetValues(openDirections);
     }
 
