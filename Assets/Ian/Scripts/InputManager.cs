@@ -10,15 +10,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum Player
+{
+    PlayerOne,
+    PlayerTwo
+}
+
 public static class InputManager
 {
     /// <summary>
     /// Return Horizontal value
     /// </summary>
     /// <returns></returns>
-    public static float Horizontal()
+    public static float Horizontal(Player a_player)
     {
-        float v = Input.GetAxis("Horizontal");
+        float v = Input.GetAxis("P" + ((int)a_player + 1) + "Horizontal");
         v = Mathf.Clamp(v, -1.0f, 1.0f);
         return v;
     }
@@ -27,9 +33,9 @@ public static class InputManager
     /// Return Vertical value
     /// </summary>
     /// <returns></returns>
-    public static float Vertical()
+    public static float Vertical(Player a_player)
     {
-        float v = Input.GetAxis("Vertical");
+        float v = Input.GetAxis("P" + ((int)a_player + 1) + "Vertical");
         v = Mathf.Clamp(v, -1.0f, 1.0f);
         return v;
     }
@@ -38,8 +44,8 @@ public static class InputManager
     /// Return both Horizontal & Vertical values
     /// </summary>
     /// <returns></returns>
-    public static Vector3 Joystick()
+    public static Vector3 Joystick(Player a_player)
     {
-        return new Vector3(Horizontal(), 0, Vertical());
+        return new Vector3(Horizontal(a_player), 0, Vertical(a_player));
     }
 }

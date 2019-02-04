@@ -15,6 +15,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float movementSpeed = 5f;
 
+    [SerializeField]
+    Player player;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +27,6 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(InputManager.Joystick() * movementSpeed * Time.deltaTime);
+        transform.Translate(InputManager.Joystick(player) * movementSpeed * Time.deltaTime);
     }
 }
