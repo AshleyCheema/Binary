@@ -25,7 +25,7 @@ public static class InputManager
     public static float Horizontal(Player a_player)
     {
         float v = Input.GetAxis("P" + ((int)a_player + 1) + "Horizontal");
-        v = Mathf.Clamp(v, -1.0f, 1.0f);
+        //v = Mathf.Clamp(v, -1.0f, 1.0f);
         return v;
     }
 
@@ -36,7 +36,7 @@ public static class InputManager
     public static float Vertical(Player a_player)
     {
         float v = Input.GetAxis("P" + ((int)a_player + 1) + "Vertical");
-        v = Mathf.Clamp(v, -1.0f, 1.0f);
+        //v = Mathf.Clamp(v, -1.0f, 1.0f);
         return v;
     }
 
