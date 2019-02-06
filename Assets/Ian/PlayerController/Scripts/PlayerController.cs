@@ -28,6 +28,5 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         transform.Translate(InputManager.Joystick(player) * movementSpeed * Time.deltaTime);
-        Debug.Log(InputManager.Joystick(player));
     }
 }
