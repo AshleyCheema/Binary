@@ -13,8 +13,9 @@ GameObject:
   - component: {fileID: 5875002155292911368}
   - component: {fileID: 2667874697289232608}
   - component: {fileID: 7327329703850088209}
-  - component: {fileID: 2502480986148587509}
+  - component: {fileID: 8687627748350547703}
   - component: {fileID: 2740295584145893406}
+  - component: {fileID: 6051253295833805098}
   m_Layer: 0
   m_Name: PlayerController_Net
   m_TagString: Untagged
@@ -111,7 +112,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &2502480986148587509
+--- !u!114 &8687627748350547703
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -120,7 +121,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4783697518550869757}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2917d2d468610d4e8e0dd3905d695ec, type: 3}
+  m_Script: {fileID: 11500000, guid: 06d60f0155565e742b84647bf8b7af8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 5
@@ -158,3 +159,25 @@ MonoBehaviour:
     i15: 0
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 1
+--- !u!114 &6051253295833805098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4783697518550869757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TransformSyncMode: 1
+  m_SendInterval: 0.1
+  m_SyncRotationAxis: 7
+  m_RotationSyncCompression: 0
+  m_SyncSpin: 0
+  m_MovementTheshold: 0.001
+  m_VelocityThreshold: 0.0001
+  m_SnapThreshold: 5
+  m_InterpolateRotation: 1
+  m_InterpolateMovement: 1

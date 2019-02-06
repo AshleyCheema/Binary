@@ -26,6 +26,8 @@ public class PlayerController_Net : NetworkBehaviour
         {
             return;
         }
+
+        
     }
 
     // Update is called once per frame
@@ -34,7 +36,6 @@ public class PlayerController_Net : NetworkBehaviour
         if(hasAuthority == false)
         {
             return;
-
         }
         transform.Translate(InputManager.Joystick(player) * movementSpeed * Time.deltaTime);
     }
