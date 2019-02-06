@@ -3,7 +3,7 @@
  * Description: Player controller to controll any player. 
  * This includes basic movements features.
  * Created: 04/02/2019
- * Edited By: Ian
+ * Edited By: Ian + Ash
  */
 
 using System.Collections;
@@ -13,7 +13,9 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField]
-    private float movementSpeed = 5f;
+    private float normalSpeed = 5f;
+    private float crouchingSpeed = 2.5f;
+    private float runningSpeed = 6f;
 
     [SerializeField]
     Player player;
@@ -21,12 +23,27 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(InputManager.Joystick(player) * movementSpeed * Time.deltaTime);
+        if (Input.GetButton("Crouching"))
+        {
+            transform.Translate(InputManager.Joystick(player) * crouchingSpeed * Time.deltaTime);
+            Debug.Log("Left Control Held Down");
+        }
+
+        else if (Input.GetButton("Sprint"))
+        {
+            transform.Translate(InputManager.Joystick(player) * runningSpeed * Time.deltaTime);
+            Debug.Log("Left Shift Held Down");
+
+        }
+        else
+        {
+            transform.Translate(InputManager.Joystick(player) * normalSpeed * Time.deltaTime);
+        }
     }
 }
