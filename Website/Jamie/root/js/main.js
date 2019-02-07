@@ -1,8 +1,9 @@
+/* 
 $(window).on('load', function () {;
     console.log('refresh');
     setTimeout(scroll, 0);
 
-});
+}); */
 
 $('.slide-show').owlCarousel({
     autoplay: true,
@@ -49,7 +50,7 @@ var swiper = new Swiper('.blog-slider', {
     }
 });
 
-$('#start').click(function () {
+/* $('#start').click(function () {
     $('html, body').animate({
         scrollTop: $("#navbar").offset().top
     }, 300);
@@ -71,4 +72,4 @@ function scroll() {
     $('html, body').animate({
         scrollTop: $("#space").offset().top
     }, 0);
-}
+} */
