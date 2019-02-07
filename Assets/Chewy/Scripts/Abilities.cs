@@ -11,4 +11,14 @@ public class Abilities : ScriptableObject
     public bool isCooldown;
     public float abilityDuration;
     public Sprite uiImage;
+
+    public virtual void Trigger()
+    {
+        Debug.Log("Ths has been triggered");
+    }
+
+    public virtual void Callback()
+    {
+
+    }
 }

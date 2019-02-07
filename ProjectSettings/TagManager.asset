@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - Distraction
   - LightSource
+  - Spy
   layers:
   - Default
   - TransparentFX

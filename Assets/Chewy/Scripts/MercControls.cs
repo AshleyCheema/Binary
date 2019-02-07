@@ -14,12 +14,13 @@ public class MercControls : MonoBehaviour
     [SerializeField]
     private float normalSpeed = 5f;
     private float runningSpeed = 8f;
-    public float cooldown;
+    private float cooldown;
     private float speedDuration;
     private bool canSprint;
     private bool buttonPressed;
 
     public Abilities sprint;
+    //public Abilities trackable;
 
     [SerializeField]
     Player player;
@@ -35,6 +36,11 @@ public class MercControls : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(Input.GetKey(KeyCode.P))
+        {
+            sprint.Trigger();
+        }
+
         //If sprint has been used up then increase cooldown until it's back to it's original time
         if(!canSprint)
         {

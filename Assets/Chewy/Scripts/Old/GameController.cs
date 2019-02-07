@@ -64,11 +64,11 @@ public class GameController : MonoBehaviour
                 throwable.SetActive(true);
                 isThrowing = true;
             }
-            else
-            {
-                isThrowing = false;
-                throwable.SetActive(false);
-            }
+            //else
+            //{
+            //    isThrowing = false;
+            //    throwable.SetActive(false);
+            //}
         }
 
         if(isThrowing)

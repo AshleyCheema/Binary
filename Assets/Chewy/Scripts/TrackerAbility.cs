@@ -8,8 +8,9 @@ public class TrackerAbility : MonoBehaviour
     private float cooldown;
     private bool isCooldown;
     private float a_Duration;
-    private GameObject throwable;
+    private GameObject trackingDevice;
     private bool trackerDown;
+    private Collider deviceCollider;
     //private bool isThrowing;
 
     // Start is called before the first frame update
@@ -18,6 +19,10 @@ public class TrackerAbility : MonoBehaviour
         cooldown = tracker.cooldown;
         isCooldown = tracker.isCooldown;
         a_Duration = tracker.abilityDuration;
+        trackingDevice = GameObject.Find("Tracker");
+        trackingDevice.SetActive(false);
+        deviceCollider = trackingDevice.GetComponent<Collider>();
+        deviceCollider.enabled = false;
     }
 
     // Update is called once per frame
@@ -27,13 +32,13 @@ public class TrackerAbility : MonoBehaviour
         {
             if (!isCooldown && a_Duration == tracker.abilityDuration)
             {
-                throwable.SetActive(true);
+                trackingDevice.SetActive(true);
                 isCooldown = true;
             }
-            else
+            else if(!trackerDown)
             {
                 isCooldown = false;
-                throwable.SetActive(false);
+                trackingDevice.SetActive(false);
             }
         }
 
@@ -44,7 +49,9 @@ public class TrackerAbility : MonoBehaviour
             if(a_Duration <= 0)
             {
                 trackerDown = false;
+                trackingDevice.SetActive(false);
                 a_Duration = tracker.abilityDuration;
+                deviceCollider.enabled = false;
             }
         }
 
@@ -65,10 +72,11 @@ public class TrackerAbility : MonoBehaviour
                     hit.point = centerPosition + fromOrigin;
                 }
 
-                throwable.transform.position = new Vector3(hit.point.x, 0, hit.point.z);
+                trackingDevice.transform.position = new Vector3(hit.point.x, 0, hit.point.z);
 
-                if (Input.GetMouseButtonDown(1))
+                if (Input.GetMouseButtonDown(0))
                 {
+                    deviceCollider.enabled = true;
                     isCooldown = false;
                     trackerDown = true;
                 }
