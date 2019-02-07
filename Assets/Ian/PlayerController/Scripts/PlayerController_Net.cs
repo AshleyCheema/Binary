@@ -26,8 +26,6 @@ public class PlayerController_Net : NetworkBehaviour
         {
             return;
         }
-
-        
     }
 
     // Update is called once per frame
