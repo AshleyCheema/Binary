@@ -430,6 +430,7 @@ GameObject:
   - component: {fileID: 319089061}
   - component: {fileID: 319089060}
   - component: {fileID: 319089059}
+  - component: {fileID: 319089065}
   m_Layer: 0
   m_Name: Capsule
   m_TagString: Untagged
@@ -450,8 +451,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   normalSpeed: 5
+  cooldown: 0
   sprint: {fileID: 11400000, guid: 9c139523592586d4aa0d7eff0ba7f97f, type: 2}
-  player: 0
+  player: 1
 --- !u!54 &319089060
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -541,6 +543,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &319089065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 319089058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b92b685ac5dd95d4cbaa06baec2a7c86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tracker: {fileID: 0}
 --- !u!1 &367488841
 GameObject:
   m_ObjectHideFlags: 0
@@ -1134,7 +1149,7 @@ PrefabInstance:
     - target: {fileID: 3011942314590609162, guid: 886c300e7afc8604db6d96de8e831e26,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3011942314590609167, guid: 886c300e7afc8604db6d96de8e831e26,
         type: 3}
