@@ -14,6 +14,8 @@
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag
+            // make fog work
+            #pragma multi_compile_fog
 
             #include "UnityCG.cginc"
 
@@ -26,7 +28,7 @@
             struct v2f
             {
                 float2 uv : TEXCOORD0;
-				float4 darken : COLOR;
+                UNITY_FOG_COORDS(1)
                 float4 vertex : SV_POSITION;
             };
 
@@ -38,12 +40,7 @@
                 v2f o;
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 o.uv = TRANSFORM_TEX(v.uv, _MainTex);
-				o.darken = float4(0, 0, 0, 0);
-
-				float3 vVM = UnityObjectToViewPos(v.vertex.xyz);
-				float3 playerPos = UnityObjectToViewPos(float3(0, 0, 0));
-				o.darken = smoothstep(0.0, 10.0, distance(vVM, playerPos));
-
+                UNITY_TRANSFER_FOG(o,o.vertex);
                 return o;
             }
 
@@ -51,7 +48,9 @@
             {
                 // sample the texture
                 fixed4 col = tex2D(_MainTex, i.uv);
-				col = fixed4(0, 0, 1, 1);
+                // apply fog
+                UNITY_APPLY_FOG(i.fogCoord, col);
+				//col = fixed4(0, 0, 1, 1);
                 return col;
             }
             ENDCG
