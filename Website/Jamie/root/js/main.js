@@ -1,9 +1,9 @@
-/* 
-$(window).on('load', function () {;
-    console.log('refresh');
-    setTimeout(scroll, 0);
+$(window).on('load', function () {
+    if ($(document).scrollTop() < 200) {
+        $('#start').fadeIn();
+    }
 
-}); */
+})
 
 $('.slide-show').owlCarousel({
     autoplay: true,
@@ -91,4 +91,6 @@ $(document).scroll(function () {
         $('#start').fadeIn();
         $('#title-text').fadeIn();
     }
+
+
 });

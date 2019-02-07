@@ -70,6 +70,10 @@ hr {
     font-family: Symtext;
 }
 
+.hidden {
+    display: none;
+}
+
 .button {
     padding: 5pt;
     padding-left: 25px;
