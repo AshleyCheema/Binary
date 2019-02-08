@@ -10,6 +10,7 @@ TagManager:
   - Distraction
   - LightSource
   - Spy
+  - Merc
   layers:
   - Default
   - TransparentFX
