@@ -1,4 +1,4 @@
-<? php 
+<?php 
 
     /**
      * Send debug code to the Javascript console
@@ -26,38 +26,39 @@
             session_start();
 
             //variable to store error message
-            $error=''; 
+            $error='';
+
             //If the post is submitted do the following
             if ( isset( $_POST[ 'submit' ] ) ) 
             {
                 // if either input it empty do the following
-                if ( empty( $_POST[ 'username' ] ) || empty( $_POST[ 'password' ] ) ) 
+                if ( empty( $_POST[ 'email' ] ) || empty( $_POST[ 'password' ] ) ) 
                 {
                     //set error variable
-                    $_SESSION['Error'] = "Username or Password is invalid";
+                    $_SESSION['Error'] = "Email or Password is invalid";
 
                 //if the name and password is set then
                 } else {   
 						  
                     // Define $username and $password 
-                    $username = $_POST[ 'username' ]; 
+                    $email = $_POST[ 'email' ]; 
                     $password = $_POST[ 'password' ];
 
                     // To protect MySQL injection for Security purpose 
-                    $username = stripslashes( $username );
-                    $password = stripslashes( $password );
+                    //$email = stripslashes( $email );
+                    //$password = stripslashes( $password );
 
                     include "config.php";
 
                     //added security for PHP
-                    $username = mysqli_escape_string( $connection, $username );
+                    $email = mysqli_escape_string( $connection, $email );
                     $password = mysqli_escape_string( $connection, $password );
 
                     //Password Encryption
                     $password = md5 ( $password );
 
                     //SQL query to fetch information of registerd users and finds user match.
-                    $query = mysqli_query( $connection, "SELECT * FROM users WHERE password='$password' AND username='$username'" );
+                    $query = mysqli_query( $connection, "SELECT * FROM users WHERE user_password='$password' AND user_email='$email'" );
 
                     //fetches data
                     $rows = mysqli_num_rows( $query );
@@ -65,16 +66,16 @@
                     if ( $rows == 1 ) {
 
                         //Initializing Session
-                        $_SESSION[ 'username' ] = $username;
+                        $_SESSION[ 'email' ] = $email;
 
                         //Redirecting to other page
-                        header( "location: commands.php" );
+                        header( "location: dashboard.php" );
 
                     } else {
 
                         //set error message
                       
-                        $_SESSION['Error'] = "Username or Password is invalid"; 
+                        $_SESSION['Error'] = "Email or Password is invalid"; 
 
                     }
 				
@@ -95,26 +96,36 @@
 		session_start();
 		
 		//Storing session
-		$username = $_SESSION[ 'username' ];        
+		$email = $_SESSION[ 'email' ];        
         
 		include "config.php";
 		
 		//SQLI query to fetch complete information of user   
-		$query = mysqli_query( $connection, "SELECT * FROM users WHERE username='$username'" );
+		$query = mysqli_query( $connection, "SELECT * FROM users WHERE user_email='$email'" );
 
 		//perform query
 		$row = mysqli_fetch_assoc( $query );
         
 		//Store username into a variable
-        $userid = $row['user_id'];
-		$login_session = $row[ 'username' ];
-        $firstname_session = $row['firstname'];
-        $lastname_session = $row['lastname'];
-        $email_session = $row['email'];
-        $creation_date = $row['creationdate'];
+        $user_id = $row[ 'user_id' ];
+        $user_pic = $row[ 'user_pic' ];
+		$login_session = $row[ 'user_email' ];
+        $name_session = $row[ 'user_name' ];
+        $right = $row[ 'user_right' ];
+        $creation_date = $row[ 'user_creation' ];
         
         //Store Session variables.
-        $_SESSION[ 'username' ] = $login_session;
+        $_SESSION[ 'login_email' ] = $login_session;
+        $_SESSION[ 'name' ] = $name_session;
+        $_SESSION[ 'pic' ] = $user_pic;
+
+        if($right == 0){
+            $_SESSION[ 'rank' ] = 'Unverified';
+        } elseif($right == 1) {
+            $_SESSION[ 'rank' ] = 'Guest';
+        } elseif($right == 2) {
+            $_SESSION[ 'rank' ] = 'Admin';
+        }
         
        // the following is then used to direct the user to the correct location
         if( $isLogin ){
@@ -125,7 +136,7 @@
                 mysqli_close( $connection );
 
                 //Redirecting to CMS dashboard 
-                header( 'Location: commands.php' );
+                header( 'Location: dashboard.php' );
             }
             
         } else {

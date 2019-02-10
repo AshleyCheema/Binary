@@ -1,3 +1,13 @@
+<?php
+
+ //includes login script
+ include( 'functions.php' );
+
+ //checks to see if user is logged in
+ checkLogin();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,10 +41,10 @@
 
                 <div class="row">
                     <div class="d-inline-flex ml-5 mt-5">
-                        <img class="pro-img" src="/images/team/ian.jpg" height="75px" />
+                        <img class="pro-img" src="<?php echo $_SESSION[ 'pic' ]?>" height="75px" />
                         <div class="div ml-3 mt-2">
-                            <h5 class="light-text sym">Ian Hudson</h5>
-                            <p class="hi-text">Admin</p>
+                            <h5 class="light-text sym"><?php echo $_SESSION[ 'name' ] ?></h5>
+                            <p class="hi-text"><?php echo $_SESSION[ 'rank' ] ?></p>
                         </div>
                     </div>
                 </div>
@@ -86,7 +96,7 @@
         <div id="smallnav" class="panel p-right">
 
             <div class="profile mb-5">
-                <img class="pro-img-small ml-2 mt-5" src="/images/team/ian.jpg" height="50px" />
+                <img class="pro-img-small ml-2 mt-5" src="<?php echo $_SESSION[ 'pic' ]?>" height="50px" />
             </div>
 
             <a class="a-link" href="#">
