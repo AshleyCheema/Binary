@@ -19,6 +19,19 @@ public class PlayerController_Net : NetworkBehaviour
     [SerializeField]
     Player player;
 
+    Vector3 velocity;
+
+    /// <summary>
+    /// Position we think is most correct for this player.
+    /// If we are the authority, then this will be transform.position
+    /// </summary>
+    Vector3 guessPosition;
+
+    /// <summary>
+    /// Objects latency's to the server
+    /// </summary>
+    float ourLatency;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,8 +46,48 @@ public class PlayerController_Net : NetworkBehaviour
     {
         if(hasAuthority == false)
         {
+            guessPosition = guessPosition + (velocity * Time.deltaTime);
+
+            transform.position = Vector3.Lerp(transform.position, guessPosition, Time.deltaTime * 10);
+
             return;
         }
+
+        transform.Translate(velocity * Time.deltaTime);
+
         transform.Translate(InputManager.Joystick(player) * movementSpeed * Time.deltaTime);
+
+        if(true)
+        {
+            // The player is asking the change it's direction/speed (velocity)
+            velocity = InputManager.Joystick(player) * movementSpeed * Time.deltaTime;
+
+            CmdUpdateVelocity(velocity, transform.position);
+        }
+    }
+
+    [Command]
+    void CmdUpdateVelocity(Vector3 a_velocity, Vector3 a_position)
+    {
+        velocity = a_velocity;
+        transform.position = a_position;
+
+        RpcUpdateVelocity(velocity, transform.position);
+    }
+
+    [ClientRpc]
+    void RpcUpdateVelocity(Vector3 a_velocity, Vector3 a_position)
+    {
+        if(hasAuthority)
+        {
+            return;
+        }
+
+        velocity = a_velocity;
+        guessPosition = a_position + (velocity * (ourLatency));
+        //transform.position = a_position;
+
+        //If we know our latency we could try this:
+        // transform.position = p + (v * (ourLatency + theirLatency))
     }
 }
