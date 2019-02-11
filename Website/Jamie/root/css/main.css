@@ -57,6 +57,7 @@ hr {
 }
 
 .button {
+    background-color: transparent;
     padding: 5pt;
     padding-left: 25px;
     padding-right: 25px;
@@ -155,7 +156,6 @@ hr {
 
 #navbar {
     background: #000000 !important;
-    height: 150px;
 }
 
 #newBody {
