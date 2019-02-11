@@ -204,6 +204,10 @@ p {
     border-color: #34383c !important;
 }
 
+#open-btn:hover {
+    color: #f4d442 !important;
+}
+
 #title-panel {
     margin-left: 300px;
     width: calc(100vw - 300px);
@@ -211,6 +215,8 @@ p {
 }
 
 #content-panel {
+    margin-left: 300px;
+    width: calc(100vw - 300px);
     height: calc(100vh - 102px);
     padding: 20px;
     transition: 800ms;
