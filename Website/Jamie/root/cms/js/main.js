@@ -2,17 +2,16 @@ $(document).ready(function () {
     $('#smallnav').hide();
 
     //default load
-    $("#content-panel").load('pages/home.php');
+    $("#content-panel").load('pages/profile.php');
 
 
 });
 
 $('#open-btn').click(function () {
 
-    $('#title-panel').removeClass('mg-sm');
-    $('#title-panel').addClass('mg-lg');
     $('#content-panel').removeClass('mg-sm');
     $('#content-panel').addClass('mg-lg');
+    $('#title-panel').removeClass('newWidth');
 
     $('#smallnav').hide("slide", {
         direction: "left"
@@ -26,10 +25,9 @@ $('#open-btn').click(function () {
 
 $('#close-btn').click(function () {
 
-    $('#title-panel').addClass('mg-sm');
     $('#content-panel').addClass('mg-sm');
-    $('#title-panel').removeClass('mg-lg');
     $('#content-panel').removeClass('mg-lg');
+    $('#title-panel').addClass('newWidth');
 
     $('#sidenav').hide("slide", {
         direction: "left"

@@ -22,3 +22,22 @@
 .dosis {
     font-family: 'Dosis';
 }
+
+p {
+    font-family: 'Dosis';
+    font-size: 14pt;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Raleway';
+    font-weight: 200;
+}
+
+.sym {
+    font-family: 'Symtext', 'SymtextIE';
+}

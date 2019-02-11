@@ -27,33 +27,13 @@ body {
 }
 
 
-p {
-    font-family: 'Dosis';
-    font-size: 14pt;
+.hidden {
+    display: none;
 }
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    font-family: 'Raleway';
-    font-weight: 200;
-}
-
 
 hr {
     border-color: #272727;
     padding-bottom: 25px;
-}
-
-.sym {
-    font-family: 'Symtext', 'SymtextIE';
-}
-
-.hidden {
-    display: none;
 }
 
 .button {
