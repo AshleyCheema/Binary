@@ -10,6 +10,7 @@ TagManager:
   - Distraction
   - LightSource
   - Spy
+  - Spawn Points Spy's
   layers:
   - Default
   - TransparentFX

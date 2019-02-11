@@ -473,8 +473,8 @@ InputManager:
     m_Name: P1Horizontal
     descriptiveName: 
     descriptiveNegativeName: 
-    negativeButton: s
-    positiveButton: w
+    negativeButton: a
+    positiveButton: d
     altNegativeButton: 
     altPositiveButton: 
     gravity: 3
@@ -489,8 +489,8 @@ InputManager:
     m_Name: P1Vertical
     descriptiveName: 
     descriptiveNegativeName: 
-    negativeButton: d
-    positiveButton: a
+    negativeButton: s
+    positiveButton: w
     altNegativeButton: 
     altPositiveButton: 
     gravity: 3
@@ -545,9 +545,9 @@ InputManager:
     dead: 0.19
     sensitivity: 1
     snap: 0
-    invert: 1
+    invert: 0
     type: 2
-    axis: 1
+    axis: 0
     joyNum: 1
   - serializedVersion: 3
     m_Name: P1Vertical
@@ -563,7 +563,7 @@ InputManager:
     snap: 0
     invert: 1
     type: 2
-    axis: 0
+    axis: 1
     joyNum: 1
   - serializedVersion: 3
     m_Name: P2Horizontal

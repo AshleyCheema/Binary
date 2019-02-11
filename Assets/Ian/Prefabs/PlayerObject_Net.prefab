@@ -79,3 +79,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerObjectPrefab: {fileID: 4783697518550869757, guid: 496581f367016b54898b677c5b2d675c,
     type: 3}
+  playerCameraPrefab: {fileID: 75251582993824296, guid: 292895c6d9c35bc49bb85c05b4afdf80,
+    type: 3}
+  playerObject: {fileID: 0}
+  playerCamera: {fileID: 0}
+  playerName: Defualt

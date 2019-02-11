@@ -17,6 +17,11 @@ public class PlayerController_Net : NetworkBehaviour
     private float movementSpeed = 5f;
 
     [SerializeField]
+    private PlayerObject_Net playerObject;
+    public PlayerObject_Net PlayerObject
+    { get { return playerObject; } set { playerObject = value; } }
+
+    [SerializeField]
     Player player;
 
     Vector3 velocity;
@@ -35,7 +40,7 @@ public class PlayerController_Net : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (!isLocalPlayer)
+        if (!hasAuthority)
         {
             return;
         }
@@ -50,14 +55,18 @@ public class PlayerController_Net : NetworkBehaviour
 
             transform.position = Vector3.Lerp(transform.position, guessPosition, Time.deltaTime * 10);
 
+            GetComponentInChildren<Camera>().enabled = false;
+
             return;
         }
+
+        GetComponentInChildren<Camera>().enabled = true;
 
         transform.Translate(velocity * Time.deltaTime);
 
         transform.Translate(InputManager.Joystick(player) * movementSpeed * Time.deltaTime);
 
-        if(true)
+        if(InputManager.Joystick(player) != Vector3.zero)
         {
             // The player is asking the change it's direction/speed (velocity)
             velocity = InputManager.Joystick(player) * movementSpeed * Time.deltaTime;
@@ -67,7 +76,7 @@ public class PlayerController_Net : NetworkBehaviour
     }
 
     [Command]
-    void CmdUpdateVelocity(Vector3 a_velocity, Vector3 a_position)
+    private void CmdUpdateVelocity(Vector3 a_velocity, Vector3 a_position)
     {
         velocity = a_velocity;
         transform.position = a_position;
@@ -76,18 +85,17 @@ public class PlayerController_Net : NetworkBehaviour
     }
 
     [ClientRpc]
-    void RpcUpdateVelocity(Vector3 a_velocity, Vector3 a_position)
+    private void RpcUpdateVelocity(Vector3 a_velocity, Vector3 a_position)
     {
-        if(hasAuthority)
+        if (hasAuthority)
         {
             return;
         }
+            velocity = a_velocity;
+            guessPosition = a_position + (velocity * (0));
+            //transform.position = a_position;
 
-        velocity = a_velocity;
-        guessPosition = a_position + (velocity * (ourLatency));
-        //transform.position = a_position;
-
-        //If we know our latency we could try this:
-        // transform.position = p + (v * (ourLatency + theirLatency))
+            //If we know our latency we could try this:
+            // transform.position = p + (v * (ourLatency + theirLatency))
     }
 }

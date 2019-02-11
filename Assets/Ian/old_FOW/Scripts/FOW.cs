@@ -1,4 +1,4 @@
-﻿using System;
+﻿/*using System;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
 
@@ -20,3 +20,4 @@ public sealed class FOWRenderer : PostProcessEffectRenderer<FOW>
         context.command.Blit(context.source, context.destination, mat);
     }
 }
+*/

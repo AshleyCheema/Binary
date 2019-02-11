@@ -1,8 +1,7 @@
-﻿using System.Collections;
+﻿/*using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering;
-
 
 [ExecuteInEditMode]
 public class ReplcementShader : MonoBehaviour
@@ -32,3 +31,4 @@ public class ReplcementShader : MonoBehaviour
         Graphics.Blit(renderTexture, renderTexture, fow);
     }
 }
+*/
