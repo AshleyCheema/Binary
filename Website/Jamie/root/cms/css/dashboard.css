@@ -3,20 +3,6 @@
     padding: 0;
 }
 
-
-/* Fonts */
-@font-face {
-    font-family: Symtext;
-    src: url(/font/Symtext.ttf);
-}
-
-@font-face {
-    font-family: Dosis;
-    src: url(/font/Dosis-Regular.otf);
-}
-
-@import url(https://fonts.googleapis.com/css?family=Raleway);
-
 body {
     overflow: hidden;
 }
@@ -98,27 +84,27 @@ p {
 }
 
 .rwthin {
-    font-family: Raleway;
+    font-family: 'Raleway';
     font-weight: 200;
 }
 
 .rwnorm {
-    font-family: Raleway;
+    font-family: 'Raleway';
     font-weight: 500;
 }
 
 .rwblack {
-    font-family: Raleway;
+    font-family: 'Raleway';
     font-weight: 900;
 }
 
 .dosis {
-    font-family: 'dosis';
+    font-family: 'Dosis';
 }
 
 
 .sym {
-    font-family: Symtext;
+    font-family: 'Symtext', 'IESymtext';
 }
 
 #sidenav {

@@ -1,0 +1,20 @@
+/* Fonts */
+@font-face {
+    font-family: Raleway;
+    src: url(Raleway-Regular.ttf);
+}
+
+@font-face {
+    font-family: Symtext;
+    src: url(Symtext.ttf);
+}
+
+@font-face {
+    font-family: SymtextIE;
+    src: url(Symtext.woff2);
+}
+
+@font-face {
+    font-family: Dosis;
+    src: url(Dosis-Regular.otf);
+}

@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP"
         crossorigin="anonymous">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link rel="stylesheet" href="/font/customfont.css">
     <link rel="stylesheet" href="css/dashboard.css">
 </head>
 
@@ -43,7 +44,7 @@
                     <div class="d-inline-flex ml-5 mt-5">
                         <img class="pro-img" src="<?php echo $_SESSION[ 'pic' ]?>" height="75px" />
                         <div class="div ml-3 mt-2">
-                            <h5 class="light-text sym"><?php echo $_SESSION[ 'name' ] ?></h5>
+                            <h5 class="light-text sym" style="max-width:170px;"><?php echo $_SESSION[ 'name' ] ?></h5>
                             <p class="hi-text"><?php echo $_SESSION[ 'rank' ] ?></p>
                         </div>
                     </div>
