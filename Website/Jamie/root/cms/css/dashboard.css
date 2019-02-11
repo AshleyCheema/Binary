@@ -1,0 +1,236 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+
+/* Fonts */
+@font-face {
+    font-family: Symtext;
+    src: url(/font/Symtext.ttf);
+}
+
+@font-face {
+    font-family: Dosis;
+    src: url(/font/Dosis-Regular.otf);
+}
+
+@import url(https://fonts.googleapis.com/css?family=Raleway);
+
+body {
+    overflow: hidden;
+}
+
+.base {
+    background-color: #24242c;
+}
+
+.panel {
+    background-color: #2c3034;
+    border-color: #34383c !important;
+}
+
+.p-top {
+    border-top: 1px solid;
+}
+
+.p-bot {
+    border-bottom: 1px solid;
+}
+
+.p-right {
+    border-right: 1px solid;
+}
+
+.p-left {
+    border-left: 1px solid;
+}
+
+.w100 {
+    width: 100%;
+}
+
+.h100 {
+    height: 100%;
+}
+
+.vw100 {
+    width: 100vw;
+}
+
+.vr {
+    border-left: 1px solid #938d85;
+    height: 30px
+}
+
+.vh100 {
+    height: 100vh;
+}
+
+.white {
+    color: #ffffff;
+
+}
+
+.light-text {
+    color: #938d85;
+}
+
+p {
+    font-family: 'Dosis';
+    color: #938d85;
+}
+
+.hi-text {
+    color: #f4d442;
+}
+
+.hi-bg {
+    background-color: #f4d442;
+}
+
+.float-right {
+    float: right;
+}
+
+.float-left {
+    float: left;
+}
+
+.rwthin {
+    font-family: Raleway;
+    font-weight: 200;
+}
+
+.rwnorm {
+    font-family: Raleway;
+    font-weight: 500;
+}
+
+.rwblack {
+    font-family: Raleway;
+    font-weight: 900;
+}
+
+.dosis {
+    font-family: 'dosis';
+}
+
+
+.sym {
+    font-family: Symtext;
+}
+
+#sidenav {
+    width: 300px;
+    height: calc(100vh - 61px);
+    position: fixed;
+}
+
+#smallnav {
+    width: 65px;
+    height: calc(100vh - 61px);
+    position: fixed;
+}
+
+#close-btn:hover {
+    color: #f4d442 !important;
+}
+
+.pro-img {
+    height: 75px;
+    width: 75px;
+    border-radius: 75px;
+}
+
+.pro-img-small {
+    height: 50px;
+    width: 50px;
+    border-radius: 50px;
+}
+
+.a-link {
+    text-decoration: none !important;
+}
+
+.navbar a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.navbar a:hover {
+    color: #f4d442;
+}
+
+.nav-btn {
+    height: 75px;
+    width: 100%;
+    border-color: #34383c !important;
+    border-left: 3px solid;
+}
+
+.nav-btn-active {
+    background-color: #34383c;
+    border-color: #f4d442 !important;
+    border-left: 3px solid;
+}
+
+.nav-btn:hover {
+    text-decoration: none !important;
+    background-color: #34383c;
+    border-color: #f4d442 !important;
+    border-left: 3px solid;
+}
+
+.nav-btn:hover i {
+    color: #f4d442;
+}
+
+.nav-btn:hover p {
+    color: #fff;
+    text-decoration: none;
+    text-emphasis: none;
+}
+
+.nav-btn i {
+    background-color: transparent !important;
+    border-style: none !important;
+    text-decoration: none !important;
+    color: #938d85;
+    font-size: 16pt;
+}
+
+#close-btn {
+    width: 300px;
+    border-top: solid 1px;
+    border-color: #34383c !important;
+
+}
+
+#close-btn:hover {
+    color: #f4d442;
+
+}
+
+#open-btn {
+    width: 65px;
+    border-top: solid 1px;
+    border-color: #34383c !important;
+}
+
+#title-panel {
+    margin-left: 300px;
+    width: calc(100vw - 300px);
+    transition: 800ms;
+}
+
+#content-panel {
+    height: calc(100vh - 102px);
+    padding: 20px;
+    transition: 800ms;
+}
+
+.mg-sm {
+    margin-left: 65px !important;
+    width: calc(100vw - 65px) !important;
+}

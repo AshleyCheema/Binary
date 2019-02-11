@@ -3,7 +3,7 @@
     //Database details saved as variables
     $dbserver = "localhost";
     
-    $dbusername = "retrogeck_admin";
+    $dbusername = "retrogec_admin";
         
     $dbpassword = "FQ4mq*EsMP_*";
 
