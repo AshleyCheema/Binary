@@ -1,4 +1,4 @@
-<script src="../cms/js/tinymce.js"></script>
+
 <script>tinymce.init({ selector:'textarea' });</script>
 
 <div id="title-panel" class="panel p-bot">
