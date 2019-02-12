@@ -80,7 +80,7 @@
                     <p class="ml-3 mt-3">Slideshow</p>
                 </div>
             </a>
-            <a class="a-link a-5" href="pages/blog.php">
+            <a class="a-link a-5" href="pages/blog.html">
                 <div class="nav-btn d-flex justify-content-left align-items-center">
                     <div class="item ml-3"><i class="fas fa-font"></i></div>
                     <div class="item vr ml-3"></div>
@@ -120,7 +120,7 @@
                     <div class="item ml-3"><i class="fas fa-image"></i></div>
                 </div>
             </a>
-            <a class="a-link a-5" href="pages/blog.php">
+            <a class="a-link a-5" href="pages/blog.html">
                 <div class="nav-btn d-flex justify-content-left align-items-center">
                     <div class="item ml-3"><i class="fas fa-font"></i></div>
                 </div>
@@ -134,15 +134,6 @@
         <div id="content-panel">
 
   
-         
-            <!--< ?php 
-                $allowed = array('home', 'profile', 'users', 'slideshow', 'blog'); // add the pagenames you need
-                $page = ( isset($_GET['page']) ) ? $_GET['page'] : 'home';
-                if( in_array( $page, $allowed ) ){
-                    include("pages/$page.php");
-                } else {
-                    include("pages/404.php");
-            } ?>-->
            
         </div>
 
@@ -159,10 +150,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
         crossorigin="anonymous"></script>
     <script src="js/main.js"></script>
-
-    <script>
-
-    </script>
+    <script src="http://cdn.tinymce.com/4/tinymce.min.js"></script>
+       
 </body>
 
 </html>
