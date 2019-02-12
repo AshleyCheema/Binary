@@ -9,6 +9,7 @@ body {
 
 p {
     color: #938d85;
+    margin:0;
 }
 
 .base {
@@ -123,9 +124,6 @@ p {
     position: fixed;
 }
 
-#close-btn:hover {
-    color: #f4d442 !important;
-}
 
 .pro-img {
     height: 75px;
@@ -198,8 +196,7 @@ p {
 }
 
 #close-btn:hover {
-    color: #f4d442;
-
+    color: #f4d442 !important;
 }
 
 #open-btn {
@@ -245,12 +242,16 @@ p {
 }
 
 #content-panel {
+    margin-top:61px;
     margin-left: 300px;
     width: calc(100vw - 300px);
-    height: calc(100vh - 102px);
+    height: calc(100vh - 61px);
     padding: 20px;
     padding-top: 0px;
     transition: 800ms;
+    overflow: auto;
+    overflow-x: hidden;
+    
 }
 
 .mg-sm {
@@ -269,4 +270,46 @@ p {
 
 .mgt {
     margin-top: 20px;
+}
+
+.space {
+    height: 100px;
+}
+
+#slide-container {
+    width: 100%;
+    min-height: 300px;
+    border-style: dashed;
+    border-width: 1px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.slide-item {
+    width: 200px;
+    position: relative;
+    overflow: hidden;
+
+}
+
+.slide-item .hover-item {
+    position: absolute;
+    top: 0px;
+    height: 200px;
+    width: 200px;
+    text-align: center;
+    padding-top: 500px;
+    transition: 0.5s ease;
+
+}
+
+.slide-item .hover-item:hover {
+    padding-top: 0px;
+    cursor: pointer;
+}
+
+.slide-item .hover-item i {
+    font-size: 120pt;
+    margin-top: 10%;
+
 }

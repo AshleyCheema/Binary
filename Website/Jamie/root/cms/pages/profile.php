@@ -17,20 +17,20 @@
     <form enctype="multipart/form-data" action="" method="POST">
         <div class="row mgt">
             <p class="col-12 col-md-2">Full name:</p>
-            <input class="form-control col-12 col-md-8" type="text" name="fullname" value="First name">
+            <input class="form-control col-12 col-md-10" type="text" name="fullname" value="First name">
         </div>
 
         <div class="row mgt">
             <p class="col-12 col-md-2">Email:</p>
-            <input class="form-control col-12 col-md-8" type="text" name="fullname" value="email@email.com">
+            <input class="form-control col-12 col-md-10" type="text" name="fullname" value="email@email.com">
         </div>
         <div class="row mgt">
             <p class="col-12 col-md-2">Password:</p>
-            <input class="form-control col-12 col-md-8" type="password" name="fullname" value="password">
+            <input class="form-control col-12 col-md-10" type="password" name="fullname" value="password">
         </div>
         <div class="row mgt">
             <p class="col-12 col-md-2">Rank:</p>
-            <select class="form-control col-12 col-md-8" list="rank" name="myRank" value="Admin">
+            <select class="form-control col-12 col-md-10" list="rank" name="myRank" value="Admin">
                 <option value="Guest">Guest</option>
                 <option value="Admin" selected>Admin</option>
             </select>

@@ -10,7 +10,6 @@ $(document).ready(function () {
 $('#open-btn').click(function () {
 
     $('#content-panel').removeClass('mg-sm');
-    $('#content-panel').addClass('mg-lg');
     $('#title-panel').removeClass('newWidth');
 
     $('#smallnav').hide("slide", {
@@ -26,7 +25,6 @@ $('#open-btn').click(function () {
 $('#close-btn').click(function () {
 
     $('#content-panel').addClass('mg-sm');
-    $('#content-panel').removeClass('mg-lg');
     $('#title-panel').addClass('newWidth');
 
     $('#sidenav').hide("slide", {

@@ -30,7 +30,7 @@
 
     <div id="wrapper">
 
-        <nav class="navbar navbar-default navbar-static-top panel p-bot text-white">
+        <nav class="navbar navbar-default navbar-static-top panel p-bot text-white fixed-top">
             <h3><span class="rwthin pl-3 ">RETRO</span><span class="sym">GECKO</span></h3>
 
             <a href="logout.php">Logout <i class="fas fa-sign-out-alt"></i> </a>
@@ -134,15 +134,6 @@
         <div id="content-panel">
 
   
-         
-            <!--< ?php 
-                $allowed = array('home', 'profile', 'users', 'slideshow', 'blog'); // add the pagenames you need
-                $page = ( isset($_GET['page']) ) ? $_GET['page'] : 'home';
-                if( in_array( $page, $allowed ) ){
-                    include("pages/$page.php");
-                } else {
-                    include("pages/404.php");
-            } ?>-->
            
         </div>
 
@@ -159,10 +150,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
         crossorigin="anonymous"></script>
     <script src="js/main.js"></script>
-
-    <script>
-
-    </script>
+    <script src="http://cdn.tinymce.com/4/tinymce.min.js"></script>
+       
 </body>
 
 </html>
