@@ -48,4 +48,17 @@ public static class InputManager
     {
         return new Vector3(Horizontal(a_player), 0, Vertical(a_player));
     }
+
+    /// <summary>
+    /// Return true or false for if the return key has been pressed
+    /// </summary>
+    /// <returns></returns>
+    public static bool GetReturn()
+    {
+        if(Input.GetKeyDown(KeyCode.Return))
+        {
+            return true;
+        }
+        return false;
+    }
 }

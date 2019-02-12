@@ -3,19 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - Ladder
-  - Terminal
-  - Enemy
-  - Distraction
-  - LightSource
-  - Spy
-  - Spawn Points Spy's
-<<<<<<< HEAD
-  - CapturePoint_Trigger
-=======
-  - Merc
->>>>>>> master
+  tags: []
   layers:
   - Default
   - TransparentFX
@@ -25,8 +13,8 @@ TagManager:
   - UI
   - 
   - 
-  - Walkable
-  - FogOfWar
+  - 
+  - 
   - 
   - 
   - 
