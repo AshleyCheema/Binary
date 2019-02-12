@@ -26,7 +26,7 @@ public class PlayerObject_Net : NetworkBehaviour
     [SerializeField]
     private string playerName;
 
-    int playerId = 0;
+    int playerId = 1;
 
     // Start is called before the first frame update
     void Start()
@@ -65,9 +65,9 @@ public class PlayerObject_Net : NetworkBehaviour
         Debug.Log("CmdSpawnMyPlayer " + playerObject.transform.position);
 
         RpcChangePlayerPosition(spawnPoints[playerId].transform.position);
-        RpcChangePlayerCamera();
+        //RpcChangePlayerCamera();
 
-        playerId++;
+        playerId += 1;
     }
 
     [ClientRpc]
