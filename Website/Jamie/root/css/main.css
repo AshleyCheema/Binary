@@ -7,7 +7,6 @@
 body {
     background-color: black;
 
-
     /* Safari 4, Chrome 1-9, iOS 3.2-4.3, Android 2.1-3.0 */
     background-image: -webkit-gradient(linear, left top, right top, from(#0f0f0f), to(#003366));
 
@@ -28,53 +27,17 @@ body {
 }
 
 
-
-@font-face {
-    font-family: Raleway;
-    src: url(https://fonts.googleapis.com/css?family=Raleway:200,900);
-}
-
-@font-face {
-    font-family: Symtext;
-    src: url(../font/Symtext.ttf);
-}
-
-@font-face {
-    font-family: Dosis;
-    src: url(https://fonts.googleapis.com/css?family=Dosis);
-}
-
-
-p {
-    font-size: 14pt;
-    font-family: Dosis;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    font-family: Raleway;
-    font-weight: 200;
-}
-
-
-hr {
-    border-color: #fff;
-    padding-bottom: 25px;
-}
-
-.sym {
-    font-family: Symtext;
-}
-
 .hidden {
     display: none;
 }
 
+hr {
+    border-color: #272727;
+    padding-bottom: 25px;
+}
+
 .button {
+    background-color: transparent;
     padding: 5pt;
     padding-left: 25px;
     padding-right: 25px;
@@ -82,7 +45,7 @@ hr {
     border-style: solid;
     border-width: 1px;
     border-color: white;
-    font-family: Raleway;
+    font-family: 'Raleway';
     font-weight: 200;
     font-size: 18pt;
     text-align: center;
@@ -125,6 +88,18 @@ hr {
     font-size: 100pt;
 }
 
+@media only screen and (max-width: 768px) {
+    #title-text {
+        font-size: 54pt;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    #title-text {
+        font-size: 36pt;
+    }
+}
+
 #start {
 
     background: none;
@@ -161,7 +136,6 @@ hr {
 
 #navbar {
     background: #000000 !important;
-    height: 150px;
 }
 
 #newBody {
@@ -173,12 +147,12 @@ hr {
 }
 
 .rwthin {
-    font-family: Raleway;
+    font-family: 'Raleway';
     font-weight: 200;
 }
 
 .rwblack {
-    font-family: Raleway;
+    font-family: 'Raleway';
     font-weight: 900;
 }
 
@@ -204,7 +178,8 @@ canvas {
 .owl-carousel .owl-item .slide-img {
     width: 100%;
     margin: auto;
-    height: 600px;
+    height: 70vh;
+    max-height: 900px;
     object-fit: cover;
     max-width: initial;
     animation: shiftBG 15s linear infinite;

@@ -1,0 +1,158 @@
+<?php 
+
+    /**
+     * Send debug code to the Javascript console
+     * https://paulund.co.uk/output-php-data-in-browser-console
+     */ 
+    function startDebug( $data ) {
+
+        if( is_array( $data ) || is_object( $data ) )
+        {
+
+            echo( "<script>console.log('PHP: " . json_encode( $data ) . "');</script>" );
+
+        } else {
+
+            echo( "<script>console.log('PHP: " . $data . "');</script>" );
+
+        }
+
+    }
+
+    //Initialise Login Procedure.
+    function startLogin () 
+    {
+            //starting session
+            session_start();
+
+            //variable to store error message
+            $error='';
+
+            //If the post is submitted do the following
+            if ( isset( $_POST[ 'submit' ] ) ) 
+            {
+                // if either input it empty do the following
+                if ( empty( $_POST[ 'email' ] ) || empty( $_POST[ 'password' ] ) ) 
+                {
+                    //set error variable
+                    $_SESSION['Error'] = "Email or Password is invalid";
+
+                //if the name and password is set then
+                } else {   
+						  
+                    // Define $username and $password 
+                    $email = $_POST[ 'email' ]; 
+                    $password = $_POST[ 'password' ];
+
+                    // To protect MySQL injection for Security purpose 
+                    //$email = stripslashes( $email );
+                    //$password = stripslashes( $password );
+
+                    include "config.php";
+
+                    //added security for PHP
+                    $email = mysqli_escape_string( $connection, $email );
+                    $password = mysqli_escape_string( $connection, $password );
+
+                    //Password Encryption
+                    $password = md5 ( $password );
+
+                    //SQL query to fetch information of registerd users and finds user match.
+                    $query = mysqli_query( $connection, "SELECT * FROM users WHERE user_password='$password' AND user_email='$email'" );
+
+                    //fetches data
+                    $rows = mysqli_num_rows( $query );
+
+                    if ( $rows == 1 ) {
+
+                        //Initializing Session
+                        $_SESSION[ 'email' ] = $email;
+
+                        //Redirecting to other page
+                        header( "location: dashboard.php" );
+
+                    } else {
+
+                        //set error message
+                      
+                        $_SESSION['Error'] = "Email or Password is invalid"; 
+
+                    }
+				
+				    //Closing Connection
+				    mysqli_close( $connection );  
+										 
+			     }
+
+            }
+        }
+
+            
+    //initialise log in checks
+    function checkLogin( $isLogin = false ) 
+    {	
+        
+        //Starting Session		                
+		session_start();
+		
+		//Storing session
+		$email = $_SESSION[ 'email' ];        
+        
+		include "config.php";
+		
+		//SQLI query to fetch complete information of user   
+		$query = mysqli_query( $connection, "SELECT * FROM users WHERE user_email='$email'" );
+
+		//perform query
+		$row = mysqli_fetch_assoc( $query );
+        
+		//Store username into a variable
+        $user_id = $row[ 'user_id' ];
+        $user_pic = $row[ 'user_pic' ];
+		$login_session = $row[ 'user_email' ];
+        $name_session = $row[ 'user_name' ];
+        $right = $row[ 'user_right' ];
+        $creation_date = $row[ 'user_creation' ];
+        
+        //Store Session variables.
+        $_SESSION[ 'login_email' ] = $login_session;
+        $_SESSION[ 'name' ] = $name_session;
+        $_SESSION[ 'pic' ] = $user_pic;
+
+        if($right == 0){
+            $_SESSION[ 'rank' ] = 'Unverified';
+        } elseif($right == 1) {
+            $_SESSION[ 'rank' ] = 'Guest';
+        } elseif($right == 2) {
+            $_SESSION[ 'rank' ] = 'Admin';
+        }
+        
+       // the following is then used to direct the user to the correct location
+        if( $isLogin ){
+            //if the login information is set then:
+            if( isset( $login_session ) )
+            {
+                //Closing Connection
+                mysqli_close( $connection );
+
+                //Redirecting to CMS dashboard 
+                header( 'Location: dashboard.php' );
+            }
+            
+        } else {
+            //if the login information is not set then:
+            if( !isset( $login_session ) )
+            {
+                //Closing Connection
+                mysqli_close( $connection );
+
+                //Redirecting to log in page
+                header( 'Location: index.php' ); 
+            
+            }
+		
+	   }
+        
+    }
+
+    ?>
