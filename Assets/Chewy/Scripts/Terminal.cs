@@ -7,91 +7,99 @@ using UnityEngine;
 /// </summary>
 public class Terminal : MonoBehaviour
 {
-    //public Camera camera;
+    public Camera[] camera;
+    private KeyCode[] cameraKeys = new KeyCode[] { KeyCode.Alpha1, KeyCode.Alpha2, KeyCode.Alpha3 };
     private Renderer renderer;
-    private GameController gameController;
-    [SerializeField]
-    private GameObject hackingCanvas;
-    [SerializeField]
-    private GameObject hackOutput;
+    private bool cameraActive;
+    private MercControls mercController;
+    private int currentCamera;
+    //[SerializeField]
+    //private GameObject hackingCanvas;
+    //[SerializeField]
+    //private GameObject hackOutput;
 
     // Use this for initialization
     void Start ()
     {
         renderer = GetComponent<Renderer>();
-        gameController = GameObject.FindGameObjectWithTag("Player").GetComponent<GameController>();
+        mercController = GameObject.FindGameObjectWithTag("Merc").GetComponent<MercControls>();
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
         //Check if the camera is enabled
-        //if (camera.enabled == true)
-        //{
-        //    //if so and the escape is pressed then turn off camera and re-enable player controls
-        //    if (Input.GetKeyDown(KeyCode.Escape))
-        //    {
-        //        gameController.enabled = true;
-        //        camera.enabled = false;
-        //    }
-        //}
-    }
-
-    public void Enable()
-    {
-        if (hackOutput.activeInHierarchy == true)
+        if (cameraActive)
         {
-            Debug.Log("Terminal is enabled");
-            hackingCanvas.SetActive(true);
-            gameController.enabled = false;
-        }
+            for (int i = 0; i < cameraKeys.Length; i++)
+            {
+                if(Input.GetKeyDown(cameraKeys[i]))
+                {
+                    for (int j = 0; j < camera.Length; j++)
+                    {
+                        camera[j].enabled = (i == j) ? true : false;
+                        currentCamera = j;
+                    }
+                }
+            }
 
-    }
-
-    public void Hack()
-    {
-        bool result = hackingCanvas.GetComponent<HackingPuzzleManager>().StartPuzzle();
-
-        hackingCanvas.SetActive(false);
-        gameController.enabled = true;
-
-        if(result)
-        {
-            Debug.Log("Hack Complete");
-            hackOutput.SetActive(false);
-        }
-        else
-        {
-            Debug.Log("Hack Failed");
+            //if so and the escape is pressed then turn off camera and re-enable player controls
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                foreach (Camera cam in camera)
+                {
+                    cam.enabled = false;
+                }
+                mercController.enabled = true;
+                cameraActive = false;
+            }
         }
     }
 
-    //Hover mouse over gameobject, this will change it's colour.
-    //If the player is close enough to the gameobject it is hackable
-    private void OnMouseOver()
+    private void OnTriggerStay(Collider other)
     {
-        renderer.material.SetColor(Color.red);
-        if (gameController.isTerminal == true)
+        gameObject.GetComponent<Renderer>().material.color = Color.red;
+        if(Input.GetKeyDown(KeyCode.E))
         {
-            //if (Input.GetMouseButtonDown(1))
-            //{
-                //disable player controller
-                gameController.enabled = false;
-                //pop up canvas 
-                hackingCanvas.SetActive(true);
-                //camera.enabled = true;
-            //}
+            camera[currentCamera].enabled = true;
+            mercController.enabled = false;
+            cameraActive = true;
         }
     }
 
-    private void HackingCompleted(bool a_result)
+    private void OnTriggerExit(Collider other)
     {
-
+        gameObject.GetComponent<Renderer>().material.color = Color.white;
     }
 
-    //Change back to original colour when no longer hovered over
-    private void OnMouseExit()
-    {
-        renderer.material.SetColor(Color.white);
-    }
+    //public void Enable()
+    //{
+    //    if (hackOutput.activeInHierarchy == true)
+    //    {
+    //        Debug.Log("Terminal is enabled");
+    //        hackingCanvas.SetActive(true);
+    //        mercController.enabled = false;
+    //    }
+    //
+    //}
+
+    //public void Hack()
+    //{
+    //    bool result = hackingCanvas.GetComponent<HackingPuzzleManager>().StartPuzzle();
+    //
+    //    hackingCanvas.SetActive(false);
+    //    mercController.enabled = true;
+    //
+    //    if(result)
+    //    {
+    //        Debug.Log("Hack Complete");
+    //        hackOutput.SetActive(false);
+    //    }
+    //    else
+    //    {
+    //        Debug.Log("Hack Failed");
+    //    }
+    //}
+
+
 }

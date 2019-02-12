@@ -175,7 +175,6 @@ public class GameController : MonoBehaviour
         if(other.gameObject.tag == "Terminal")
         {
             isTerminal = true;
-            other.gameObject.GetComponent<Terminal>().Enable();
         }
         else
         {
