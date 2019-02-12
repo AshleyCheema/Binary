@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6168213292800209205}
   - component: {fileID: 1319168239139109970}
   - component: {fileID: 3383351326559757225}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 2.5x3.25WallPlane (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -100,7 +100,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5954467088188378282}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 2.5x2.5CornerInner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 2071075907985724768}
   - component: {fileID: 8595107902943071552}
   - component: {fileID: 2511124590881767276}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 2.5x3.25WallPlane
   m_TagString: Untagged
   m_Icon: {fileID: 0}

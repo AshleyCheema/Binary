@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5631041725092987857}
   - component: {fileID: 7013394435750347557}
   - component: {fileID: 5300092145122327506}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 5x3.25WallPlane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -100,7 +100,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6934323589899075866}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 5x3.25WallPlane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
