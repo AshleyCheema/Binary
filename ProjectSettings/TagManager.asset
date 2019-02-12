@@ -11,7 +11,11 @@ TagManager:
   - LightSource
   - Spy
   - Spawn Points Spy's
+<<<<<<< HEAD
   - CapturePoint_Trigger
+=======
+  - Merc
+>>>>>>> master
   layers:
   - Default
   - TransparentFX

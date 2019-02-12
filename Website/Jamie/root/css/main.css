@@ -26,52 +26,18 @@ body {
     overflow-x: hidden;
 }
 
-@font-face {
-    font-family: Raleway;
-    src: url(https://fonts.googleapis.com/css?family=Raleway:200,900);
-}
 
-@font-face {
-    font-family: Symtext;
-    src: url(/font/Symtext.ttf);
+.hidden {
+    display: none;
 }
-
-@font-face{
-    font-family: Dosis;
-    src: url(/font/Dosis-Regular.otf);
-}
-@import url(https://fonts.googleapis.com/css?family=Raleway);
-
-p {
-    font-family: 'Dosis';
-    font-size: 14pt;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    font-family: 'Raleway';
-    font-weight: 200;
-}
-
 
 hr {
     border-color: #272727;
     padding-bottom: 25px;
 }
 
-.sym {
-    font-family: Symtext;
-}
-
-.hidden {
-    display: none;
-}
-
 .button {
+    background-color: transparent;
     padding: 5pt;
     padding-left: 25px;
     padding-right: 25px;
@@ -79,7 +45,7 @@ hr {
     border-style: solid;
     border-width: 1px;
     border-color: white;
-    font-family: Raleway;
+    font-family: 'Raleway';
     font-weight: 200;
     font-size: 18pt;
     text-align: center;
@@ -122,17 +88,15 @@ hr {
     font-size: 100pt;
 }
 
-@media only screen and (max-width: 768px)
-{
-    #title-text{
-        font-size:54pt;
+@media only screen and (max-width: 768px) {
+    #title-text {
+        font-size: 54pt;
     }
 }
 
-@media only screen and (max-width: 600px)
-{
-    #title-text{
-        font-size:36pt;
+@media only screen and (max-width: 600px) {
+    #title-text {
+        font-size: 36pt;
     }
 }
 
@@ -172,7 +136,6 @@ hr {
 
 #navbar {
     background: #000000 !important;
-    height: 150px;
 }
 
 #newBody {
@@ -184,12 +147,12 @@ hr {
 }
 
 .rwthin {
-    font-family: Raleway;
+    font-family: 'Raleway';
     font-weight: 200;
 }
 
 .rwblack {
-    font-family: Raleway;
+    font-family: 'Raleway';
     font-weight: 900;
 }
 
@@ -216,7 +179,7 @@ canvas {
     width: 100%;
     margin: auto;
     height: 70vh;
-    max-height:900px;
+    max-height: 900px;
     object-fit: cover;
     max-width: initial;
     animation: shiftBG 15s linear infinite;

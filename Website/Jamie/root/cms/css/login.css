@@ -3,24 +3,6 @@
     padding: 0;
 }
 
-
-@font-face {
-    font-family: Raleway;
-    src: url(https://fonts.googleapis.com/css?family=Raleway:200,900);
-}
-
-@font-face {
-    font-family: Symtext;
-    src: url(//font/Symtext.ttf);
-}
-
-@font-face {
-    font-family: Dosis;
-    src: url(//font/Dosis-Regular.otf);
-}
-
-@import url(https://fonts.googleapis.com/css?family=Raleway);
-
 /* Coded with love by Mutiullah Samim */
 body {
     background-color: black;
@@ -101,7 +83,7 @@ body {
     border-style: solid;
     border-width: 1px;
     border-color: white;
-    font-family: Raleway;
+    font-family: 'Raleway';
     font-weight: 200;
     font-size: 18pt;
     text-align: center;
