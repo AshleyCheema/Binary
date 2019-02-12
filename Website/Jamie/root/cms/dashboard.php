@@ -30,7 +30,7 @@
 
     <div id="wrapper">
 
-        <nav class="navbar navbar-default navbar-static-top panel p-bot text-white">
+        <nav class="navbar navbar-default navbar-static-top panel p-bot text-white fixed-top">
             <h3><span class="rwthin pl-3 ">RETRO</span><span class="sym">GECKO</span></h3>
 
             <a href="logout.php">Logout <i class="fas fa-sign-out-alt"></i> </a>
@@ -80,7 +80,7 @@
                     <p class="ml-3 mt-3">Slideshow</p>
                 </div>
             </a>
-            <a class="a-link a-5" href="pages/blog.html">
+            <a class="a-link a-5" href="pages/blog.php">
                 <div class="nav-btn d-flex justify-content-left align-items-center">
                     <div class="item ml-3"><i class="fas fa-font"></i></div>
                     <div class="item vr ml-3"></div>
@@ -120,7 +120,7 @@
                     <div class="item ml-3"><i class="fas fa-image"></i></div>
                 </div>
             </a>
-            <a class="a-link a-5" href="pages/blog.html">
+            <a class="a-link a-5" href="pages/blog.php">
                 <div class="nav-btn d-flex justify-content-left align-items-center">
                     <div class="item ml-3"><i class="fas fa-font"></i></div>
                 </div>

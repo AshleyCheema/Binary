@@ -24,7 +24,7 @@
 
         <div class="row mgt">
             <p class="col-12 col-md-2">Blog Content:</p>
-            <div class="col-12 col-md-10">
+            <div class="col-12 col-md-10" style="padding-left:0px; padding-right:0px">
                 <textarea type="text" name="blog_content" style="min-height:300px;">
                 </textarea>
             </div>

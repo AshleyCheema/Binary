@@ -9,6 +9,7 @@ body {
 
 p {
     color: #938d85;
+    margin:0;
 }
 
 .base {
@@ -123,9 +124,6 @@ p {
     position: fixed;
 }
 
-#close-btn:hover {
-    color: #f4d442 !important;
-}
 
 .pro-img {
     height: 75px;
@@ -198,8 +196,7 @@ p {
 }
 
 #close-btn:hover {
-    color: #f4d442;
-
+    color: #f4d442 !important;
 }
 
 #open-btn {
@@ -245,12 +242,16 @@ p {
 }
 
 #content-panel {
+    margin-top:61px;
     margin-left: 300px;
     width: calc(100vw - 300px);
-    height: calc(100vh - 102px);
+    height: calc(100vh - 61px);
     padding: 20px;
     padding-top: 0px;
     transition: 800ms;
+    overflow: auto;
+    overflow-x: hidden;
+    
 }
 
 .mg-sm {
