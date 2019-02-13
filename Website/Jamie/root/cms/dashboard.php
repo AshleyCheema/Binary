@@ -12,6 +12,8 @@
 
  addBlog();
 
+ deleteBlog();
+
 ?>
 
 <!DOCTYPE html>
@@ -61,7 +63,7 @@
                 <div class="nav-btn nav-btn-active d-flex justify-content-left align-items-center">
                     <div class="item ml-3"><i class="fas fa-home"></i></div>
                     <div class="item vr ml-3"></div>
-                    <p class="ml-3 mt-3">Home</p>
+                    <p class="ml-3">Home</p>
                 </div>
             </a>
 
@@ -69,7 +71,7 @@
                 <div class="nav-btn d-flex justify-content-left align-items-center">
                     <div class="item ml-3"><i class="fas fa-user-alt"></i></div>
                     <div class="item vr ml-3"></div>
-                    <p class="ml-3 mt-3">Profile</p>
+                    <p class="ml-3">Profile</p>
                 </div>
             </a>
           <!--   <a class="a-link a-3" href="pages/users.php">
@@ -83,14 +85,14 @@
                 <div class="nav-btn d-flex justify-content-left align-items-center">
                     <div class="item ml-3"><i class="fas fa-image"></i></div>
                     <div class="item vr ml-3"></div>
-                    <p class="ml-3 mt-3">Slideshow</p>
+                    <p class="ml-3">Slideshow</p>
                 </div>
             </a>
             <a class="a-link a-5" href="pages/blog.php">
                 <div class="nav-btn d-flex justify-content-left align-items-center">
                     <div class="item ml-3"><i class="fas fa-font"></i></div>
                     <div class="item vr ml-3"></div>
-                    <p class="ml-3 mt-3">Blog</p>
+                    <p class="ml-3">Blog</p>
                 </div>
             </a>
 
