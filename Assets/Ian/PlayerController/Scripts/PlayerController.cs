@@ -13,12 +13,14 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField]
-    private float normalSpeed = 5f;
+    public float normalSpeed = 5f;
     private float crouchingSpeed = 2.5f;
-    private float runningSpeed = 6f;
+    public float runningSpeed = 6f;
+
+    public float currentSpeed = 5f;
 
     [SerializeField]
-    Player player;
+    public Player player;
 
     // Start is called before the first frame update
     void Start()
@@ -27,23 +29,23 @@ public class PlayerController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public virtual void Update()
     {
         if (Input.GetButton("Crouching"))
         {
-            transform.Translate(InputManager.Joystick(player) * crouchingSpeed * Time.deltaTime);
-            Debug.Log("Left Control Held Down");
+            currentSpeed = crouchingSpeed;
         }
 
         else if (Input.GetButton("Sprint"))
         {
-            transform.Translate(InputManager.Joystick(player) * runningSpeed * Time.deltaTime);
-            Debug.Log("Left Shift Held Down");
+            currentSpeed = runningSpeed;
         }
         else
         {
-            transform.Translate(InputManager.Joystick(player) * normalSpeed * Time.deltaTime);
+            currentSpeed = normalSpeed;
         }
+
+        transform.Translate(InputManager.Joystick(player) * currentSpeed * Time.deltaTime);
 
         UpdateDirection();
     }
@@ -52,7 +54,7 @@ public class PlayerController : MonoBehaviour
     /// Update the directio that the character is facing,
     /// This locks the character not to rotate on the x plane
     /// </summary>
-    private void UpdateDirection()
+    public void UpdateDirection()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
@@ -60,7 +62,7 @@ public class PlayerController : MonoBehaviour
         if(Physics.Raycast(ray, out hit))
         {
             Vector3 newDirection = transform.position - hit.point;
-            newDirection.y = 0;
+            newDirection.y = 0.5f;
             transform.forward = newDirection;
             transform.right = Vector3.Cross(transform.forward, transform.up);
         }
