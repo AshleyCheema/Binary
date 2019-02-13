@@ -7,8 +7,10 @@
  checkLogin();
 
  updateProfile();
- 
+
  addSlide();
+
+ addBlog();
 
 ?>
 

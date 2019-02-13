@@ -14,22 +14,22 @@
 
         <div class="row mgt">
             <p class="col-12 col-md-2">Blog Title:</p>
-            <input class="form-control col-12 col-md-10" type="text" name="blog_title" placeholder="Slide Title">
+            <input class="form-control col-12 col-md-10" type="text" name="blog-title" placeholder="Slide Title">
         </div>
 
         <div class="row mgt">
-            <p class="col-12 col-md-2">Blog Main:</p>
-            <input class="form-control col-12 col-md-10" type="file" name="blog_image" accept="image/*">
+            <p class="col-12 col-md-2">Blog Main Image:</p>
+            <input class="form-control col-12 col-md-10" type="file" name="fileToUpload" accept="image/*">
         </div>
 
         <div class="row mgt">
             <p class="col-12 col-md-2">Blog Content:</p>
             <div class="col-12 col-md-10" style="padding-left:0px; padding-right:0px">
-                <textarea type="text" name="blog_content" style="min-height:300px;">
+                <textarea type="text" name="blog-content" style="min-height:300px;">
                 </textarea>
             </div>
         </div>
-        <button type="submit" class="btn btn-primary mgt">Submit</button>
+        <button type="submit" name="add-blog" class="btn btn-primary mgt">Submit</button>
     </form>
 
     <h3 class="conmg white mt-5">Manage Existing Blogs</h3>
