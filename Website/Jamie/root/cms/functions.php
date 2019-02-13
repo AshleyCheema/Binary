@@ -222,7 +222,7 @@
 
         if ( isset( $_POST[ 'add-slide' ] ) ) {
 
-            $target_dir = "../images/slideupload/";
+            $target_dir = "../images/slideuploads/";
             $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
             $uploadOk = 1;
             $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
@@ -284,7 +284,9 @@
             } else {
                // echo "Error: " . $result . "<br>" . $connection->error;
             }
-            
+
+            /* free result set */
+            mysqli_free_result($result);
             mysqli_close( $connection );
 
         }
@@ -305,7 +307,7 @@
                     //echo "File is an image - " . $check["mime"] . ".";
                     $uploadOk = 1;
                 } else {
-                   // echo "File is not an image.";
+                    // echo "File is not an image.";
                     $uploadOk = 0;
                 }
             }
@@ -339,29 +341,86 @@
                 }
             }
 
-            $blogImage = $target_file;
-            $blogAuthor = $_SESSION[ 'name' ];
             $blogTitle = $_POST[ 'blog-title' ];
             $blogContent = $_POST[ 'blog-content' ];
             
+            include "config.php";
 
             //Added security to information being placed in database
             $blogTitle = stripslashes( $blogTitle );
             $blogContent = stripslashes( $blogContent );
 
-            include "config.php";
+            $blogImage = $target_file;
+            $blogAuthor = $_SESSION[ 'name' ];
 
-            $result = mysqli_query( $connection, "INSERT INTO blog (blog_author, blog_title, blog_image, blog_content ) VALUES ('$blogAuthor', '$blogTitle', '$blogImage', '$blogContent' )" );
+            $newsql = "INSERT INTO blog (blog_author, blog_title, blog_image, blog_content ) VALUES ('$blogAuthor', '$blogTitle', '$blogImage', '$blogContent' )";
+            $result = mysqli_query( $connection, $newsql );
             
-            if ($connection->query($result) === TRUE) {
+            /* if ($connection->query($result) === TRUE) {
                 //echo "New record created successfully";
             } else {
-               // echo "Error: " . $result . "<br>" . $connection->error;
-            }
+                // echo "Error: " . $result . "<br>" . $connection->error;
+            } */
             
+            /* free result set */
+            //mysqli_free_result($result);
+            mysqli_close( $connection );
+        }
+    }
+
+    function showBlogCms(){
+        include "config.php";
+
+        //Query the database to find all information in the blog and to arrange it in descending order.
+        $queryblogs = "SELECT * FROM blog ORDER BY blog_id DESC" ;
+        
+        if ($result = mysqli_query($connection, $queryblogs)) {
+        
+            while ($row = mysqli_fetch_assoc($result))
+            {
+                //make variables equal to the data from taken from the database.
+                $id = $row['blog_id'];
+                $image = $row['blog_image'];
+                $title = $row['blog_title'];
+    
+                ?>
+                <form enctype="multipart/form-data" action="" method="POST"> 
+                    <input type="hidden" name="blog-id" value="<?php echo $id; ?>">   
+                    <div class="slide-item m-4"><div style="background-image: url('<?php echo $image ?>'); background-size:cover; height:200px; width:200px;'"></div><br>
+                        <p class="text-center"><?php echo $title ?></p>  
+                        <button class="hover-item" type="submit" name="delete-blog" style="background-color: transparent;border-style: none;color: #34383c;-webkit-appearance: none;">
+                            <i class="fas fa-times-circle"></i>
+                        </button>
+                    </div>
+
+                </form>
+                <?php
+    
+            }
+
+             /* free result set */
+            mysqli_free_result($result);
+
+        }
+
+        mysqli_close( $connection );
+    }
+
+    function deleteBlog(){
+        
+        if(isset($_POST["delete-blog"])) {
+
+            $id = $_POST[ 'blog-id' ];
+            include "config.php";
+
+            $result = mysqli_query( $connection, "DELETE FROM blog WHERE blog_id = $id " );
+
+            //Close the mysqli connection
             mysqli_close( $connection );
 
         }
     }
+
+
 
     ?>

@@ -1,4 +1,12 @@
+<?php
 
+
+    //includes login script
+    include( '../functions.php' );
+
+    checkLogin();
+    
+?>
 <script>tinymce.init({ selector:'textarea' });</script>
 
 <div id="title-panel" class="panel p-bot">
@@ -37,11 +45,13 @@
 
     <div id="slide-container" class="mgt light-text p-4">
 
-        <div class="slide-item m-4"><img height="200px" width="200px" src="https://via.placeholder.com/200"><br>
+    <?php showBlogCms() ?>
+        <!-- <div class="slide-item m-4"><img height="200px" width="200px" src="https://via.placeholder.com/200"><br>
             <p class="text-center">Blog title</p>
             <div class="hover-item">
                 <i class="fas fa-times-circle"></i>
             </div>
-        </div>
+        </div> -->
+
     </div>
 </div>
