@@ -9,21 +9,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MercControls : MonoBehaviour
+public class MercControls : PlayerController
 {
-    [SerializeField]
-    private float normalSpeed = 5f;
-    private float runningSpeed = 8f;
+    //private float normalSpeed = 5f;
+    //private float runningSpeed = 8f;
     private float cooldown;
     private float speedDuration;
     private bool canSprint;
     private bool buttonPressed;
 
+    private bool noShoot;
+    private float shotCooldown = 5f;
+    private float reloadSpeed = 3f;
+    private GameObject bullet;
+    private Rigidbody rb;
+
     public Abilities sprint;
     //public Abilities trackable;
 
     [SerializeField]
-    Player player;
+    //Player player;
 
     // Start is called before the first frame update
     void Start()
@@ -31,15 +36,43 @@ public class MercControls : MonoBehaviour
         cooldown = sprint.cooldown;
         canSprint = sprint.isCooldown;
         speedDuration = sprint.abilityDuration;
+        bullet = GameObject.Find("Bullet");
+        rb = bullet.GetComponent<Rigidbody>();
+        bullet.SetActive(false);
     }
 
     // Update is called once per frame
-    void Update()
+    public override void Update()
     {
+        //UpdateDirection();
+        base.Update();
         if(Input.GetKey(KeyCode.P))
         {
             sprint.Trigger();
         }
+
+        if(Input.GetKeyDown(KeyCode.Mouse0) && !noShoot)
+        {
+            //Sound/Animation?
+            bullet.SetActive(true);
+            bullet.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + 1);
+            rb.velocity = transform.TransformDirection(transform.forward * 100);
+            noShoot = true;
+        }
+        if(noShoot)
+        {
+            shotCooldown -= Time.deltaTime;
+            //Reload Animation
+            transform.Translate(InputManager.Joystick(player) * reloadSpeed * Time.deltaTime);
+
+            if (shotCooldown <= 0)
+            {
+                bullet.SetActive(false);
+                shotCooldown = 5f;
+                noShoot = false;
+            }
+        }
+
 
         //If sprint has been used up then increase cooldown until it's back to it's original time
         if(!canSprint)
@@ -60,7 +93,8 @@ public class MercControls : MonoBehaviour
         }
         if (buttonPressed)
         {
-            transform.Translate(InputManager.Joystick(player) * runningSpeed * Time.deltaTime);
+            // transform.Translate(InputManager.Joystick(player) * runningSpeed * Time.deltaTime);
+            currentSpeed = runningSpeed;
             speedDuration -= 0.01f;
 
             if (speedDuration <= 0)
@@ -68,11 +102,13 @@ public class MercControls : MonoBehaviour
                 cooldown = speedDuration;
                 canSprint = false;
                 buttonPressed = false;
+
+                currentSpeed = normalSpeed;
             }
         }
         else
         {
-            transform.Translate(InputManager.Joystick(player) * normalSpeed * Time.deltaTime);
+            //transform.Translate(InputManager.Joystick(player) * normalSpeed * Time.deltaTime);
         }
  
     }
