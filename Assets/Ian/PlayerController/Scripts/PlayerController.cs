@@ -39,11 +39,30 @@ public class PlayerController : MonoBehaviour
         {
             transform.Translate(InputManager.Joystick(player) * runningSpeed * Time.deltaTime);
             Debug.Log("Left Shift Held Down");
-
         }
         else
         {
             transform.Translate(InputManager.Joystick(player) * normalSpeed * Time.deltaTime);
+        }
+
+        UpdateDirection();
+    }
+
+    /// <summary>
+    /// Update the directio that the character is facing,
+    /// This locks the character not to rotate on the x plane
+    /// </summary>
+    private void UpdateDirection()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        if(Physics.Raycast(ray, out hit))
+        {
+            Vector3 newDirection = transform.position - hit.point;
+            newDirection.y = 0;
+            transform.forward = newDirection;
+            transform.right = Vector3.Cross(transform.forward, transform.up);
         }
     }
 }
