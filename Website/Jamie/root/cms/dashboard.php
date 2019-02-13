@@ -6,6 +6,10 @@
  //checks to see if user is logged in
  checkLogin();
 
+ updateProfile();
+ 
+ addSlide();
+
 ?>
 
 <!DOCTYPE html>
@@ -42,7 +46,7 @@
 
                 <div class="row">
                     <div class="d-inline-flex ml-5 mt-5">
-                        <img class="pro-img" src="<?php echo $_SESSION[ 'pic' ]?>" height="75px" />
+                        <div class="pro-img" style="background-image:url('<?php echo $_SESSION[ 'pic' ]?>');"></div>
                         <div class="div ml-3 mt-2">
                             <h5 class="light-text sym" style="max-width:170px;"><?php echo $_SESSION[ 'name' ] ?></h5>
                             <p class="hi-text"><?php echo $_SESSION[ 'rank' ] ?></p>
@@ -96,8 +100,8 @@
 
         <div id="smallnav" class="panel p-right">
 
-            <div class="profile mb-5">
-                <img class="pro-img-small ml-2 mt-5" src="<?php echo $_SESSION[ 'pic' ]?>" height="50px" />
+            <div class="profile mb-5 mt-2">
+            <div class="pro-img-small" style="background-image:url('<?php echo $_SESSION[ 'pic' ]?>');"></div>
             </div>
             <a class="a-link a-1" href="pages/profile.php">
                 <div class="nav-btn nav-btn-active d-flex justify-content-left align-items-center">

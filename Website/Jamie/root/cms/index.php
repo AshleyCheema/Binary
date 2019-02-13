@@ -62,7 +62,7 @@
 								</div>
                             </div>
                             <div class="d-flex justify-content-center mt-3 login_container">
-						        <button type="sumbit" value="submit" name="submit" class="btn login_btn">Login</button>
+						        <button type="submit" value="submit" name="submit" class="btn login_btn">Login</button>
 					        </div>
 						</form>
 					</div>

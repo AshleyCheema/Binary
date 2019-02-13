@@ -255,7 +255,7 @@ canvas {
 }
 
 .sandles {
-    background-image: url("../images/team/sandles.jpg");
+    background-image: url("../images/team/sandles.png");
 }
 
 .jess {
@@ -263,11 +263,11 @@ canvas {
 }
 
 .chewy {
-    background-image: url("../images/team/chewy.jpg");
+    background-image: url("../images/team/chewy.png");
 }
 
 .ian {
-    background-image: url("../images/team/ian.jpg");
+    background-image: url("../images/team/ian.png");
 }
 
 .james {
@@ -275,8 +275,7 @@ canvas {
 }
 
 .jamie {
-    background-image: url("../images/team/jamie.jpg");
-    background-position: -50px -50px;
+    background-image: url("../images/team/jamie.png");
 }
 
 

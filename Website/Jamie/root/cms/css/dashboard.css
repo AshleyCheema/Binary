@@ -9,7 +9,7 @@ body {
 
 p {
     color: #938d85;
-    margin:0;
+    margin: 0;
 }
 
 .base {
@@ -129,12 +129,17 @@ p {
     height: 75px;
     width: 75px;
     border-radius: 75px;
+    background-size: 75px;
+    background-size: cover;
 }
 
 .pro-img-small {
+    margin: 0 auto;
     height: 50px;
     width: 50px;
     border-radius: 50px;
+    background-size: 50px;
+    background-size: cover;
 }
 
 .a-link {
@@ -242,7 +247,7 @@ p {
 }
 
 #content-panel {
-    margin-top:61px;
+    margin-top: 61px;
     margin-left: 300px;
     width: calc(100vw - 300px);
     height: calc(100vh - 61px);
@@ -251,7 +256,7 @@ p {
     transition: 800ms;
     overflow: auto;
     overflow-x: hidden;
-    
+
 }
 
 .mg-sm {
