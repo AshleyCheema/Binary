@@ -6,7 +6,7 @@ using UnityEngine.Networking.Match;
 using UnityEngine.Networking.Types;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-/*
+
 public class LobbyManager : NetworkLobbyManager
 {
     /// <summary>
@@ -18,6 +18,7 @@ public class LobbyManager : NetworkLobbyManager
     /// <summary>
     /// 
     /// </summary>
+    [SerializeField]
     private float matchStartCountDown = 5.0f;
 
     [SerializeField]
@@ -41,12 +42,15 @@ public class LobbyManager : NetworkLobbyManager
     /// <summary>
     /// 
     /// </summary>
+    [SerializeField]
     private LobbyInfoPanel lobbyInfoPanel;
 
     /// <summary>
     /// 
     /// </summary>
-    private LobbyCoutndownPanel countDownPanel;
+    [SerializeField]
+    private LobbyCountdownPanel countDownPanel;
+    public LobbyCountdownPanel CountdownPanel => countDownPanel;
 
     /// <summary>
     /// 
@@ -59,7 +63,9 @@ public class LobbyManager : NetworkLobbyManager
     [SerializeField]
     private Button backButton;
 
+    [SerializeField]
     private Text statusInfo;
+    [SerializeField]
     private Text hostInfo;
 
     /// <summary>
@@ -68,7 +74,8 @@ public class LobbyManager : NetworkLobbyManager
     private int numberOfPlayersConnected = 0;
 
     private bool isMatchmaking = false;
-    public bool IsMatchmaking => isMatchmaking;
+    public bool IsMatchmaking
+    { get { return isMatchmaking; } set { isMatchmaking = value; } }
 
     protected bool disconnectServer = false;
 
@@ -90,7 +97,7 @@ public class LobbyManager : NetworkLobbyManager
             Destroy(this);
         }
 
-        lobbyHooks = GetComponent<LobbyHooks>();
+        lobbyHooks = GetComponent<LobbyHook>();
         currentPanel = mainMenuPanel;
         GetComponent<Canvas>().enabled = true;
 
@@ -148,7 +155,7 @@ public class LobbyManager : NetworkLobbyManager
 
             Destroy(GameObject.Find("MainMenuUI(Clone)"));
 
-            topPanel.isInGame = true;
+            topPanel.IsInGame = true;
             topPanel.ToggleVisibility(false);
         }
     }
@@ -474,7 +481,7 @@ public class LobbyManager : NetworkLobbyManager
                 {
                     if(lobbySlots[i] != null)
                     {
-                        lobbySlots[i].RpcUpdateCountDown(floorTime);
+                        (lobbySlots[i] as LobbyPlayer).RpcUpdateCountdown(floorTime);
                     }
                 }
             }
@@ -518,4 +525,4 @@ public class LobbyManager : NetworkLobbyManager
         lobbyInfoPanel.Display("Client error: " + (errorCode == 6 ? "timeout" : errorCode.ToString()), "Close", null);
     }
 }
-*/
+
