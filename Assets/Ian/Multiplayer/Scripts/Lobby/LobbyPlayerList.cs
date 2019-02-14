@@ -1,68 +1,76 @@
-using UnityEngine;
-using UnityEngine.UI;
+﻿/*
+ * Author: Ian Hudson
+ * Description: 
+ * Created: 14/02/2019
+ * Edited By: Ian
+ */
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.Networking;
 
-
-//List of players in the lobby
 public class LobbyPlayerList : MonoBehaviour
 {
-    public static LobbyPlayerList _instance = null;
+    private static LobbyPlayerList instance;
+    public static LobbyPlayerList Instance
+    { get { return instance; } }
 
-    public RectTransform playerListContentTransform;
-    public GameObject warningDirectPlayServer;
-    public Transform addButtonRow;
+    public RectTransform playerListContent;
 
-    protected VerticalLayoutGroup _layout;
-    protected List<LobbyPlayer> _players = new List<LobbyPlayer>();
+    protected VerticalLayoutGroup layout;
+    protected List<LobbyPlayer> players = new List<LobbyPlayer>();
 
-    public void OnEnable()
+    /// <summary>
+    /// Onenable
+    /// </summary>
+    private void OnEnable()
     {
-        _instance = this;
-        _layout = playerListContentTransform.GetComponent<VerticalLayoutGroup>();
-    }
-
-    public void DisplayDirectServerWarning(bool enabled)
-    {
-        if (warningDirectPlayServer != null)
-            warningDirectPlayServer.SetActive(enabled);
-    }
-
-    void Update()
-    {
-        //this dirty the layout to force it to recompute evryframe (a sync problem between client/server
-        //sometime to child being assigned before layout was enabled/init, leading to broken layouting)
-
-        if (_layout)
-            _layout.childAlignment = Time.frameCount % 2 == 0 ? TextAnchor.UpperCenter : TextAnchor.UpperLeft;
-    }
-
-    public void AddPlayer(LobbyPlayer player)
-    {
-        if (_players.Contains(player))
-            return;
-
-        _players.Add(player);
-
-        player.transform.SetParent(playerListContentTransform, false);
-        addButtonRow.transform.SetAsLastSibling();
-
-        PlayerListModified();
-    }
-
-    public void RemovePlayer(LobbyPlayer player)
-    {
-        _players.Remove(player);
-        PlayerListModified();
-    }
-
-    public void PlayerListModified()
-    {
-        int i = 0;
-        foreach (LobbyPlayer p in _players)
+        if (instance == null)
         {
-            p.OnPlayerListChanged(i);
-            ++i;
+            instance = this;
         }
+        else
+        {
+            Destroy(this);
+        }
+
+        layout = playerListContent.GetComponent<VerticalLayoutGroup>();
+    }
+
+    /// <summary>
+    /// Update
+    /// </summary>
+    private void Update()
+    {
+        if(layout)
+        {
+            layout.childAlignment = Time.frameCount % 2 == 0 ? TextAnchor.UpperCenter : TextAnchor.UpperLeft;
+        }
+    }
+
+    /// <summary>
+    /// Add a new player to the lobby
+    /// </summary>
+    /// <param name="a_player"></param>
+    public void AddPlayer(LobbyPlayer a_player)
+    {
+        if(players.Contains(a_player))
+        {
+            return;
+        }
+
+        players.Add(a_player);
+
+        a_player.transform.SetParent(playerListContent, false);
+    }
+
+    /// <summary>
+    /// Remove a player from the lobby
+    /// </summary>
+    /// <param name="a_player"></param>
+    public void RemovePlayer(LobbyPlayer a_player)
+    {
+        players.Remove(a_player);
     }
 }
