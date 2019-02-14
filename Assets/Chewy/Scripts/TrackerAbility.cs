@@ -11,6 +11,7 @@ public class TrackerAbility : MonoBehaviour
     private GameObject trackingDevice;
     private bool trackerDown;
     private Collider deviceCollider;
+    private Vector3 trackerPos;
     //private bool isThrowing;
 
     // Start is called before the first frame update
@@ -28,6 +29,12 @@ public class TrackerAbility : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (trackingDevice.GetComponent<Trigger>().isDetected == false)
+        {
+            //Tracker Position
+            Debug.Log("Detected");
+        }
+
         if (Input.GetKeyDown(KeyCode.Q))
         {
             if (!isCooldown && a_Duration == tracker.abilityDuration)
@@ -76,6 +83,7 @@ public class TrackerAbility : MonoBehaviour
 
                 if (Input.GetMouseButtonDown(0))
                 {
+                    trackerPos = trackingDevice.transform.position;
                     deviceCollider.enabled = true;
                     isCooldown = false;
                     trackerDown = true;

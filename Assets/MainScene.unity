@@ -1165,6 +1165,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 603291d495b0ac24ea7a3c4a58cb01e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  triggerType: 0
+  hasShot: 0
+  isDetected: 0
 --- !u!1 &545078749
 GameObject:
   m_ObjectHideFlags: 0
@@ -3044,6 +3047,7 @@ GameObject:
   - component: {fileID: 1849527861}
   - component: {fileID: 1849527860}
   - component: {fileID: 1849527864}
+  - component: {fileID: 1849527865}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Untagged
@@ -3059,10 +3063,10 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1849527859}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1849527861
 MeshRenderer:
@@ -3139,6 +3143,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 118
   m_CollisionDetection: 0
+--- !u!114 &1849527865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1849527859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 603291d495b0ac24ea7a3c4a58cb01e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerType: 0
+  hasShot: 0
+  isDetected: 0
 --- !u!1 &1853926560
 GameObject:
   m_ObjectHideFlags: 0
