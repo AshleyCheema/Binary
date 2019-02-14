@@ -67,13 +67,13 @@
                 </div>
             </a>
 
-            <a class="a-link a-2" href="pages/profile.php">
+            <!-- <a class="a-link a-2" href="pages/profile.php">
                 <div class="nav-btn d-flex justify-content-left align-items-center">
                     <div class="item ml-3"><i class="fas fa-user-alt"></i></div>
                     <div class="item vr ml-3"></div>
                     <p class="ml-3">Profile</p>
                 </div>
-            </a>
+            </a> -->
           <!--   <a class="a-link a-3" href="pages/users.php">
                 <div class="nav-btn d-flex justify-content-left align-items-center">
                     <div class="item ml-3"><i class="fas fa-users"></i></div>
@@ -112,12 +112,12 @@
                     <div class="item ml-3"><i class="fas fa-home"></i></div>
                 </div>
             </a>
-            <a class="a-link a-2" href="pages/profile.php">
+            <!-- <a class="a-link a-2" href="pages/profile.php">
                 <div class="nav-btn d-flex justify-content-left align-items-center">
                     <div class="item ml-3"><i class="fas fa-user-alt"></i></div>
 
                 </div>
-            </a>
+            </a> -->
           <!--   <a class="a-link a-3" href="pages/users.php">
                 <div class="nav-btn d-flex justify-content-left align-items-center">
                     <div class="item ml-3"><i class="fas fa-users"></i></div>
