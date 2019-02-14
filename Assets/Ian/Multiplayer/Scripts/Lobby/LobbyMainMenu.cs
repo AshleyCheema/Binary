@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-/*
+
 public class LobbyMainMenu : MonoBehaviour
 {
     /// <summary>
@@ -88,7 +88,7 @@ public class LobbyMainMenu : MonoBehaviour
     public void OnClickDeedicated()
     {
         lobbyManager.ChangeTo(null);
-        lobbyManager.SetServer();
+        lobbyManager.StartServer();
 
         //Set the back delegate for when the back button is 
         lobbyManager.backDelegate = lobbyManager.StopServerCallback;
@@ -105,14 +105,14 @@ public class LobbyMainMenu : MonoBehaviour
         lobbyManager.matchMaker.CreateMatch
         (
             gameNameInput.text,
-            lobbyManager.maxPlayer,
+            (uint)lobbyManager.maxPlayers,
             true,
             "", "", "", 0, 0,
             lobbyManager.OnMatchCreate
         );
 
         lobbyManager.backDelegate = lobbyManager.StopHostCallback;
-        lobbyManager.isMathcmaking = true;
+        lobbyManager.IsMatchmaking = true;
         lobbyManager.DisplayIsConnecting();
 
         lobbyManager.SetServerInfo("Matchmaker Host", lobbyManager.matchHost);
@@ -152,4 +152,3 @@ public class LobbyMainMenu : MonoBehaviour
         }
     }
 }
-*/
