@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿/*
+using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
 using UnityEngine.Networking.Match;
@@ -33,3 +34,4 @@ public class LobbyServerEntry : MonoBehaviour
         lobbyManager.DisplayIsConnecting();
     }
 }
+*/
