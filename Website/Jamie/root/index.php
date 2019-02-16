@@ -99,7 +99,7 @@ include( 'cms/functions.php' );
                         </div>
                     </div>
                     <div class="row pt-4">
-                        <a class="button middle" href="blog.html">See more news</a>
+                        <a class="button middle" href="blog.php">See more news</a>
                     </div>
                 </div>
                 <!--EndBlog-->

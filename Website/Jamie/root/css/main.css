@@ -140,6 +140,7 @@ hr {
 
 #newBody {
     background-color: #0f0f0f;
+    padding-bottom: 20px;
 }
 
 #navbar #brandtitle {
@@ -321,6 +322,51 @@ footer p {
     padding: 10px;
     width: 100%;
 }
+
+.row-post {
+    background-color: rgba(0, 0, 0, 0.25);
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+}
+
+.row-post .row-title {
+    color: #fdfdfd;
+    padding: 20px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.parent {
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    min-height: 250px;
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+.row-post .parent .image {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: #000000;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: all .5s;
+}
+
+.row-post .parent .image:hover {
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+.highlight {
+    color: #f4d442;
+}
+
 
 @media(max-width: 768px) {
 

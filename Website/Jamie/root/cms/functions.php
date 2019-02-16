@@ -475,6 +475,8 @@
         $firstImg = $row['blog_image'];
         $firstCont = $row['blog_content'];
         $firstDate = $row['blog_date'];
+        $dt1 = date('jS M Y', strtotime($firstDate));
+
             
         /* free result set */
         mysqli_free_result($result);
@@ -489,6 +491,8 @@
         $secondImg = $row['blog_image'];
         $secondCont = $row['blog_content'];
         $secondDate = $row['blog_date'];
+        $dt2 = date('jS M Y', strtotime($secondDate));
+
 
         /* free result set */
         mysqli_free_result($result);
@@ -503,6 +507,7 @@
         $thirdImg = $row['blog_image'];
         $thirdCont = $row['blog_content'];
         $thirdDate = $row['blog_date'];
+        $dt3 = date('jS M Y', strtotime($thirdDate));
 
         /* free result set */
         mysqli_free_result($result);
@@ -512,7 +517,7 @@
         <div class="col-12 col-md-7 blog-post" style="background-image:url('<? echo $firstImg ?>');">
             <div class="blog-title">
                 <h5 class="blog-title-text"><? echo $firstTitle ?></h5>
-                <p class="blog-date"><? echo $firstDate ?></p>
+                <p class="blog-date"><? echo $dt1 ?></p>
                 <br>
                 <a class="blog-link" href="/blog.php/<? echo $firstId ?>">Read More</a>
             </div>
@@ -521,25 +526,49 @@
             <div class="blog-post sm-blog-post" style="background-image:url('<? echo $secondImg ?>');">
                 <div class="blog-title">
                     <h5 class="blog-title-text"><? echo $secondTitle ?></h5>
-                    <p class="blog-date"><? echo $secondDate ?></p>
+                    <p class="blog-date"><? echo $dt2 ?></p>
                     <a class="blog-link" href="/blog.php/<? echo $secondId ?>">Read More</a>
                 </div>
             </div>
             <div class="blog-post sm-blog-post" style="background-image:url('<? echo $thirdImg ?>');">
                 <div class="blog-title">
                     <h5 class="blog-title-text"><? echo $thirdTitle ?></h5>
-                    <p class="blog-date"><? echo $thirdDate ?></p>
+                    <p class="blog-date"><? echo $dt3 ?></p>
                     <a class="blog-link" href="/blog.php/<? echo $thirdId ?>">Read More</a>
                 </div>
             </div>
-
-
         <?php
+    }
 
-        
+    function allBlogs(){
+        include "config.php";
 
+        //sql to find all information in the blog and to arrange it in descending order.
+        $blogsql = "SELECT * FROM blog ORDER BY blog_date DESC" ;
         
-         
+        //Result of querying the database
+        $result = mysqli_query($connection, $blogsql) or die("Bad Query: $blogsql");
+        while ($row = mysqli_fetch_assoc($result)){
+
+            $rowdate = $row['blog_date'];
+            $dt = date('jS M Y', strtotime($rowdate));
+
+            ?>
+                <div class="row row-post">
+                    <div class="col-7 row-title">
+                        <h3 class="title"><?php echo $row['blog_title'] ?></h3>
+                        <p class="date"><span class="highlight"><?php echo $row['blog_author'] ?></span>, <?php echo $dt ?></p>
+                        <br>
+                        <a class="link" href="blog.php/<?php echo $row['blog_id'] ?>">Read More</a>
+                    </div>
+                    <div class="col-5 parent">
+                         <div class="image" style="background-image:url('<?php echo $row['blog_image'] ?>')" ;></div>
+                    </div>
+                </div>
+
+            <?php
+
+        }
     }
 
 
