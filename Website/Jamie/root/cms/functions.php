@@ -593,9 +593,16 @@
             ?>
 
             <div class="post-wrap">
-                <div class="post-image" style="background-image:url('<?php echo $image ?>');">
+                <div id="myImg" class="post-image" style="background-image:url('<?php echo $image ?>');">
 
                 </div>
+                <!-- The Modal -->
+                <div id="myModal" class="modal">
+                <span class="close">&times;</span>
+                <!-- Modal Content (The Image) -->
+                <div class="modal-content" id="img01" style="background-image:url('<?php echo $image ?>');"></div>
+                </div>
+
                 <div class="container text-white">
                     <div class="col-9 post">
                         <h1 class="mt-5"><?php echo $row[ 'blog_title' ]; ?></h1>
@@ -613,6 +620,28 @@
                     <a class="button" href="blog.php">Back to blogs</a>
                 </div>
             </div>
+            <script>
+                // Get the modal
+                var modal = document.getElementById('myModal');
+                // Get the image and insert it inside the modal - use its "alt" text as a caption
+                var img = document.getElementById('myImg');
+                
+                img.onclick = function(){
+                    modal.style.display = "block";
+                }
+
+                // Get the <span> element that closes the modal
+                var span = document.getElementsByClassName("close")[0];
+
+                // When the user clicks on <span> (x), close the modal
+                span.onclick = function() { 
+                    modal.style.display = "none";
+                }
+
+                modal.onclick = function(){
+                    modal.style.display = "none";
+                }
+            </script>
 
             <?php
             
