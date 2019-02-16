@@ -83,15 +83,15 @@ body {
     border-style: solid;
     border-width: 1px;
     border-color: white;
-    font-family: 'Raleway';
+    font-family: 'Exo2';
     font-weight: 200;
     font-size: 18pt;
     text-align: center;
 }
 
 .login_btn:hover {
-    color: #f4d442;
-    border-color: #f4d442;
+    color: #19a333;
+    border-color: #19a333;
     text-decoration: none;
     transform: scale(1.1);
     transition: 1000ms;
@@ -128,12 +128,8 @@ p {
     font-family: 'Dosis';
 }
 
-.dosis {
-    font-family: 'Dosis';
-}
-
 .input-group:focus-within {
-    border-color: yellow;
+    border-color: #19a333;
     background-color: transparent !important;
 }
 
@@ -151,5 +147,5 @@ p {
 }
 
 .custom-checkbox .custom-control-input:checked~.custom-control-label::before {
-    background-color: #f4d442 !important;
+    background-color: #19a333 !important;
 }

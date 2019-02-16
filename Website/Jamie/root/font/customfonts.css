@@ -1,7 +1,13 @@
 /* Fonts */
 @font-face {
     font-family: Raleway;
-    src: url(Raleway-Regular.ttf);
+    src: url(Raleway-Thin.ttf);
+}
+
+/* Fonts */
+@font-face {
+    font-family: Exo2;
+    src: url(Exo2-Regular.otf);
 }
 
 @font-face {
@@ -34,10 +40,61 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: 'Raleway';
+    font-family: 'Exo2';
     font-weight: 200;
 }
 
+a {
+    font-family: 'Dosis', sans-serif;
+    color: #19a333;
+    text-decoration: none;
+    transition: all .5s ease-in-out;
+}
+
+a:hover {
+    color: #19a333;
+    text-decoration: underline;
+}
+
 .sym {
-    font-family: 'Symtext', 'SymtextIE';
+    font-family: 'Symtext', 'SymtextIE', sans-serif;
+}
+
+
+.rwnorm {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 500;
+}
+
+
+.dosis {
+    font-family: 'Dosis', sans-serif;
+}
+
+.exo2 {
+    font-family: 'Exo2', sans-serif;
+}
+
+input {
+    font-family: 'Exo2', sans-serif;
+}
+
+.rwthin {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 200;
+}
+
+.rwblack {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 900;
+}
+
+.exthin {
+    font-family: 'Exo2', sans-serif;
+    font-weight: 200;
+}
+
+.exblack {
+    font-family: 'Exo2', sans-serif;
+    font-weight: 900;
 }

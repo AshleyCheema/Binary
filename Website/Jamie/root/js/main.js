@@ -24,6 +24,9 @@ $('.meet-carousel').owlCarousel({
     slideSpeed: 500,
     paginationSpeed: 200,
     responsive: {
+        100: {
+            items: 1
+        },
         425: {
             items: 1
         },
@@ -31,7 +34,7 @@ $('.meet-carousel').owlCarousel({
             items: 2
         },
         1024: {
-            items: 4
+            items: 3
         },
         1440: {
             items: 6

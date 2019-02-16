@@ -1,8 +1,17 @@
 $(document).ready(function () {
-    $('#smallnav').hide();
 
     //default load
     $("#content-panel").load('pages/profile.php');
+
+    //If window is smaller than 768 show the small navigation
+    if ($(window).width() < 768) {
+        $('#sidenav').hide();
+        $('#smallnav').show();
+        $('#content-panel').addClass('mg-sm');
+        $('#title-panel').addClass('newWidth');
+    } else { //else show the large navigation
+        $('#smallnav').hide();
+    }
 
 
 });

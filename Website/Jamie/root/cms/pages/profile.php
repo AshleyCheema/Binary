@@ -15,8 +15,8 @@
 <div class="container">
 
     <div class="row conmg">
-        <div style="background-image:url('<?php echo $_SESSION[ 'pic' ]?>');background-size:cover;height:200px;width:200px;"></div>
-        <div class="white float-left" style="margin-left:20px;">
+        <div style="margin-right:20px; background-image:url('<?php echo $_SESSION[ 'pic' ]?>');background-size:cover;height:200px;width:200px;"></div>
+        <div class="white float-left" >
             <h2><?php echo $_SESSION[ 'name' ]?></h2>
             <p><?php echo $_SESSION[ 'login_email' ]?> - <?php echo $_SESSION[ 'rank' ]?></p>
         </div>

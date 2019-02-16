@@ -73,11 +73,11 @@ p {
 }
 
 .hi-text {
-    color: #f4d442;
+    color: #19a333;
 }
 
 .hi-bg {
-    background-color: #f4d442;
+    background-color: #19a333;
 }
 
 .float-right {
@@ -88,29 +88,6 @@ p {
     float: left;
 }
 
-.rwthin {
-    font-family: 'Raleway';
-    font-weight: 200;
-}
-
-.rwnorm {
-    font-family: 'Raleway';
-    font-weight: 500;
-}
-
-.rwblack {
-    font-family: 'Raleway';
-    font-weight: 900;
-}
-
-.dosis {
-    font-family: 'Dosis';
-}
-
-
-.sym {
-    font-family: 'Symtext', 'IESymtext';
-}
 
 #sidenav {
     width: 300px;
@@ -152,7 +129,7 @@ p {
 }
 
 .navbar a:hover {
-    color: #f4d442;
+    color: #19a333;
 }
 
 .nav-btn {
@@ -164,19 +141,19 @@ p {
 
 .nav-btn-active {
     background-color: #34383c;
-    border-color: #f4d442 !important;
+    border-color: #19a333 !important;
     border-left: 3px solid;
 }
 
 .nav-btn:hover {
     text-decoration: none !important;
     background-color: #34383c;
-    border-color: #f4d442 !important;
+    border-color: #19a333 !important;
     border-left: 3px solid;
 }
 
 .nav-btn:hover i {
-    color: #f4d442;
+    color: #19a333;
 }
 
 .nav-btn:hover p {
@@ -201,7 +178,7 @@ p {
 }
 
 #close-btn:hover {
-    color: #f4d442 !important;
+    color: #19a333 !important;
 }
 
 #open-btn {
@@ -220,7 +197,7 @@ p {
     border-style: solid;
     border-width: 1px;
     border-color: white;
-    font-family: 'Raleway';
+    font-family: 'Exo2';
     font-weight: 200;
     font-size: 18pt;
     text-align: center;
@@ -228,8 +205,8 @@ p {
 }
 
 .button:hover {
-    color: #f4d442;
-    border-color: #f4d442;
+    color: #19a333;
+    border-color: #19a333;
     text-decoration: none;
     transform: scale(1.1);
     transition: 1000ms;
@@ -237,7 +214,7 @@ p {
 }
 
 #open-btn:hover {
-    color: #f4d442 !important;
+    color: #19a333 !important;
 }
 
 #title-panel {
@@ -316,4 +293,22 @@ p {
     font-size: 120pt;
     margin-top: 10%;
 
+}
+
+@media only screen and (max-width: 768px) {
+
+    #content-panel {
+        width: calc(100vw - 65px) !important;
+        margin-left: 65px !important;
+    }
+
+    #sidenav {
+        width: 100%;
+        z-index: 9999;
+        position: fixed;
+    }
+
+    #close-btn {
+        width: 100%;
+    }
 }

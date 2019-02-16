@@ -24,6 +24,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Retro Gecko Dashboard</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/fav/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/fav/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../images/fav/favicon-16x16.png">
+    <link rel="manifest" href="../images/fav/site.webmanifest">
+    <link rel="mask-icon" href="../images/fav/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#00a300">
+    <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
         crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.3.5/css/swiper.min.css">

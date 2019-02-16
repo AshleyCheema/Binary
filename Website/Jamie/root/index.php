@@ -12,6 +12,13 @@ include( 'cms/functions.php' );
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Retro Gecko</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/fav/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/fav/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/fav/favicon-16x16.png">
+    <link rel="manifest" href="/images/fav/site.webmanifest">
+    <link rel="mask-icon" href="/images/fav/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#00a300">
+    <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
         crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.3.5/css/swiper.min.css">
@@ -25,9 +32,9 @@ include( 'cms/functions.php' );
 <body>
     <div id="wrapper">
         <!--Landing Space-->
-        <div id="space">
-            <h1 id="title-text" class="text-center text-white">RETRO<span class="sym">GECKO</span></h1>
-            <a id="start" class="hidden">Let's Begin</a>
+        <div id="space" class="home-space">
+            <h1 id="title-text" class="text-center text-white rwthin">RETRO<span class="sym">GECKO</span></h1>
+            <a id="start" class="hidden exo2">Let's Begin</a>
         </div>
         <!--End-->
         <!--Navigation-->
@@ -72,29 +79,6 @@ include( 'cms/functions.php' );
                     <h2>Latest News</h2>
                     <hr>
                     <div class="row middle container">
-                        <!-- <div class="col-12 col-md-7 blog-post">
-                            <div class="blog-title">
-                                <h5 class="blog-title-text">Random ass, slightly long blog title.</h5>
-                                <p class="blog-date">February 07th 2019</p>
-                                <br>
-                                <a class="blog-link" href="#">Read More</a>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-md-5 blog-row-2">
-                            <div class="blog-post sm-blog-post">
-                                <div class="blog-title">
-                                    <h5 class="blog-title-text">Random ass, slightly long title.</h5>
-                                    <p class="blog-date">February 07th 2019</p>
-                                    <a class="blog-link" href="#">Read More</a>
-                                </div>
-                            </div>
-                            <div class="blog-post sm-blog-post">
-                                <div class="blog-title">
-                                    <h5 class="blog-title-text">Random ass, slightly long title.</h5>
-                                    <p class="blog-date">February 07th 2019</p>
-                                    <a class="blog-link" href="#">Read More</a>
-                                </div>
-                            </div> -->
                             <?php threeBlogs() ?>
                         </div>
                     </div>
@@ -187,11 +171,12 @@ include( 'cms/functions.php' );
                 </div>
                 <!--END Meet the team-->
             </div>
-            <footer class="footer mt-5">
-                <p>&copy Retro Gecko 2019, all rights reserved</p>
+            </div>
+            <footer class="footer">
+                <p class="highlight">&copy Retro Gecko 2019, all rights reserved</p>
             </footer>
-        </div>
-
+        
+    </div>
         <!-- threejs.org canvas lines example -->
         <script src="
                 https://cdnjs.cloudflare.com/ajax/libs/three.js/r67/three.min.js">

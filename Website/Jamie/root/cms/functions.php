@@ -514,7 +514,7 @@
 
         ?>
 
-        <div class="col-12 col-md-7 blog-post" style="background-image:url('<? echo $firstImg ?>');">
+        <div class="col-12 col-lg-7 blog-post" style="background-image:url('<? echo $firstImg ?>');">
             <div class="blog-title">
                 <h5 class="blog-title-text"><? echo $firstTitle ?></h5>
                 <p class="blog-date"><? echo $dt1 ?></p>
@@ -522,7 +522,7 @@
                 <a class="blog-link" href="blog.php?post_id=<? echo $firstId ?>">Read More</a>
             </div>
         </div>
-        <div class="col-sm-12 col-md-5 blog-row-2">
+        <div class="col-sm-12 col-lg-5 blog-row-2">
             <div class="blog-post sm-blog-post" style="background-image:url('<? echo $secondImg ?>');">
                 <div class="blog-title">
                     <h5 class="blog-title-text"><? echo $secondTitle ?></h5>
@@ -629,15 +629,12 @@
                 img.onclick = function(){
                     modal.style.display = "block";
                 }
-
                 // Get the <span> element that closes the modal
                 var span = document.getElementsByClassName("close")[0];
-
                 // When the user clicks on <span> (x), close the modal
                 span.onclick = function() { 
                     modal.style.display = "none";
                 }
-
                 modal.onclick = function(){
                     modal.style.display = "none";
                 }
