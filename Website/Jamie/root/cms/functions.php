@@ -374,7 +374,7 @@
         //Query the database to find all information in the blog and to arrange it in descending order.
         $queryblogs = "SELECT * FROM blog ORDER BY blog_id DESC" ;
         
-        if ($result = mysqli_query($connection, $queryblogs)) {
+        if ($result = mysqli_query($connection, $queryblogs) or die("Bad Query: $queryblogs")) {
         
             while ($row = mysqli_fetch_assoc($result))
             {
@@ -419,6 +419,127 @@
             mysqli_close( $connection );
 
         }
+    }
+
+    function displaySlides(){
+
+        include "config.php";
+
+        //Query the database to find all information in the slideshow and to arrange it in descending order.
+        $queryslide = "SELECT * FROM slideshow ORDER BY slide_id DESC" ;
+
+        if ($result = mysqli_query($connection, $queryslide) or die("Bad Query: $queryslide")) {
+        
+            while ($row = mysqli_fetch_assoc($result))
+            {
+                //make variables equal to the data from taken from the database.
+                $id = $row['slide_id'];
+                $image = $row['slide_img'];
+                $title = $row['slide_title'];
+                $sub = $row['slide_sub'];
+    
+                ?>
+                 <div class="slide-img" style="background-image: url('<?php echo $image?>');">
+                    <div class="img-overlay">
+                        <h3 class="img-title"><?php echo $title?></h3>
+                        <p class="img-author"><?php echo $sub?></p>
+                    </div>
+                </div>
+                <?php
+    
+            }
+
+             /* free result set */
+            mysqli_free_result($result);
+
+         }
+    }
+
+    function threeBlogs(){
+
+        include "config.php";
+
+        //sql to find all information in the blog and to arrange it in descending order.
+        $blogsqlone = "SELECT * FROM blog ORDER BY blog_date DESC LIMIT 0,1" ;
+        $blogsqltwo = "SELECT * FROM blog ORDER BY blog_date DESC LIMIT 1,1" ;
+        $blogsqlthree = "SELECT * FROM blog ORDER BY blog_date DESC LIMIT 2,1" ;
+
+
+        //Result of querying the database
+        $result = mysqli_query($connection, $blogsqlone) or die("Bad Query: $blogsqlone");
+        $row = mysqli_fetch_assoc($result);
+
+        $firstId = $row['blog_id'];
+        $firstAuthor = $row['blog_author'];
+        $firstTitle = $row['blog_title'];
+        $firstImg = $row['blog_image'];
+        $firstCont = $row['blog_content'];
+        $firstDate = $row['blog_date'];
+            
+        /* free result set */
+        mysqli_free_result($result);
+
+        //Result of querying the database
+        $result = mysqli_query($connection, $blogsqltwo) or die("Bad Query: $blogsqltwo");
+        $row = mysqli_fetch_assoc($result);
+
+        $secondId = $row['blog_id'];
+        $secondAuthor = $row['blog_author'];
+        $secondTitle = $row['blog_title'];
+        $secondImg = $row['blog_image'];
+        $secondCont = $row['blog_content'];
+        $secondDate = $row['blog_date'];
+
+        /* free result set */
+        mysqli_free_result($result);
+
+        //Result of querying the database
+        $result = mysqli_query($connection, $blogsqlthree) or die("Bad Query: $blogsqlthree");
+        $row = mysqli_fetch_assoc($result);
+
+        $thirdId = $row['blog_id'];
+        $thirdAuthor = $row['blog_author'];
+        $thirdTitle = $row['blog_title'];
+        $thirdImg = $row['blog_image'];
+        $thirdCont = $row['blog_content'];
+        $thirdDate = $row['blog_date'];
+
+        /* free result set */
+        mysqli_free_result($result);
+
+        ?>
+
+        <div class="col-12 col-md-7 blog-post" style="background-image:url('<? echo $firstImg ?>');">
+            <div class="blog-title">
+                <h5 class="blog-title-text"><? echo $firstTitle ?></h5>
+                <p class="blog-date"><? echo $firstDate ?></p>
+                <br>
+                <a class="blog-link" href="/blog.php/<? echo $firstId ?>">Read More</a>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-5 blog-row-2">
+            <div class="blog-post sm-blog-post" style="background-image:url('<? echo $secondImg ?>');">
+                <div class="blog-title">
+                    <h5 class="blog-title-text"><? echo $secondTitle ?></h5>
+                    <p class="blog-date"><? echo $secondDate ?></p>
+                    <a class="blog-link" href="/blog.php/<? echo $secondId ?>">Read More</a>
+                </div>
+            </div>
+            <div class="blog-post sm-blog-post" style="background-image:url('<? echo $thirdImg ?>');">
+                <div class="blog-title">
+                    <h5 class="blog-title-text"><? echo $thirdTitle ?></h5>
+                    <p class="blog-date"><? echo $thirdDate ?></p>
+                    <a class="blog-link" href="/blog.php/<? echo $thirdId ?>">Read More</a>
+                </div>
+            </div>
+
+
+        <?php
+
+        
+
+        
+         
     }
 
 

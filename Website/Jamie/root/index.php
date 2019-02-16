@@ -1,3 +1,9 @@
+<?php
+
+//includes login script
+include( 'cms/functions.php' );
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -55,18 +61,9 @@
             <!--End Navigation-->
             <!--Slideshow-->
             <div class="owl-carousel owl-theme slide-show">
-                <div class="slide-img" style="background-image: url('images/MoodBoard_1.jpg');">
-                    <div class="img-overlay">
-                        <h3 class="img-title">Moodboard</h3>
-                        <p class="img-author">Created by Jess Barrett</p>
-                    </div>
-                </div>
-                <div class="slide-img" style="background-image: url('images/MoodBoard_2.jpg');">
-                    <div class="img-overlay">
-                        <h3 class="img-title">Moodboard</h3>
-                        <p class="img-author">Created by Jess Barrett</p>
-                    </div>
-                </div>
+                <?php
+                    displaySlides();
+                ?>
             </div>
             <!--End SlideShow-->
             <div class="">
@@ -75,7 +72,7 @@
                     <h2>Latest News</h2>
                     <hr>
                     <div class="row middle container">
-                        <div class="col-12 col-md-7 blog-post">
+                        <!-- <div class="col-12 col-md-7 blog-post">
                             <div class="blog-title">
                                 <h5 class="blog-title-text">Random ass, slightly long blog title.</h5>
                                 <p class="blog-date">February 07th 2019</p>
@@ -97,7 +94,8 @@
                                     <p class="blog-date">February 07th 2019</p>
                                     <a class="blog-link" href="#">Read More</a>
                                 </div>
-                            </div>
+                            </div> -->
+                            <?php threeBlogs() ?>
                         </div>
                     </div>
                     <div class="row pt-4">
