@@ -4,6 +4,7 @@
 include( 'cms/functions.php' );
 
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -53,25 +54,23 @@ include( 'cms/functions.php' );
                 </div>
             </nav>
             <!--End Navigation-->
+            <?php
+        if(isset($_GET['post_id'])){
+            
+            specificBlog();
+                
+        }else{ 
+            ?>
             <div class="container pt-5">
                 <h2 class="text-white">News</h2>
                 <hr>
-
-                <!-- <div class="row row-post">
-                    <div class="col-7 row-title">
-                        <h3 class="title">Random ass, slightly long blog title.</h3>
-                        <p class="date"><span class="highlight">Jamie Laurence</span>, February 07th 2019</p>
-                        <br>
-                        <a class="link" href="#">Read More</a>
-                    </div>
-                    <div class="col-5 image" style="background-image:url('')" ;></div>
-                </div> -->
                 <?php
-                    allBlogs();
-                ?>
-
+                        allBlogs();
+                    ?>
             </div>
-
+            <?php
+        }
+        ?>
         </div>
         <footer class="footer">
             <p>&copy Retro Gecko 2019, all rights reserved</p>

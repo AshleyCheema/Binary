@@ -367,6 +367,24 @@ footer p {
     color: #f4d442;
 }
 
+.post-image {
+    height: 400px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.post {
+    background-color: #1c1c1c;
+    padding: 20px;
+    margin-bottom: 50px;
+    margin-top: 50px;
+}
+
+.post-wrap {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
 
 @media(max-width: 768px) {
 

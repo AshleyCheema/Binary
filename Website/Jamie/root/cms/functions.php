@@ -519,7 +519,7 @@
                 <h5 class="blog-title-text"><? echo $firstTitle ?></h5>
                 <p class="blog-date"><? echo $dt1 ?></p>
                 <br>
-                <a class="blog-link" href="/blog.php/<? echo $firstId ?>">Read More</a>
+                <a class="blog-link" href="blog.php?post_id=<? echo $firstId ?>">Read More</a>
             </div>
         </div>
         <div class="col-sm-12 col-md-5 blog-row-2">
@@ -527,14 +527,14 @@
                 <div class="blog-title">
                     <h5 class="blog-title-text"><? echo $secondTitle ?></h5>
                     <p class="blog-date"><? echo $dt2 ?></p>
-                    <a class="blog-link" href="/blog.php/<? echo $secondId ?>">Read More</a>
+                    <a class="blog-link" href="blog.php?post_id=<? echo $secondId ?>">Read More</a>
                 </div>
             </div>
             <div class="blog-post sm-blog-post" style="background-image:url('<? echo $thirdImg ?>');">
                 <div class="blog-title">
                     <h5 class="blog-title-text"><? echo $thirdTitle ?></h5>
                     <p class="blog-date"><? echo $dt3 ?></p>
-                    <a class="blog-link" href="/blog.php/<? echo $thirdId ?>">Read More</a>
+                    <a class="blog-link" href="blog.php?post_id=<? echo $thirdId ?>">Read More</a>
                 </div>
             </div>
         <?php
@@ -559,7 +559,7 @@
                         <h3 class="title"><?php echo $row['blog_title'] ?></h3>
                         <p class="date"><span class="highlight"><?php echo $row['blog_author'] ?></span>, <?php echo $dt ?></p>
                         <br>
-                        <a class="link" href="blog.php/<?php echo $row['blog_id'] ?>">Read More</a>
+                        <a class="link" href="?post_id=<?php echo $row['blog_id'] ?>">Read More</a>
                     </div>
                     <div class="col-5 parent">
                          <div class="image" style="background-image:url('<?php echo $row['blog_image'] ?>')" ;></div>
@@ -569,8 +569,56 @@
             <?php
 
         }
+         /* free result set */
+         mysqli_free_result($result);
     }
 
+    function specificBlog(){
 
+        include "config.php";
+
+        $postid = $_GET['post_id'];
+
+        //sql to find all information in the blog and to arrange it in descending order.
+        $thisBlog = "SELECT * FROM blog WHERE blog_id = '$postid'";
+        //Result of querying the database
+        $blogresult = mysqli_query($connection, $thisBlog) or die("Bad Query: $thisBlog");
+
+        while($row = mysqli_fetch_assoc($blogresult)){
+
+            $rowdate = $row['blog_date'];
+            $dt = date('jS M Y', strtotime($rowdate));
+            $image = $row[ 'blog_image'];
+            
+            ?>
+
+            <div class="post-wrap">
+                <div class="post-image" style="background-image:url('<?php echo $image ?>');">
+
+                </div>
+                <div class="container text-white">
+                    <div class="col-9 post">
+                        <h1 class="mt-5"><?php echo $row[ 'blog_title' ]; ?></h1>
+                        <hr>
+                    <!--  <p>Sub title about some Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquam
+                            corrupti
+                            perferendis ipsam.</p> -->
+                        <p class="highlight"><?php echo $row[ 'blog_author' ]; ?></p>
+                        <p class="grey-text"><?php echo $dt ?></p>
+                        <br>
+                        <br>
+                        <?php echo $row[ 'blog_content' ]; ?>
+
+                    </div>
+                    <a class="button" href="blog.php">Back to blogs</a>
+                </div>
+            </div>
+
+            <?php
+            
+        }
+        /* free result set */
+        mysqli_free_result($blogresult);
+    }
 
     ?>
