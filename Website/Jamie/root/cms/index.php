@@ -74,7 +74,7 @@
 
 
 						<div class="d-flex justify-content-center links dosis">
-							<span class="dosis">Go<a href="/index.html" class="ml-2">back</a></span>
+							<span class="dosis">Go<a href="/index.php" class="ml-2">back</a></span>
 						</div>
 					</div>
 				</div>
