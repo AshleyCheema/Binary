@@ -10,6 +10,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using TMPro;
 using System.Net;
+using UnityEngine.UI;
 
 public class LobbyMainMenuPanel : MonoBehaviour
 {
@@ -23,7 +24,7 @@ public class LobbyMainMenuPanel : MonoBehaviour
 
     //ip input field
     [SerializeField]
-    private TextMeshProUGUI ipInput;
+    private Text ipInput;
 
     /// <summary>
     /// When script is enabled call this
@@ -50,7 +51,7 @@ public class LobbyMainMenuPanel : MonoBehaviour
     public void OnClickJoin()
     {
         lobbyManager.ChangeTo(lobbyPanel);
-        lobbyManager.networkAddress = "192.168.0.29";
+        lobbyManager.networkAddress = ipInput.text;
         lobbyManager.StartClient();
 
         lobbyManager.backDelegate = lobbyManager.StopClientClbk;
