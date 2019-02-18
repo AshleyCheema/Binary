@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 using TMPro;
+using System.Net;
 
 public class LobbyMainMenuPanel : MonoBehaviour
 {
@@ -39,8 +40,8 @@ public class LobbyMainMenuPanel : MonoBehaviour
     {
         lobbyManager.StartHost();
         Debug.Log(lobbyManager.isNetworkActive);
-        Debug.Log(lobbyManager.networkAddress);
         Debug.Log(lobbyManager.networkPort);
+        Debug.Log(lobbyManager.networkAddress);
     }
 
     /// <summary>
@@ -49,8 +50,7 @@ public class LobbyMainMenuPanel : MonoBehaviour
     public void OnClickJoin()
     {
         lobbyManager.ChangeTo(lobbyPanel);
-
-        lobbyManager.networkAddress = ipInput.text;
+        lobbyManager.networkAddress = "192.168.0.29";
         lobbyManager.StartClient();
 
         lobbyManager.backDelegate = lobbyManager.StopClientClbk;

@@ -569,7 +569,8 @@ PlayerSettings:
     daydream:
       daydreamIconForeground: {fileID: 0}
       daydreamIconBackground: {fileID: 0}
-  cloudServicesEnabled: {}
+  cloudServicesEnabled:
+    UNet: 1
   luminIcon:
     m_Name: 
     m_ModelFolderPath: 
@@ -589,10 +590,10 @@ PlayerSettings:
   facebookXfbml: 0
   facebookFrictionlessRequests: 1
   apiCompatibilityLevel: 6
-  cloudProjectId: ed84d3c9-b756-49a5-a45c-2b1d75b6e8c9
+  cloudProjectId: f6e922b6-5050-42a8-8a17-baa3ef50b340
   framebufferDepthMemorylessMode: 0
-  projectName: GroupProject (1)
-  organizationId: ashley-cheema
+  projectName: GroupProject
+  organizationId: ian-3953386
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0
