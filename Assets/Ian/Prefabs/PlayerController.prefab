@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 3011942314590609165}
   - component: {fileID: 3011942314590609164}
   - component: {fileID: 3011942314590609163}
-  - component: {fileID: 3011942314590609264}
+  - component: {fileID: 3505184697141787877}
+  - component: {fileID: 5701234720215257261}
   m_Layer: 0
   m_Name: PlayerController
   m_TagString: Untagged
@@ -110,7 +111,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &3011942314590609264
+--- !u!114 &3505184697141787877
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -119,8 +120,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 3011942314590609162}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2917d2d468610d4e8e0dd3905d695ec, type: 3}
+  m_Script: {fileID: 11500000, guid: 3a8658bf8cd8fed408ddd7594de99694, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 5
-  player: 0
+--- !u!114 &5701234720215257261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3011942314590609162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e9512ef81fe03a4aba99ff192cb5941, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stunAbility: {fileID: 11400000, guid: dcb674641ca9fc7498c21cc58a8a4d86, type: 2}

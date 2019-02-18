@@ -9,6 +9,7 @@ public class TrackerAbility : MonoBehaviour
     private bool isCooldown;
     private float a_Duration;
     private GameObject trackingDevice;
+    private Trigger trackerTrigger;
     private bool trackerDown;
     private Collider deviceCollider;
     private Vector3 trackerPos;
@@ -21,6 +22,7 @@ public class TrackerAbility : MonoBehaviour
         isCooldown = tracker.isCooldown;
         a_Duration = tracker.abilityDuration;
         trackingDevice = GameObject.Find("Tracker");
+        trackerTrigger = trackingDevice.GetComponent<Trigger>();
         trackingDevice.SetActive(false);
         deviceCollider = trackingDevice.GetComponent<Collider>();
         deviceCollider.enabled = false;
@@ -29,9 +31,10 @@ public class TrackerAbility : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (trackingDevice.GetComponent<Trigger>().isDetected == false)
+        if (trackerTrigger.hasShot)
         {
             //Tracker Position
+            //Insert arrow pointing towards tracker position
             Debug.Log("Detected");
         }
 
