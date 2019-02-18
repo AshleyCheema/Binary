@@ -1,4 +1,5 @@
-﻿using System;
+﻿/*
+using System;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
 
@@ -19,4 +20,4 @@ public sealed class FOWRenderer : PostProcessEffectRenderer<FOW>
         //sheet.properties.SetFloat("_Blend", settings.MaxDistance);
         context.command.Blit(context.source, context.destination, mat);
     }
-}
+}*/
