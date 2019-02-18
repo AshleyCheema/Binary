@@ -50,7 +50,7 @@ public class LobbyMainMenuPanel : MonoBehaviour
     {
         lobbyManager.ChangeTo(lobbyPanel);
 
-        lobbyManager.networkAddress = "localhost";
+        lobbyManager.networkAddress = ipInput.text;
         lobbyManager.StartClient();
 
         lobbyManager.backDelegate = lobbyManager.StopClientClbk;
