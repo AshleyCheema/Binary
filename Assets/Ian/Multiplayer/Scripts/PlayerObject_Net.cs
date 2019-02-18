@@ -53,21 +53,52 @@ public class PlayerObject_Net : NetworkBehaviour
     [Command]
     private void CmdSpawnMyPlayer()
     {
+        if (connectionToClient.isReady)
+        {
+            CmdSpawn();
+        }
+        else
+        {
+            StartCoroutine(WaitForRead());
+        }
+    }
+
+    IEnumerator WaitForRead()
+    {
+        while (!connectionToClient.isReady)
+        {
+            yield return new WaitForSeconds(0.25f);
+        }
+
+        CmdSpawn();
+    }
+
+    [Command]
+    void CmdSpawn()
+    {
         GameObject[] spawnPoints = GameObject.FindGameObjectsWithTag("Spawn Points Spy's");
         playerObject = Instantiate(playerObjectPrefab);
 
-        playerObject.GetComponentInChildren<PlayerController_Net>().PlayerObject = this;
-
+        //playerObject.GetComponentInChildren<PlayerController_Net>().PlayerObject = this;
         NetworkServer.SpawnWithClientAuthority(playerObject, connectionToClient);
+        RpcSetPLayerObject(playerObject);
 
         //Tell the server where this playerObject is 
         playerObject.transform.position = spawnPoints[playerId].transform.position;
-        Debug.Log("CmdSpawnMyPlayer " + playerObject.transform.position);
+        Debug.Log("PLAYER SPAWNED AT " + playerObject.transform.position);
 
         RpcChangePlayerPosition(spawnPoints[playerId].transform.position);
-        //RpcChangePlayerCamera();
 
         playerId += 1;
+    }
+
+    [ClientRpc]
+    private void RpcSetPLayerObject(GameObject a_go)
+    {
+        if(isLocalPlayer)
+        {
+            a_go.GetComponent<PlayerController_Net>().PlayerObject = this;
+        }
     }
 
     [ClientRpc]
