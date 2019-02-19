@@ -635,6 +635,7 @@ GameObject:
   - component: {fileID: 9061004800231788260}
   - component: {fileID: 9061004800231788261}
   - component: {fileID: 9061004800231788262}
+  - component: {fileID: 1261491539580236380}
   m_Layer: 0
   m_Name: CapturePoint
   m_TagString: Untagged
@@ -709,11 +710,25 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9061004800231788263}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1261491539580236380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9061004800231788263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d137f82fe4a3ea546bebc420b093be15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spyIsCapturing: 0
+  capturePercentage: 0
 --- !u!1 &9061004800321778191
 GameObject:
   m_ObjectHideFlags: 0
@@ -726,6 +741,7 @@ GameObject:
   - component: {fileID: 9061004800321778188}
   - component: {fileID: 9061004800321778189}
   - component: {fileID: 9061004800321778190}
+  - component: {fileID: 2516473074621591548}
   m_Layer: 0
   m_Name: CapturePoint
   m_TagString: Untagged
@@ -800,11 +816,25 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9061004800321778191}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2516473074621591548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9061004800321778191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d137f82fe4a3ea546bebc420b093be15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spyIsCapturing: 0
+  capturePercentage: 0
 --- !u!1 &9061004800498570281
 GameObject:
   m_ObjectHideFlags: 0
@@ -817,6 +847,7 @@ GameObject:
   - component: {fileID: 9061004800498570286}
   - component: {fileID: 9061004800498570287}
   - component: {fileID: 9061004800498570280}
+  - component: {fileID: 5210437667394293823}
   m_Layer: 0
   m_Name: CapturePoint
   m_TagString: Untagged
@@ -891,11 +922,25 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9061004800498570281}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5210437667394293823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9061004800498570281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d137f82fe4a3ea546bebc420b093be15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spyIsCapturing: 0
+  capturePercentage: 0
 --- !u!1 &9061004800652132430
 GameObject:
   m_ObjectHideFlags: 0
