@@ -79,26 +79,31 @@ public class PlayerObject_Net : NetworkBehaviour
         GameObject[] spawnPoints = GameObject.FindGameObjectsWithTag("Spawn Points Spy's");
         playerObject = Instantiate(playerObjectPrefab);
 
-        //playerObject.GetComponentInChildren<PlayerController_Net>().PlayerObject = this;
+        playerObject.GetComponentInChildren<PlayerController_Net>().PlayerObject = this;
         NetworkServer.SpawnWithClientAuthority(playerObject, connectionToClient);
-        RpcSetPLayerObject(playerObject);
+
+        string tag = "Spy" + playerId;
+        RpcSetPLayerObject(playerObject, tag);
 
         //Tell the server where this playerObject is 
         playerObject.transform.position = spawnPoints[playerId].transform.position;
         Debug.Log("PLAYER SPAWNED AT " + playerObject.transform.position);
-
-        RpcChangePlayerPosition(spawnPoints[playerId].transform.position);
+        //RpcChangePlayerPosition(spawnPoints[playerId].transform.position);
 
         playerId += 1;
     }
 
     [ClientRpc]
-    private void RpcSetPLayerObject(GameObject a_go)
+    private void RpcSetPLayerObject(GameObject a_go, string a_tag)
     {
-        if(isLocalPlayer)
+        if (isLocalPlayer)
         {
-            a_go.GetComponent<PlayerController_Net>().PlayerObject = this;
+            a_go.tag = a_tag;
         }
+        //if(isLocalPlayer)
+        //{
+        //    a_go.GetComponent<PlayerController_Net>().PlayerObject = this;
+        //}
     }
 
     [ClientRpc]

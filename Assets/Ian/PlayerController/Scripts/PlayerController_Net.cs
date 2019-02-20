@@ -42,6 +42,7 @@ public class PlayerController_Net : NetworkBehaviour
     {
         if (!hasAuthority)
         {
+            GetComponentInChildren<Camera>().enabled = false;
             return;
         }
     }
@@ -97,5 +98,12 @@ public class PlayerController_Net : NetworkBehaviour
 
             //If we know our latency we could try this:
             // transform.position = p + (v * (ourLatency + theirLatency))
+    }
+
+    public NetworkConnection SetAuthoirty(NetworkIdentity a_net)
+    {
+        a_net.AssignClientAuthority(PlayerObject.connectionToClient);
+
+        return PlayerObject.connectionToClient;
     }
 }

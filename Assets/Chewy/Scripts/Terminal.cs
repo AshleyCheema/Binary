@@ -22,7 +22,6 @@ public class Terminal : MonoBehaviour
     void Start ()
     {
         renderer = GetComponent<Renderer>();
-        mercController = GameObject.FindGameObjectWithTag("Merc").GetComponent<MercControls>();
     }
 	
 	// Update is called once per frame

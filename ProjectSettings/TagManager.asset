@@ -8,6 +8,8 @@ TagManager:
   - Terminal
   - Spy
   - Merc
+  - Spy1
+  - Spy2
   layers:
   - Default
   - TransparentFX
