@@ -12,12 +12,16 @@ using UnityEngine.Networking;
 
 public class PlayerObject_Net : NetworkBehaviour
 {
+    [SyncVar]
+    public string id;
+
     [SerializeField]
     private GameObject playerObjectPrefab;
     [SerializeField]
     private Camera playerCameraPrefab;
 
     [SerializeField]
+    [SyncVar]
     private GameObject playerObject;
 
     [SerializeField]
@@ -26,6 +30,7 @@ public class PlayerObject_Net : NetworkBehaviour
     [SerializeField]
     private string playerName;
 
+    [SyncVar]
     int playerId = 1;
 
     // Start is called before the first frame update
@@ -38,7 +43,7 @@ public class PlayerObject_Net : NetworkBehaviour
         }
 
         CmdSpawnMyPlayer();
-        CmdChangePlayerName("");
+        CmdSetID("Player" + GetComponent<NetworkIdentity>().netId.Value);
     }
 
     // Update is called once per frame
@@ -48,7 +53,7 @@ public class PlayerObject_Net : NetworkBehaviour
     }
 
     /// <summary>
-    /// 
+    /// Server. Spawn a player
     /// </summary>
     [Command]
     private void CmdSpawnMyPlayer()
@@ -63,6 +68,10 @@ public class PlayerObject_Net : NetworkBehaviour
         }
     }
 
+    /// <summary>
+    /// Coroutine. Wait for the connection to be ready
+    /// </summary>
+    /// <returns></returns>
     IEnumerator WaitForRead()
     {
         while (!connectionToClient.isReady)
@@ -73,42 +82,62 @@ public class PlayerObject_Net : NetworkBehaviour
         CmdSpawn();
     }
 
+    /// <summary>
+    /// Server. Spawn the player controller prefab on the server
+    /// </summary>
     [Command]
     void CmdSpawn()
     {
         GameObject[] spawnPoints = GameObject.FindGameObjectsWithTag("Spawn Points Spy's");
-        playerObject = Instantiate(playerObjectPrefab);
+        GameObject tempPlayer = Instantiate(playerObjectPrefab);
 
-        //playerObject.GetComponentInChildren<PlayerController_Net>().PlayerObject = this;
-        NetworkServer.SpawnWithClientAuthority(playerObject, connectionToClient);
-        RpcSetPLayerObject(playerObject);
+        //tempPlayer.GetComponentInChildren<PlayerController_Net>().PlayerObject = this;
+        NetworkServer.SpawnWithClientAuthority(tempPlayer, connectionToClient);
+
+        //After spwning the playerControllers reference the controller to the object and 
+        //object to controller
+        CmdSetPlayerController(tempPlayer);
+        playerObject.GetComponent<PlayerController_Net>().CmdSetPlayerObject(gameObject);
 
         //Tell the server where this playerObject is 
-        playerObject.transform.position = spawnPoints[playerId].transform.position;
-        Debug.Log("PLAYER SPAWNED AT " + playerObject.transform.position);
-
-        RpcChangePlayerPosition(spawnPoints[playerId].transform.position);
+        tempPlayer.transform.position = spawnPoints[playerId].transform.position;
+        Debug.Log("PLAYER SPAWNED AT " + tempPlayer.transform.position);
+        //RpcChangePlayerPosition(spawnPoints[playerId].transform.position);
 
         playerId += 1;
     }
 
-    [ClientRpc]
-    private void RpcSetPLayerObject(GameObject a_go)
+    /// <summary>
+    /// Server. Set the new id
+    /// </summary>
+    /// <param name="a_newID"></param>
+    [Command]
+    void CmdSetID(string a_newID)
     {
-        if(isLocalPlayer)
-        {
-            a_go.GetComponent<PlayerController_Net>().PlayerObject = this;
-        }
+        id = a_newID;
     }
 
-    [ClientRpc]
-    private void RpcChangePlayerPosition(Vector3 a_position)
+    /// <summary>
+    /// Server. Set the player controller on the server
+    /// </summary>
+    /// <param name="a_go"></param>
+    [Command]
+    void CmdSetPlayerController(GameObject a_go)
     {
-        //tell all the clients where this playerObject is
-        playerObject.transform.position = a_position;
-        Debug.Log("RpcChangePlayerPosition " + playerObject.transform.position);
+        playerObject = a_go;
     }
 
+    //[ClientRpc]
+    //private void RpcChangePlayerPosition(Vector3 a_position)
+    //{
+    //    //tell all the clients where this playerObject is
+    //    playerObject.transform.position = a_position;
+    //    Debug.Log("RpcChangePlayerPosition " + playerObject.transform.position);
+    //}
+
+    /// <summary>
+    /// Client. Spawn a camera and set it to a player controller
+    /// </summary>
     [ClientRpc]
     private void RpcChangePlayerCamera()
     {
@@ -120,7 +149,7 @@ public class PlayerObject_Net : NetworkBehaviour
     }
 
     /// <summary>
-    /// 
+    /// Server. Change a playerName on the server
     /// </summary>
     /// <param name="a_name"></param>
     [Command]
@@ -132,6 +161,10 @@ public class PlayerObject_Net : NetworkBehaviour
         RpcChangePlayerName(playerName);
     }
 
+    /// <summary>
+    /// Client. Chagne the player name on all clients
+    /// </summary>
+    /// <param name="a_name"></param>
     [ClientRpc]
     void RpcChangePlayerName(string a_name)
     {
