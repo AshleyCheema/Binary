@@ -17,8 +17,9 @@ public class PlayerController_Net : NetworkBehaviour
     private float movementSpeed = 5f;
 
     [SerializeField]
-    private PlayerObject_Net playerObject;
-    public PlayerObject_Net PlayerObject
+    [SyncVar]
+    private GameObject playerObject;
+    public GameObject PlayerObject
     { get { return playerObject; } set { playerObject = value; } }
 
     [SerializeField]
@@ -45,6 +46,8 @@ public class PlayerController_Net : NetworkBehaviour
             GetComponentInChildren<Camera>().enabled = false;
             return;
         }
+
+        CmdUpdateVelocity(velocity, transform.position);
     }
 
     // Update is called once per frame
@@ -76,6 +79,11 @@ public class PlayerController_Net : NetworkBehaviour
         }
     }
 
+    /// <summary>
+    /// Server. Update velocity on server side
+    /// </summary>
+    /// <param name="a_velocity"></param>
+    /// <param name="a_position"></param>
     [Command]
     private void CmdUpdateVelocity(Vector3 a_velocity, Vector3 a_position)
     {
@@ -85,6 +93,11 @@ public class PlayerController_Net : NetworkBehaviour
         RpcUpdateVelocity(velocity, transform.position);
     }
 
+    /// <summary>
+    /// Client. Update velocity on all clients
+    /// </summary>
+    /// <param name="a_velocity"></param>
+    /// <param name="a_position"></param>
     [ClientRpc]
     private void RpcUpdateVelocity(Vector3 a_velocity, Vector3 a_position)
     {
@@ -100,10 +113,20 @@ public class PlayerController_Net : NetworkBehaviour
             // transform.position = p + (v * (ourLatency + theirLatency))
     }
 
+    /// <summary>
+    /// Client. Set all PlayerObjects on clients
+    /// </summary>
+    /// <param name="a_go"></param>
+    [Command]
+    public void CmdSetPlayerObject(GameObject a_go)
+    {
+        playerObject = a_go;
+    }
+
     public NetworkConnection SetAuthoirty(NetworkIdentity a_net)
     {
-        a_net.AssignClientAuthority(PlayerObject.connectionToClient);
+        a_net.AssignClientAuthority(PlayerObject.GetComponent<PlayerController_Net>().connectionToClient);
 
-        return PlayerObject.connectionToClient;
+        return PlayerObject.GetComponent<PlayerController_Net>().connectionToClient;
     }
 }
