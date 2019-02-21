@@ -12,6 +12,7 @@ public class SpyController : PlayerController
     {
         bullet = GameObject.Find("Bullet");
         bulletTrigger = bullet.GetComponent<Trigger>();
+        bullet.SetActive(false);
     }
 
     // Update is called once per frame

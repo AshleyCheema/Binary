@@ -38,7 +38,6 @@ public class MercControls : PlayerController
         speedDuration = sprint.abilityDuration;
         bullet = GameObject.Find("Bullet");
         rb = bullet.GetComponent<Rigidbody>();
-        bullet.SetActive(false);
     }
 
     // Update is called once per frame
@@ -56,7 +55,7 @@ public class MercControls : PlayerController
             //Sound/Animation?
             bullet.SetActive(true);
             bullet.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + 1);
-            rb.velocity = transform.TransformDirection(transform.forward * 100);
+            rb.velocity = transform.forward * 100;
             noShoot = true;
         }
         if(noShoot)

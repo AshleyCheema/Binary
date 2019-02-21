@@ -11,6 +11,7 @@ public class Terminal : MonoBehaviour
     private KeyCode[] cameraKeys = new KeyCode[] { KeyCode.Alpha1, KeyCode.Alpha2, KeyCode.Alpha3 };
     private Renderer renderer;
     private bool cameraActive;
+    [SerializeField]
     private MercControls mercController;
     private int currentCamera;
     //[SerializeField]
