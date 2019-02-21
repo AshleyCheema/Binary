@@ -79,6 +79,24 @@ public class PlayerController_Net : NetworkBehaviour
         }
     }
 
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (hasAuthority)
+    //    {
+    //        Debug.LogWarning("Entered trigger");
+    //        PlayerObject_Net.SetAuthority(other.gameObject, PlayerObject);
+    //    }
+    //}
+
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    if(hasAuthority)
+    //    {
+    //        Debug.LogWarning("Exited trigger");
+    //        PlayerObject_Net.RevokeAuthority(other.gameObject, PlayerObject);
+    //    }
+    //}
+
     /// <summary>
     /// Server. Update velocity on server side
     /// </summary>
@@ -121,6 +139,11 @@ public class PlayerController_Net : NetworkBehaviour
     public void CmdSetPlayerObject(GameObject a_go)
     {
         playerObject = a_go;
+    }
+
+    public bool ObjectHasAuthority()
+    {
+        return hasAuthority;
     }
 
     public NetworkConnection SetAuthoirty(NetworkIdentity a_net)

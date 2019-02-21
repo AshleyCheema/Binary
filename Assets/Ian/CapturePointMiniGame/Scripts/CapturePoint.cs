@@ -13,6 +13,9 @@ using TMPro;
 public class CapturePoint : NetworkBehaviour
 {
     [SerializeField]
+    private GameObject percentageUI;
+
+    [SerializeField]
     private CapturePointMiniGame miniGame;
 
     [SerializeField]
@@ -30,6 +33,8 @@ public class CapturePoint : NetworkBehaviour
     [SyncVar]
     private float captureMulitiplier = 3.0f;
 
+    private List<GameObject> spys = new List<GameObject>();
+
     private NetworkConnection authoirty;
 
     [SerializeField]
@@ -38,9 +43,12 @@ public class CapturePoint : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        text.text = capturePercentage.ToString();
         //if (hasAuthority)
         //{
+            Debug.LogWarning("CapturePoint updating");
+            text.text = capturePercentage.ToString();
+            //if (hasAuthority)
+            //{
             if (spyIsCapturing)
             {
                 capturePercentage += (1.0f * captureMulitiplier) * Time.deltaTime;
@@ -50,10 +58,12 @@ public class CapturePoint : NetworkBehaviour
                     capturePercentage = 100.0f;
                 }
             }
+            //}
         //}
     }
 
-    public void IncreaseMultiplier()
+    [Command]
+    public void CmdIncreaseMultiplier()
     {
         captureMulitiplier += 0.5f;
     }
@@ -67,16 +77,20 @@ public class CapturePoint : NetworkBehaviour
     {
         if(other.tag == "Spy")
         {
-            spyIsCapturing = true;
-            showMiniGame = true;
-
-            //authoirty = other.gameObject.GetComponent<PlayerController_Net>().SetAuthoirty(GetComponent<NetworkIdentity>());
-            //other.gameObject.GetComponent<PlayerController_Net>().SetAuthoirty(miniGame.gameObject.GetComponent<NetworkIdentity>());
-
-            if (showMiniGame)
+            if (!spyIsCapturing)
             {
-                miniGame.Show();
+                spyIsCapturing = true;
+                showMiniGame = true;
+
+                if (showMiniGame)
+                {
+                    if (other.GetComponent<PlayerController_Net>().hasAuthority)
+                    {
+                        miniGame.Show();
+                    }
+                }
             }
+            percentageUI.SetActive(true);
         }
     }
 
@@ -84,13 +98,31 @@ public class CapturePoint : NetworkBehaviour
     {
         if(other.tag == "Spy")
         {
-            spyIsCapturing = false;
-            showMiniGame = false;
-            capturePercentage = Mathf.RoundToInt(capturePercentage);
-
-            if (!showMiniGame)
+            if (other.GetComponent<PlayerController_Net>().hasAuthority)
             {
+                showMiniGame = false;
                 miniGame.Hide();
+                if (!showMiniGame)
+                {
+                    percentageUI.SetActive(false);
+
+                }
+            }
+
+            Collider[] allObjects = Physics.OverlapSphere(transform.position, GetComponent<SphereCollider>().radius);
+            bool noSpy = true;
+            for (int i = 0; i < allObjects.Length; ++i)
+            {
+                if(allObjects[i].tag == "Spy")
+                {
+                    noSpy = false;
+                }
+            }
+
+            if (noSpy)
+            {
+                spyIsCapturing = false;
+                capturePercentage = Mathf.RoundToInt(capturePercentage);
             }
         }
     }
