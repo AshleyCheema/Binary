@@ -61,10 +61,21 @@ public class PlayerController : MonoBehaviour
 
         if(Physics.Raycast(ray, out hit))
         {
-            Vector3 newDirection = transform.position - hit.point;
-            newDirection.y = 0.5f;
-            transform.forward = newDirection;
-            transform.right = Vector3.Cross(transform.forward, transform.up);
+            if (hit.collider.tag == "Merc")
+            {
+                Vector3 newDirection = transform.position - hit.point;
+                newDirection.y = 0.5f;
+                transform.forward = newDirection;
+                transform.right = Vector3.Cross(transform.forward, transform.up);
+
+                //Vector3 playerToMouse = hit.point - transform.position;
+                //
+                //playerToMouse.y = 0f;
+                //
+                //Quaternion newRotation = Quaternion.LookRotation(playerToMouse);
+                //
+                //transform.rotation = newRotation;
+            }
         }
     }
 }

@@ -20,7 +20,7 @@ public class MercControls : PlayerController
 
     private bool noShoot;
     private float shotCooldown = 5f;
-    private float reloadSpeed = 3f;
+    private float reloadSpeed = 2f;
     private GameObject bullet;
     private Rigidbody rb;
 
@@ -38,6 +38,7 @@ public class MercControls : PlayerController
         speedDuration = sprint.abilityDuration;
         bullet = GameObject.Find("Bullet");
         rb = bullet.GetComponent<Rigidbody>();
+        bullet.SetActive(false);
     }
 
     // Update is called once per frame
@@ -62,8 +63,8 @@ public class MercControls : PlayerController
         {
             shotCooldown -= Time.deltaTime;
             //Reload Animation
-            transform.Translate(InputManager.Joystick(player) * reloadSpeed * Time.deltaTime);
-
+            //transform.Translate(InputManager.Joystick(player) * reloadSpeed * Time.deltaTime);
+            currentSpeed = reloadSpeed;
             if (shotCooldown <= 0)
             {
                 bullet.SetActive(false);

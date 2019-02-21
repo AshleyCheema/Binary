@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class SpyController : PlayerController
 {
+    [SerializeField]
     private GameObject bullet;
     private Trigger bulletTrigger;
     private bool isHurt;
     // Start is called before the first frame update
     void Start()
     {
-        bullet = GameObject.Find("Bullet");
         bulletTrigger = bullet.GetComponent<Trigger>();
-        bullet.SetActive(false);
     }
 
     // Update is called once per frame

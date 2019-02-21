@@ -37,7 +37,7 @@ public class PlayerObject_Net : NetworkBehaviour
     void Start()
     {
         //Check if this is the local player
-        if(!isLocalPlayer)
+        if (!isLocalPlayer)
         {
             return;
         }
@@ -49,7 +49,7 @@ public class PlayerObject_Net : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     /// <summary>
@@ -169,5 +169,20 @@ public class PlayerObject_Net : NetworkBehaviour
     void RpcChangePlayerName(string a_name)
     {
         playerName = a_name;
+    }
+
+    public static void SetAuthority(GameObject a_toBeSet, GameObject a_client)
+    {
+        if (NetworkServer.active)
+        {
+            a_toBeSet.GetComponent<NetworkIdentity>().AssignClientAuthority(a_client.GetComponent<NetworkIdentity>().connectionToClient);
+        }
+    }
+    public static void RevokeAuthority(GameObject a_toBeSet, GameObject a_client)
+    {
+        if (NetworkServer.active)
+        {
+            a_toBeSet.GetComponent<NetworkIdentity>().RemoveClientAuthority(a_client.GetComponent<NetworkIdentity>().connectionToClient);
+        }
     }
 }

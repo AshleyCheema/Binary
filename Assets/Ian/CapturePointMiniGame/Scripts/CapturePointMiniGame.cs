@@ -72,8 +72,8 @@ public class CapturePointMiniGame : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (hasAuthority)
-        {
+        //if (hasAuthority)
+        //{
             if (!isCompleted && Input.GetKeyDown(inputsNeeded[inputsIndex]))
             {
                 inputsIndex++;
@@ -88,7 +88,7 @@ public class CapturePointMiniGame : NetworkBehaviour
                 {
                     //isCompleted = true;
                     inputsIndex = 0;
-                    capturePoint.IncreaseMultiplier();
+                    capturePoint.CmdIncreaseMultiplier();
                 }
             }
             else if (!isCompleted && Input.anyKeyDown && CheckInput())
@@ -97,9 +97,7 @@ public class CapturePointMiniGame : NetworkBehaviour
                 inputsIndex = 0;
                 scroll.horizontalNormalizedPosition = 0;
             }
-
-            //billboardUI.transform.LookAt(transform.position + camera.transform.rotation * Vector3.forward, camera.transform.rotation * Vector3.up);
-        }
+       // }
     }
     /// <summary>
     /// 

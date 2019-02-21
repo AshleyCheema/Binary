@@ -44,7 +44,7 @@ public class Terminal : MonoBehaviour
             }
 
             //if so and the escape is pressed then turn off camera and re-enable player controls
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if (cameraActive && Input.GetKeyDown(KeyCode.Escape))
             {
                 foreach (Camera cam in camera)
                 {
