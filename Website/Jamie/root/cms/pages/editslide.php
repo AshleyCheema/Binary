@@ -13,30 +13,25 @@
 </div>
 
 <div class="container">
-    <h3 class="conmg white">Upload new Slide</h3>
+    <h3 class="conmg white">Edit Slide</h3>
     <hr>
     <form enctype="multipart/form-data" action="" method="POST">
-
+<!-- 
         <div class="row mgt">
             <p class="col-12 col-md-2">Upload Image:</p>
             <input class="form-control col-12 col-md-10" type="file" name="fileToUpload" accept="image/*">
-        </div>
+        </div> -->
         <div class="row mgt">
             <p class="col-12 col-md-2">Slide Title:</p>
-            <input class="form-control col-12 col-md-10" type="text" name="slide-title" placeholder="Slide Title">
+            <input class="form-control col-12 col-md-10" type="text" name="slide-title" value="<?php echo $_SESSION['this_slide_title'] ?>">
         </div>
         <div class="row mgt">
             <p class="col-12 col-md-2">Slide Subtitle:</p>
-            <input class="form-control col-12 col-md-10" type="text" name="slide-subtitle" placeholder="Slide Subtitle">
+            <input class="form-control col-12 col-md-10" type="text" name="slide-sub" value="<?php echo $_SESSION['this_slide_sub'] ?>">
         </div>
         <div class="d-flex justify-content-center mt-5 login_container">
-            <button type="submit" name="add-slide" value="add-slide" class="button login_btn">Add Slide</button>
+            <button type="submit" name="update-slide" value="update-slide" class="button login_btn">Update Slide</button>
+            <a href="dashboard.php?page=slideshow" class="button login_btn ml-3">Cancel</a>
         </div>
     </form>
-    <div class="space"></div>
-    <h3 class="conmg white">Existing Slides</h3>
-    <hr>
-    <div id="slide-container" class="mgt light-text p-4">
-        <?php showSlideCms() ?>
-    </div>
 </div>

@@ -213,6 +213,18 @@ p {
     cursor: pointer;
 }
 
+.cms-button{
+    font-size:10pt !important;
+    margin:5pt !important;
+}
+
+.cms-hover{
+    background-color:transparent;
+    border-style:none;
+    color:#34383c;
+    -webkit-appearance:none;
+}
+
 #open-btn:hover {
     color: #19a333 !important;
 }

@@ -368,7 +368,7 @@
         }
     }
 
-    function showBlogCms(){
+     function showBlogCms(){
         include "config.php";
 
         //Query the database to find all information in the blog and to arrange it in descending order.
@@ -384,15 +384,15 @@
                 $title = $row['blog_title'];
     
                 ?>
+
                 <form enctype="multipart/form-data" action="" method="POST"> 
                     <input type="hidden" name="blog-id" value="<?php echo $id; ?>">   
                     <div class="slide-item m-4"><div style="background-image: url('<?php echo $image ?>'); background-size:cover; height:200px; width:200px;'"></div><br>
                         <p class="text-center"><?php echo $title ?></p>  
-                        <button class="hover-item" type="submit" name="delete-blog" style="background-color: transparent;border-style: none;color: #34383c;-webkit-appearance: none;">
-                            <i class="fas fa-times-circle"></i>
-                        </button>
+                        <div class="hover-item cms-hover">
+                            <button type="submit" name="edit-blog" class="button cms-button btn">Edit</button><button type="submit" name="delete-blog" class="button cms-button btn"> Delete</button>
+                        </div>
                     </div>
-
                 </form>
                 <?php
     
@@ -406,6 +406,66 @@
         mysqli_close( $connection );
     }
 
+    function deleteSlide(){
+
+        if(isset($_POST["delete-slide"])) {
+
+            $id = $_POST[ 'slide-id' ];
+            include "config.php";
+
+            $result = mysqli_query( $connection, "DELETE FROM slideshow WHERE slide_id = $id " );
+
+            //Close the mysqli connection
+            mysqli_close( $connection );
+        }
+    }
+
+    function editSlide(){
+        if(isset($_POST["edit-slide"])) {
+
+            $id = $_POST[ 'slide-id' ];
+            include "config.php";
+
+            $result = mysqli_query( $connection, "SELECT * FROM slideshow WHERE slide_id = $id " );
+            $row = mysqli_fetch_assoc($result);
+
+            $image = $row['slide_image'];
+            $title = $row['slide_title'];
+            $sub = $row['slide_sub'];
+
+            $_SESSION['this_slide_id'] = $id;
+            $_SESSION['this_slide_image'] = $image;
+            $_SESSION['this_slide_title'] = $title;
+            $_SESSION['this_slide_sub'] = $sub;
+
+            //Close the mysqli connection
+            mysqli_close( $connection );
+
+            header('Location: dashboard.php?page=editslide');
+
+        }
+    }
+
+    function updateSlide(){
+        if(isset($_POST["update-slide"])){
+
+            $id = $_SESSION['this_slide_id'];
+            $title = $_POST[ 'slide-title' ];
+            $image = $_POST[ 'slide-image' ];
+            $sub = $_POST[ 'slide-sub' ];
+
+            include "config.php";
+
+            $update = mysqli_query( $connection, "UPDATE slideshow SET slide_title='$title', slide_sub='$sub' WHERE slide_id = $id" );
+
+            //Close the mysqli connection
+            mysqli_close( $connection );
+
+            header('Location: dashboard.php?page=slideshow');
+
+        }
+    }
+
     function deleteBlog(){
         
         if(isset($_POST["delete-blog"])) {
@@ -417,6 +477,58 @@
 
             //Close the mysqli connection
             mysqli_close( $connection );
+
+        }
+    }
+
+    function editBlog(){
+        
+        if(isset($_POST["edit-blog"])) {
+
+            $id = $_POST[ 'blog-id' ];
+            include "config.php";
+
+            $result = mysqli_query( $connection, "SELECT * FROM blog WHERE blog_id = $id " );
+            $row = mysqli_fetch_assoc($result);
+
+            $author = $row['blog_author'];
+            $title = $row['blog_title'];
+            $image = $row['blog_image'];
+            $content = $row['blog_content'];
+            $date = $row['blog_date'];
+
+            $_SESSION['this_id'] = $id;
+            $_SESSION['this_author'] = $author;
+            $_SESSION['this_title'] = $title;
+            $_SESSION['this_image'] = $image;
+            $_SESSION['this_date'] = $date;
+
+            $_SESSION['this_content'] = htmlspecialchars($row['blog_content']); 
+
+            //Close the mysqli connection
+            mysqli_close( $connection );
+
+            header('Location: dashboard.php?page=editblog');
+
+        }
+    }
+
+    function updateBlog(){
+        if(isset($_POST["update-post"])){
+
+            $id = $_SESSION['this_id'];
+            $title = $_POST[ 'blog-title' ];
+            $image = $_POST[ 'blog-image' ];
+            $content = $_POST[ 'blog-content' ];
+
+            include "config.php";
+
+            $update = mysqli_query( $connection, "UPDATE blog SET blog_title='$title', blog_content='$content' WHERE blog_id = $id" );
+
+            //Close the mysqli connection
+            mysqli_close( $connection );
+
+            header('Location: dashboard.php?page=blog');
 
         }
     }
@@ -453,6 +565,45 @@
             mysqli_free_result($result);
 
          }
+    }
+
+    function showSlideCms(){
+        include "config.php";
+
+        //Query the database to find all information in the slides and to arrange it in descending order.
+        $queryslides = "SELECT * FROM slideshow ORDER BY slide_id DESC" ;
+        
+        if ($result = mysqli_query($connection, $queryslides) or die("Bad Query: $queryslides")) {
+        
+            while ($row = mysqli_fetch_assoc($result))
+            {
+                //make variables equal to the data from taken from the database.
+                $id = $row['slide_id'];
+                $image = $row['slide_img'];
+                $title = $row['slide_title'];
+    
+                ?>
+
+                <form enctype="multipart/form-data" action="" method="POST"> 
+                    <input type="hidden" name="slide-id" value="<?php echo $id; ?>">   
+                    <div class="slide-item m-4"><div style="background-image: url('<?php echo $image ?>'); background-size:cover; height:200px; width:200px;'"></div><br>
+                        <p class="text-center"><?php echo $title ?></p>  
+                        <div class="hover-item cms-hover">
+                            <button type="submit" name="edit-slide" class="button cms-button btn">Edit</button><button type="submit" name="delete-slide" class="button cms-button btn"> Delete</button>
+                        </div>
+                    </div>
+                </form>
+
+                <?php
+    
+            }
+
+             /* free result set */
+            mysqli_free_result($result);
+
+        }
+
+        mysqli_close( $connection );
     }
 
     function threeBlogs(){

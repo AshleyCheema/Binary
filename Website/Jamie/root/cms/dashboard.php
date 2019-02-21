@@ -14,6 +14,16 @@
 
  deleteBlog();
 
+ editBlog();
+
+ updateBlog();
+
+ deleteSlide();
+
+ editSlide();
+
+ updateSlide();
+
 ?>
 
 <!DOCTYPE html>
@@ -66,7 +76,7 @@
                 </div>
             </div>
 
-            <a class="a-link a-1" href="pages/profile.php">
+            <a class="a-link a-1" href="dashboard.php?page=profile">
                 <div class="nav-btn nav-btn-active d-flex justify-content-left align-items-center">
                     <div class="item ml-3"><i class="fas fa-home"></i></div>
                     <div class="item vr ml-3"></div>
@@ -88,14 +98,14 @@
                     <p class="ml-3 mt-3">Users</p>
                 </div>
             </a> -->
-            <a class="a-link a-4" href="pages/slideshow.php">
+            <a class="a-link a-4" href="dashboard.php?page=slideshow">
                 <div class="nav-btn d-flex justify-content-left align-items-center">
                     <div class="item ml-3"><i class="fas fa-image"></i></div>
                     <div class="item vr ml-3"></div>
                     <p class="ml-3">Slideshow</p>
                 </div>
             </a>
-            <a class="a-link a-5" href="pages/blog.php">
+            <a class="a-link a-5" href="dashboard.php?page=blog">
                 <div class="nav-btn d-flex justify-content-left align-items-center">
                     <div class="item ml-3"><i class="fas fa-font"></i></div>
                     <div class="item vr ml-3"></div>
@@ -114,7 +124,7 @@
             <div class="profile mb-5 mt-2">
             <div class="pro-img-small" style="background-image:url('<?php echo $_SESSION[ 'pic' ]?>');"></div>
             </div>
-            <a class="a-link a-1" href="pages/profile.php">
+            <a class="a-link a-1" href="dashboard.php?page=profile">
                 <div class="nav-btn nav-btn-active d-flex justify-content-left align-items-center">
                     <div class="item ml-3"><i class="fas fa-home"></i></div>
                 </div>
@@ -130,12 +140,12 @@
                     <div class="item ml-3"><i class="fas fa-users"></i></div>
                 </div>
             </a> -->
-            <a class="a-link a-4" href="pages/slideshow.php">
+            <a class="a-link a-4" href="dashboard.php?page=slideshow">
                 <div class="nav-btn d-flex justify-content-left align-items-center">
                     <div class="item ml-3"><i class="fas fa-image"></i></div>
                 </div>
             </a>
-            <a class="a-link a-5" href="pages/blog.php">
+            <a class="a-link a-5" href="dashboard.php?page=blog">
                 <div class="nav-btn d-flex justify-content-left align-items-center">
                     <div class="item ml-3"><i class="fas fa-font"></i></div>
                 </div>
@@ -166,7 +176,7 @@
         crossorigin="anonymous"></script>
     <script src="js/main.js"></script>
     <script src="http://cdn.tinymce.com/4/tinymce.min.js"></script>
-       
+
 </body>
 
 </html>
