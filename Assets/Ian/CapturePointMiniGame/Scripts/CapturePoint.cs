@@ -8,6 +8,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using TMPro;
 
 public class CapturePoint : NetworkBehaviour
 {
@@ -15,24 +16,31 @@ public class CapturePoint : NetworkBehaviour
     private CapturePointMiniGame miniGame;
 
     [SerializeField]
+    [SyncVar]
     private bool spyIsCapturing = false;
 
     [SerializeField]
     private bool showMiniGame = false;
 
     [SerializeField]
+    [SyncVar]
     private float capturePercentage = 0.0f;
 
     [SerializeField]
+    [SyncVar]
     private float captureMulitiplier = 3.0f;
 
     private NetworkConnection authoirty;
 
+    [SerializeField]
+    private TextMeshProUGUI text;
+
     // Update is called once per frame
     void Update()
     {
-        if (hasAuthority)
-        {
+        text.text = capturePercentage.ToString();
+        //if (hasAuthority)
+        //{
             if (spyIsCapturing)
             {
                 capturePercentage += (1.0f * captureMulitiplier) * Time.deltaTime;
@@ -42,7 +50,7 @@ public class CapturePoint : NetworkBehaviour
                     capturePercentage = 100.0f;
                 }
             }
-        }
+        //}
     }
 
     public void IncreaseMultiplier()
@@ -62,12 +70,13 @@ public class CapturePoint : NetworkBehaviour
             spyIsCapturing = true;
             showMiniGame = true;
 
-            authoirty = other.gameObject.GetComponent<PlayerController_Net>().SetAuthoirty(GetComponent<NetworkIdentity>());
-            other.gameObject.GetComponent<PlayerController_Net>().SetAuthoirty(miniGame.gameObject.GetComponent<NetworkIdentity>());
+            //authoirty = other.gameObject.GetComponent<PlayerController_Net>().SetAuthoirty(GetComponent<NetworkIdentity>());
+            //other.gameObject.GetComponent<PlayerController_Net>().SetAuthoirty(miniGame.gameObject.GetComponent<NetworkIdentity>());
 
-            Debug.LogWarning("HAS: " + authoirty);
-
-            miniGame.Show();
+            if (showMiniGame)
+            {
+                miniGame.Show();
+            }
         }
     }
 
@@ -79,7 +88,10 @@ public class CapturePoint : NetworkBehaviour
             showMiniGame = false;
             capturePercentage = Mathf.RoundToInt(capturePercentage);
 
-            miniGame.Hide();
+            if (!showMiniGame)
+            {
+                miniGame.Hide();
+            }
         }
     }
 }
