@@ -21,16 +21,19 @@ public class SpyController : PlayerController
 
         if(bulletTrigger.hasShot)
         {
-            //Change animation
-            //Maybe drip blood?
-            Debug.Log("Hurt State");
-            isHurt = true;
-            bulletTrigger.hasShot = false;
-        }
-
-        if(isHurt && bulletTrigger.hasShot)
-        {
-            //Die?
+            if (!isHurt)
+            {
+                //Change animation
+                //Maybe drip blood?
+                Debug.Log("Hurt State");
+                isHurt = true;
+                bulletTrigger.hasShot = false;
+            }
+            else
+            {
+                bulletTrigger.hasShot = false;
+                Debug.Log("Die");
+            }
         }
     }
 }

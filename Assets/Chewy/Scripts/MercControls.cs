@@ -11,8 +11,7 @@ using UnityEngine;
 
 public class MercControls : PlayerController
 {
-    //private float normalSpeed = 5f;
-    //private float runningSpeed = 8f;
+
     private float cooldown;
     private float speedDuration;
     private bool canSprint;
@@ -20,15 +19,12 @@ public class MercControls : PlayerController
 
     private bool noShoot;
     private float shotCooldown = 5f;
-    private float reloadSpeed = 2f;
+    public float reloadSpeed = 2f;
     private GameObject bullet;
     private Rigidbody rb;
+    private Trigger triggerScript;
 
     public Abilities sprint;
-    //public Abilities trackable;
-
-    [SerializeField]
-    //Player player;
 
     // Start is called before the first frame update
     void Start()
@@ -37,6 +33,7 @@ public class MercControls : PlayerController
         canSprint = sprint.isCooldown;
         speedDuration = sprint.abilityDuration;
         bullet = GameObject.Find("Bullet");
+        triggerScript = bullet.GetComponent<Trigger>();
         rb = bullet.GetComponent<Rigidbody>();
         bullet.SetActive(false);
     }
@@ -46,9 +43,20 @@ public class MercControls : PlayerController
     {
         //UpdateDirection();
         base.Update();
-        if(Input.GetKey(KeyCode.P))
+        //if(Input.GetKey(KeyCode.P))
+        //{
+        //    sprint.Trigger();
+        //}
+
+        if(triggerScript.isStunned)
         {
-            sprint.Trigger();
+            currentSpeed = reloadSpeed;
+            reloadSpeed -= Time.deltaTime;
+            if(reloadSpeed <= 0)
+            {
+                currentSpeed = normalSpeed;
+                triggerScript.isStunned = false;
+            }
         }
 
         if(Input.GetKeyDown(KeyCode.Mouse0) && !noShoot)
@@ -63,7 +71,6 @@ public class MercControls : PlayerController
         {
             shotCooldown -= Time.deltaTime;
             //Reload Animation
-            //transform.Translate(InputManager.Joystick(player) * reloadSpeed * Time.deltaTime);
             currentSpeed = reloadSpeed;
             if (shotCooldown <= 0)
             {
@@ -93,7 +100,6 @@ public class MercControls : PlayerController
         }
         if (buttonPressed)
         {
-            // transform.Translate(InputManager.Joystick(player) * runningSpeed * Time.deltaTime);
             currentSpeed = runningSpeed;
             speedDuration -= 0.01f;
 
@@ -106,10 +112,5 @@ public class MercControls : PlayerController
                 currentSpeed = normalSpeed;
             }
         }
-        else
-        {
-            //transform.Translate(InputManager.Joystick(player) * normalSpeed * Time.deltaTime);
-        }
- 
     }
 }

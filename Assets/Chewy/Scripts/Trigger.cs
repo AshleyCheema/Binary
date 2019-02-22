@@ -5,7 +5,8 @@ using UnityEngine;
 public enum TriggerType
 {
     Tracker,
-    Bullet
+    Bullet,
+    Stun
 }
 
 public class Trigger : MonoBehaviour
@@ -14,6 +15,7 @@ public class Trigger : MonoBehaviour
     private TriggerType triggerType = TriggerType.Tracker;
     public bool hasShot;
     public bool isDetected;
+    public bool isStunned;
 
     private MercControls mercControls;
 
@@ -21,7 +23,6 @@ public class Trigger : MonoBehaviour
     {
         mercControls = gameObject.GetComponent<MercControls>();
     }
-
 
     private void OnTriggerEnter(Collider other)
     {
@@ -44,5 +45,17 @@ public class Trigger : MonoBehaviour
         //{
         //    parent.Callback();
         //}
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if(other.gameObject.tag == "Merc")
+        {
+            if(triggerType == TriggerType.Stun)
+            {
+                isStunned = true;
+                Debug.Log("Flashed");
+            }
+        }
     }
 }
