@@ -6,6 +6,7 @@ public class StunAbility : MonoBehaviour
 {
     private GameObject stunG;
     private bool stunActive;
+    private bool stunDropped;
     private float cooldown;
     private float abilityDuration;
 
@@ -25,18 +26,23 @@ public class StunAbility : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Q))
         {
-            if (!stunActive)
+            if (!stunDropped)
             {
                 stunG.SetActive(true);
-                stunG.transform.position = gameObject.transform.position;
-                abilityDuration -= Time.deltaTime;
+                stunG.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - 1);
+                stunDropped = true;
+            }
+        }
 
-                if (abilityDuration <= 0)
-                {
-                    stunActive = true;
-                    abilityDuration = stunAbility.abilityDuration;
-                    stunG.SetActive(false);
-                }
+        if(stunDropped)
+        {
+            abilityDuration -= Time.deltaTime;
+
+            if (abilityDuration <= 0)
+            {
+                stunActive = true;
+                abilityDuration = stunAbility.abilityDuration;
+                stunG.SetActive(false);
             }
         }
 
@@ -45,7 +51,7 @@ public class StunAbility : MonoBehaviour
             cooldown -= Time.deltaTime;
             if(cooldown <= 0)
             {
-                stunActive = false;
+                stunDropped = false;
             }
             //Flash Effect
             //Stun Animation

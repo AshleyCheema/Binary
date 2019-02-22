@@ -22,6 +22,7 @@ public class MercControls : PlayerController
     public float reloadSpeed = 2f;
     private GameObject bullet;
     private Rigidbody rb;
+    [SerializeField]
     private Trigger triggerScript;
 
     public Abilities sprint;
@@ -33,7 +34,6 @@ public class MercControls : PlayerController
         canSprint = sprint.isCooldown;
         speedDuration = sprint.abilityDuration;
         bullet = GameObject.Find("Bullet");
-        triggerScript = bullet.GetComponent<Trigger>();
         rb = bullet.GetComponent<Rigidbody>();
         bullet.SetActive(false);
     }

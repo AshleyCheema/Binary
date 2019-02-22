@@ -1168,16 +1168,6 @@ PrefabInstance:
       propertyPath: bullet
       value: 
       objectReference: {fileID: 1760232273}
-    - target: {fileID: 3505184697141787877, guid: 886c300e7afc8604db6d96de8e831e26,
-        type: 3}
-      propertyPath: currentSpeed
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 3505184697141787877, guid: 886c300e7afc8604db6d96de8e831e26,
-        type: 3}
-      propertyPath: normalSpeed
-      value: 4
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 886c300e7afc8604db6d96de8e831e26, type: 3}
 --- !u!1 &1155454257
@@ -2188,6 +2178,18 @@ Transform:
   m_Father: {fileID: 1238055595}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2054288086 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8053444857443078783, guid: f15e1cd2d15d91b4d82e9884b895c41d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1170343424455630058}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 603291d495b0ac24ea7a3c4a58cb01e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2074659947
 GameObject:
   m_ObjectHideFlags: 0
@@ -2294,14 +2296,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 80722652396774937, guid: 4639a6967376c6f4ca6f687a0a1370ad,
         type: 3}
-      propertyPath: normalSpeed
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 80722652396774937, guid: 4639a6967376c6f4ca6f687a0a1370ad,
-        type: 3}
-      propertyPath: currentSpeed
-      value: 3
-      objectReference: {fileID: 0}
+      propertyPath: triggerScript
+      value: 
+      objectReference: {fileID: 2054288086}
     - target: {fileID: 80722652396774930, guid: 4639a6967376c6f4ca6f687a0a1370ad,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2504,6 +2501,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1170343424564217716, guid: f15e1cd2d15d91b4d82e9884b895c41d,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 122
+      objectReference: {fileID: 0}
+    - target: {fileID: 1170343424564217716, guid: f15e1cd2d15d91b4d82e9884b895c41d,
+        type: 3}
+      propertyPath: m_Mass
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f15e1cd2d15d91b4d82e9884b895c41d, type: 3}

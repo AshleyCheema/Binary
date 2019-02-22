@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Tracker
   aClip: {fileID: 0}
-  cooldown: 5
+  cooldown: 60
   isCooldown: 0
-  abilityDuration: 60
+  abilityDuration: 2
   uiImage: {fileID: 0}
