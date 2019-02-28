@@ -46,6 +46,10 @@ namespace LLAPI
         public int UnreliableChannel
         { get { return unreliableChannel; } }
 
+        private int stateUpdateChannel;
+        public int StateUpdateChannel
+        { get { return stateUpdateChannel; } }
+
         private bool isStarted = false;
         private byte error;
 
@@ -78,6 +82,7 @@ namespace LLAPI
 
             reliableChannel = cc.AddChannel(QosType.Reliable);
             unreliableChannel = cc.AddChannel(QosType.Unreliable);
+            stateUpdateChannel = cc.AddChannel(QosType.StateUpdate);
 
             HostTopology topo = new HostTopology(cc, MAX_CONNECTIONS);
 
@@ -271,7 +276,7 @@ namespace LLAPI
 
                 case NetOP.PLAYERMOVEMENT:
                     NetMsg_PlayerMovement movement = a_netmsg as NetMsg_PlayerMovement;
-                    MoveObject(movement.xMove, movement.yMove, players[connectionId].avater, connectionId);
+                    MoveObject(movement.xMove, movement.yMove, movement.zMove, players[connectionId].avater, connectionId);
                     break;
 
                 case NetOP.NETWORK_OBJECT:
@@ -404,15 +409,14 @@ namespace LLAPI
 
         private void SpawnAllPlayers()
         {
-
-
             foreach (var pKey in players.Keys)
             {
                 NetMsg_SpawnObject spawnNewPlayer = new NetMsg_SpawnObject();
                 spawnNewPlayer.ObjectsToSpawn.Add(0);
                 spawnNewPlayer.ObjectsConnectionIds.Add(pKey);
 
-                //loop though all our current players
+
+                /*//loop though all our current players
                 //if the keys are different then 
                 //tell the old client to spawn the new client's player
                 foreach (var key in players.Keys)
@@ -439,12 +443,22 @@ namespace LLAPI
 
                 //spawn all the old players on the new player's client
                 Send(spawnNewPlayer, reliableChannel, pKey);
+                */
 
-                spawnNewPlayer = new NetMsg_SpawnObject();
-                spawnNewPlayer.ObjectsConnectionIds.Add(pKey);
-                spawnNewPlayer.ObjectsToSpawn.Add(0);
+                //Add all other players
+                foreach (var key in players.Keys)
+                {
+                    if (key != pKey)
+                    {
+                        spawnNewPlayer.ObjectsToSpawn.Add(0);
+                        spawnNewPlayer.ObjectsConnectionIds.Add(key);
+                    }
+                }
                 //Tell the client it self to spawn
                 Send(spawnNewPlayer, reliableChannel, pKey);
+
+                //Spawn server avater
+                players[pKey].avater = Instantiate(playerPrefab, new Vector3(0, 10, 0), Quaternion.identity);
             }
         }
 
@@ -464,7 +478,7 @@ namespace LLAPI
             Send(dis, reliableChannel, a_connectionId, false);
         }
 
-        private void MoveObject(float x, float y, GameObject obj, int a_connectionId)
+        private void MoveObject(float x, float y, float z, GameObject obj, int a_connectionId)
         {
             //if (!fixedUpdateMovement.ContainsKey(a_connectionId))
             //{
@@ -475,17 +489,18 @@ namespace LLAPI
             //    fixedUpdateMovement[a_connectionId] = new Vector3(x, 0, y);
             //}
 
-            players[a_connectionId].avater.GetComponent<Rigidbody>().MovePosition(new Vector3(x, 0.5f, y));
+            players[a_connectionId].avater.GetComponent<Rigidbody>().MovePosition(new Vector3(x, y, z));
 
             //obj.transform.Translate((x * 5) * Time.deltaTime, 0, (y * 5) * Time.deltaTime);
             //
             NetMsg_PlayerMovement pm = new NetMsg_PlayerMovement();
             pm.xMove = obj.GetComponent<Rigidbody>().position.x;
-            pm.yMove = obj.GetComponent<Rigidbody>().position.z;
+            pm.yMove = obj.GetComponent<Rigidbody>().position.y;
+            pm.zMove = obj.GetComponent<Rigidbody>().position.z;
             pm.connectId = a_connectionId;
             //
             //Send(pm, reliableChannel, a_connectionId);
-            Send(pm, reliableChannel, a_connectionId, false);
+            Send(pm, stateUpdateChannel, a_connectionId, false);
         }
 
         public void Send(NetMsg a_msg, int a_channel)

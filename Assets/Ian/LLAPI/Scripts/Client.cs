@@ -39,6 +39,10 @@ namespace LLAPI
         public int UnreliableChannel
         { get { return UnreliableChannel; } }
 
+        private int stateUpdateChannel;
+        public int StateUpdateChannel
+        { get { return stateUpdateChannel; } }
+
         private int clientId;
         private int connectionId;
         private int serverConnectionId;
@@ -179,6 +183,7 @@ namespace LLAPI
 
             reliableChannel = cc.AddChannel(QosType.Reliable);
             unreliableChannel = cc.AddChannel(QosType.Unreliable);
+            stateUpdateChannel = cc.AddChannel(QosType.StateUpdate);
 
             HostTopology topo = new HostTopology(cc, MAX_CONNECTIONS);
 
@@ -309,12 +314,20 @@ namespace LLAPI
                 case NetOP.SPAWNOBJECT:
                     NetMsg_SpawnObject spawnObject = (NetMsg_SpawnObject)a_netmsg;
 
-                        int index = 0;
+                    int index = 0;
                     foreach (var key in spawnObject.ObjectsConnectionIds)
                     {
-                        if()
-                        players[key].avater =
-                         Instantiate(spawnableObjects[spawnObject.ObjectsToSpawn[index]]);
+                        if (key == serverConnectionId)
+                        {
+                            localPlayer.avater = Instantiate(spawnableObjects[spawnObject.ObjectsToSpawn[0]], new Vector3(0, 10, 0), Quaternion.identity);
+                            localPlayer.avater.GetComponent<PlayerController>().client = this;
+                        }
+                        else
+                        {
+                            players[key].avater =
+                             Instantiate(spawnableObjects[spawnObject.ObjectsToSpawn[index]], new Vector3(0, 10, 0), Quaternion.identity);
+                            players[key].avater.GetComponent<PlayerController>().enabled = false;
+                        }
                         index += 1;
                     }
                     break;
@@ -327,7 +340,7 @@ namespace LLAPI
                     if (pm.connectId == serverConnectionId)
                     {
                         //localPlayer.transform.position = new Vector3(pm.xMove, 0.5f, pm.yMove);
-                        localPlayer.avater.GetComponent<Rigidbody>().MovePosition(new Vector3(pm.xMove, 0.5f, pm.yMove));
+                        localPlayer.avater.GetComponent<Rigidbody>().MovePosition(new Vector3(pm.xMove, pm.yMove, pm.zMove));
                     }
                     else
                     {
@@ -335,7 +348,7 @@ namespace LLAPI
                         //another client has moved there object on the server. Move that 
                         //object on this local client
                         //players[pm.connectId].transform.position = new Vector3(pm.xMove, 0.5f, pm.yMove);
-                        players[pm.connectId].avater.GetComponent<Rigidbody>().MovePosition(new Vector3(pm.xMove, 0.5f, pm.yMove));
+                        players[pm.connectId].avater.GetComponent<Rigidbody>().MovePosition(Vector3.Lerp(players[pm.connectId].avater.GetComponent<Rigidbody>().position, new Vector3(pm.xMove, pm.yMove, pm.zMove), Time.deltaTime * 10));
                     }
                     break;
 

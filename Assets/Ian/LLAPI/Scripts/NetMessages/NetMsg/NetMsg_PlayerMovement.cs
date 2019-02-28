@@ -14,6 +14,7 @@ namespace LLAPI
 
         public float xMove { set; get; }
         public float yMove { set; get; }
+        public float zMove { get; set; }
         public int connectId { set; get; }
     }
 }
