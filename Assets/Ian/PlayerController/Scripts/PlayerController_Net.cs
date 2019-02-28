@@ -38,6 +38,9 @@ public class PlayerController_Net : NetworkBehaviour
     /// </summary>
     float ourLatency;
 
+    [SerializeField]
+    private CapturePoint cp;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -63,6 +66,7 @@ public class PlayerController_Net : NetworkBehaviour
 
             return;
         }
+        cp = GameObject.Find("CapturePoint").GetComponent<CapturePoint>();
 
         GetComponentInChildren<Camera>().enabled = true;
 
@@ -77,16 +81,45 @@ public class PlayerController_Net : NetworkBehaviour
 
             CmdUpdateVelocity(velocity, transform.position);
         }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            // if (objectInteract != null)
+            // {
+            //CmdSetAuthoirty(objectInteract.GetComponent<NetworkIdentity>().netId, playerObject.GetComponent<NetworkIdentity>());
+            //objectInteract.Interact();
+            //CmdRemoveAuthoirty(objectInteract.GetComponent<NetworkIdentity>().netId, playerObject.GetComponent<NetworkIdentity>());
+            // }
+            cp.testInput = 10;
+            CmdDebug(GetComponent<NetworkIdentity>().netId);
+        }
     }
 
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if (hasAuthority)
-    //    {
-    //        Debug.LogWarning("Entered trigger");
-    //        PlayerObject_Net.SetAuthority(other.gameObject, PlayerObject);
-    //    }
-    //}
+    [Command]
+    void CmdDebug(NetworkInstanceId a_a)
+    {
+        Debug.Log("Client " + a_a + " sent this message");
+        cp.testInput = 10;
+        RpcDebug(a_a, cp.testInput);
+    }
+
+    [ClientRpc]
+    void RpcDebug(NetworkInstanceId a_a, int a_i)
+    {
+        cp.testInput = a_i;
+        Debug.Log("Server " + a_a + " sent this message");
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (hasAuthority)
+        {
+            if (other.GetComponent<Interactable_Net>())
+            {
+                CmdSetInteractable(other.GetComponent<NetworkIdentity>().netId);
+            }
+        }
+    }
 
     //private void OnTriggerExit(Collider other)
     //{
@@ -146,10 +179,54 @@ public class PlayerController_Net : NetworkBehaviour
         return hasAuthority;
     }
 
-    public NetworkConnection SetAuthoirty(NetworkIdentity a_net)
+    [Command]
+    public void CmdSetInteractable(NetworkInstanceId a_id)
     {
-        a_net.AssignClientAuthority(PlayerObject.GetComponent<PlayerController_Net>().connectionToClient);
+        //objectInteract = NetworkServer.FindLocalObject(a_id).gameObject.GetComponent<Interactable_Net>();
+        RpcSetInteractable(a_id);
+    }
 
-        return PlayerObject.GetComponent<PlayerController_Net>().connectionToClient;
+    [ClientRpc]
+    public void RpcSetInteractable(NetworkInstanceId a_id)
+    {
+        if (!hasAuthority)
+        {
+            //objectInteract = NetworkServer.FindLocalObject(a_id).gameObject.GetComponent<Interactable_Net>();
+        }
+    }
+
+    [Command]
+    public void CmdSetAuthoirty(NetworkInstanceId a_objectId, NetworkIdentity a_player)
+    {
+        GameObject iObject = NetworkServer.FindLocalObject(a_objectId);
+        NetworkIdentity networkIdentity = iObject.GetComponent<NetworkIdentity>();
+        var otherOwner = networkIdentity.clientAuthorityOwner;
+
+        if(otherOwner == a_player.connectionToClient)
+        {
+            return;
+        }
+        else
+        {
+            if(otherOwner != null)
+            {
+                networkIdentity.RemoveClientAuthority(otherOwner);
+            }
+            networkIdentity.AssignClientAuthority(a_player.connectionToClient);
+        }
+    }
+
+
+    [Command]
+    public void CmdRemoveAuthoirty(NetworkInstanceId a_objectId, NetworkIdentity a_player)
+    {
+        GameObject iObject = NetworkServer.FindLocalObject(a_objectId);
+        NetworkIdentity networkIdentity = iObject.GetComponent<NetworkIdentity>();
+        var otherOwner = networkIdentity.clientAuthorityOwner;
+
+        if (otherOwner == a_player.connectionToClient)
+        {
+            networkIdentity.RemoveClientAuthority(otherOwner);
+        }
     }
 }

@@ -16,6 +16,8 @@ public class Trigger : MonoBehaviour
     public bool hasShot;
     public bool isDetected;
     public bool isStunned;
+    private AudioSource source;
+    public AudioSO bulletSound;
 
     private MercControls mercControls;
 

@@ -24,12 +24,15 @@ public class MercControls : PlayerController
     private Rigidbody rb;
     [SerializeField]
     private Trigger triggerScript;
+    private AudioSource source;
 
+    public AudioSO walkingSound;
     public Abilities sprint;
 
     // Start is called before the first frame update
     void Start()
     {
+        source = gameObject.GetComponent<AudioSource>();
         cooldown = sprint.cooldown;
         canSprint = sprint.isCooldown;
         speedDuration = sprint.abilityDuration;
@@ -64,6 +67,7 @@ public class MercControls : PlayerController
             //Sound/Animation?
             bullet.SetActive(true);
             bullet.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + 1);
+            //walkingSound.SetSourceProperties(source);
             rb.velocity = transform.forward * 100;
             noShoot = true;
         }
