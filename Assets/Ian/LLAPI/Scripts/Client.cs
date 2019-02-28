@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 namespace LLAPI
 {
@@ -182,7 +183,7 @@ namespace LLAPI
             HostTopology topo = new HostTopology(cc, MAX_CONNECTIONS);
 
             hostId = NetworkTransport.AddHost(topo, 0);
-            connectionId = NetworkTransport.Connect(hostId, "192.168.0.29", port, 0, out error);
+            connectionId = NetworkTransport.Connect(hostId, a_ip, port, 0, out error);
 
             //players.Add(connectionId, localPlayer.gameObject);
 
@@ -259,14 +260,15 @@ namespace LLAPI
                     break;
 
                 case NetOP.SPAWN_PLAYER_LB:
-                    NetMsgSpawnPlayerLB sp = (NetMsgSpawnPlayerLB)a_netmsg;
+                    NetMsg_SpawnPlayerLB sp = (NetMsg_SpawnPlayerLB)a_netmsg;
 
                     Player p = new Player();
                     p.connectionId = sp.ConnectionID;
                     p.playerName = sp.PlayerName;
                     p.team = sp.Team;
 
-                    p.lobbyAvater = Instantiate(spawnableObjects[1]);
+                    p.lobbyAvater = Instantiate(spawnableObjects[1], CS_LobbyManager.Instance.transform);
+                    p.lobbyAvater.transform.localScale = new Vector3(1, 1, 1);
 
                     players.Add(p.connectionId, p);
 
@@ -288,6 +290,13 @@ namespace LLAPI
                     players[teamLB.ConnectionID].team = teamLB.Team;
                     CS_LobbyManager.Instance.SetPlayerTeam(players[teamLB.ConnectionID]);
                     break;
+
+                case NetOP.CLIENT_LOAD_SCENE_LB:
+                    NetMsg_ClientLoadSceneLB sceneLoadLB = (NetMsg_ClientLoadSceneLB)a_netmsg;
+                    SceneManager.sceneLoaded += SceneLoaded;
+                    SceneManager.LoadScene(sceneLoadLB.SceneToLoad);
+
+                    break;
             }
 
         }
@@ -297,6 +306,19 @@ namespace LLAPI
         {
             switch (a_netmsg.OP)
             {
+                case NetOP.SPAWNOBJECT:
+                    NetMsg_SpawnObject spawnObject = (NetMsg_SpawnObject)a_netmsg;
+
+                        int index = 0;
+                    foreach (var key in spawnObject.ObjectsConnectionIds)
+                    {
+                        if()
+                        players[key].avater =
+                         Instantiate(spawnableObjects[spawnObject.ObjectsToSpawn[index]]);
+                        index += 1;
+                    }
+                    break;
+
                 case NetOP.PLAYERMOVEMENT:
                     NetMsg_PlayerMovement pm = (NetMsg_PlayerMovement)a_netmsg;
                     //pm.connectId is the id from the server on which client is moving.
@@ -330,6 +352,24 @@ namespace LLAPI
         }
 
         #endregion
+
+        /// <summary>
+        /// Call when a scene has been loaded
+        /// </summary>
+        /// <param name="scene"></param>
+        /// <param name="mode"></param>
+        private void SceneLoaded(Scene scene, LoadSceneMode mode)
+        {
+            SceneManager.sceneLoaded -= SceneLoaded;
+
+            NetMsg_ClientConfirmSceneLoadLB confirm = new NetMsg_ClientConfirmSceneLoadLB();
+            confirm.ConnectionID = serverConnectionId;
+            confirm.SceneLoaded = true;
+
+            currentStatus = Status.Game;
+
+            Send(confirm);
+        }
 
         public void Send(NetMsg a_msg, int a_channel = -1)
         {

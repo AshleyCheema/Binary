@@ -16,6 +16,8 @@ namespace LLAPI
         public Team team;
         public GameObject lobbyAvater;
         public GameObject avater;
+        public bool IsReady;
+        public bool LoadedGame;
     }
 
     public enum Status
@@ -241,6 +243,20 @@ namespace LLAPI
                     players[teamLB.ConnectionID].team = teamLB.Team;
                     Send(teamLB, reliableChannel, teamLB.ConnectionID, false);
                     break;
+                case NetOP.IS_READY_LB:
+                    NetMsg_IsReadyLB readyLB = (NetMsg_IsReadyLB)a_netmsg;
+                    players[readyLB.ConnectionID].IsReady = readyLB.IsReady;
+
+                    CheckForGameStart();
+
+                    break;
+
+                case NetOP.CLIENT_CONFIRM_LOAD_SCENE_LB:
+                    NetMsg_ClientConfirmSceneLoadLB conformLoadLB = (NetMsg_ClientConfirmSceneLoadLB)a_netmsg;
+                    players[conformLoadLB.ConnectionID].LoadedGame = true;
+
+                    CheckForAllSceneLoads();
+                    break;
             }
 
         }
@@ -268,28 +284,111 @@ namespace LLAPI
 
         #endregion
 
+        /// <summary>
+        /// Check if the game can start. This can only happen if all the current players 
+        /// have readied up.
+        /// </summary>
+        private void CheckForGameStart()
+        {
+            bool isReady = true;
+
+            foreach (var key in players.Keys)
+            {
+                if(!players[key].IsReady)
+                {
+                    isReady = false;
+                    break;
+                }
+            }
+
+            if(!isReady)
+            {
+                //Not all players have readied up
+            }
+            else
+            {
+                //StartGame
+                ClientLoadScenes(1);
+            }
+        }
+
+        /// <summary>
+        /// Tell all the clients to load new scenes
+        /// </summary>
+        private void ClientLoadScenes(int a_scene)
+        {
+            foreach (var key in players.Keys)
+            {
+                NetMsg_ClientLoadSceneLB sceneLoadLB = new NetMsg_ClientLoadSceneLB();
+                sceneLoadLB.ConnectionID = players[key].connectionId;
+                sceneLoadLB.SceneToLoad = 2;
+                Send(sceneLoadLB, reliableChannel);
+            }
+        }
+
+        /// <summary>
+        /// Check that all the players have loaded their scenes
+        /// </summary>
+        private void CheckForAllSceneLoads()
+        {
+            bool allScenesLoad = true;
+
+            foreach (var key in players.Keys)
+            {
+                if (!players[key].LoadedGame)
+                {
+                    allScenesLoad = false;
+                    break;
+                }
+            }
+
+            if(allScenesLoad)
+            {
+                //Spawn all the players and set the current status to game 
+                //as we are now being the game
+                SpawnAllPlayers();
+                currentStatus = Status.Game;
+            }
+        }
+
+        /// <summary>
+        /// When a new client has connected to the server 
+        /// call this to setup the new player and send all the 
+        /// relevant data to all players on the server
+        /// </summary>
+        /// <param name="a_connectionId"></param>
         private void OnConection(int a_connectionId)
         {
+            //Create a new player
             Player p = new Player();
             p.connectionId = a_connectionId;
             p.playerName = "Default";
             p.team = Team.Unassigned;
+            p.IsReady = false;
+            p.LoadedGame = false;
+            //Add the new player to the players on the srever
             players.Add(a_connectionId, p);
 
+            //Create a new message to send to the new player
+            //Send the player the server's connection ID. THIS IS UNIQUE 
             NetMsg_SendServerConnectionID id = new NetMsg_SendServerConnectionID();
             id.ConnectionId = a_connectionId;
             Send(id, reliableChannel, a_connectionId);
 
-            NetMsgSpawnPlayerLB msg = new NetMsgSpawnPlayerLB();
-            msg.ConnectionID = a_connectionId;
-            msg.PlayerName = "Default";
-            msg.Team = Team.Unassigned;
+            //Create a new message to send to all players on the server apart from
+            //the new player
+            NetMsg_SpawnPlayerLB msg = new NetMsg_SpawnPlayerLB();
+            msg.ConnectionID = p.connectionId;
+            msg.PlayerName = p.playerName;
+            msg.Team = p.team;
 
+            //Send the new player's information to all clients
             Send(msg, reliableChannel, a_connectionId, false);
 
+            //Send all the old players information to the new player
             foreach (var pKey in players.Keys)
             {
-                NetMsgSpawnPlayerLB spawnLobbyP = new NetMsgSpawnPlayerLB();
+                NetMsg_SpawnPlayerLB spawnLobbyP = new NetMsg_SpawnPlayerLB();
                 spawnLobbyP.ConnectionID = players[pKey].connectionId;
                 spawnLobbyP.PlayerName = players[pKey].playerName;
                 spawnLobbyP.Team = players[pKey].team;
@@ -299,15 +398,18 @@ namespace LLAPI
                     Send(spawnLobbyP, reliableChannel, a_connectionId);
                 }
             }
+
+            //All clients should now have synced the lobby information
         }
 
         private void SpawnAllPlayers()
         {
+
+
             foreach (var pKey in players.Keys)
             {
                 NetMsg_SpawnObject spawnNewPlayer = new NetMsg_SpawnObject();
                 spawnNewPlayer.ObjectsToSpawn.Add(0);
-
                 spawnNewPlayer.ObjectsConnectionIds.Add(pKey);
 
                 //loop though all our current players
@@ -336,6 +438,12 @@ namespace LLAPI
                 }
 
                 //spawn all the old players on the new player's client
+                Send(spawnNewPlayer, reliableChannel, pKey);
+
+                spawnNewPlayer = new NetMsg_SpawnObject();
+                spawnNewPlayer.ObjectsConnectionIds.Add(pKey);
+                spawnNewPlayer.ObjectsToSpawn.Add(0);
+                //Tell the client it self to spawn
                 Send(spawnNewPlayer, reliableChannel, pKey);
             }
         }

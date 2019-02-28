@@ -5,9 +5,9 @@ using UnityEngine;
 namespace LLAPI
 {
     [System.Serializable]
-    public class NetMsgSpawnPlayerLB : NetMsg
+    public class NetMsg_SpawnPlayerLB : NetMsg
     {
-        public NetMsgSpawnPlayerLB()
+        public NetMsg_SpawnPlayerLB()
         {
             OP = NetOP.SPAWN_PLAYER_LB;
         }
