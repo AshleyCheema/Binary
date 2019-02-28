@@ -1227,7 +1227,7 @@ MonoBehaviour:
     i14: 165
     i15: 149
   m_ServerOnly: 0
-  m_LocalPlayerAuthority: 1
+  m_LocalPlayerAuthority: 0
 --- !u!1 &1387442389
 GameObject:
   m_ObjectHideFlags: 0
@@ -4016,6 +4016,11 @@ PrefabInstance:
       propertyPath: percentageUI
       value: 
       objectReference: {fileID: 2048973926}
+    - target: {fileID: 5210437667394293823, guid: a54b0b73fee3ec44b90d9fc9293ca595,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a54b0b73fee3ec44b90d9fc9293ca595, type: 3}
 --- !u!4 &1767585485 stripped
@@ -4221,7 +4226,7 @@ MonoBehaviour:
     i14: 0
     i15: 0
   m_ServerOnly: 0
-  m_LocalPlayerAuthority: 1
+  m_LocalPlayerAuthority: 0
 --- !u!1 &2045718754
 GameObject:
   m_ObjectHideFlags: 0
@@ -4361,7 +4366,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2048973927
 RectTransform:
   m_ObjectHideFlags: 0
