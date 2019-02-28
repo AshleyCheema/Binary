@@ -4,14 +4,7 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Spawn Points Spy's
-  - Terminal
-  - Spy
-  - Merc
-  - Spy1
-  - Spy2
-  - SpyOwner1
-  - SpyOwner2
+  - Shootable
   layers:
   - Default
   - TransparentFX
@@ -21,9 +14,9 @@ TagManager:
   - UI
   - 
   - 
-  - Wall
-  - Character
-  - 
+  - Lighting
+  - Ground
+  - Postprocessing
   - 
   - 
   - 
@@ -46,6 +39,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Fire
+    uniqueID: 3804908061
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
