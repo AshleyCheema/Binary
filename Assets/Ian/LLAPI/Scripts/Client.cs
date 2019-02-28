@@ -8,6 +8,7 @@ using UnityEngine.Networking;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
+using System;
 
 namespace LLAPI
 {
@@ -109,22 +110,39 @@ namespace LLAPI
                 byte[] recBuffer = new byte[1024];
                 int dataSize;
 
-                NetworkEventType type = NetworkTransport.Receive(out recHostId, out recConnectionId, out recChannelId, recBuffer, recBuffer.Length, out dataSize, out error);
+                NetworkEventType recData = NetworkEventType.Nothing;
 
-                switch (type)
+                do
                 {
-                    case NetworkEventType.ConnectEvent:
-                        Debug.Log("We have connected to server");
-                        break;
+                    recData = NetworkTransport.Receive(out recHostId, out recConnectionId, out recChannelId, recBuffer, recBuffer.Length, out dataSize, out error);
 
-                    case NetworkEventType.DisconnectEvent:
-                        Debug.Log("We have disconnected to server");
+                    if (recData == NetworkEventType.Nothing)
+                    {
                         break;
+                    }
 
-                    case NetworkEventType.DataEvent:
-                        ReciveData(recHostId, recConnectionId, recChannelId, recBuffer);
-                        break;
-                }
+                    byte[] workingBuffer = new byte[dataSize];
+
+                    if (dataSize > 0)
+                    {
+                        Buffer.BlockCopy(recBuffer, 0, workingBuffer, 0, dataSize);
+                    }
+
+                    switch (recData)
+                    {
+                        case NetworkEventType.ConnectEvent:
+                            Debug.Log("We have connected to server");
+                            break;
+
+                        case NetworkEventType.DisconnectEvent:
+                            Debug.Log("We have disconnected to server");
+                            break;
+
+                        case NetworkEventType.DataEvent:
+                            ReciveData(recHostId, recConnectionId, recChannelId, recBuffer);
+                            break;
+                    }
+                } while (recData != NetworkEventType.Nothing);
             }
         }
 
@@ -150,27 +168,45 @@ namespace LLAPI
             byte[] recBuffer = new byte[1024];
             int dataSize;
 
-            NetworkEventType type = NetworkTransport.Receive(out recHostId, out recConnectionId, out recChannelId, recBuffer, recBuffer.Length, out dataSize, out error);
+            NetworkEventType recData = NetworkEventType.Nothing;
 
-            switch (type)
+            do
             {
-                case NetworkEventType.ConnectEvent:
-                    Debug.Log("We have connected to server");
-                    break;
+                recData = NetworkTransport.Receive(out recHostId, out recConnectionId, out recChannelId, recBuffer, recBuffer.Length, out dataSize, out error);
 
-                case NetworkEventType.DisconnectEvent:
-                    Debug.Log("We have disconnected to server");
-                    break;
 
-                case NetworkEventType.DataEvent:
-                    ReciveData(recHostId, recConnectionId, recChannelId, recBuffer);
+                if (recData == NetworkEventType.Nothing)
+                {
                     break;
+                }
 
-                default:
-                case NetworkEventType.BroadcastEvent:
-                    //Debug.Log("Unexpected network event type");
-                    break;
-            }
+                byte[] workingBuffer = new byte[dataSize];
+
+                if (dataSize > 0)
+                {
+                    Buffer.BlockCopy(recBuffer, 0, workingBuffer, 0, dataSize);
+                }
+
+                switch (recData)
+                {
+                    case NetworkEventType.ConnectEvent:
+                        Debug.Log("We have connected to server");
+                        break;
+
+                    case NetworkEventType.DisconnectEvent:
+                        Debug.Log("We have disconnected to server");
+                        break;
+
+                    case NetworkEventType.DataEvent:
+                        ReciveData(recHostId, recConnectionId, recChannelId, workingBuffer);
+                        break;
+
+                    default:
+                    case NetworkEventType.BroadcastEvent:
+                        //Debug.Log("Unexpected network event type");
+                        break;
+                }
+            } while (recData != NetworkEventType.Nothing);
         }
 
         /// <summary>
@@ -191,12 +227,6 @@ namespace LLAPI
             connectionId = NetworkTransport.Connect(hostId, a_ip, port, 0, out error);
 
             //players.Add(connectionId, localPlayer.gameObject);
-
-            Network_Object[] netObjs = GameObject.FindObjectsOfType<Network_Object>();
-            for (int i = 0; i < netObjs.Length; i++)
-            {
-                networkObjects.Add(netObjs[i].ID, netObjs[i]);
-            }
 
             connectionTime = Time.time;
             isConnected = true;
@@ -315,18 +345,22 @@ namespace LLAPI
                     NetMsg_SpawnObject spawnObject = (NetMsg_SpawnObject)a_netmsg;
 
                     int index = 0;
-                    foreach (var key in spawnObject.ObjectsConnectionIds)
+                    foreach (var key in spawnObject.ObjectsToSpawn)
                     {
-                        if (key == serverConnectionId)
+                        if (key.ConnectionID == serverConnectionId)
                         {
-                            localPlayer.avater = Instantiate(spawnableObjects[spawnObject.ObjectsToSpawn[0]], new Vector3(0, 10, 0), Quaternion.identity);
+                            localPlayer.avater = Instantiate(spawnableObjects[key.ObjectID], new Vector3(0, 10, 0), Quaternion.identity);
                             localPlayer.avater.GetComponent<PlayerController>().client = this;
+
+                            Camera.main.GetComponent<CameraScript>().target = localPlayer.avater.transform;
+                            Camera.main.transform.position = localPlayer.avater.transform.position + new Vector3(-15, 33, -15);
+                            Camera.main.transform.rotation = Quaternion.Euler(56, 45, 0);
                         }
                         else
                         {
-                            players[key].avater =
-                             Instantiate(spawnableObjects[spawnObject.ObjectsToSpawn[index]], new Vector3(0, 10, 0), Quaternion.identity);
-                            players[key].avater.GetComponent<PlayerController>().enabled = false;
+                            players[key.ConnectionID].avater =
+                             Instantiate(spawnableObjects[key.ObjectID], new Vector3(0, 10, 0), Quaternion.identity);
+                            players[key.ConnectionID].avater.GetComponent<PlayerController>().enabled = false;
                         }
                         index += 1;
                     }
@@ -382,6 +416,12 @@ namespace LLAPI
             currentStatus = Status.Game;
 
             Send(confirm);
+
+            Network_Object[] netObjs = GameObject.FindObjectsOfType<Network_Object>();
+            for (int i = 0; i < netObjs.Length; i++)
+            {
+                networkObjects.Add(netObjs[i].ID, netObjs[i]);
+            }
         }
 
         public void Send(NetMsg a_msg, int a_channel = -1)

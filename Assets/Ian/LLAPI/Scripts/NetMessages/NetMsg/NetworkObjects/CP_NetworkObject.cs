@@ -27,7 +27,10 @@ namespace LLAPI
         /// </summary>
         private void Update()
         {
-            tm.text = capturePercentage.ToString();
+            if (tm != null)
+            {
+                tm.text = capturePercentage.ToString();
+            }
             if (isBeingCaptured)
             {
                 capturePercentage += captureAmount * Time.deltaTime;
