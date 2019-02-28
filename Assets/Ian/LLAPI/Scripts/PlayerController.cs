@@ -38,9 +38,10 @@ namespace LLAPI
 
                 NetMsg_PlayerMovement serverVelocity = new NetMsg_PlayerMovement();
                 serverVelocity.xMove = rb.position.x;//rawVelocity.x;
-                serverVelocity.yMove = rb.position.z;//rawVelocity.z;
+                serverVelocity.yMove = rb.position.y;//rawVelocity.z;
+                serverVelocity.zMove = rb.position.z;//rawVelocity.z;
 
-                client.Send(serverVelocity, Client.Instance.ReliableChannel);
+                client.Send(serverVelocity, Client.Instance.StateUpdateChannel);
             }
             else
             {
