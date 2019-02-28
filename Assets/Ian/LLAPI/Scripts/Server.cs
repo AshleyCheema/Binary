@@ -159,22 +159,39 @@ namespace LLAPI
             byte[] recBuffer = new byte[1024];
             int dataSize;
 
-            NetworkEventType type = NetworkTransport.Receive(out recHostId, out recConnectionId, out recChannelId, recBuffer, recBuffer.Length, out dataSize, out error);
+            NetworkEventType recData = NetworkEventType.Nothing;
 
-            switch (type)
+            do
             {
-                case NetworkEventType.ConnectEvent:
-                    OnConection(recConnectionId);
-                    break;
+                recData = NetworkTransport.Receive(out recHostId, out recConnectionId, out recChannelId, recBuffer, recBuffer.Length, out dataSize, out error);
 
-                case NetworkEventType.DataEvent:
-                    ReciveData(recHostId, recConnectionId, recChannelId, recBuffer);
+                if (recData == NetworkEventType.Nothing)
+                {
                     break;
+                }
 
-                case NetworkEventType.DisconnectEvent:
-                    OnDisconnect(recConnectionId);
-                    break;
-            }
+                byte[] workingBuffer = new byte[dataSize];
+
+                if (dataSize > 0)
+                {
+                    Buffer.BlockCopy(recBuffer, 0, workingBuffer, 0, dataSize);
+                }
+
+                switch (recData)
+                {
+                    case NetworkEventType.ConnectEvent:
+                        OnConection(recConnectionId);
+                        break;
+
+                    case NetworkEventType.DataEvent:
+                        ReciveData(recHostId, recConnectionId, recChannelId, recBuffer);
+                        break;
+
+                    case NetworkEventType.DisconnectEvent:
+                        OnDisconnect(recConnectionId);
+                        break;
+                }
+            } while (recData != NetworkEventType.Nothing);
         }
 
         private void UpdateInGame()
@@ -191,27 +208,44 @@ namespace LLAPI
             byte[] recBuffer = new byte[1024];
             int dataSize;
 
-            NetworkEventType type = NetworkTransport.Receive(out recHostId, out recConnectionId, out recChannelId, recBuffer, recBuffer.Length, out dataSize, out error);
+            NetworkEventType recData = NetworkEventType.Nothing;
 
-            switch (type)
+            do
             {
-                //case NetworkEventType.ConnectEvent:
-                //    OnConection(recConnectionId);
-                //    break;
+                recData = NetworkTransport.Receive(out recHostId, out recConnectionId, out recChannelId, recBuffer, recBuffer.Length, out dataSize, out error);
 
-                case NetworkEventType.DisconnectEvent:
-                    OnDisconnect(recConnectionId);
+                if(recData == NetworkEventType.Nothing)
+                {
                     break;
+                }
 
-                case NetworkEventType.DataEvent:
-                    ReciveData(recHostId, recConnectionId, recChannelId, recBuffer);
-                    break;
+                byte[] workingBuffer = new byte[dataSize];
 
-                default:
-                case NetworkEventType.BroadcastEvent:
-                    //Debug.Log("Unexpected network event type");
-                    break;
-            }
+                if(dataSize > 0)
+                {
+                    Buffer.BlockCopy(recBuffer, 0, workingBuffer, 0, dataSize);
+                }
+
+                switch (recData)
+                {
+                    //case NetworkEventType.ConnectEvent:
+                    //    OnConection(recConnectionId);
+                    //    break;
+
+                    case NetworkEventType.DisconnectEvent:
+                        OnDisconnect(recConnectionId);
+                        break;
+
+                    case NetworkEventType.DataEvent:
+                        ReciveData(recHostId, recConnectionId, recChannelId, workingBuffer);
+                        break;
+
+                    default:
+                    case NetworkEventType.BroadcastEvent:
+                        //Debug.Log("Unexpected network event type");
+                        break;
+                }
+            } while (recData != NetworkEventType.Nothing);
         }
 
         #region OnData
@@ -412,11 +446,49 @@ namespace LLAPI
             foreach (var pKey in players.Keys)
             {
                 NetMsg_SpawnObject spawnNewPlayer = new NetMsg_SpawnObject();
-                spawnNewPlayer.ObjectsToSpawn.Add(0);
-                spawnNewPlayer.ObjectsConnectionIds.Add(pKey);
 
+                Vector3 spawnPosition = Vector3.zero;
 
-                /*//loop though all our current players
+                BoxCollider spySpawnTrigger = GameObject.Find("Spawn_Spy_Area").GetComponent<BoxCollider>();
+                BoxCollider mercSpawnTrigger = GameObject.Find("Spawn_Merc_Area").GetComponent<BoxCollider>();
+
+                if (players[pKey].team == Team.Merc)
+                {
+                    spawnPosition = ExtensionFunctions.RandomPointInBounds(mercSpawnTrigger.bounds);
+                }
+                else if (players[pKey].team == Team.Spy)
+                {
+                    spawnPosition = ExtensionFunctions.RandomPointInBounds(spySpawnTrigger.bounds);
+                }
+
+                spawnNewPlayer.ObjectsToSpawn.Add(new SpawnableObject
+                {
+                    ConnectionID = pKey,
+                    ObjectID = 0,
+                    XPos = spawnPosition.x,
+                    YPos = spawnPosition.y,
+                    ZPos = spawnPosition.z,
+                    XRot = 0,
+                    YRot = 0,
+                    ZRot = 0
+                });
+
+                //Spawn server avater
+                players[pKey].avater = Instantiate(playerPrefab,
+                                        spawnPosition,
+                                        Quaternion.identity);
+
+                if(players[pKey].team == Team.Spy)
+                {
+                    players[pKey].avater.tag = "Spy";
+                }
+                else
+                {
+                    players[pKey].avater.tag = "Merc";
+                }
+
+                /*
+                //loop though all our current players
                 //if the keys are different then 
                 //tell the old client to spawn the new client's player
                 foreach (var key in players.Keys)
@@ -444,21 +516,25 @@ namespace LLAPI
                 //spawn all the old players on the new player's client
                 Send(spawnNewPlayer, reliableChannel, pKey);
                 */
+            }
+            //Add all other players
+            foreach (var key in players.Keys)
+            {
+                NetMsg_SpawnObject spawnNewPlayer = new NetMsg_SpawnObject();
 
-                //Add all other players
-                foreach (var key in players.Keys)
+                spawnNewPlayer.ObjectsToSpawn.Add(new SpawnableObject
                 {
-                    if (key != pKey)
-                    {
-                        spawnNewPlayer.ObjectsToSpawn.Add(0);
-                        spawnNewPlayer.ObjectsConnectionIds.Add(key);
-                    }
-                }
+                    ConnectionID = key,
+                    ObjectID = 0,
+                    XPos = players[key].avater.GetComponent<Rigidbody>().position.x,
+                    YPos = players[key].avater.GetComponent<Rigidbody>().position.y,
+                    ZPos = players[key].avater.GetComponent<Rigidbody>().position.z,
+                    XRot = 0,
+                    YRot = 0,
+                    ZRot = 0
+                });
                 //Tell the client it self to spawn
-                Send(spawnNewPlayer, reliableChannel, pKey);
-
-                //Spawn server avater
-                players[pKey].avater = Instantiate(playerPrefab, new Vector3(0, 10, 0), Quaternion.identity);
+                Send(spawnNewPlayer, reliableChannel, key);
             }
         }
 
@@ -500,7 +576,7 @@ namespace LLAPI
             pm.connectId = a_connectionId;
             //
             //Send(pm, reliableChannel, a_connectionId);
-            Send(pm, stateUpdateChannel, a_connectionId, false);
+            Send(pm, unreliableChannel, a_connectionId, false);
         }
 
         public void Send(NetMsg a_msg, int a_channel)

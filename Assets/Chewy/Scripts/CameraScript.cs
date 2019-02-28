@@ -12,13 +12,19 @@ public class CameraScript : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
-        offset = transform.position - target.position;
+        if (target != null)
+        {
+            offset = transform.position - target.position;
+        }
 	}
 	
 	// Update is called once per frame
 	void FixedUpdate ()
     {
-        Vector3 targetCamPos = target.position + offset;
-        transform.position = Vector3.Lerp(transform.position, targetCamPos, smoothing * Time.deltaTime);
-	}
+        if (target != null)
+        {
+            Vector3 targetCamPos = target.position + offset;
+            transform.position = Vector3.Lerp(transform.position, targetCamPos, smoothing * Time.deltaTime);
+        }
+    }
 }
