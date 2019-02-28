@@ -23,4 +23,18 @@ public static class ExtensionFunctions
             a_material.SetColor("_BaseColor", a_color);
         }
     }
+
+    public static Vector3 RandomPointInBounds(Bounds a_bounds)
+    {
+        return new Vector3(
+            UnityEngine.Random.Range(a_bounds.min.x, a_bounds.max.x),
+            UnityEngine.Random.Range(a_bounds.min.y, a_bounds.max.y),
+            UnityEngine.Random.Range(a_bounds.min.z, a_bounds.max.z)
+            );
+    }
+
+    public static Vector3 GetVector3(this Vector3 a_vector3, LLAPI.SpawnableObject a_object)
+    {
+        return new Vector3(a_object.XPos, a_object.YPos, a_object.ZPos);
+    }
 }

@@ -15,6 +15,9 @@ namespace LLAPI
         [SerializeField]
         private Vector3 rawVelocity;
 
+        private float lastInputX;
+        private float lastInputZ;
+
         // Start is called before the first frame update
         void Start()
         {
@@ -25,13 +28,13 @@ namespace LLAPI
         void Update()
         {
             float xMov = Input.GetAxis("Horizontal");
-            float yMov = Input.GetAxis("Vertical");
+            float zMov = Input.GetAxis("Vertical");
             //tansform.Translate(xMov * Time.deltaTime, 0, yMov * Time.deltaTime);
 
-            if (xMov != 0 || yMov != 0)
+            if (/* xMov != lastInputX || zMov != lastInputZ || */  xMov != 0 || zMov != 0)
             {
-                rawVelocity = new Vector3(xMov, 0, yMov);
-                velocity = new Vector3(xMov, 0, yMov) * 5 * Time.deltaTime;
+                rawVelocity = new Vector3(xMov, 0, zMov);
+                velocity = new Vector3(xMov, 0, zMov) * 5 * Time.deltaTime;
                 //transform.Translate(velocity);
                 //rb.MovePosition(rb.position + rawVelocity * 5 * Time.fixedDeltaTime);
 
