@@ -69,8 +69,23 @@ public class CS_LobbyManager : MonoBehaviour
         a_p.lobbyAvater.name = a_p.connectionId.ToString();
 
         TMP_InputField input = a_p.lobbyAvater.GetComponentInChildren<TMP_InputField>();
+        Button readyButton = a_p.lobbyAvater.GetComponentInChildren<Button>();
 
-        input.onEndEdit.AddListener( delegate { OnNameChange(input, a_p); });
+        //Add a listener to the name input
+        //When text has been entered then call OnNameChange
+        input.onEndEdit.AddListener(delegate { OnNameChange(input, a_p); });
+
+        //Add a listener to the ready button.
+        //When the ready button has been pressed then tell the server
+        //this client is ready
+        readyButton.onClick.AddListener(delegate 
+        {
+            NetMsg_IsReadyLB readyLB = new NetMsg_IsReadyLB();
+            readyLB.ConnectionID = a_p.connectionId;
+            readyLB.IsReady = true;
+
+            client.Send(readyLB);
+        });
 
     }
 

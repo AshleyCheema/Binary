@@ -17,6 +17,9 @@
         public const int DISCONNECTION = 12;
         public const int TEAM_CHANGE_LB = 13;
         public const int PLAYER_READY_LB = 14;
+        public const int IS_READY_LB = 15;
+        public const int CLIENT_LOAD_SCENE_LB = 16;
+        public const int CLIENT_CONFIRM_LOAD_SCENE_LB = 17;
 
     }
 
