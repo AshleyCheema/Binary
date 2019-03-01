@@ -6,7 +6,7 @@ using UnityEngine;
 public class AudioSO : ScriptableObject
 {
     public string AudioName = "";
-    public AudioClip clip;
+    public AudioClip[] clip;
 
     [Range(0, 1)]
     public float volume = 1f;
@@ -21,7 +21,7 @@ public class AudioSO : ScriptableObject
 
     public void SetSourceProperties(AudioSource _audioSource)
     {
-        _audioSource.clip = clip;
+        _audioSource.clip = clip[Random.Range(0, clip.Length)];
         _audioSource.volume = volume;
         _audioSource.pitch = pitch;
         _audioSource.loop = loop;
