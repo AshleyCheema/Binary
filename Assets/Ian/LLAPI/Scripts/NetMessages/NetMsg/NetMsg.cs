@@ -20,6 +20,7 @@
         public const int IS_READY_LB = 15;
         public const int CLIENT_LOAD_SCENE_LB = 16;
         public const int CLIENT_CONFIRM_LOAD_SCENE_LB = 17;
+        public const int AB_SPRINT = 18;
 
     }
 

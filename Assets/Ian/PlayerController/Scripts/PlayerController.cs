@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     protected Rigidbody rb;
 
-    private Client client;
+    protected Client client;
 
     private Vector3 velocity;
 

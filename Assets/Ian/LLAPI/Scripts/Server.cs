@@ -18,6 +18,7 @@ namespace LLAPI
         public GameObject avater;
         public bool IsReady;
         public bool LoadedGame;
+        public float moveSpeed = 5;
     }
 
     public enum Status
@@ -317,6 +318,20 @@ namespace LLAPI
                     NetMsg_NetworkObject netObj = (NetMsg_NetworkObject)a_netmsg;
                     networkObjects[netObj.ID].Recive(netObj);
                     break;
+
+                case NetOP.AB_SPRINT:
+                    NetMsg_AB_Sprint ab_sprint = (NetMsg_AB_Sprint)a_netmsg;
+                    players[ab_sprint.ConnectionID].moveSpeed = ab_sprint.SprintValue;
+                    break;
+
+                    /*
+                     * foreach(player)
+                     *      check if there position is in the radius
+                     *      
+                     *      send new message affect flash bang to client 
+                     * 
+                     * 
+                     */
             }
 
         }

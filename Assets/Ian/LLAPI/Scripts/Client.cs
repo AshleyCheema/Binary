@@ -398,6 +398,10 @@ namespace LLAPI
                     NetMsg_NetworkObject netObj = (NetMsg_NetworkObject)a_netmsg;
                     networkObjects[netObj.ID].Recive(netObj);
                     break;
+
+                case NetOP.AB_SPRINT:
+
+                    break;
             }
 
         }

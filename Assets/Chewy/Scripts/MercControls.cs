@@ -5,6 +5,7 @@
  * Created: 04/02/2019
  * Edited By:
  */
+using LLAPI;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -104,6 +105,13 @@ public class MercControls : PlayerController
         if (Input.GetButton("Sprint") && canSprint)
         {
             buttonPressed = true;
+
+
+            NetMsg_AB_Sprint ab_Sprint = new NetMsg_AB_Sprint();
+            ab_Sprint.ConnectionID = client.ServerConnectionId;
+            ab_Sprint.SprintValue = runningSpeed;
+
+            client.Send(ab_Sprint);
         }
         if (buttonPressed)
         {
