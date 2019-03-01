@@ -21,10 +21,21 @@ public class CameraScript : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate ()
     {
-        if (target != null)
-        {
+        if(target != null)
+        { 
             Vector3 targetCamPos = target.position + offset;
             transform.position = Vector3.Lerp(transform.position, targetCamPos, smoothing * Time.deltaTime);
         }
+    }
+
+    public void SetTarget(Transform a_tarTransform)
+    {
+        target = a_tarTransform;
+        transform.position = target.position;
+
+        transform.position += new Vector3(-15, 33, -15);
+        transform.rotation = Quaternion.Euler(56, 45, 0);
+
+        offset = transform.position - target.position;
     }
 }

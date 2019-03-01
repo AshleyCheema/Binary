@@ -45,8 +45,12 @@ namespace LLAPI
         { get { return stateUpdateChannel; } }
 
         private int clientId;
+
         private int connectionId;
+
         private int serverConnectionId;
+        public int ServerConnectionId
+        { get { return serverConnectionId; } }
 
         private float connectionTime;
         private bool isConnected = false;
@@ -350,11 +354,11 @@ namespace LLAPI
                         if (key.ConnectionID == serverConnectionId)
                         {
                             localPlayer.avater = Instantiate(spawnableObjects[key.ObjectID], new Vector3(0, 10, 0), Quaternion.identity);
-                            localPlayer.avater.GetComponent<PlayerController>().client = this;
+                            //localPlayer.avater.GetComponent<PlayerController>().client = this;
 
-                            Camera.main.GetComponent<CameraScript>().target = localPlayer.avater.transform;
-                            Camera.main.transform.position = localPlayer.avater.transform.position + new Vector3(-15, 33, -15);
-                            Camera.main.transform.rotation = Quaternion.Euler(56, 45, 0);
+                            Camera.main.GetComponent<CameraScript>().SetTarget(localPlayer.avater.transform);
+                            //Camera.main.transform.position = localPlayer.avater.transform.position; //+ new Vector3(-15, 33, -15);
+                            //Camera.main.transform.rotation = Quaternion.Euler(56, 45, 0);
                         }
                         else
                         {
