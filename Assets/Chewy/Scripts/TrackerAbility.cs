@@ -31,7 +31,7 @@ public class TrackerAbility : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (trackerTrigger.hasShot)
+        if (trackerTrigger != null && trackerTrigger.hasShot)
         {
             //Tracker Position
             //Insert arrow pointing towards tracker position

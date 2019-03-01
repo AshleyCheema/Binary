@@ -3123,7 +3123,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnableObjects:
-  - {fileID: 934932069714253868, guid: b700f6b16a4f02c45b4def67484ab4c6, type: 3}
+  - {fileID: 80722652396774936, guid: 4639a6967376c6f4ca6f687a0a1370ad, type: 3}
   - {fileID: 1066272778257627177, guid: f047c080362abf74185f69226c11f510, type: 3}
 --- !u!1 &1878935137
 GameObject:

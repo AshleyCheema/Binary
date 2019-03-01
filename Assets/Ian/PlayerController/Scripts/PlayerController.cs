@@ -6,6 +6,7 @@
  * Edited By: Ian + Ash
  */
 
+using LLAPI;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,10 +23,18 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     public Player player;
 
-    // Start is called before the first frame update
-    void Start()
-    {
+    [SerializeField]
+    protected Rigidbody rb;
 
+    private Client client;
+
+    private Vector3 velocity;
+
+    // Start is called before the first frame update
+    public virtual void Start()
+    {
+        client = FindObjectOfType<Client>();
+        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -45,9 +54,34 @@ public class PlayerController : MonoBehaviour
             currentSpeed = normalSpeed;
         }
 
-        transform.Translate(InputManager.Joystick(player) * currentSpeed * Time.deltaTime);
+        velocity = InputManager.Joystick(player) * currentSpeed * Time.deltaTime;
+        //transform.Translate(InputManager.Joystick(player) * currentSpeed * Time.deltaTime);
+
 
         UpdateDirection();
+
+        //Check if the velocity is not zero
+        if (velocity != Vector3.zero)
+        {
+            //Update server setting for this object
+            NetMsg_PlayerMovement playerMovement = new NetMsg_PlayerMovement();
+            playerMovement.connectId = client.ServerConnectionId;
+            playerMovement.xMove = rb.position.x;
+            playerMovement.yMove = rb.position.y;
+            playerMovement.zMove = rb.position.z;
+
+            client.Send(playerMovement, client.StateUpdateChannel);
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        //Update the position on the rigidbody
+        //this keeps our position in line with collisions/physics
+        if (rb != null)
+        {
+            rb.MovePosition(rb.position + velocity);
+        }
     }
 
     /// <summary>

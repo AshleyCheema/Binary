@@ -21,7 +21,6 @@ public class MercControls : PlayerController
     private float shotCooldown = 5f;
     public float reloadSpeed = 2f;
     private GameObject bullet;
-    private Rigidbody rb;
     [SerializeField]
     private Trigger triggerScript;
     private AudioSource source;
@@ -30,14 +29,15 @@ public class MercControls : PlayerController
     public Abilities sprint;
 
     // Start is called before the first frame update
-    void Start()
+    public override void Start()
     {
+        base.Start();
+
         source = gameObject.GetComponent<AudioSource>();
         cooldown = sprint.cooldown;
         canSprint = sprint.isCooldown;
         speedDuration = sprint.abilityDuration;
         bullet = GameObject.Find("Bullet");
-        rb = bullet.GetComponent<Rigidbody>();
         bullet.SetActive(false);
     }
 
@@ -51,14 +51,17 @@ public class MercControls : PlayerController
         //    sprint.Trigger();
         //}
 
-        if(triggerScript.isStunned)
+        if (triggerScript != null)
         {
-            currentSpeed = reloadSpeed;
-            reloadSpeed -= Time.deltaTime;
-            if(reloadSpeed <= 0)
+            if (triggerScript.isStunned)
             {
-                currentSpeed = normalSpeed;
-                triggerScript.isStunned = false;
+                currentSpeed = reloadSpeed;
+                reloadSpeed -= Time.deltaTime;
+                if (reloadSpeed <= 0)
+                {
+                    currentSpeed = normalSpeed;
+                    triggerScript.isStunned = false;
+                }
             }
         }
 
@@ -68,7 +71,7 @@ public class MercControls : PlayerController
             bullet.SetActive(true);
             bullet.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + 1);
             //walkingSound.SetSourceProperties(source);
-            rb.velocity = transform.forward * 100;
+            bullet.GetComponent<Rigidbody>().velocity = transform.forward * 100;
             noShoot = true;
         }
         if(noShoot)
