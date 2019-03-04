@@ -16,11 +16,12 @@ public class Trigger : MonoBehaviour
     public bool hasShot;
     public bool isDetected;
     public bool isStunned;
-
+    private StunAbility stunAbility;
     private MercControls mercControls;
 
     private void Start()
     {
+        stunAbility = gameObject.GetComponent<StunAbility>();
         mercControls = gameObject.GetComponent<MercControls>();
     }
 
@@ -34,7 +35,7 @@ public class Trigger : MonoBehaviour
                 Debug.Log("SPY DETECTED");
             }
 
-            if(triggerType  == TriggerType.Bullet)
+            if(triggerType == TriggerType.Bullet)
             {
                 hasShot = true;
                 Debug.Log("Shot");
@@ -53,8 +54,11 @@ public class Trigger : MonoBehaviour
         {
             if(triggerType == TriggerType.Stun)
             {
-                isStunned = true;
-                Debug.Log("Flashed");
+                if (stunAbility.stunActive)
+                {
+                    isStunned = true;
+                    Debug.Log("Flashed");
+                }
             }
         }
     }
