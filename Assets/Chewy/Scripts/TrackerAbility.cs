@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using LLAPI;
 public class TrackerAbility : MonoBehaviour
 {
     public Abilities tracker;
@@ -13,11 +13,14 @@ public class TrackerAbility : MonoBehaviour
     private bool trackerDown;
     private Collider deviceCollider;
     private Vector3 trackerPos;
+    protected Client client;
+    private NetMsg_AB_Tracker ab_Tracker = new NetMsg_AB_Tracker();
     //private bool isThrowing;
 
     // Start is called before the first frame update
     void Start()
     {
+        client = FindObjectOfType<Client>();
         cooldown = tracker.cooldown;
         isCooldown = tracker.isCooldown;
         a_Duration = tracker.abilityDuration;
@@ -31,11 +34,12 @@ public class TrackerAbility : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (trackerTrigger != null && trackerTrigger.hasShot)
+        if (trackerTrigger != null && trackerTrigger.isDetected)
         {
             //Tracker Position
             //Insert arrow pointing towards tracker position
             Debug.Log("Detected");
+            ab_Tracker.TrackerTriggered = trackerTrigger.isDetected;
         }
 
         if (Input.GetKeyDown(KeyCode.Q))
@@ -90,6 +94,13 @@ public class TrackerAbility : MonoBehaviour
                     deviceCollider.enabled = true;
                     isCooldown = false;
                     trackerDown = true;
+
+                    #region NetMsg_Tracker
+                    ab_Tracker.ConnectionID = client.ServerConnectionId;
+                    ab_Tracker.TrackerPosition = trackerPos;
+                    ab_Tracker.TrackerObject = trackingDevice;
+                    client.Send(ab_Tracker);
+                    #endregion
                 }
             }
         }

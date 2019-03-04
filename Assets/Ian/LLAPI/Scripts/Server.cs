@@ -324,6 +324,10 @@ namespace LLAPI
                     players[ab_sprint.ConnectionID].moveSpeed = ab_sprint.SprintValue;
                     break;
 
+               //case NetOP.AB_FIRE:
+               //    NetMsg_AB_Fire ab_fire = (NetMsg_AB_Fire)a_netmsg;
+               //    players[ab_fire.ConnectionID].
+
                     /*
                      * foreach(player)
                      *      check if there position is in the radius

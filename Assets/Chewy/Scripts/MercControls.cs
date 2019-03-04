@@ -28,6 +28,7 @@ public class MercControls : PlayerController
 
     public AudioSO walkingSound;
     public Abilities sprint;
+    private NetMsg_AB_Fire ab_Fire = new NetMsg_AB_Fire();
 
     // Start is called before the first frame update
     public override void Start()
@@ -52,6 +53,8 @@ public class MercControls : PlayerController
         //    sprint.Trigger();
         //}
 
+        ab_Fire.Trigger = triggerScript.hasShot;
+
         if (triggerScript != null)
         {
             if (triggerScript.isStunned)
@@ -65,15 +68,23 @@ public class MercControls : PlayerController
                 }
             }
         }
-
-        if(Input.GetKeyDown(KeyCode.Mouse0) && !noShoot)
+        if (Input.GetKeyDown(KeyCode.Mouse0) && !noShoot)
         {
             //Sound/Animation?
             bullet.SetActive(true);
             bullet.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + 1);
-            //walkingSound.SetSourceProperties(source);
             bullet.GetComponent<Rigidbody>().velocity = transform.forward * 100;
+            //walkingSound.SetSourceProperties(source);
             noShoot = true;
+
+            #region NetMsg_Fire
+            ab_Fire.ConnectionID = client.ServerConnectionId;
+            ab_Fire.BulletPosition = bullet.transform.position;
+            ab_Fire.Velocity = bullet.GetComponent<Rigidbody>().velocity;
+            ab_Fire.BulletObject = bullet;
+            client.Send(ab_Fire);
+            #endregion
+
         }
         if(noShoot)
         {
@@ -105,13 +116,12 @@ public class MercControls : PlayerController
         if (Input.GetButton("Sprint") && canSprint)
         {
             buttonPressed = true;
-
-
+            #region NetMsg_Sprint
             NetMsg_AB_Sprint ab_Sprint = new NetMsg_AB_Sprint();
             ab_Sprint.ConnectionID = client.ServerConnectionId;
             ab_Sprint.SprintValue = runningSpeed;
-
             client.Send(ab_Sprint);
+            #endregion
         }
         if (buttonPressed)
         {
