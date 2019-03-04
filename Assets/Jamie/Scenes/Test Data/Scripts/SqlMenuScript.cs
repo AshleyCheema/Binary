@@ -9,4 +9,9 @@ public class SqlMenuScript : MonoBehaviour
     {
         SceneManager.LoadScene(1);
     }
+
+    public void GoToLogin()
+    {
+        SceneManager.LoadScene(2);
+    }
 }
