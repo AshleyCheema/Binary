@@ -340,7 +340,7 @@ MonoBehaviour:
     m_FontSize: 14
     m_FontStyle: 2
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 0
     m_MaxSize: 40
     m_Alignment: 0
     m_AlignByGeometry: 0
@@ -1084,10 +1084,10 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_FontSize: 20
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 2
     m_MaxSize: 40
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -1219,6 +1219,7 @@ GameObject:
   - component: {fileID: 1979353746}
   - component: {fileID: 1979353745}
   - component: {fileID: 1979353744}
+  - component: {fileID: 1979353747}
   m_Layer: 5
   m_Name: NameInputField
   m_TagString: Untagged
@@ -1359,6 +1360,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1979353742}
   m_CullTransparentMesh: 0
+--- !u!114 &1979353747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1979353742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51f6633cdff96ba44839e91cc5ea54fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextField: {fileID: 2094700836}
 --- !u!1 &2073109077
 GameObject:
   m_ObjectHideFlags: 0
@@ -1450,6 +1464,7 @@ GameObject:
   - component: {fileID: 2094700838}
   - component: {fileID: 2094700837}
   - component: {fileID: 2094700836}
+  - component: {fileID: 2094700839}
   m_Layer: 5
   m_Name: PwInputField
   m_TagString: Untagged
@@ -1517,8 +1532,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2094700837}
   m_TextComponent: {fileID: 918127318}
   m_Placeholder: {fileID: 1096956722}
-  m_ContentType: 0
-  m_InputType: 0
+  m_ContentType: 7
+  m_InputType: 2
   m_AsteriskChar: 42
   m_KeyboardType: 0
   m_LineType: 0
@@ -1590,6 +1605,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2094700834}
   m_CullTransparentMesh: 0
+--- !u!114 &2094700839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2094700834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51f6633cdff96ba44839e91cc5ea54fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextField: {fileID: 1979353744}
 --- !u!1 &2103370959
 GameObject:
   m_ObjectHideFlags: 0

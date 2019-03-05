@@ -7,6 +7,10 @@ using TMPro;
 
 public class SqlMenuScript : MonoBehaviour
 {
+    public Button registerButton;
+    public Button loginButton;
+    public Button playButton;
+
     public TMP_Text playerDisplay;
 
     private void Start()
@@ -15,6 +19,10 @@ public class SqlMenuScript : MonoBehaviour
         {
             playerDisplay.text = "Player: " + DBManager.username;
         }
+
+        registerButton.interactable = !DBManager.LoggedIn;
+        loginButton.interactable = !DBManager.LoggedIn;
+        playButton.interactable = DBManager.LoggedIn;
     }
 
     public void GoToRegister()
