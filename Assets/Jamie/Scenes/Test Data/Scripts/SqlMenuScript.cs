@@ -26,4 +26,9 @@ public class SqlMenuScript : MonoBehaviour
     {
         SceneManager.LoadScene(2);
     }
+
+    public void GoToGame()
+    {
+        SceneManager.LoadScene(3);
+    }
 }
