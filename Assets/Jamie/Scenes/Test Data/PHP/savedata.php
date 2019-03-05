@@ -1,6 +1,5 @@
 <?php
-
-	//Connection details: (host, user, password, database-name)
+    //Connection details: (host, user, password, database-name)
 	$con = mysqli_connect('localhost', 'root', 'root', 'unityaccess');
 
   //check that connection happened
@@ -12,10 +11,10 @@
     }
 
     $username = $_POST["name"];
-    $password = $_POST["password"];
+    $newscore = $_POST["score"];
 
     //Check to see if the name already exists.
-    $namecheckquery = "SELECT username, salt, hash, score FROM players WHERE username ='$username'";
+    $namecheckquery = "SELECT username FROM players WHERE username ='$username'";
     $namecheck = mysqli_query($con, $namecheckquery) or die("2: Username check query failed"); //error code #2 = username check query failed.
 
     if (mysqli_num_rows($namecheck) != 1 )
@@ -24,18 +23,9 @@
     	exit();
     }
 
-    //get login info from query
-    $existinginfo = mysqli_fetch_assoc($namecheck);
-    $salt = $existinginfo["salt"];
-    $hash = $existinginfo["hash"];
-  
+    $updatequery = "UPDATE players SET score = '$newscore' WHERE username = '$username'";
+    $result = mysqli_query($con, $updatequery) or die("7: Save Query Failed"); //error code #7 - UPDATE query failed
 
-    $loginhash = crypt($password, $salt);
-    if($hash != $loginhash)
-    {
-    	echo "6: Incorrect Password"; //error code #6 password does not has to match table
-    	exit();
-    }
-
-    echo "0\t" . $existinginfo["score"];
+    echo "0";
+    
 ?>
