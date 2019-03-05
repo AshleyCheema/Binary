@@ -59,14 +59,14 @@ public class StunAbility : MonoBehaviour
             if (abilityDuration <= 0)
             {
                 flash.Play();
-                //#region NetMsg_Stun
-                //NetMsg_AB_Stun ab_Stun = new NetMsg_AB_Stun();
-                //ab_Stun.ConnectionID = client.ServerConnectionId;
-                //ab_Stun.StunObjectIndex = 4;
-                ////ab_Stun.StunParticle
-                //ab_Stun.Stunned = trigger.isStunned;
-                //client.Send(ab_Stun);
-                //#endregion
+                #region NetMsg_Stun
+                NetMsg_AB_Stun ab_Stun = new NetMsg_AB_Stun();
+                ab_Stun.ConnectionID = client.ServerConnectionId;
+                ab_Stun.StunObjectIndex = 4;
+                //ab_Stun.StunParticle
+                ab_Stun.Stunned = trigger.isStunned;
+                client.Send(ab_Stun);
+                #endregion
                 //Flash Effect
             }
             if(abilityDuration <= -1)
