@@ -24,6 +24,7 @@
         public const int AB_FIRE = 19;
         public const int AB_TRACKER = 20;
         public const int AB_STUN = 21;
+        public const int AB_TRIGGER = 22;
 
     }
 

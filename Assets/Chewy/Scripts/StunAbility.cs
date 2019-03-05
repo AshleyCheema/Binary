@@ -13,6 +13,8 @@ public class StunAbility : MonoBehaviour
     protected Client client;
     public Abilities stunAbility;
 
+    public ParticleSystem flash;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,9 +29,9 @@ public class StunAbility : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Q))
         {
-            if (!stunDropped)
+            if (!stunActive)
             {
                 stunG.SetActive(true);
                 stunG.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - 1);
@@ -37,35 +39,40 @@ public class StunAbility : MonoBehaviour
             }
         }
 
-        if(stunDropped)
-        {
-            abilityDuration -= Time.deltaTime;
-
-            if (abilityDuration <= 0)
-            {
-                stunActive = true;
-                abilityDuration = stunAbility.abilityDuration;
-                #region NetMsg_Stun
-                NetMsg_AB_Stun ab_Stun = new NetMsg_AB_Stun();
-                ab_Stun.ConnectionID = client.ServerConnectionId;
-                ab_Stun.StunObject = stunG;
-                //ab_Stun.StunParticle
-                ab_Stun.Stunned = trigger.isStunned;
-                client.Send(ab_Stun);
-                #endregion
-                //Flash Effect
-            }
-        }
-
         if(stunActive)
         {
+            abilityDuration = stunAbility.abilityDuration;
             stunG.SetActive(false);
+            stunDropped = false;
+
             cooldown -= Time.deltaTime;
             if(cooldown <= 0)
             {
-                stunDropped = false;
+                stunActive = false;
             }
 
+        }
+
+        if (stunDropped)
+        {
+            abilityDuration -= Time.deltaTime;
+            if (abilityDuration <= 0)
+            {
+                flash.Play();
+                //#region NetMsg_Stun
+                //NetMsg_AB_Stun ab_Stun = new NetMsg_AB_Stun();
+                //ab_Stun.ConnectionID = client.ServerConnectionId;
+                //ab_Stun.StunObjectIndex = 4;
+                ////ab_Stun.StunParticle
+                //ab_Stun.Stunned = trigger.isStunned;
+                //client.Send(ab_Stun);
+                //#endregion
+                //Flash Effect
+            }
+            if(abilityDuration <= -1)
+            {
+                stunActive = true;
+            }
         }
     }
 }

@@ -15,8 +15,8 @@ namespace LLAPI
         public int ConnectionID { get; set; }
         public Vector3 BulletPosition { get; set; }
         public Vector3 Velocity { get; set; }
-        public GameObject BulletObject { get; set; }
-        public bool Trigger { get; set; }
+        public int BulletObjectIndex { get; set; }
+        //public bool Trigger { get; set; }
     }
 
 }

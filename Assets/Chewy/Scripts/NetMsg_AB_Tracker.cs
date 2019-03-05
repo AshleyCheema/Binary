@@ -14,7 +14,7 @@ namespace LLAPI
 
         public int ConnectionID { get; set; }
         public Vector3 TrackerPosition { get; set; }
-        public GameObject TrackerObject { get; set; }
+        public int TrackerObjectIndex { get; set; }
         public bool TrackerTriggered { get; set; }
     }
 }

@@ -98,7 +98,7 @@ public class TrackerAbility : MonoBehaviour
                     #region NetMsg_Tracker
                     ab_Tracker.ConnectionID = client.ServerConnectionId;
                     ab_Tracker.TrackerPosition = trackerPos;
-                    ab_Tracker.TrackerObject = trackingDevice;
+                    ab_Tracker.TrackerObjectIndex = 3;
                     client.Send(ab_Tracker);
                     #endregion
                 }

@@ -53,7 +53,7 @@ public class MercControls : PlayerController
         //    sprint.Trigger();
         //}
 
-        ab_Fire.Trigger = triggerScript.hasShot;
+        //ab_Fire.Trigger = triggerScript.hasShot;
 
         if (triggerScript != null)
         {
@@ -81,7 +81,7 @@ public class MercControls : PlayerController
             ab_Fire.ConnectionID = client.ServerConnectionId;
             ab_Fire.BulletPosition = bullet.transform.position;
             ab_Fire.Velocity = bullet.GetComponent<Rigidbody>().velocity;
-            ab_Fire.BulletObject = bullet;
+            ab_Fire.BulletObjectIndex = 2;
             client.Send(ab_Fire);
             #endregion
 

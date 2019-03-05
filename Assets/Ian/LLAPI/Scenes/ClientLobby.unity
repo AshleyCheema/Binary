@@ -3125,6 +3125,9 @@ MonoBehaviour:
   spawnableObjects:
   - {fileID: 80722652396774936, guid: 4639a6967376c6f4ca6f687a0a1370ad, type: 3}
   - {fileID: 1066272778257627177, guid: f047c080362abf74185f69226c11f510, type: 3}
+  - {fileID: 3126095382192189259, guid: 5d13507df2cc3c54883887ba7098ab8f, type: 3}
+  - {fileID: 692459277777247403, guid: 47454f4b52d2c0648a965273116261d8, type: 3}
+  - {fileID: 1170343424564217715, guid: f15e1cd2d15d91b4d82e9884b895c41d, type: 3}
 --- !u!1001 &1853717419
 PrefabInstance:
   m_ObjectHideFlags: 0
