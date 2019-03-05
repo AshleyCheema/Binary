@@ -15,7 +15,7 @@
     $password = $_POST["password"];
 
     //Check to see if the name already exists.
-    $namecheckquery = "SELECT username from players WHERE username ='$username";
+    $namecheckquery = "SELECT username FROM players WHERE username = '$username' ";
     $namecheck = mysqli_query($con, $namecheckquery) or die("2: Username check query failed"); //error code #2 = username check query failed.
 
     if (mysqli_num_rows($namecheck) > 0 )
