@@ -12,7 +12,6 @@ using UnityEngine;
 
 public class MercControls : PlayerController
 {
-
     private float cooldown;
     private float speedDuration;
     private bool canSprint;
@@ -24,9 +23,12 @@ public class MercControls : PlayerController
     private GameObject bullet;
     [SerializeField]
     private Trigger triggerScript;
+    //Audio
     private AudioSource source;
-
     public AudioSO walkingSound;
+    public AudioSO fireSound;
+    public AudioSO burstRunSound;
+
     public Abilities sprint;
     private NetMsg_AB_Fire ab_Fire = new NetMsg_AB_Fire();
 
@@ -76,6 +78,7 @@ public class MercControls : PlayerController
             bullet.GetComponent<Rigidbody>().velocity = transform.forward * 100;
             //walkingSound.SetSourceProperties(source);
             noShoot = true;
+            fireSound.SetSourceProperties(source);
 
             #region NetMsg_Fire
             ab_Fire.ConnectionID = client.ServerConnectionId;

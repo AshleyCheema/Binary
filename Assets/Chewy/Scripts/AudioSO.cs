@@ -19,6 +19,12 @@ public class AudioSO : ScriptableObject
     [Range(0f, 1f)]
     public float spatialBlend = 1f;
 
+    public AudioRolloffMode rolloffMode;
+
+    public float audioMinDistance;
+
+    public float audioMaxDistance;
+
     public void SetSourceProperties(AudioSource _audioSource)
     {
         _audioSource.clip = clip[Random.Range(0, clip.Length)];
@@ -26,5 +32,8 @@ public class AudioSO : ScriptableObject
         _audioSource.pitch = pitch;
         _audioSource.loop = loop;
         _audioSource.spatialBlend = spatialBlend;
+        _audioSource.rolloffMode = rolloffMode;
+        _audioSource.minDistance = audioMinDistance;
+        _audioSource.maxDistance = audioMaxDistance;
     }
 }

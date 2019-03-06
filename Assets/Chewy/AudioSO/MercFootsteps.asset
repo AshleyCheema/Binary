@@ -10,11 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9507256ebeee2fa44adc3020e4bf9e01, type: 3}
-  m_Name: MercFootstepsHeavy
+  m_Name: MercFootsteps
   m_EditorClassIdentifier: 
-  AudioName: 
-  clip: []
+  AudioName: MercFootstepsLight
+  clip:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   volume: 1
   pitch: 1
   loop: 0
   spatialBlend: 1
+  rolloffMode: 0
+  audioMinDistance: 0
+  audioMaxDistance: 0
