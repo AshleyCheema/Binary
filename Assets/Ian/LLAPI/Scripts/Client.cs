@@ -71,12 +71,13 @@ namespace LLAPI
         private Status currentStatus = Status.Lobby;
 
         [SerializeField]
-        private GameObject[] spawnableObjects;
+        private SpawnableObjects spawnableObjects;
 
         private Dictionary<int, Player> players = new Dictionary<int, Player>();
         private Dictionary<int, Network_Object> networkObjects = new Dictionary<int, Network_Object>();
 
         #endregion
+
         private void Start()
         {
             if (instance == null)
@@ -293,7 +294,7 @@ namespace LLAPI
 
                     localPlayer = new Player();
                     localPlayer.connectionId = serverConnectionId;
-                    localPlayer.lobbyAvater = Instantiate(spawnableObjects[1], CS_LobbyManager.Instance.transform);
+                    localPlayer.lobbyAvater = Instantiate(spawnableObjects.ObjectsToSpawn[1], CS_LobbyManager.Instance.transform);
 
                     CS_LobbyManager.Instance.AddLobbyPlayer(localPlayer);
                     break;
@@ -306,7 +307,7 @@ namespace LLAPI
                     p.playerName = sp.PlayerName;
                     p.team = sp.Team;
 
-                    p.lobbyAvater = Instantiate(spawnableObjects[1], CS_LobbyManager.Instance.transform);
+                    p.lobbyAvater = Instantiate(spawnableObjects.ObjectsToSpawn[1], CS_LobbyManager.Instance.transform);
                     p.lobbyAvater.transform.localScale = new Vector3(1, 1, 1);
 
                     players.Add(p.connectionId, p);
@@ -353,7 +354,7 @@ namespace LLAPI
                     {
                         if (key.ConnectionID == serverConnectionId)
                         {
-                            localPlayer.avater = Instantiate(spawnableObjects[key.ObjectID], new Vector3(0, 10, 0), Quaternion.identity);
+                            localPlayer.avater = Instantiate(spawnableObjects.ObjectsToSpawn[key.ObjectID], new Vector3(0, 10, 0), Quaternion.identity);
                             //localPlayer.avater.GetComponent<PlayerController>().client = this;
 
                             Camera.main.GetComponent<CameraScript>().SetTarget(localPlayer.avater.transform);
@@ -363,8 +364,9 @@ namespace LLAPI
                         else
                         {
                             players[key.ConnectionID].avater =
-                             Instantiate(spawnableObjects[key.ObjectID], new Vector3(0, 10, 0), Quaternion.identity);
-                            players[key.ConnectionID].avater.GetComponent<PlayerController>().enabled = false;
+                             Instantiate(spawnableObjects.ObjectsToSpawn[key.ObjectID], new Vector3(0, 10, 0), Quaternion.identity);
+                            players[key.ConnectionID].avater.GetComponent<MercControls>().enabled = false;
+                            players[key.ConnectionID].avater.GetComponent<TrackerAbility>().enabled = false;
                         }
                         index += 1;
                     }

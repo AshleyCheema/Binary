@@ -1,6 +1,7 @@
 ﻿/*
  * Author: Ian Hudson
- * Description: 
+ * Description: This script is for the player's object when
+ * first connecting to the server. (Connection object)
  * Created: 06/02/2019
  * Edited By: Ian
  */
@@ -12,24 +13,31 @@ using UnityEngine.Networking;
 
 public class PlayerObject_Net : NetworkBehaviour
 {
+    //Sync the id of this player
     [SyncVar]
     public string id;
 
+    //Player "Avater" object
     [SerializeField]
     private GameObject playerObjectPrefab;
+    //Player camera prefab
     [SerializeField]
     private Camera playerCameraPrefab;
 
+    //Sync the "Avater" of this player
     [SerializeField]
     [SyncVar]
     private GameObject playerObject;
 
+    //Camera for this player
     [SerializeField]
     private Camera playerCamera;
 
+    //Player name
     [SerializeField]
     private string playerName;
 
+    //Player ID
     [SyncVar]
     int playerId = 1;
 
@@ -58,12 +66,16 @@ public class PlayerObject_Net : NetworkBehaviour
     [Command]
     private void CmdSpawnMyPlayer()
     {
+        //If the connection to the server is ready.
+        //Then spawn the player
         if (connectionToClient.isReady)
         {
             CmdSpawn();
         }
         else
         {
+            //Connection to the server is not ready 
+            //wait
             StartCoroutine(WaitForRead());
         }
     }
@@ -88,7 +100,9 @@ public class PlayerObject_Net : NetworkBehaviour
     [Command]
     void CmdSpawn()
     {
+        //Find all the spawn points
         GameObject[] spawnPoints = GameObject.FindGameObjectsWithTag("Spawn Points Spy's");
+        //Instantiate the player object/avater
         GameObject tempPlayer = Instantiate(playerObjectPrefab);
 
         //tempPlayer.GetComponentInChildren<PlayerController_Net>().PlayerObject = this;
@@ -171,6 +185,11 @@ public class PlayerObject_Net : NetworkBehaviour
         playerName = a_name;
     }
 
+    /// <summary>
+    /// Set an objects authority
+    /// </summary>
+    /// <param name="a_toBeSet"></param>
+    /// <param name="a_client"></param>
     public static void SetAuthority(GameObject a_toBeSet, GameObject a_client)
     {
         if (NetworkServer.active)
@@ -178,6 +197,12 @@ public class PlayerObject_Net : NetworkBehaviour
             a_toBeSet.GetComponent<NetworkIdentity>().AssignClientAuthority(a_client.GetComponent<NetworkIdentity>().connectionToClient);
         }
     }
+
+    /// <summary>
+    /// Revoke the authority from an object
+    /// </summary>
+    /// <param name="a_toBeSet"></param>
+    /// <param name="a_client"></param>
     public static void RevokeAuthority(GameObject a_toBeSet, GameObject a_client)
     {
         if (NetworkServer.active)

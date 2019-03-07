@@ -22,6 +22,19 @@ namespace LLAPI
         [SerializeField]
         private bool runRecive = false;
 
+        //has this capture point been captured
+        public bool IsCaptured
+        {
+            get
+            {
+                if((int)captureAmount == 100 || captureAmount > 99.9f)
+                {
+                    return true;
+                }
+                return false;
+            }
+        }
+
         /// <summary>
         /// Update
         /// </summary>
@@ -58,6 +71,7 @@ namespace LLAPI
                 NetMsg_CP_Capture cp = (NetMsg_CP_Capture)a_netMsg;
 
                 isBeingCaptured = cp.IsBeingCaptured;
+                capturePercentage = cp.Percentage;
 
                 if (isBeingCaptured)
                 {
@@ -87,6 +101,7 @@ namespace LLAPI
                     NetMsg_CP_Capture capture = new NetMsg_CP_Capture();
                     capture.ID = ID;
                     capture.IsBeingCaptured = isBeingCaptured;
+                    capture.Percentage = (int)capturePercentage;
 
                     Server.Instance.Send(capture, Server.Instance.ReliableChannel);
                 }
@@ -110,6 +125,7 @@ namespace LLAPI
                     NetMsg_CP_Capture capture = new NetMsg_CP_Capture();
                     capture.ID = ID;
                     capture.IsBeingCaptured = isBeingCaptured;
+                    capture.Percentage = (int)capturePercentage;
 
                     Server.Instance.Send(capture, Server.Instance.ReliableChannel);
                 }

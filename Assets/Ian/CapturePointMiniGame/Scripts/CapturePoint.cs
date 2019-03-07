@@ -1,6 +1,7 @@
 ﻿/*
  * Author: Ian Hudson
- * Description: 
+ * Description: HLAPI - This is a capture point object. This object keeps track as to if it has 
+ * been captured.
  * Created: 19/02/2019
  * Edited By: Ian
  */

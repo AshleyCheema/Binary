@@ -13,5 +13,6 @@ namespace LLAPI
         }
 
         public bool IsBeingCaptured { set; get; }
+        public int Percentage { get; set; }
     }
 }

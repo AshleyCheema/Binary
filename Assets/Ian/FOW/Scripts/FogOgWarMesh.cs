@@ -1,4 +1,10 @@
-﻿using System.Collections;
+﻿/*
+ * Author: Ian Hudson
+ * Description: Create a mesh which can be used as a mask for the fog of war
+ * Created: 04/03/2019
+ * Edited By: Ian
+ */
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

@@ -42,7 +42,10 @@ public class MercControls : PlayerController
         canSprint = sprint.isCooldown;
         speedDuration = sprint.abilityDuration;
         bullet = GameObject.Find("Bullet");
-        bullet.SetActive(false);
+        if (bullet != null)
+        {
+            bullet.SetActive(false);
+        }
     }
 
     // Update is called once per frame
@@ -73,12 +76,18 @@ public class MercControls : PlayerController
         if (Input.GetKeyDown(KeyCode.Mouse0) && !noShoot)
         {
             //Sound/Animation?
-            bullet.SetActive(true);
-            bullet.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + 1);
-            bullet.GetComponent<Rigidbody>().velocity = transform.forward * 100;
+            if (bullet != null)
+            {
+                bullet.SetActive(true);
+                bullet.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + 1);
+                bullet.GetComponent<Rigidbody>().velocity = transform.forward * 100;
+            }
             //walkingSound.SetSourceProperties(source);
             noShoot = true;
-            fireSound.SetSourceProperties(source);
+            if (fireSound != null)
+            {
+                fireSound.SetSourceProperties(source);
+            }
 
             #region NetMsg_Fire
             ab_Fire.ConnectionID = client.ServerConnectionId;
@@ -96,7 +105,10 @@ public class MercControls : PlayerController
             currentSpeed = reloadSpeed;
             if (shotCooldown <= 0)
             {
-                bullet.SetActive(false);
+                if (bullet != null)
+                {
+                    bullet.SetActive(false);
+                }
                 shotCooldown = 5f;
                 noShoot = false;
             }
