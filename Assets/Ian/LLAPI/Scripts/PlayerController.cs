@@ -44,7 +44,7 @@ namespace LLAPI
                 serverVelocity.yMove = rb.position.y;//rawVelocity.z;
                 serverVelocity.zMove = rb.position.z;//rawVelocity.z;
 
-                client.Send(serverVelocity, Client.Instance.StateUpdateChannel);
+                //client.Send(serverVelocity, Client.Instance.StateUpdateChannel);
             }
             else
             {

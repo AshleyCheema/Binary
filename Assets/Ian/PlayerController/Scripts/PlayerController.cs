@@ -80,7 +80,7 @@ public class PlayerController : MonoBehaviour
         //this keeps our position in line with collisions/physics
         if (rb != null)
         {
-            rb.MovePosition(rb.position + velocity);
+            rb.MovePosition(rb.position + velocity * currentSpeed * Time.fixedDeltaTime);
         }
     }
 

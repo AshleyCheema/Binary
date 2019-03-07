@@ -57,7 +57,7 @@ namespace LLAPI
         private Status currentStatus = Status.Lobby;
 
         [SerializeField]
-        private GameObject playerPrefab;
+        private SpawnableObjects spawnableObjects;
         private Dictionary<int, Player> players = new Dictionary<int, Player>();
 
         private Dictionary<int, Network_Object> networkObjects = new Dictionary<int, Network_Object>();
@@ -380,7 +380,7 @@ namespace LLAPI
                 NetMsg_ClientLoadSceneLB sceneLoadLB = new NetMsg_ClientLoadSceneLB();
                 sceneLoadLB.ConnectionID = players[key].connectionId;
                 sceneLoadLB.SceneToLoad = 2;
-                Send(sceneLoadLB, reliableChannel);
+                Send(sceneLoadLB, reliableChannel, players[key].connectionId);
             }
         }
 
@@ -462,10 +462,9 @@ namespace LLAPI
 
         private void SpawnAllPlayers()
         {
+            NetMsg_SpawnObject spawnNewPlayer = new NetMsg_SpawnObject();
             foreach (var pKey in players.Keys)
             {
-                NetMsg_SpawnObject spawnNewPlayer = new NetMsg_SpawnObject();
-
                 Vector3 spawnPosition = Vector3.zero;
 
                 BoxCollider spySpawnTrigger = GameObject.Find("Spawn_Spy_Area").GetComponent<BoxCollider>();
@@ -493,11 +492,17 @@ namespace LLAPI
                 });
 
                 //Spawn server avater
-                players[pKey].avater = Instantiate(playerPrefab,
+                players[pKey].avater = Instantiate(spawnableObjects.ObjectsToSpawn[0],
                                         spawnPosition,
                                         Quaternion.identity);
+                players[pKey].avater.GetComponent<MercControls>().enabled = false;
 
-                if(players[pKey].team == Team.Spy)
+                if (players[pKey].avater.GetComponent<TrackerAbility>())
+                {
+                    players[pKey].avater.GetComponent<TrackerAbility>().enabled = false;
+                }
+
+                if (players[pKey].team == Team.Spy)
                 {
                     players[pKey].avater.tag = "Spy";
                 }
@@ -536,25 +541,26 @@ namespace LLAPI
                 Send(spawnNewPlayer, reliableChannel, pKey);
                 */
             }
-            //Add all other players
-            foreach (var key in players.Keys)
-            {
-                NetMsg_SpawnObject spawnNewPlayer = new NetMsg_SpawnObject();
 
-                spawnNewPlayer.ObjectsToSpawn.Add(new SpawnableObject
-                {
-                    ConnectionID = key,
-                    ObjectID = 0,
-                    XPos = players[key].avater.GetComponent<Rigidbody>().position.x,
-                    YPos = players[key].avater.GetComponent<Rigidbody>().position.y,
-                    ZPos = players[key].avater.GetComponent<Rigidbody>().position.z,
-                    XRot = 0,
-                    YRot = 0,
-                    ZRot = 0
-                });
-                //Tell the client it self to spawn
-                Send(spawnNewPlayer, reliableChannel, key);
-            }
+            Send(spawnNewPlayer, reliableChannel);
+            //Add all other players
+            //foreach (var key in players.Keys)
+            //{
+            //    NetMsg_SpawnObject spawnNewPlayer = new NetMsg_SpawnObject();
+            //
+            //    spawnNewPlayer.ObjectsToSpawn.Add(new SpawnableObject
+            //    {
+            //        ConnectionID = key,
+            //        ObjectID = 0,
+            //        XPos = players[key].avater.GetComponent<Rigidbody>().position.x,
+            //        YPos = players[key].avater.GetComponent<Rigidbody>().position.y,
+            //        ZPos = players[key].avater.GetComponent<Rigidbody>().position.z,
+            //        XRot = 0,
+            //        YRot = 0,
+            //        ZRot = 0
+            //    });
+            //    //Tell the client it self to spawn
+            //}
         }
 
         private void OnDisconnect(int a_connectionId)

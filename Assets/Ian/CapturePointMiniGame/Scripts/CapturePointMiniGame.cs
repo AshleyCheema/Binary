@@ -1,6 +1,7 @@
 ﻿/*
  * Author: Ian Hudson
- * Description: 
+ * Description: HLAPI - This script is used for a mini game which is shown to the player.
+ * The mini game is based on Simon Says.
  * Created: 20/02/2019
  * Edited By: Ian
  */

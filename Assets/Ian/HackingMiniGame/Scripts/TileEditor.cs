@@ -1,8 +1,9 @@
 ﻿/*
- * 
- * Tile Editor class. Used in the editor to setup the hacking mini game.
- * 
- */
+* Author: Ian Hudson
+* Description: Tile Editor class. Used in the editor to setup the hacking mini game.
+* Created: 05/02/2019
+* Edited By: Ian
+*/
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

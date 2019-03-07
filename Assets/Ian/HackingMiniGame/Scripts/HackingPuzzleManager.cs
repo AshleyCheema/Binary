@@ -1,10 +1,10 @@
 ﻿/*
- * Hacking mini game maanger. 
- * This class will handle what should happen when a hacking mini game is displayed.
- * This class currently should be used per a canvas
- * 
- */
-
+* Author: Ian Hudson
+* Description: Hacking mini game manager. This class will handle what should happen when a hacking mini game is displayed.
+* This class currently should be used per a canvas
+* Created: 05/02/2019
+* Edited By: Ian
+*/
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -179,7 +179,7 @@ public class HackingPuzzleManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Return a list of tiles which are neigbours and valid 
+    /// Return a list of tiles which are neighbors and valid 
     /// </summary>
     /// <param name="a_tile"></param>
     /// <returns></returns>

@@ -1,33 +1,47 @@
-﻿using System.Collections;
+﻿/*
+ * Author: Ian Hudson
+ * Description: Setup a projector
+ * Created: 04/03/2019
+ * Edited By: Ian
+ */
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class FogProjector : MonoBehaviour
 {
+    //Projector material
     [SerializeField]
     private Material projectorMaterial;
+    //Blur material
     [SerializeField]
     private Material blurMat;
 
+    //Blend speed. How fast to blend the two materials
     [SerializeField]
     private float blendSpeed;
+    //Texture Scale. What is the scale of the texture
     [SerializeField]
     private int textureScale;
 
+    //Fog Texture. Fog of war texture
     [SerializeField]
     private RenderTexture fogTexture;
 
+    //Previous texture 
     private RenderTexture prevTexture;
+    //current texture
     private RenderTexture currTexture;
+    //projector
     [SerializeField]
     private Projector projector;
 
+    //Blend Amount
     private float blendAmount;
 
     // Start is called before the first frame update
     void Awake()
     {
-        //projector = GetComponent();
         projector.enabled = true;
 
         blurMat.SetVector("_Parameter", new Vector4(1, -1, 0, 0));
@@ -45,6 +59,10 @@ public class FogProjector : MonoBehaviour
         StartNewBlend();
     }
 
+    /// <summary>
+    /// Generate a new render texture
+    /// </summary>
+    /// <returns></returns>
     RenderTexture GenerateTexture()
     {
         RenderTexture rt = new RenderTexture(
@@ -58,6 +76,9 @@ public class FogProjector : MonoBehaviour
         return rt;
     }
 
+    /// <summary>
+    /// Start a blend between the textures
+    /// </summary>
     public void StartNewBlend()
     {
         StopCoroutine(BlendFog());
@@ -82,6 +103,10 @@ public class FogProjector : MonoBehaviour
         RenderTexture.ReleaseTemporary(temp);
     }
 
+    /// <summary>
+    /// Increase the blend 
+    /// </summary>
+    /// <returns></returns>
     IEnumerator BlendFog()
     {
         while (blendAmount < 1)

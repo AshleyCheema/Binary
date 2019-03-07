@@ -1,9 +1,9 @@
 ﻿/*
- * 
- * Tile object for the hacking mini game.
- * 
- */
-
+* Author: Ian Hudson
+* Description: Tile object for the hacking mini game.
+* Created: 05/02/2019
+* Edited By: Ian
+*/
 using UnityEngine;
 using UnityEngine.UI;
 
