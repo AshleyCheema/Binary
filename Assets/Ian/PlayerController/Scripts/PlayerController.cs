@@ -54,9 +54,9 @@ public class PlayerController : MonoBehaviour
             currentSpeed = normalSpeed;
         }
 
-        velocity = InputManager.Joystick(player) * currentSpeed * Time.deltaTime;
-        //transform.Translate(InputManager.Joystick(player) * currentSpeed * Time.deltaTime);
+        velocity = InputManager.Joystick(player);
 
+        Quaternion oldRot = transform.rotation;
 
         UpdateDirection();
 
@@ -71,6 +71,19 @@ public class PlayerController : MonoBehaviour
             playerMovement.zMove = rb.position.z;
 
             client.Send(playerMovement, client.StateUpdateChannel);
+        }
+
+        //Check if the rotation has changed
+        if(oldRot != transform.rotation)
+        {
+            //Update server seting for this object
+            NetMsg_PlayerRotation playerRotation = new NetMsg_PlayerRotation();
+            playerRotation.ConnectionId = client.ServerConnectionId;
+            playerRotation.XRot = transform.rotation.x;
+            playerRotation.YRot = transform.rotation.y;
+            playerRotation.ZRot = transform.rotation.z;
+
+            client.Send(playerRotation, client.StateUpdateChannel);
         }
     }
 
