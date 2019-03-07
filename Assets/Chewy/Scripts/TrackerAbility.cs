@@ -14,7 +14,6 @@ public class TrackerAbility : MonoBehaviour
     private Collider deviceCollider;
     private Vector3 trackerPos;
     protected Client client;
-    private NetMsg_AB_Tracker ab_Tracker = new NetMsg_AB_Tracker();
     //private bool isThrowing;
 
     // Start is called before the first frame update
@@ -39,7 +38,7 @@ public class TrackerAbility : MonoBehaviour
             //Tracker Position
             //Insert arrow pointing towards tracker position
             Debug.Log("Detected");
-            ab_Tracker.TrackerTriggered = trackerTrigger.isDetected;
+            //ab_Tracker.TrackerTriggered = trackerTrigger.isDetected;
         }
 
         if (Input.GetKeyDown(KeyCode.Q))
@@ -96,8 +95,11 @@ public class TrackerAbility : MonoBehaviour
                     trackerDown = true;
 
                     #region NetMsg_Tracker
+                    NetMsg_AB_Tracker ab_Tracker = new NetMsg_AB_Tracker();
                     ab_Tracker.ConnectionID = client.ServerConnectionId;
-                    ab_Tracker.TrackerPosition = trackerPos;
+                    ab_Tracker.TrackerPositionX = trackerPos.x;
+                    ab_Tracker.TrackerPositionY = trackerPos.y;
+                    ab_Tracker.TrackerPositionZ = trackerPos.z;
                     ab_Tracker.TrackerObjectIndex = 3;
                     client.Send(ab_Tracker);
                     #endregion

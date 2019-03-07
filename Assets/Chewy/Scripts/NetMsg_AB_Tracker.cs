@@ -13,7 +13,11 @@ namespace LLAPI
         }
 
         public int ConnectionID { get; set; }
-        public Vector3 TrackerPosition { get; set; }
+
+        public float TrackerPositionX { get; set; }
+        public float TrackerPositionY { get; set; }
+        public float TrackerPositionZ { get; set; }
+
         public int TrackerObjectIndex { get; set; }
         public bool TrackerTriggered { get; set; }
     }
