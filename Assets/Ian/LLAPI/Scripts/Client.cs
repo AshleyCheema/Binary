@@ -354,7 +354,12 @@ namespace LLAPI
                     {
                         if (key.ConnectionID == serverConnectionId)
                         {
-                            localPlayer.avater = Instantiate(spawnableObjects.ObjectsToSpawn[key.ObjectID], new Vector3(0, 10, 0), Quaternion.identity);
+                            localPlayer.avater = Instantiate(spawnableObjects.ObjectsToSpawn[key.ObjectID], new Vector3(spawnObject.ObjectsToSpawn[key.ObjectID].XPos,
+                                                                                                                        spawnObject.ObjectsToSpawn[key.ObjectID].YPos, 
+                                                                                                                        spawnObject.ObjectsToSpawn[key.ObjectID].ZPos), 
+                                                                                                                        Quaternion.Euler(spawnObject.ObjectsToSpawn[key.ObjectID].XRot,
+                                                                                                                        spawnObject.ObjectsToSpawn[key.ObjectID].YRot,
+                                                                                                                        spawnObject.ObjectsToSpawn[key.ObjectID].ZRot));
                             //localPlayer.avater.GetComponent<PlayerController>().client = this;
                             localPlayer.avater.tag = (localPlayer.team == Team.Merc) ? "Merc" : "Spy";
 
@@ -365,7 +370,12 @@ namespace LLAPI
                         else
                         {
                             players[key.ConnectionID].avater =
-                             Instantiate(spawnableObjects.ObjectsToSpawn[key.ObjectID], new Vector3(0, 10, 0), Quaternion.identity);
+                             Instantiate(spawnableObjects.ObjectsToSpawn[key.ObjectID], new Vector3(spawnObject.ObjectsToSpawn[key.ObjectID].XPos,
+                                                                                                    spawnObject.ObjectsToSpawn[key.ObjectID].YPos,
+                                                                                                    spawnObject.ObjectsToSpawn[key.ObjectID].ZPos), 
+                                                                                                    Quaternion.Euler(spawnObject.ObjectsToSpawn[key.ObjectID].XRot,
+                                                                                                    spawnObject.ObjectsToSpawn[key.ObjectID].YRot,
+                                                                                                    spawnObject.ObjectsToSpawn[key.ObjectID].ZRot));
                             players[key.ConnectionID].avater.GetComponent<MercControls>().enabled = false;
                             players[key.ConnectionID].avater.GetComponent<TrackerAbility>().enabled = false;
                         }
@@ -391,6 +401,19 @@ namespace LLAPI
                         //players[pm.connectId].transform.position = new Vector3(pm.xMove, 0.5f, pm.yMove);
                         players[pm.connectId].avater.GetComponent<Rigidbody>().MovePosition(Vector3.Lerp(players[pm.connectId].avater.GetComponent<Rigidbody>().position, new Vector3(pm.xMove, pm.yMove, pm.zMove), Time.deltaTime * 10));
                     }
+                    break;
+
+                case NetOP.ROTATION:
+                    NetMsg_PlayerRotation playerRotation = (NetMsg_PlayerRotation)a_netmsg;
+                    if (playerRotation.ConnectionId == serverConnectionId)
+                    {
+                        //IT'S ME
+                    }
+                    else
+                    {
+                        players[playerRotation.ConnectionId].avater.transform.rotation = new Quaternion(playerRotation.XRot, playerRotation.YRot, playerRotation.ZRot, 0.0f);
+                    }
+
                     break;
 
                 //case NetOP.CP_CAPTURE:

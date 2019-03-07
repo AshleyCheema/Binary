@@ -310,8 +310,13 @@ namespace LLAPI
                     break;
 
                 case NetOP.PLAYERMOVEMENT:
-                    NetMsg_PlayerMovement movement = a_netmsg as NetMsg_PlayerMovement;
+                    NetMsg_PlayerMovement movement = (NetMsg_PlayerMovement)a_netmsg;
                     MoveObject(movement.xMove, movement.yMove, movement.zMove, players[connectionId].avater, connectionId);
+                    break;
+
+                case NetOP.ROTATION:
+                    NetMsg_PlayerRotation rotation = (NetMsg_PlayerRotation)a_netmsg;
+                    RotateObject(rotation, connectionId);
                     break;
 
                 case NetOP.NETWORK_OBJECT:
@@ -579,6 +584,14 @@ namespace LLAPI
             Send(dis, reliableChannel, a_connectionId, false);
         }
 
+        /// <summary>
+        /// Move an object 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="z"></param>
+        /// <param name="obj"></param>
+        /// <param name="a_connectionId"></param>
         private void MoveObject(float x, float y, float z, GameObject obj, int a_connectionId)
         {
             //if (!fixedUpdateMovement.ContainsKey(a_connectionId))
@@ -601,6 +614,24 @@ namespace LLAPI
             pm.connectId = a_connectionId;
             //
             //Send(pm, reliableChannel, a_connectionId);
+            Send(pm, unreliableChannel, a_connectionId, false);
+        }
+
+        /// <summary>
+        /// Rotate an object 
+        /// </summary>
+        /// <param name="a_msg"></param>
+        /// <param name="a_connectionId"></param>
+        private void RotateObject(NetMsg_PlayerRotation a_msg, int a_connectionId)
+        {
+            players[a_connectionId].avater.transform.rotation = new Quaternion(a_msg.XRot, a_msg.YRot, a_msg.ZRot, 1.0f);
+
+            NetMsg_PlayerRotation pm = new NetMsg_PlayerRotation();
+            pm.ConnectionId = a_connectionId;
+            pm.XRot = a_msg.XRot;
+            pm.YRot = a_msg.YRot;
+            pm.ZRot = a_msg.ZRot;
+
             Send(pm, unreliableChannel, a_connectionId, false);
         }
 
