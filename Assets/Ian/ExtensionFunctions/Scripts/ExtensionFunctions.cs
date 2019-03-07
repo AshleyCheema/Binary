@@ -60,4 +60,11 @@ public static class ExtensionFunctions
     {
         return new Vector3(a_object.XPos, a_object.YPos, a_object.ZPos);
     }
+
+    public static void SetVector3(Vector3 a_input, float a_x, float a_y, float a_z)
+    {
+        a_x = a_input.x;
+        a_y = a_input.y;
+        a_z = a_input.z;
+    }
 }

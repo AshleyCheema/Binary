@@ -13,8 +13,15 @@ namespace LLAPI
         }
 
         public int ConnectionID { get; set; }
-        public Vector3 BulletPosition { get; set; }
-        public Vector3 Velocity { get; set; }
+
+        public float BulletPositionX { get; set; }
+        public float BulletPositionY { get; set; }
+        public float BulletPositionZ { get; set; }
+
+        public float VelocityX { get; set; }
+        public float VelocityY { get; set; }
+        public float VelocityZ { get; set; }
+
         public int BulletObjectIndex { get; set; }
         //public bool Trigger { get; set; }
     }
