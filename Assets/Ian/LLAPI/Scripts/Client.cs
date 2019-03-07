@@ -356,6 +356,7 @@ namespace LLAPI
                         {
                             localPlayer.avater = Instantiate(spawnableObjects.ObjectsToSpawn[key.ObjectID], new Vector3(0, 10, 0), Quaternion.identity);
                             //localPlayer.avater.GetComponent<PlayerController>().client = this;
+                            localPlayer.avater.tag = (localPlayer.team == Team.Merc) ? "Merc" : "Spy";
 
                             Camera.main.GetComponent<CameraScript>().SetTarget(localPlayer.avater.transform);
                             //Camera.main.transform.position = localPlayer.avater.transform.position; //+ new Vector3(-15, 33, -15);

@@ -54,7 +54,7 @@ public class PlayerController : MonoBehaviour
             currentSpeed = normalSpeed;
         }
 
-        velocity = InputManager.Joystick(player) * currentSpeed * Time.deltaTime;
+        velocity = InputManager.Joystick(player);
         //transform.Translate(InputManager.Joystick(player) * currentSpeed * Time.deltaTime);
 
 

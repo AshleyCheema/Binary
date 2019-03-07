@@ -133,6 +133,8 @@ MonoBehaviour:
   reloadSpeed: 2
   triggerScript: {fileID: 0}
   walkingSound: {fileID: 0}
+  fireSound: {fileID: 0}
+  burstRunSound: {fileID: 0}
   sprint: {fileID: 11400000, guid: 9c139523592586d4aa0d7eff0ba7f97f, type: 2}
 --- !u!114 &80722652396774931
 MonoBehaviour:
@@ -247,6 +249,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7038928057084140508}
+  - component: {fileID: 7592974964240436822}
   m_Layer: 11
   m_Name: FOW
   m_TagString: Untagged
@@ -262,13 +265,25 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5169024955201589156}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 4, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8293209663376350654}
   m_Father: {fileID: 80722652396774930}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7592974964240436822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5169024955201589156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98b02eb2fe13dc1469c8efd9d3f7bea0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5619185600533170801
 GameObject:
   m_ObjectHideFlags: 0
