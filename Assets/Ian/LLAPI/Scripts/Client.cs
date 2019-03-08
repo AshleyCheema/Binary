@@ -411,7 +411,7 @@ namespace LLAPI
                     }
                     else
                     {
-                        players[playerRotation.ConnectionId].avater.transform.rotation = new Quaternion(playerRotation.XRot, playerRotation.YRot, playerRotation.ZRot, 0.0f);
+                        players[playerRotation.ConnectionId].avater.transform.rotation = Quaternion.Euler(playerRotation.XRot, playerRotation.YRot, playerRotation.ZRot);
                     }
 
                     break;

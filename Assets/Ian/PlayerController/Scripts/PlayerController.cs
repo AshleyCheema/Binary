@@ -79,9 +79,9 @@ public class PlayerController : MonoBehaviour
             //Update server seting for this object
             NetMsg_PlayerRotation playerRotation = new NetMsg_PlayerRotation();
             playerRotation.ConnectionId = client.ServerConnectionId;
-            playerRotation.XRot = transform.rotation.x;
-            playerRotation.YRot = transform.rotation.y;
-            playerRotation.ZRot = transform.rotation.z;
+            playerRotation.XRot = transform.rotation.eulerAngles.x;
+            playerRotation.YRot = transform.rotation.eulerAngles.y;
+            playerRotation.ZRot = transform.rotation.eulerAngles.z;
 
             client.Send(playerRotation, client.StateUpdateChannel);
         }

@@ -624,7 +624,7 @@ namespace LLAPI
         /// <param name="a_connectionId"></param>
         private void RotateObject(NetMsg_PlayerRotation a_msg, int a_connectionId)
         {
-            players[a_connectionId].avater.transform.rotation = new Quaternion(a_msg.XRot, a_msg.YRot, a_msg.ZRot, 1.0f);
+            players[a_connectionId].avater.transform.rotation = Quaternion.Euler(a_msg.XRot, a_msg.YRot, a_msg.ZRot);
 
             NetMsg_PlayerRotation pm = new NetMsg_PlayerRotation();
             pm.ConnectionId = a_connectionId;

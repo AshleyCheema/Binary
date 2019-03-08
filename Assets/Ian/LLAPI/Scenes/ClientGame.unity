@@ -435,7 +435,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &553051359
 Transform:
   m_ObjectHideFlags: 0
@@ -746,7 +746,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &936247218
 Transform:
   m_ObjectHideFlags: 0
@@ -1308,7 +1308,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectorMaterial: {fileID: 2100000, guid: 60f5b90b52a21e641aadfadfbca3f06b, type: 2}
   blurMat: {fileID: 2100000, guid: 9a2b6ae432b529c45b7c6629dbed4acc, type: 2}
-  blendSpeed: 5
+  blendSpeed: 10
   textureScale: 2
   fogTexture: {fileID: 8400000, guid: 68dad465100c0dc4b84bf5071a0848e1, type: 2}
   projector: {fileID: 2032774145}
