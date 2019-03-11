@@ -354,12 +354,12 @@ namespace LLAPI
                     {
                         if (key.ConnectionID == serverConnectionId)
                         {
-                            localPlayer.avater = Instantiate(spawnableObjects.ObjectsToSpawn[key.ObjectID], new Vector3(spawnObject.ObjectsToSpawn[key.ObjectID].XPos,
-                                                                                                                        spawnObject.ObjectsToSpawn[key.ObjectID].YPos, 
-                                                                                                                        spawnObject.ObjectsToSpawn[key.ObjectID].ZPos), 
-                                                                                                                        Quaternion.Euler(spawnObject.ObjectsToSpawn[key.ObjectID].XRot,
-                                                                                                                        spawnObject.ObjectsToSpawn[key.ObjectID].YRot,
-                                                                                                                        spawnObject.ObjectsToSpawn[key.ObjectID].ZRot));
+                            localPlayer.avater = Instantiate(spawnableObjects.ObjectsToSpawn[key.ObjectID], new Vector3(spawnObject.ObjectsToSpawn[index].XPos,
+                                                                                                                        spawnObject.ObjectsToSpawn[index].YPos, 
+                                                                                                                        spawnObject.ObjectsToSpawn[index].ZPos), 
+                                                                                                                        Quaternion.Euler(spawnObject.ObjectsToSpawn[index].XRot,
+                                                                                                                        spawnObject.ObjectsToSpawn[index].YRot,
+                                                                                                                        spawnObject.ObjectsToSpawn[index].ZRot));
                             //localPlayer.avater.GetComponent<PlayerController>().client = this;
                             localPlayer.avater.tag = (localPlayer.team == Team.Merc) ? "Merc" : "Spy";
 
@@ -370,14 +370,29 @@ namespace LLAPI
                         else
                         {
                             players[key.ConnectionID].avater =
-                             Instantiate(spawnableObjects.ObjectsToSpawn[key.ObjectID], new Vector3(spawnObject.ObjectsToSpawn[key.ObjectID].XPos,
-                                                                                                    spawnObject.ObjectsToSpawn[key.ObjectID].YPos,
-                                                                                                    spawnObject.ObjectsToSpawn[key.ObjectID].ZPos), 
-                                                                                                    Quaternion.Euler(spawnObject.ObjectsToSpawn[key.ObjectID].XRot,
-                                                                                                    spawnObject.ObjectsToSpawn[key.ObjectID].YRot,
-                                                                                                    spawnObject.ObjectsToSpawn[key.ObjectID].ZRot));
-                            players[key.ConnectionID].avater.GetComponent<MercControls>().enabled = false;
-                            players[key.ConnectionID].avater.GetComponent<TrackerAbility>().enabled = false;
+                             Instantiate(spawnableObjects.ObjectsToSpawn[key.ObjectID], new Vector3(spawnObject.ObjectsToSpawn[index].XPos,
+                                                                                                    spawnObject.ObjectsToSpawn[index].YPos,
+                                                                                                    spawnObject.ObjectsToSpawn[index].ZPos), 
+                                                                                                    Quaternion.Euler(spawnObject.ObjectsToSpawn[index].XRot,
+                                                                                                    spawnObject.ObjectsToSpawn[index].YRot,
+                                                                                                    spawnObject.ObjectsToSpawn[index].ZRot));
+                            players[key.ConnectionID].team = (key.ObjectID == 0) ? Team.Merc : Team.Spy;
+
+                            if (players[key.ConnectionID].team == Team.Merc)
+                            {
+                                //disable the controls for this player as it is not the local player
+                                players[key.ConnectionID].avater.GetComponent<MercControls>().enabled = false;
+                                players[key.ConnectionID].avater.GetComponent<TrackerAbility>().enabled = false;
+                            }
+                            else
+                            {
+                                //disable the controls for this player as it is not the local player
+                                players[key.ConnectionID].avater.GetComponent<SpyController>().enabled = false;
+                                players[key.ConnectionID].avater.GetComponent<StunAbility>().enabled = false;
+                            }
+                            //disable the fog of war for this player
+                            players[key.ConnectionID].avater.GetComponentInChildren<FOWMask>().gameObject.SetActive(false);
+
                         }
                         index += 1;
                     }
@@ -426,6 +441,18 @@ namespace LLAPI
                     break;
 
                 case NetOP.AB_SPRINT:
+
+                    break;
+
+                    //if a trigger message is recived
+                case NetOP.AB_TRIGGER:
+                    NetMsg_AB_Trigger ab_trigger = (NetMsg_AB_Trigger)a_netmsg;
+
+                    //if the type is bullet
+                    if(ab_trigger.Type == TriggerType.BULLET)
+                    {
+                        Debug.Log("I AM SHOT. HELP!!!!!!!!!!!!!!!!");
+                    }
 
                     break;
             }

@@ -13,7 +13,6 @@ namespace LLAPI
 
         public int ConnectionID { get; set; }
         public int StunObjectIndex { get; set; }
-        public ParticleSystem StunParticle { get; set; }
         public bool Stunned { get; set; }
     }
 }

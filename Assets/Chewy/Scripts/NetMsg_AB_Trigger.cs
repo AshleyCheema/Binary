@@ -13,5 +13,13 @@ namespace LLAPI
 
         public int ConnectionID { get; set; }
         public bool Trigger { get; set; }
+       public TriggerType Type { get; set; }
+    }
+
+    public enum TriggerType
+    {
+        BULLET,
+        TRACKER,
+        STUN
     }
 }

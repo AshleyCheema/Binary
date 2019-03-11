@@ -1198,7 +1198,7 @@ PrefabInstance:
     - target: {fileID: 3011942314590609162, guid: 886c300e7afc8604db6d96de8e831e26,
         type: 3}
       propertyPath: m_Name
-      value: PlayerController
+      value: SpyController
       objectReference: {fileID: 0}
     - target: {fileID: 3011942314590609162, guid: 886c300e7afc8604db6d96de8e831e26,
         type: 3}

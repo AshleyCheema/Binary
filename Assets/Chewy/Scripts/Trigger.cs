@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using LLAPI;
 
 public enum TriggerType
 {
@@ -38,6 +39,23 @@ public class Trigger : MonoBehaviour
             if(triggerType == TriggerType.Bullet)
             {
                 hasShot = true;
+                //Send message to client which has been hit
+                //first get the client which has been affected
+                foreach (var key in Server.Instance.Players.Keys)
+                {
+                    //if true we have found the gameObejct hit
+                    if(other.gameObject == Server.Instance.Players[key].avater)
+                    {
+                        //Create the new message to send to the client who was shot
+                        NetMsg_AB_Trigger trigger = new NetMsg_AB_Trigger();
+                        trigger.ConnectionID = key;
+                        trigger.Trigger = true;
+                        trigger.Type = LLAPI.TriggerType.BULLET;
+
+                        //Send the message to the affected client
+                        Server.Instance.Send(trigger, Server.Instance.ReliableChannel, key);
+                    }
+                }
                 Debug.Log("Shot");
             }
         }

@@ -18,10 +18,14 @@ public class StunAbility : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        trigger = gameObject.GetComponent<Trigger>();
         client = FindObjectOfType<Client>();
         stunG = GameObject.Find("StunG");
-        stunG.SetActive(false);
+        if (stunG != null)
+        {
+            stunG.SetActive(false);
+        }
+        flash = stunG.transform.GetChild(0).GetComponent<ParticleSystem>();
+        trigger = stunG.GetComponent<Trigger>();
         cooldown = stunAbility.cooldown;
         abilityDuration = stunAbility.abilityDuration;
     }

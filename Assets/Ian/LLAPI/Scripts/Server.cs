@@ -16,6 +16,7 @@ namespace LLAPI
         public Team team;
         public GameObject lobbyAvater;
         public GameObject avater;
+        public List<GameObject> avaterObjects;
         public bool IsReady;
         public bool LoadedGame;
         public float moveSpeed = 5;
@@ -59,6 +60,8 @@ namespace LLAPI
         [SerializeField]
         private SpawnableObjects spawnableObjects;
         private Dictionary<int, Player> players = new Dictionary<int, Player>();
+        public Dictionary<int, Player> Players
+        { get { return players; } }
 
         private Dictionary<int, Network_Object> networkObjects = new Dictionary<int, Network_Object>();
 
@@ -329,9 +332,10 @@ namespace LLAPI
                     players[ab_sprint.ConnectionID].moveSpeed = ab_sprint.SprintValue;
                     break;
 
-               //case NetOP.AB_FIRE:
-               //    NetMsg_AB_Fire ab_fire = (NetMsg_AB_Fire)a_netmsg;
-               //    players[ab_fire.ConnectionID].
+               case NetOP.AB_FIRE:
+                   NetMsg_AB_Fire ab_fire = (NetMsg_AB_Fire)a_netmsg;
+                    players[ab_fire.ConnectionID].avaterObjects.Add(Instantiate(spawnableObjects.ObjectsToSpawn[ab_fire.BulletObjectIndex], new Vector3(ab_fire.BulletPositionX, ab_fire.BulletPositionY, ab_fire.BulletPositionZ), Quaternion.identity));
+                    players[ab_fire.ConnectionID].avaterObjects[players[ab_fire.ConnectionID].avaterObjects.Count  - 1].GetComponent<Rigidbody>().velocity = new Vector3(ab_fire.VelocityX, ab_fire.VelocityY, ab_fire.VelocityZ);
 
                     /*
                      * foreach(player)
@@ -341,6 +345,14 @@ namespace LLAPI
                      * 
                      * 
                      */
+                     break;
+                case NetOP.AB_STUN:
+                    NetMsg_AB_Stun ab_stun = (NetMsg_AB_Stun)a_netmsg;
+
+                    //spawn stun
+                    players[ab_stun.ConnectionID].avaterObjects.Add(Instantiate(spawnableObjects.ObjectsToSpawn[ab_stun.StunObjectIndex], players[ab_stun.ConnectionID].avater.transform.position, Quaternion.identity));
+
+                    break;
             }
 
         }
@@ -429,6 +441,7 @@ namespace LLAPI
             p.team = Team.Unassigned;
             p.IsReady = false;
             p.LoadedGame = false;
+            p.avaterObjects = new List<GameObject>();
             //Add the new player to the players on the srever
             players.Add(a_connectionId, p);
 
@@ -465,6 +478,9 @@ namespace LLAPI
             //All clients should now have synced the lobby information
         }
 
+        /// <summary>
+        /// Spawn all the players on the server and on all the clients
+        /// </summary>
         private void SpawnAllPlayers()
         {
             NetMsg_SpawnObject spawnNewPlayer = new NetMsg_SpawnObject();
@@ -487,7 +503,7 @@ namespace LLAPI
                 spawnNewPlayer.ObjectsToSpawn.Add(new SpawnableObject
                 {
                     ConnectionID = pKey,
-                    ObjectID = 0,
+                    ObjectID = players[pKey].team == Team.Merc ? 0 : 5,
                     XPos = spawnPosition.x,
                     YPos = spawnPosition.y,
                     ZPos = spawnPosition.z,
@@ -497,14 +513,19 @@ namespace LLAPI
                 });
 
                 //Spawn server avater
-                players[pKey].avater = Instantiate(spawnableObjects.ObjectsToSpawn[0],
+                players[pKey].avater = Instantiate(spawnableObjects.ObjectsToSpawn[(players[pKey].team == Team.Merc ? 0 : 5)],
                                         spawnPosition,
                                         Quaternion.identity);
-                players[pKey].avater.GetComponent<MercControls>().enabled = false;
 
-                if (players[pKey].avater.GetComponent<TrackerAbility>())
+                if (players[pKey].team == Team.Merc)
                 {
+                    players[pKey].avater.GetComponent<MercControls>().enabled = false;
                     players[pKey].avater.GetComponent<TrackerAbility>().enabled = false;
+                }
+                else
+                {
+                    players[pKey].avater.GetComponent<SpyController>().enabled = false;
+                    players[pKey].avater.GetComponent<StunAbility>().enabled = false;
                 }
 
                 if (players[pKey].team == Team.Spy)

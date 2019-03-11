@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     protected Rigidbody rb;
 
+    [SerializeField]
     protected Client client;
 
     private Vector3 velocity;
@@ -40,6 +41,12 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     public virtual void Update()
     {
+        //Maybe add a client check if need
+        if(client == null)
+        {
+            client = FindObjectOfType<Client>();
+        }
+
         if (Input.GetButton("Crouching"))
         {
             currentSpeed = crouchingSpeed;
@@ -70,7 +77,7 @@ public class PlayerController : MonoBehaviour
             playerMovement.yMove = rb.position.y;
             playerMovement.zMove = rb.position.z;
 
-            client.Send(playerMovement, client.StateUpdateChannel);
+            client.Send(playerMovement, client.ReliableChannel);
         }
 
         //Check if the rotation has changed

@@ -11,6 +11,7 @@ public class SpyController : PlayerController
     // Start is called before the first frame update
     void Start()
     {
+        bullet = GameObject.Find("Bullet");
         bulletTrigger = bullet.GetComponent<Trigger>();
     }
 

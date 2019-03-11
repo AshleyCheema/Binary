@@ -77,9 +77,11 @@ public class MercControls : PlayerController
             //Sound/Animation?
             if (bullet != null)
             {
+                bullet.transform.position = transform.GetChild(0).transform.position;//new Vector3(transform.position.x, transform.position.y, transform.position.z);
+                bullet.transform.position += transform.GetChild(0).transform.forward * 2.5f;
+                bullet.transform.rotation = transform.GetChild(0).transform.rotation;
+                bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * 5;
                 bullet.SetActive(true);
-                bullet.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + 1);
-                bullet.GetComponent<Rigidbody>().velocity = transform.forward * 100;
             }
             //walkingSound.SetSourceProperties(source);
             noShoot = true;
