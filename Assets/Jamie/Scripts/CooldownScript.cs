@@ -25,6 +25,7 @@ public class CooldownScript : MonoBehaviour
     {
         if (currentCooldown < CooldownTime)
         {
+            CooldownImage.color = new Color32(102, 102, 102, 255);
             currentCooldown += Time.deltaTime;
             CooldownImage.fillAmount = currentCooldown / CooldownTime;
         }
@@ -33,7 +34,7 @@ public class CooldownScript : MonoBehaviour
             Action.interactable = true;
             Debug.Log("Cooldown finished");
             CooldownImage.color = new Color32(103, 201, 255, 255);
-            Invoke("ResetColour", 0.5F);
+            Invoke("ResetColour", 0.25F);
         }
     }
 
