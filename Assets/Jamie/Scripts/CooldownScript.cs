@@ -32,7 +32,7 @@ public class CooldownScript : MonoBehaviour
         if (CooldownImage.fillAmount == 1 && Action.interactable == false)
         {
             Action.interactable = true;
-            Debug.Log("Cooldown finished");
+            //Debug.Log("Cooldown finished");
             CooldownImage.color = new Color32(103, 201, 255, 255);
             Invoke("ResetColour", 0.25F);
         }
@@ -45,7 +45,7 @@ public class CooldownScript : MonoBehaviour
 
     public void ActionClicked()
     {
-        Debug.Log("Skill '" + Action.name + "' has been clicked");
+        //Debug.Log("Skill '" + Action.name + "' has been clicked");
         Action.interactable = false;
         currentCooldown = 0;
     }
