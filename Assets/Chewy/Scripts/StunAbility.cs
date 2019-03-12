@@ -12,7 +12,8 @@ public class StunAbility : MonoBehaviour
     private Trigger trigger;
     protected Client client;
     public Abilities stunAbility;
-
+    private GameObject spyController;
+    private SpyController spyControllerSc;
     public ParticleSystem flash;
 
     // Start is called before the first frame update
@@ -20,6 +21,8 @@ public class StunAbility : MonoBehaviour
     {
         client = FindObjectOfType<Client>();
         stunG = GameObject.Find("StunG");
+        spyController = GameObject.FindGameObjectWithTag("Spy");
+        spyControllerSc = spyController.GetComponent<SpyController>();
         if (stunG != null)
         {
             stunG.SetActive(false);
@@ -33,13 +36,13 @@ public class StunAbility : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (spyControllerSc.stunDrop)
         {
             if (!stunActive)
             {
-                stunG.SetActive(true);
                 stunG.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - 1);
                 stunDropped = true;
+                spyControllerSc.stunDrop = false;
             }
         }
 
@@ -48,7 +51,7 @@ public class StunAbility : MonoBehaviour
             abilityDuration = stunAbility.abilityDuration;
             stunG.SetActive(false);
             stunDropped = false;
-
+            flash.Stop();
             cooldown -= Time.deltaTime;
             if(cooldown <= 0)
             {
@@ -60,6 +63,12 @@ public class StunAbility : MonoBehaviour
         if (stunDropped)
         {
             abilityDuration -= Time.deltaTime;
+
+            if (abilityDuration <= -1)
+            {
+                stunActive = true;
+            }
+
             if (abilityDuration <= 0)
             {
                 flash.Play();
@@ -84,11 +93,6 @@ public class StunAbility : MonoBehaviour
                         }
                     }
                 }
-                //Flash Effect
-            }
-            if(abilityDuration <= -1)
-            {
-                stunActive = true;
             }
         }
     }

@@ -6,10 +6,13 @@ public class SpyController : PlayerController
 {
     [SerializeField]
     private GameObject bullet;
+    [SerializeField]
+    private GameObject stun;
     private Trigger bulletTrigger;
     private bool isHurt;
+    public bool stunDrop;
     // Start is called before the first frame update
-    void Start()
+    public override void Start()
     {
         bullet = GameObject.Find("Bullet");
         bulletTrigger = bullet.GetComponent<Trigger>();
@@ -35,6 +38,12 @@ public class SpyController : PlayerController
                 bulletTrigger.hasShot = false;
                 Debug.Log("Die");
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            stun.SetActive(true);
+            stunDrop = true;
         }
     }
 }
