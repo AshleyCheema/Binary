@@ -20,12 +20,6 @@ public class Trigger : MonoBehaviour
     private StunAbility stunAbility;
     private MercControls mercControls;
 
-    private void Start()
-    {
-        stunAbility = gameObject.GetComponent<StunAbility>();
-        mercControls = gameObject.GetComponent<MercControls>();
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Spy")
@@ -35,8 +29,7 @@ public class Trigger : MonoBehaviour
                 isDetected = true;
                 Debug.Log("SPY DETECTED");
             }
-
-            if(triggerType == TriggerType.Bullet)
+            else if(triggerType == TriggerType.Bullet)
             {
                 hasShot = true;
                 //Send message to client which has been hit
@@ -57,6 +50,12 @@ public class Trigger : MonoBehaviour
                     }
                 }
                 Debug.Log("Shot");
+            }
+            else if(triggerType == TriggerType.Tracker)
+            {
+                //tell merc that the tracker has been set off
+                //spy tracked
+                //send
             }
         }
 

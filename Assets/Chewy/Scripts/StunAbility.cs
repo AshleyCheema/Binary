@@ -43,6 +43,17 @@ public class StunAbility : MonoBehaviour
                 stunG.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - 1);
                 stunDropped = true;
                 spyControllerSc.stunDrop = false;
+
+                #region NetMsg_Stun
+
+                NetMsg_AB_Stun ab_Stun = new NetMsg_AB_Stun();
+                ab_Stun.ConnectionID = client.ServerConnectionId;
+                ab_Stun.StunObjectIndex = 4;
+                //ab_Stun.StunParticle
+                ab_Stun.Stunned = trigger.isStunned;
+                client.Send(ab_Stun);
+
+                #endregion
             }
         }
 
@@ -81,15 +92,6 @@ public class StunAbility : MonoBehaviour
                     {
                         if (coll[i].gameObject == client.Players[pKey].avater)
                         {
-                            #region NetMsg_Stun
-                            NetMsg_AB_Stun ab_Stun = new NetMsg_AB_Stun();
-                            ab_Stun.ConnectionID = client.ServerConnectionId;
-                            ab_Stun.StunObjectIndex = 4;
-                            //ab_Stun.StunParticle
-                            ab_Stun.Stunned = trigger.isStunned;
-                            ab_Stun.AffectedID = client.Players[pKey].connectionId;
-                            client.Send(ab_Stun);
-                            #endregion
                         }
                     }
                 }

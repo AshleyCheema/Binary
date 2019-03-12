@@ -95,12 +95,14 @@ public class TrackerAbility : MonoBehaviour
                     trackerDown = true;
 
                     #region NetMsg_Tracker
+
                     NetMsg_AB_Tracker ab_Tracker = new NetMsg_AB_Tracker();
                     ab_Tracker.ConnectionID = client.ServerConnectionId;
                     ab_Tracker.TrackerPositionX = trackerPos.x;
                     ab_Tracker.TrackerPositionY = trackerPos.y;
                     ab_Tracker.TrackerPositionZ = trackerPos.z;
                     ab_Tracker.TrackerObjectIndex = 3;
+
                     client.Send(ab_Tracker);
                     #endregion
                 }

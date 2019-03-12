@@ -351,7 +351,35 @@ namespace LLAPI
 
                     //spawn stun
                     players[ab_stun.ConnectionID].avaterObjects.Add(Instantiate(spawnableObjects.ObjectsToSpawn[ab_stun.StunObjectIndex], players[ab_stun.ConnectionID].avater.transform.position, Quaternion.identity));
+                    Send(ab_stun, reliableChannel, ab_stun.ConnectionID, false);
+                    break;
 
+                case NetOP.AB_TRACKER:
+                    //A tracker has been placed down in the scene
+                    NetMsg_AB_Tracker ab_tracker = (NetMsg_AB_Tracker)a_netmsg;
+
+                    //Check if the player does not have a tracker within the scene already
+                    GameObject tracker = null;
+                    for (int i = 0; i < players[ab_tracker.ConnectionID].avaterObjects.Count; i++)
+                    {
+                        if(players[ab_tracker.ConnectionID].avaterObjects[i].name == "Merc_Tracker")
+                        {
+                            tracker = players[ab_tracker.ConnectionID].avaterObjects[i];
+                            break;
+                        }
+                    }
+
+                    //If there is no tracker for this player then add one. Otherwise edit the 
+                    //old tracker
+                    if (tracker == null)
+                    {
+                        players[ab_tracker.ConnectionID].avaterObjects.Add(Instantiate(spawnableObjects.ObjectsToSpawn[ab_tracker.TrackerObjectIndex], new Vector3(ab_tracker.TrackerPositionX, ab_tracker.TrackerPositionY, ab_tracker.TrackerPositionZ), Quaternion.identity));
+                        players[ab_tracker.ConnectionID].avaterObjects[players[ab_tracker.ConnectionID].avaterObjects.Count - 1].gameObject.name = "Merc_Tracker";
+                    }
+                    else
+                    {
+                        tracker.transform.position = new Vector3(ab_tracker.TrackerPositionX, ab_tracker.TrackerPositionY, ab_tracker.TrackerPositionZ);
+                    }
                     break;
             }
 
@@ -369,14 +397,14 @@ namespace LLAPI
 
             foreach (var key in players.Keys)
             {
-                if(!players[key].IsReady)
+                if (!players[key].IsReady)
                 {
                     isReady = false;
                     break;
                 }
             }
 
-            if(!isReady)
+            if (!isReady)
             {
                 //Not all players have readied up
             }

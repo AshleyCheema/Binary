@@ -365,6 +365,7 @@ namespace LLAPI
                                                                                                                         spawnObject.ObjectsToSpawn[index].ZRot));
                             //localPlayer.avater.GetComponent<PlayerController>().client = this;
                             localPlayer.avater.tag = (localPlayer.team == Team.Merc) ? "Merc" : "Spy";
+                            localPlayer.avaterObjects = new List<GameObject>();
 
                             Camera.main.GetComponent<CameraScript>().SetTarget(localPlayer.avater.transform);
                             //Camera.main.transform.position = localPlayer.avater.transform.position; //+ new Vector3(-15, 33, -15);
@@ -380,6 +381,7 @@ namespace LLAPI
                                                                                                     spawnObject.ObjectsToSpawn[index].YRot,
                                                                                                     spawnObject.ObjectsToSpawn[index].ZRot));
                             players[key.ConnectionID].team = (key.ObjectID == 0) ? Team.Merc : Team.Spy;
+                            players[key.ConnectionID].avaterObjects = new List<GameObject>();
 
                             if (players[key.ConnectionID].team == Team.Merc)
                             {
@@ -447,7 +449,15 @@ namespace LLAPI
 
                     break;
 
-                    //if a trigger message is recived
+                case NetOP.AB_STUN:
+                    //Stun object has been droped by another player
+                    NetMsg_AB_Stun ab_stun = (NetMsg_AB_Stun)a_netmsg;
+
+                    players[ab_stun.ConnectionID].avaterObjects.Add(Instantiate(spawnableObjects.ObjectsToSpawn[ab_stun.StunObjectIndex], players[ab_stun.ConnectionID].avater.transform.position, Quaternion.identity));
+
+                    break;
+
+                //if a trigger message is recived
                 case NetOP.AB_TRIGGER:
                     NetMsg_AB_Trigger ab_trigger = (NetMsg_AB_Trigger)a_netmsg;
 
