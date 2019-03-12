@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 1170343424564217717}
   - component: {fileID: 1170343424564217716}
   - component: {fileID: 8053444857443078783}
-  - component: {fileID: 2302647609740702958}
   m_Layer: 0
   m_Name: StunG
   m_TagString: Untagged
@@ -141,18 +140,6 @@ MonoBehaviour:
   hasShot: 0
   isDetected: 0
   isStunned: 0
---- !u!114 &2302647609740702958
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1170343424564217715}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 682233db59dd9bb43aa2b334579ff487, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &5871736404160863565
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -160,11 +147,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1170343424564217719}
     m_Modifications:
-    - target: {fileID: 312546652755104693, guid: 4d0d07280e019bf4b950e4016b056a09,
-        type: 3}
-      propertyPath: m_Name
-      value: FlashEffect
-      objectReference: {fileID: 0}
     - target: {fileID: 312546652755104690, guid: 4d0d07280e019bf4b950e4016b056a09,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -219,6 +201,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 312546652755104693, guid: 4d0d07280e019bf4b950e4016b056a09,
+        type: 3}
+      propertyPath: m_Name
+      value: FlashEffect
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4d0d07280e019bf4b950e4016b056a09, type: 3}

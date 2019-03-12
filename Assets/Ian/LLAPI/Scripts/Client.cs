@@ -74,6 +74,9 @@ namespace LLAPI
         private SpawnableObjects spawnableObjects;
 
         private Dictionary<int, Player> players = new Dictionary<int, Player>();
+        public Dictionary<int, Player> Players
+        { get { return players; } }
+
         private Dictionary<int, Network_Object> networkObjects = new Dictionary<int, Network_Object>();
 
         #endregion

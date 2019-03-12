@@ -72,7 +72,7 @@ public class Trigger : MonoBehaviour
         {
             if(triggerType == TriggerType.Stun)
             {
-                if (stunAbility.stunActive)
+                if (stunAbility != null && stunAbility.stunActive)
                 {
                     isStunned = true;
                     Debug.Log("Flashed");
