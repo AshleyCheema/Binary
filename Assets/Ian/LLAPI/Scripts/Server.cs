@@ -381,6 +381,12 @@ namespace LLAPI
                         tracker.transform.position = new Vector3(ab_tracker.TrackerPositionX, ab_tracker.TrackerPositionY, ab_tracker.TrackerPositionZ);
                     }
                     break;
+
+                case NetOP.AB_TRIGGER:
+                    NetMsg_AB_Trigger ab_trigger = (NetMsg_AB_Trigger)a_netmsg;
+
+                    Send(ab_trigger, reliableChannel, ab_trigger.ConnectionID);
+                    break;
             }
 
         }
@@ -553,7 +559,6 @@ namespace LLAPI
                 else
                 {
                     players[pKey].avater.GetComponent<SpyController>().enabled = false;
-                    players[pKey].avater.GetComponent<StunAbility>().enabled = false;
                 }
 
                 if (players[pKey].team == Team.Spy)

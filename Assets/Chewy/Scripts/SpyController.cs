@@ -7,7 +7,7 @@ public class SpyController : PlayerController
     [SerializeField]
     private GameObject bullet;
     [SerializeField]
-    private GameObject stun;
+    public GameObject stun;
     private Trigger bulletTrigger;
     private bool isHurt;
     public bool stunDrop;
@@ -15,6 +15,10 @@ public class SpyController : PlayerController
     public override void Start()
     {
         bullet = GameObject.Find("Bullet");
+        if (stun == null)
+        {
+            stun = GameObject.Find("StunG");
+        }
         bulletTrigger = bullet.GetComponent<Trigger>();
     }
 
@@ -42,7 +46,7 @@ public class SpyController : PlayerController
 
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            stun.SetActive(true);
+            stun.GetComponent<StunAbility>().IsActive = true;
             stunDrop = true;
         }
     }

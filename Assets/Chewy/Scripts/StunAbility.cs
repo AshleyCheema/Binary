@@ -16,16 +16,49 @@ public class StunAbility : MonoBehaviour
     private SpyController spyControllerSc;
     public ParticleSystem flash;
 
+    public bool IsActive
+    {
+        get
+        {
+            return GetComponent<MeshRenderer>().enabled;
+        }
+
+        set
+        {
+            if(value == false)
+            {
+                foreach (var item in GetComponents<Collider>())
+                {
+                    item.enabled = false;
+                }
+
+                GetComponent<MeshRenderer>().enabled = false;
+            }
+            else
+            {
+                foreach (var item in GetComponents<Collider>())
+                {
+                    item.enabled = true;
+                }
+
+                GetComponent<MeshRenderer>().enabled = true;
+            }
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         client = FindObjectOfType<Client>();
         stunG = GameObject.Find("StunG");
         spyController = GameObject.FindGameObjectWithTag("Spy");
-        spyControllerSc = spyController.GetComponent<SpyController>();
-        if (stunG != null)
+        if (spyController)
         {
-            stunG.SetActive(false);
+            spyControllerSc = spyController.GetComponent<SpyController>();
+            if (stunG != null)
+            {
+                stunG.SetActive(false);
+            }
         }
         flash = stunG.transform.GetChild(0).GetComponent<ParticleSystem>();
         trigger = stunG.GetComponent<Trigger>();
@@ -36,11 +69,13 @@ public class StunAbility : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (spyControllerSc.stunDrop)
+        if (spyControllerSc != null && spyControllerSc.stunDrop)
         {
             if (!stunActive)
             {
-                stunG.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - 1);
+                stunG.transform.position = new Vector3(spyController.transform.position.x,
+                                                       spyController.transform.position.y,
+                                                       spyController.transform.position.z - 1);
                 stunDropped = true;
                 spyControllerSc.stunDrop = false;
 
@@ -56,11 +91,26 @@ public class StunAbility : MonoBehaviour
                 #endregion
             }
         }
+        else if(spyControllerSc == null)
+        {
+            spyController = GameObject.FindGameObjectWithTag("Spy");
+            if (spyController)
+            {
+                spyControllerSc = spyController.GetComponent<SpyController>();
+                if (stunG != null)
+                {
+                    spyControllerSc.stun = stunG;
+                    //stunG.SetActive(false);
+                    IsActive = false;
+                }
+            }
+        }
 
         if(stunActive)
         {
             abilityDuration = stunAbility.abilityDuration;
-            stunG.SetActive(false);
+            //stunG.SetActive(false);
+            IsActive = false;
             stunDropped = false;
             flash.Stop();
             cooldown -= Time.deltaTime;
@@ -90,8 +140,19 @@ public class StunAbility : MonoBehaviour
                 {
                     foreach (var pKey in client.Players.Keys)
                     {
-                        if (coll[i].gameObject == client.Players[pKey].avater)
+                        if(coll[i].gameObject == client.LocalPlayer.avater)
                         {
+
+                        }
+                        else if (coll[i].gameObject == client.Players[pKey].avater)
+                        {
+                            //Send message to player tell them that they are affected
+                            NetMsg_AB_Trigger ab_trigger = new NetMsg_AB_Trigger();
+                            ab_trigger.ConnectionID = client.Players[pKey].connectionId;
+                            ab_trigger.Trigger = true;
+                            ab_trigger.Type = LLAPI.TriggerType.STUN;
+
+                            client.Send(ab_trigger);
                         }
                     }
                 }

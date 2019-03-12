@@ -364,6 +364,7 @@ namespace LLAPI
                                                                                                                         spawnObject.ObjectsToSpawn[index].YRot,
                                                                                                                         spawnObject.ObjectsToSpawn[index].ZRot));
                             //localPlayer.avater.GetComponent<PlayerController>().client = this;
+                            localPlayer.team = (key.ObjectID == 0) ? Team.Merc : Team.Spy;
                             localPlayer.avater.tag = (localPlayer.team == Team.Merc) ? "Merc" : "Spy";
                             localPlayer.avaterObjects = new List<GameObject>();
 
@@ -381,6 +382,7 @@ namespace LLAPI
                                                                                                     spawnObject.ObjectsToSpawn[index].YRot,
                                                                                                     spawnObject.ObjectsToSpawn[index].ZRot));
                             players[key.ConnectionID].team = (key.ObjectID == 0) ? Team.Merc : Team.Spy;
+                            players[key.ConnectionID].avater.tag = (players[key.ConnectionID].team == Team.Merc) ? "Merc" : "Spy";
                             players[key.ConnectionID].avaterObjects = new List<GameObject>();
 
                             if (players[key.ConnectionID].team == Team.Merc)
@@ -393,7 +395,6 @@ namespace LLAPI
                             {
                                 //disable the controls for this player as it is not the local player
                                 players[key.ConnectionID].avater.GetComponent<SpyController>().enabled = false;
-                                players[key.ConnectionID].avater.GetComponent<StunAbility>().enabled = false;
                             }
                             //disable the fog of war for this player
                             players[key.ConnectionID].avater.GetComponentInChildren<FOWMask>().gameObject.SetActive(false);
@@ -465,6 +466,15 @@ namespace LLAPI
                     if(ab_trigger.Type == TriggerType.BULLET)
                     {
                         Debug.Log("I AM SHOT. HELP!!!!!!!!!!!!!!!!");
+                    }
+                    else if(ab_trigger.Type == TriggerType.STUN)
+                    {
+                        Debug.Log("I HAVE BEEN STUNNED. NO!!!!!!!!!!!!!!");
+                        //set isStunned to true
+                        if(localPlayer.avater.GetComponent<Trigger>())
+                        {
+                            localPlayer.avater.GetComponent<Trigger>().isStunned = true;
+                        }
                     }
 
                     break;
