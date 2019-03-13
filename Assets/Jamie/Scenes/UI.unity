@@ -331,7 +331,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CooldownImage: {fileID: 489129499}
-  CooldownTime: 0.1
+  CooldownTime: 1
   Action: {fileID: 216650449}
 --- !u!1 &216940488
 GameObject:
@@ -890,7 +890,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &439003371
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1651,7 +1651,7 @@ MonoBehaviour:
   PlayerText: {fileID: 1074600157}
   TimeText: {fileID: 1217478067}
   PlayerName: Chewy
-  isSpy: 1
+  isSpy: 0
   isHurt: 0
   Borders: {fileID: 757922355}
   MercAbil: {fileID: 342963749}
