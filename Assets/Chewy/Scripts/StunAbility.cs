@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using LLAPI;
-public class StunAbility : MonoBehaviour
+public class StunAbility : Cooldown
 {
     private GameObject stunG;
     public bool stunActive;
-    public bool stunDropped;
-    private float cooldown;
+    private bool stunDropped;
+    //private float cooldown;
     private float abilityDuration;
     private Trigger trigger;
     protected Client client;
@@ -68,8 +68,10 @@ public class StunAbility : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
+        base.Update();
+
         if (spyControllerSc != null && spyControllerSc.stunDrop)
         {
             if (!stunActive)
@@ -80,6 +82,7 @@ public class StunAbility : MonoBehaviour
                 stunDropped = true;
                 spyControllerSc.stunDrop = false;
 
+                isCooldown = true;
                 #region NetMsg_Stun
 
                 NetMsg_AB_Stun ab_Stun = new NetMsg_AB_Stun();
@@ -114,8 +117,7 @@ public class StunAbility : MonoBehaviour
             IsActive = false;
             stunDropped = false;
             flash.Stop();
-            cooldown -= Time.deltaTime;
-            if(cooldown <= 0)
+            if(!isCooldown)
             {
                 stunActive = false;
             }

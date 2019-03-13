@@ -75,5 +75,9 @@ public class Trigger : MonoBehaviour
                 }
             }
         }
+        if(GameObject.FindGameObjectWithTag("Spy"))
+        {
+
+        }
     }
 }
