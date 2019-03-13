@@ -2,12 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using LLAPI;
-public class TrackerAbility : MonoBehaviour
+public class TrackerAbility : Cooldown
 {
     public Abilities tracker;
-    private float cooldown;
-    private bool isCooldown;
-    private float a_Duration;
     private GameObject trackingDevice;
     private Trigger trackerTrigger;
     private bool trackerDown;
@@ -20,9 +17,8 @@ public class TrackerAbility : MonoBehaviour
     void Start()
     {
         client = FindObjectOfType<Client>();
-        cooldown = tracker.cooldown;
         isCooldown = tracker.isCooldown;
-        a_Duration = tracker.abilityDuration;
+        cooldown = tracker.abilityDuration;
         trackingDevice = GameObject.Find("Tracker");
         trackerTrigger = trackingDevice.GetComponent<Trigger>();
         trackingDevice.SetActive(false);
@@ -31,8 +27,10 @@ public class TrackerAbility : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
+        base.Update();
+
         if (trackerTrigger != null && trackerTrigger.isDetected)
         {
             //Tracker Position
@@ -43,7 +41,7 @@ public class TrackerAbility : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            if (!isCooldown && a_Duration == tracker.abilityDuration)
+            if (!isCooldown && cooldown == tracker.abilityDuration)
             {
                 trackingDevice.SetActive(true);
                 isCooldown = true;
@@ -57,13 +55,13 @@ public class TrackerAbility : MonoBehaviour
 
         if(trackerDown)
         {
-            a_Duration -= Time.deltaTime;
+            cooldown -= Time.deltaTime;
 
-            if(a_Duration <= 0)
+            if(cooldown <= 0)
             {
                 trackerDown = false;
                 trackingDevice.SetActive(false);
-                a_Duration = tracker.abilityDuration;
+                cooldown = tracker.abilityDuration;
 
                 NetMsg_AB_Tracker ab_Tracker = new NetMsg_AB_Tracker();
                 ab_Tracker.ConnectionID = client.ServerConnectionId;
