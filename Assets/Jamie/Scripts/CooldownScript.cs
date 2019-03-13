@@ -9,14 +9,13 @@ public class CooldownScript : MonoBehaviour
     public Image CooldownImage;
     public float CooldownTime;
     public Button Action;
-
     private float currentCooldown = 0;
 
     // Start is called before the first frame update
     private void Start()
     {
         Action.interactable = false;
-        currentCooldown = 0;
+        currentCooldown = CooldownTime;
         CooldownImage.fillAmount = Mathf.InverseLerp(0, 1, CooldownTime);
     }
 
