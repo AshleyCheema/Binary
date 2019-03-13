@@ -14,9 +14,15 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField]
-    public float normalSpeed = 5f;
-    private float crouchingSpeed = 2.5f;
-    public float runningSpeed = 6f;
+    protected float normalSpeed = 5f;
+
+    [SerializeField]
+    protected float crouchingSpeed = 2.5f;
+
+    [SerializeField]
+    protected float runningSpeed = 6f;
+
+    public bool isRunning;
 
     public float currentSpeed = 5f;
 
@@ -54,10 +60,12 @@ public class PlayerController : MonoBehaviour
 
         else if (Input.GetButton("Sprint"))
         {
+            isRunning = true;
             currentSpeed = runningSpeed;
         }
         else
         {
+            isRunning = false;
             currentSpeed = normalSpeed;
         }
 

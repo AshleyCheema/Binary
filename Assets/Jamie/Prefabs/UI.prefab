@@ -549,6 +549,10 @@ MonoBehaviour:
   CooldownImage: {fileID: 2114616452887230166}
   CooldownTime: 5
   Action: {fileID: 2114616451759763328}
+  spyController: {fileID: 0}
+  mercControls: {fileID: 0}
+  trackerAbility: {fileID: 0}
+  abilityType: 0
 --- !u!1 &2114616451882984745
 GameObject:
   m_ObjectHideFlags: 0
@@ -696,6 +700,10 @@ MonoBehaviour:
   CooldownImage: {fileID: 2114616453029032958}
   CooldownTime: 60
   Action: {fileID: 2114616451882984751}
+  spyController: {fileID: 0}
+  mercControls: {fileID: 0}
+  trackerAbility: {fileID: 0}
+  abilityType: 0
 --- !u!1 &2114616451905442643
 GameObject:
   m_ObjectHideFlags: 0
@@ -1263,6 +1271,10 @@ MonoBehaviour:
   CooldownImage: {fileID: 2114616453555485542}
   CooldownTime: 60
   Action: {fileID: 2114616452149704715}
+  spyController: {fileID: 0}
+  mercControls: {fileID: 0}
+  trackerAbility: {fileID: 0}
+  abilityType: 0
 --- !u!1 &2114616452261418978
 GameObject:
   m_ObjectHideFlags: 0
@@ -1571,6 +1583,10 @@ MonoBehaviour:
   CooldownImage: {fileID: 2114616453122628365}
   CooldownTime: 5
   Action: {fileID: 2114616452326917871}
+  spyController: {fileID: 0}
+  mercControls: {fileID: 0}
+  trackerAbility: {fileID: 0}
+  abilityType: 3
 --- !u!1 &2114616452398418101
 GameObject:
   m_ObjectHideFlags: 0
@@ -3265,6 +3281,10 @@ MonoBehaviour:
   CooldownImage: {fileID: 2114616453659077704}
   CooldownTime: 1
   Action: {fileID: 2114616453402851458}
+  spyController: {fileID: 0}
+  mercControls: {fileID: 0}
+  trackerAbility: {fileID: 0}
+  abilityType: 0
 --- !u!1 &2114616453410666756
 GameObject:
   m_ObjectHideFlags: 0

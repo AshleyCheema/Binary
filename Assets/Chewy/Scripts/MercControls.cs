@@ -14,10 +14,10 @@ public class MercControls : PlayerController
 {
     private float cooldown;
     private float speedDuration;
-    private bool canSprint;
+    public bool canSprint;
     private bool buttonPressed;
 
-    private bool noShoot;
+    public bool noShoot;
     private float shotCooldown = 5f;
     public float reloadSpeed = 2f;
     private GameObject bullet;

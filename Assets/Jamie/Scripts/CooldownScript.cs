@@ -10,10 +10,36 @@ public class CooldownScript : MonoBehaviour
     public float CooldownTime;
     public Button Action;
     private float currentCooldown = 0;
+    public SpyController spyController;
+    public MercControls mercControls;
+    public TrackerAbility trackerAbility;
+
+    private bool isSpy;
+    private bool isMerc;
+    public AbilityType abilityType;
+
+    public enum AbilityType
+    {
+        //Spy
+        SPRINT,
+        STUN,
+        //Merc
+        TRACKER,
+        BURST,
+        FIRE
+    }
 
     // Start is called before the first frame update
     private void Start()
     {
+        if(mercControls != null)
+        {
+            isMerc = true;
+        }
+        if(spyController != null)
+        {
+            isSpy = true;
+        }
         Action.interactable = false;
         currentCooldown = CooldownTime;
         CooldownImage.fillAmount = Mathf.InverseLerp(0, 1, CooldownTime);
@@ -35,6 +61,40 @@ public class CooldownScript : MonoBehaviour
             CooldownImage.color = new Color32(103, 201, 255, 255);
             Invoke("ResetColour", 0.25F);
         }
+
+        if (isSpy)
+        {
+            //Debug.Log("Skill '" + Action.name + "' has been clicked");
+            if (spyController.isRunning && Action.interactable == true && abilityType == AbilityType.SPRINT)
+            {
+                Action.interactable = false;
+                currentCooldown = 0;
+            }
+            if(spyController.stunDrop && Action.interactable == true && abilityType == AbilityType.STUN)
+            {
+                Action.interactable = false;
+                currentCooldown = 0;
+            }
+        }
+
+        if (isMerc)
+        {
+            if (mercControls.noShoot && Action.interactable == true && abilityType == AbilityType.FIRE)
+            {
+                Action.interactable = false;
+                currentCooldown = 0;
+            }
+            if (!mercControls.canSprint && Action.interactable == true && abilityType == AbilityType.BURST)
+            {
+                Action.interactable = false;
+                currentCooldown = 0;
+            }
+            if (trackerAbility.trackerDown && Action.interactable == true && abilityType == AbilityType.TRACKER)
+            {
+                Action.interactable = false;
+                currentCooldown = 0;
+            }
+        }
     }
 
     private void ResetColour()
@@ -42,10 +102,4 @@ public class CooldownScript : MonoBehaviour
         CooldownImage.color = new Color32(255, 255, 255, 255);
     }
 
-    public void ActionClicked()
-    {
-        //Debug.Log("Skill '" + Action.name + "' has been clicked");
-        Action.interactable = false;
-        currentCooldown = 0;
-    }
 }

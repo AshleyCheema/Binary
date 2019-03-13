@@ -7,7 +7,7 @@ public class TrackerAbility : Cooldown
     public Abilities tracker;
     private GameObject trackingDevice;
     private Trigger trackerTrigger;
-    private bool trackerDown;
+    public bool trackerDown;
     private Collider deviceCollider;
     private Vector3 trackerPos;
     protected Client client;
