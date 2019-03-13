@@ -381,6 +381,17 @@ namespace LLAPI
                     {
                         tracker.transform.position = new Vector3(ab_tracker.TrackerPositionX, ab_tracker.TrackerPositionY, ab_tracker.TrackerPositionZ);
                     }
+
+                    if (ab_tracker.TrackerTriggered)
+                    {
+                        tracker.SetActive(true);
+                    }
+                    else
+                    {
+                        tracker.SetActive(false);
+                    }
+
+                    Send(ab_tracker, reliableChannel, ab_tracker.ConnectionID, false);
                     break;
 
                 case NetOP.AB_TRIGGER:

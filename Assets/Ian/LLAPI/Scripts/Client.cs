@@ -460,6 +460,8 @@ namespace LLAPI
                     players[ab_fire.ConnectionID].avaterObjects[players[ab_fire.ConnectionID].avaterObjects.Count - 1].GetComponent<Trigger>().enabled = false;
                     players[ab_fire.ConnectionID].avaterObjects[players[ab_fire.ConnectionID].avaterObjects.Count - 1].gameObject.tag = "Destroy";
 
+                    players[ab_fire.ConnectionID].avaterObjects[players[ab_fire.ConnectionID].avaterObjects.Count - 1].GetComponent<Trigger>().enabled = false;
+
                     break;
 
                 case NetOP.AB_STUN:
@@ -467,6 +469,58 @@ namespace LLAPI
                     NetMsg_AB_Stun ab_stun = (NetMsg_AB_Stun)a_netmsg;
 
                     players[ab_stun.ConnectionID].avaterObjects.Add(Instantiate(spawnableObjects.ObjectsToSpawn[ab_stun.StunObjectIndex], players[ab_stun.ConnectionID].avater.transform.position, Quaternion.identity));
+                    players[ab_stun.ConnectionID].avaterObjects[players[ab_stun.ConnectionID].avaterObjects.Count - 1].GetComponent<StunAbility>().isSpawned = true;
+                    players[ab_stun.ConnectionID].avaterObjects[players[ab_stun.ConnectionID].avaterObjects.Count - 1].GetComponent<StunAbility>().stunDropped = true;
+
+                    players[ab_stun.ConnectionID].avaterObjects[players[ab_stun.ConnectionID].avaterObjects.Count - 1].GetComponent<StunAbility>().SetShell();
+                    players[ab_stun.ConnectionID].avaterObjects[players[ab_stun.ConnectionID].avaterObjects.Count - 1].GetComponent<Trigger>().enabled = false;
+
+                    break;
+
+                case NetOP.AB_TRACKER:
+                    //A tracker has been placed down in the scene
+                    NetMsg_AB_Tracker ab_tracker = (NetMsg_AB_Tracker)a_netmsg;
+
+                    //Check if the player does not have a tracker within the scene already
+                    GameObject tracker = null;
+                    for (int i = 0; i < players[ab_tracker.ConnectionID].avaterObjects.Count; i++)
+                    {
+                        if (players[ab_tracker.ConnectionID].avaterObjects[i] != null &&
+                            players[ab_tracker.ConnectionID].avaterObjects[i].name == "Merc_Tracker")
+                        {
+                            tracker = players[ab_tracker.ConnectionID].avaterObjects[i];
+                            break;
+                        }
+                    }
+
+                    //If there is no tracker for this player then add one. Otherwise edit the 
+                    //old tracker
+                    if (tracker == null)
+                    {
+                        players[ab_tracker.ConnectionID].avaterObjects.Add(Instantiate(spawnableObjects.ObjectsToSpawn[ab_tracker.TrackerObjectIndex], new Vector3(ab_tracker.TrackerPositionX, ab_tracker.TrackerPositionY, ab_tracker.TrackerPositionZ), Quaternion.identity));
+                        players[ab_tracker.ConnectionID].avaterObjects[players[ab_tracker.ConnectionID].avaterObjects.Count - 1].gameObject.name = "Merc_Tracker";
+                        players[ab_tracker.ConnectionID].avaterObjects[players[ab_tracker.ConnectionID].avaterObjects.Count - 1].GetComponent<Trigger>().enabled = false;
+
+                    }
+                    else
+                    {
+                        tracker.transform.position = new Vector3(ab_tracker.TrackerPositionX, ab_tracker.TrackerPositionY, ab_tracker.TrackerPositionZ);
+
+                        if (ab_tracker.TrackerTriggered)
+                        {
+                            if (tracker != null)
+                            {
+                                tracker.SetActive(true);
+                            }
+                        }
+                        else
+                        {
+                            if (tracker != null)
+                            {
+                                tracker.SetActive(false);
+                            }
+                        }
+                    }
 
                     break;
 

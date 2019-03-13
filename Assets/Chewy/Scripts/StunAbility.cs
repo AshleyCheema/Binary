@@ -6,7 +6,7 @@ public class StunAbility : MonoBehaviour
 {
     private GameObject stunG;
     public bool stunActive;
-    private bool stunDropped;
+    public bool stunDropped;
     private float cooldown;
     private float abilityDuration;
     private Trigger trigger;
@@ -45,6 +45,7 @@ public class StunAbility : MonoBehaviour
             }
         }
     }
+    public bool isSpawned = false;
 
     // Start is called before the first frame update
     void Start()
@@ -60,8 +61,8 @@ public class StunAbility : MonoBehaviour
                 stunG.SetActive(false);
             }
         }
-        flash = stunG.transform.GetChild(0).GetComponent<ParticleSystem>();
-        trigger = stunG.GetComponent<Trigger>();
+        flash = gameObject.transform.GetChild(0).GetComponent<ParticleSystem>();
+        trigger = gameObject.GetComponent<Trigger>();
         cooldown = stunAbility.cooldown;
         abilityDuration = stunAbility.abilityDuration;
     }
@@ -125,38 +126,52 @@ public class StunAbility : MonoBehaviour
         {
             abilityDuration -= Time.deltaTime;
 
-            if (abilityDuration <= -1)
+            if (abilityDuration <= -2)
             {
                 stunActive = true;
+
+                if(isSpawned)
+                {
+                    Destroy(gameObject);
+                    //remove from list in clients
+                }
             }
 
             if (abilityDuration <= 0)
             {
                 flash.Play();
 
-                Collider[] coll = Physics.OverlapSphere(transform.position, stunG.GetComponent<SphereCollider>().radius);
-
-                for (int i = 0; i < coll.Length; i++)
+                if (!isSpawned)
                 {
-                    foreach (var pKey in client.Players.Keys)
+                    Collider[] coll = Physics.OverlapSphere(transform.position, stunG.GetComponent<SphereCollider>().radius);
+
+                    for (int i = 0; i < coll.Length; i++)
                     {
-                        if(coll[i].gameObject == client.LocalPlayer.avater)
+                        foreach (var pKey in client.Players.Keys)
                         {
+                            if (coll[i].gameObject == client.LocalPlayer.avater)
+                            {
 
-                        }
-                        else if (coll[i].gameObject == client.Players[pKey].avater)
-                        {
-                            //Send message to player tell them that they are affected
-                            NetMsg_AB_Trigger ab_trigger = new NetMsg_AB_Trigger();
-                            ab_trigger.ConnectionID = client.Players[pKey].connectionId;
-                            ab_trigger.Trigger = true;
-                            ab_trigger.Type = LLAPI.TriggerType.STUN;
+                            }
+                            else if (coll[i].gameObject == client.Players[pKey].avater)
+                            {
+                                //Send message to player tell them that they are affected
+                                NetMsg_AB_Trigger ab_trigger = new NetMsg_AB_Trigger();
+                                ab_trigger.ConnectionID = client.Players[pKey].connectionId;
+                                ab_trigger.Trigger = true;
+                                ab_trigger.Type = LLAPI.TriggerType.STUN;
 
-                            client.Send(ab_trigger);
+                                client.Send(ab_trigger);
+                            }
                         }
                     }
                 }
             }
         }
+    }
+
+    public void SetShell()
+    {
+        flash = gameObject.transform.GetChild(0).GetComponent<ParticleSystem>();
     }
 }

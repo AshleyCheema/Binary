@@ -27,7 +27,10 @@ public class Trigger : MonoBehaviour
             if (triggerType == TriggerType.Tracker)
             {
                 isDetected = true;
-                Debug.Log("SPY DETECTED");
+                Debug.Log("Spy detected: " + gameObject.transform.position);
+
+                //tell merc that the tracker has been set off
+                //spy tracked
             }
             else if(triggerType == TriggerType.Bullet)
             {
@@ -50,12 +53,6 @@ public class Trigger : MonoBehaviour
                     }
                 }
                 Debug.Log("Shot");
-            }
-            else if(triggerType == TriggerType.Tracker)
-            {
-                //tell merc that the tracker has been set off
-                //spy tracked
-                //send
             }
         }
 

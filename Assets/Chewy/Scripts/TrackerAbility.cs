@@ -37,7 +37,7 @@ public class TrackerAbility : MonoBehaviour
         {
             //Tracker Position
             //Insert arrow pointing towards tracker position
-            Debug.Log("Detected");
+            //Debug.Log("Detected");
             //ab_Tracker.TrackerTriggered = trackerTrigger.isDetected;
         }
 
@@ -64,7 +64,17 @@ public class TrackerAbility : MonoBehaviour
                 trackerDown = false;
                 trackingDevice.SetActive(false);
                 a_Duration = tracker.abilityDuration;
-                deviceCollider.enabled = false;
+
+                NetMsg_AB_Tracker ab_Tracker = new NetMsg_AB_Tracker();
+                ab_Tracker.ConnectionID = client.ServerConnectionId;
+                ab_Tracker.TrackerPositionX = trackerPos.x;
+                ab_Tracker.TrackerPositionY = trackerPos.y;
+                ab_Tracker.TrackerPositionZ = trackerPos.z;
+                ab_Tracker.TrackerTriggered = false;
+                ab_Tracker.TrackerObjectIndex = 3;
+
+                client.Send(ab_Tracker);
+                //deviceCollider.enabled = false;
             }
         }
 
@@ -101,6 +111,7 @@ public class TrackerAbility : MonoBehaviour
                     ab_Tracker.TrackerPositionX = trackerPos.x;
                     ab_Tracker.TrackerPositionY = trackerPos.y;
                     ab_Tracker.TrackerPositionZ = trackerPos.z;
+                    ab_Tracker.TrackerTriggered = true;
                     ab_Tracker.TrackerObjectIndex = 3;
 
                     client.Send(ab_Tracker);
