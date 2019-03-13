@@ -19,40 +19,44 @@ public class Trigger : MonoBehaviour
     public bool isStunned;
     private StunAbility stunAbility;
     private MercControls mercControls;
+    public bool IsSpawned = false;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Spy")
+        if (!IsSpawned)
         {
-            if (triggerType == TriggerType.Tracker)
+            if (other.gameObject.tag == "Spy")
             {
-                isDetected = true;
-                Debug.Log("Spy detected: " + gameObject.transform.position);
-
-                //tell merc that the tracker has been set off
-                //spy tracked
-            }
-            else if(triggerType == TriggerType.Bullet)
-            {
-                hasShot = true;
-                //Send message to client which has been hit
-                //first get the client which has been affected
-                foreach (var key in Client.Instance.Players.Keys)
+                if (triggerType == TriggerType.Tracker)
                 {
-                    //if true we have found the gameObejct hit
-                    if(other.gameObject == Client.Instance.Players[key].avater)
-                    {
-                        //Create the new message to send to the client who was shot
-                        NetMsg_AB_Trigger trigger = new NetMsg_AB_Trigger();
-                        trigger.ConnectionID = key;
-                        trigger.Trigger = true;
-                        trigger.Type = LLAPI.TriggerType.BULLET;
+                    isDetected = true;
+                    Debug.Log("Spy detected: " + gameObject.transform.position);
 
-                        //Send the message to the affected client
-                        Client.Instance.Send(trigger);
-                    }
+                    //tell merc that the tracker has been set off
+                    //spy tracked
                 }
-                Debug.Log("Shot");
+                else if (triggerType == TriggerType.Bullet)
+                {
+                    hasShot = true;
+                    //Send message to client which has been hit
+                    //first get the client which has been affected
+                    foreach (var key in Client.Instance.Players.Keys)
+                    {
+                        //if true we have found the gameObejct hit
+                        if (other.gameObject == Client.Instance.Players[key].avater)
+                        {
+                            //Create the new message to send to the client who was shot
+                            NetMsg_AB_Trigger trigger = new NetMsg_AB_Trigger();
+                            trigger.ConnectionID = key;
+                            trigger.Trigger = true;
+                            trigger.Type = LLAPI.TriggerType.BULLET;
+
+                            //Send the message to the affected client
+                            Client.Instance.Send(trigger);
+                        }
+                    }
+                    Debug.Log("Shot");
+                }
             }
         }
 

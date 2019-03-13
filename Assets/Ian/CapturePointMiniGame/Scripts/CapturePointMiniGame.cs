@@ -1,21 +1,17 @@
 ﻿/*
  * Author: Ian Hudson
  * Description: HLAPI - This script is used for a mini game which is shown to the player.
- * The mini game is based on Simon Says.
+ * The mini game is based on Simon Says. Now used in LLAPI
  * Created: 20/02/2019
  * Edited By: Ian
  */
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Networking;
 using UnityEngine.UI;
 
-public class CapturePointMiniGame : NetworkBehaviour
+public class CapturePointMiniGame : MonoBehaviour
 {
-    [SerializeField]
-    private CapturePoint capturePoint;
-
     [SerializeField]
     private GameObject parent;
 
@@ -83,18 +79,18 @@ public class CapturePointMiniGame : NetworkBehaviour
                     scroll.horizontalNormalizedPosition = 0;
                 }
 
-                scroll.horizontalNormalizedPosition += 1f / inputsNeeded.Length;
+                scroll.horizontalNormalizedPosition += 1.0f / (inputsNeeded.Length + 1);
 
                 if (inputsIndex > inputsNeeded.Length - 1)
                 {
                     //isCompleted = true;
                     inputsIndex = 0;
-                    capturePoint.CmdIncreaseMultiplier();
+
+                    //Mini Game is completed
                 }
             }
             else if (!isCompleted && Input.anyKeyDown && CheckInput())
             {
-                capturePoint.ResetMulitiplier();
                 inputsIndex = 0;
                 scroll.horizontalNormalizedPosition = 0;
             }

@@ -457,10 +457,8 @@ namespace LLAPI
                     players[ab_fire.ConnectionID].avaterObjects.Add(Instantiate(spawnableObjects.ObjectsToSpawn[ab_fire.BulletObjectIndex], new Vector3(ab_fire.BulletPositionX, ab_fire.BulletPositionY, ab_fire.BulletPositionZ), Quaternion.identity));
                     players[ab_fire.ConnectionID].avaterObjects[players[ab_fire.ConnectionID].avaterObjects.Count - 1].GetComponent<Rigidbody>().velocity = new Vector3(ab_fire.VelocityX, ab_fire.VelocityY, ab_fire.VelocityZ);
 
-                    players[ab_fire.ConnectionID].avaterObjects[players[ab_fire.ConnectionID].avaterObjects.Count - 1].GetComponent<Trigger>().enabled = false;
+                    players[ab_fire.ConnectionID].avaterObjects[players[ab_fire.ConnectionID].avaterObjects.Count - 1].GetComponent<Trigger>().IsSpawned = true;
                     players[ab_fire.ConnectionID].avaterObjects[players[ab_fire.ConnectionID].avaterObjects.Count - 1].gameObject.tag = "Destroy";
-
-                    players[ab_fire.ConnectionID].avaterObjects[players[ab_fire.ConnectionID].avaterObjects.Count - 1].GetComponent<Trigger>().enabled = false;
 
                     break;
 
@@ -473,7 +471,7 @@ namespace LLAPI
                     players[ab_stun.ConnectionID].avaterObjects[players[ab_stun.ConnectionID].avaterObjects.Count - 1].GetComponent<StunAbility>().stunDropped = true;
 
                     players[ab_stun.ConnectionID].avaterObjects[players[ab_stun.ConnectionID].avaterObjects.Count - 1].GetComponent<StunAbility>().SetShell();
-                    players[ab_stun.ConnectionID].avaterObjects[players[ab_stun.ConnectionID].avaterObjects.Count - 1].GetComponent<Trigger>().enabled = false;
+                    players[ab_stun.ConnectionID].avaterObjects[players[ab_stun.ConnectionID].avaterObjects.Count - 1].GetComponent<Trigger>().IsSpawned = true;
 
                     break;
 
@@ -499,7 +497,7 @@ namespace LLAPI
                     {
                         players[ab_tracker.ConnectionID].avaterObjects.Add(Instantiate(spawnableObjects.ObjectsToSpawn[ab_tracker.TrackerObjectIndex], new Vector3(ab_tracker.TrackerPositionX, ab_tracker.TrackerPositionY, ab_tracker.TrackerPositionZ), Quaternion.identity));
                         players[ab_tracker.ConnectionID].avaterObjects[players[ab_tracker.ConnectionID].avaterObjects.Count - 1].gameObject.name = "Merc_Tracker";
-                        players[ab_tracker.ConnectionID].avaterObjects[players[ab_tracker.ConnectionID].avaterObjects.Count - 1].GetComponent<Trigger>().enabled = false;
+                        players[ab_tracker.ConnectionID].avaterObjects[players[ab_tracker.ConnectionID].avaterObjects.Count - 1].GetComponent<Trigger>().IsSpawned = true;
 
                     }
                     else
