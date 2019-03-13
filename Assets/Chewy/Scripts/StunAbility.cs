@@ -6,7 +6,7 @@ public class StunAbility : Cooldown
 {
     private GameObject stunG;
     public bool stunActive;
-    private bool stunDropped;
+    public bool stunDropped;
     //private float cooldown;
     private float abilityDuration;
     private Trigger trigger;
