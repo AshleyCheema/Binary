@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Shootable
   - Merc
+  - Terminal
+  - Spy
+  - Destroy
   layers:
   - Default
   - TransparentFX

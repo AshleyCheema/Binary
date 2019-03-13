@@ -450,6 +450,18 @@ namespace LLAPI
 
                     break;
 
+                case NetOP.AB_FIRE:
+                    //Stun object has been droped by another player
+                    NetMsg_AB_Fire ab_fire = (NetMsg_AB_Fire)a_netmsg;
+
+                    players[ab_fire.ConnectionID].avaterObjects.Add(Instantiate(spawnableObjects.ObjectsToSpawn[ab_fire.BulletObjectIndex], new Vector3(ab_fire.BulletPositionX, ab_fire.BulletPositionY, ab_fire.BulletPositionZ), Quaternion.identity));
+                    players[ab_fire.ConnectionID].avaterObjects[players[ab_fire.ConnectionID].avaterObjects.Count - 1].GetComponent<Rigidbody>().velocity = new Vector3(ab_fire.VelocityX, ab_fire.VelocityY, ab_fire.VelocityZ);
+
+                    players[ab_fire.ConnectionID].avaterObjects[players[ab_fire.ConnectionID].avaterObjects.Count - 1].GetComponent<Trigger>().enabled = false;
+                    players[ab_fire.ConnectionID].avaterObjects[players[ab_fire.ConnectionID].avaterObjects.Count - 1].gameObject.tag = "Destroy";
+
+                    break;
+
                 case NetOP.AB_STUN:
                     //Stun object has been droped by another player
                     NetMsg_AB_Stun ab_stun = (NetMsg_AB_Stun)a_netmsg;
@@ -471,9 +483,9 @@ namespace LLAPI
                     {
                         Debug.Log("I HAVE BEEN STUNNED. NO!!!!!!!!!!!!!!");
                         //set isStunned to true
-                        if(localPlayer.avater.GetComponent<Trigger>())
+                        if(localPlayer.avater.GetComponent<MercControls>())
                         {
-                            localPlayer.avater.GetComponent<Trigger>().isStunned = true;
+                            localPlayer.avater.GetComponent<MercControls>().IsStunned = true;
                         }
                     }
 

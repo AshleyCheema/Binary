@@ -21,8 +21,15 @@ public class MercControls : PlayerController
     private float shotCooldown = 5f;
     public float reloadSpeed = 2f;
     private GameObject bullet;
-    [SerializeField]
-    private Trigger triggerScript;
+
+    //[SerializeField]
+    //private Trigger triggerScript;
+
+    private bool isStunned = false;
+    public bool IsStunned
+    { get { return isStunned; } set { isStunned = value; } }
+    private float stunCountDown = 2.0f;
+
     //Audio
     private AudioSource source;
     public AudioSO walkingSound;
@@ -59,19 +66,20 @@ public class MercControls : PlayerController
 
         //ab_Fire.Trigger = triggerScript.hasShot;
 
-        if (triggerScript != null)
-        {
-            if (triggerScript.isStunned)
+        //if (triggerScript != null)
+        //{
+            if (isStunned)
             {
                 currentSpeed = reloadSpeed;
-                reloadSpeed -= Time.deltaTime;
-                if (reloadSpeed <= 0)
+                stunCountDown -= Time.deltaTime;
+                if (stunCountDown <= 0)
                 {
+                    stunCountDown = 2.0f;
                     currentSpeed = normalSpeed;
-                    triggerScript.isStunned = false;
+                    isStunned = false;
                 }
             }
-        }
+        //}
         if (Input.GetKeyDown(KeyCode.Mouse0) && !noShoot)
         {
             //Sound/Animation?

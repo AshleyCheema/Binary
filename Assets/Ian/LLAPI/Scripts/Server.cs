@@ -337,6 +337,7 @@ namespace LLAPI
                     players[ab_fire.ConnectionID].avaterObjects.Add(Instantiate(spawnableObjects.ObjectsToSpawn[ab_fire.BulletObjectIndex], new Vector3(ab_fire.BulletPositionX, ab_fire.BulletPositionY, ab_fire.BulletPositionZ), Quaternion.identity));
                     players[ab_fire.ConnectionID].avaterObjects[players[ab_fire.ConnectionID].avaterObjects.Count  - 1].GetComponent<Rigidbody>().velocity = new Vector3(ab_fire.VelocityX, ab_fire.VelocityY, ab_fire.VelocityZ);
 
+                    Send(ab_fire, reliableChannel, ab_fire.ConnectionID, false);
                     /*
                      * foreach(player)
                      *      check if there position is in the radius
