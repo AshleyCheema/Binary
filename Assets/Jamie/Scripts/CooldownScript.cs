@@ -32,6 +32,7 @@ public class CooldownScript : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
+
         if(mercControls != null)
         {
             isMerc = true;
