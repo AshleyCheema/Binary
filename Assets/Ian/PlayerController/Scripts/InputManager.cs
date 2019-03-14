@@ -44,10 +44,26 @@ public static class InputManager
     /// Return both Horizontal & Vertical values
     /// </summary>
     /// <returns></returns>
-    public static Vector3 Joystick(Player a_player)
+    public static Vector3 Joystick(Player a_player, Vector3 a_pos)
     {
-        return new Vector3(Horizontal(a_player), 0, Vertical(a_player));
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit))
+        {
+            if (Input.GetKey(KeyCode.W))
+            {
+                Vector3 newDir = hit.point - a_pos;
+                newDir.y = 0;
+
+                return newDir.normalized;
+            }
+        }
+        return Vector3.zero;
+        // return new Vector3(Horizontal(a_player), 0, Vertical(a_player));
+
     }
+
 
     /// <summary>
     /// Return true or false for if the return key has been pressed

@@ -72,15 +72,15 @@ public class PlayerController_Net : NetworkBehaviour
 
         transform.Translate(velocity * Time.deltaTime);
 
-        transform.Translate(InputManager.Joystick(player) * movementSpeed * Time.deltaTime);
-
-        if(InputManager.Joystick(player) != Vector3.zero)
-        {
-            // The player is asking the change it's direction/speed (velocity)
-            velocity = InputManager.Joystick(player) * movementSpeed * Time.deltaTime;
-
-            CmdUpdateVelocity(velocity, transform.position);
-        }
+        //transform.Translate(InputManager.Joystick(player) * movementSpeed * Time.deltaTime);
+        //
+        //if(InputManager.Joystick(player) != Vector3.zero)
+        //{
+        //    // The player is asking the change it's direction/speed (velocity)
+        //    velocity = InputManager.Joystick(player) * movementSpeed * Time.deltaTime;
+        //
+        //    CmdUpdateVelocity(velocity, transform.position);
+        //}
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
