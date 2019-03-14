@@ -119,6 +119,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 560383091229060558, guid: a54b0b73fee3ec44b90d9fc9293ca595,
+        type: 3}
+      propertyPath: m_Name
+      value: WhiteBox
+      objectReference: {fileID: 0}
     - target: {fileID: 990148580350240163, guid: a54b0b73fee3ec44b90d9fc9293ca595,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -248,11 +253,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsTrigger
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 560383091229060558, guid: a54b0b73fee3ec44b90d9fc9293ca595,
-        type: 3}
-      propertyPath: m_Name
-      value: WhiteBox
       objectReference: {fileID: 0}
     - target: {fileID: 3244997370592837269, guid: a54b0b73fee3ec44b90d9fc9293ca595,
         type: 3}
@@ -1325,7 +1325,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1274431020}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &1274431023
 Camera:
   m_ObjectHideFlags: 0

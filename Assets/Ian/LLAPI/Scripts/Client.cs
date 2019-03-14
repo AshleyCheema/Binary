@@ -224,6 +224,7 @@ namespace LLAPI
         {
             NetworkTransport.Init();
             ConnectionConfig cc = new ConnectionConfig();
+            //cc.SendDelay = 0;
 
             reliableChannel = cc.AddChannel(QosType.Reliable);
             unreliableChannel = cc.AddChannel(QosType.Unreliable);
