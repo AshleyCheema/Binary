@@ -112,10 +112,24 @@ public class CS_LobbyManager : MonoBehaviour
         if(a_p.team == Team.Merc)
         {
             cs_lobby.AddMercPlayer(a_p.lobbyAvater);
+            for(int i = 0; i < a_p.lobbyAvater.transform.childCount; ++i)
+            {
+                if(a_p.lobbyAvater.transform.GetChild(i).gameObject.tag == "playerColourIndication")
+                {
+                    a_p.lobbyAvater.transform.GetChild(i).gameObject.GetComponent<Image>().color = new Color32(142,23,23,255);
+                }
+            }
         }
         else if(a_p.team == Team.Spy)
         {
             cs_lobby.AddSpyPlayer(a_p.lobbyAvater);
+            for (int i = 0; i < a_p.lobbyAvater.transform.childCount; ++i)
+            {
+                if (a_p.lobbyAvater.transform.GetChild(i).gameObject.tag == "playerColourIndication")
+                {
+                    a_p.lobbyAvater.transform.GetChild(i).gameObject.GetComponent<Image>().color = new Color32(51, 134, 160, 255);
+                }
+            }
         }
         else
         {

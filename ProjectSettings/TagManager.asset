@@ -9,6 +9,7 @@ TagManager:
   - Terminal
   - Spy
   - Destroy
+  - playerColourIndication
   layers:
   - Default
   - TransparentFX
