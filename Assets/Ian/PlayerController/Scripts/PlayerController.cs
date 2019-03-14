@@ -53,23 +53,27 @@ public class PlayerController : MonoBehaviour
             client = FindObjectOfType<Client>();
         }
 
-        if (Input.GetButton("Crouching"))
+        if (player == Player.PlayerTwo)
         {
-            currentSpeed = crouchingSpeed;
-        }
+            if (Input.GetButton("Crouching"))
+            {
+                currentSpeed = crouchingSpeed;
+            }
 
-        else if (Input.GetButton("Sprint"))
-        {
-            isRunning = true;
-            currentSpeed = runningSpeed;
-        }
-        else
-        {
-            isRunning = false;
-            currentSpeed = normalSpeed;
+            else if (Input.GetButton("Sprint"))
+            {
+                isRunning = true;
+                currentSpeed = runningSpeed;
+            }
+            else
+            {
+                isRunning = false;
+                currentSpeed = normalSpeed;
+            }
         }
 
         velocity = InputManager.Joystick(player);
+
 
         Quaternion oldRot = transform.rotation;
 
@@ -80,12 +84,15 @@ public class PlayerController : MonoBehaviour
         {
             //Update server setting for this object
             NetMsg_PlayerMovement playerMovement = new NetMsg_PlayerMovement();
-            playerMovement.connectId = client.ServerConnectionId;
-            playerMovement.xMove = rb.position.x;
-            playerMovement.yMove = rb.position.y;
-            playerMovement.zMove = rb.position.z;
+            if (client != null)
+            {
+                playerMovement.connectId = client.ServerConnectionId;
+                playerMovement.xMove = rb.position.x;
+                playerMovement.yMove = rb.position.y;
+                playerMovement.zMove = rb.position.z;
 
-            client.Send(playerMovement, client.ReliableChannel);
+                client.Send(playerMovement, client.ReliableChannel);
+            }
         }
 
         //Check if the rotation has changed
@@ -93,12 +100,15 @@ public class PlayerController : MonoBehaviour
         {
             //Update server seting for this object
             NetMsg_PlayerRotation playerRotation = new NetMsg_PlayerRotation();
-            playerRotation.ConnectionId = client.ServerConnectionId;
-            playerRotation.XRot = transform.rotation.eulerAngles.x;
-            playerRotation.YRot = transform.rotation.eulerAngles.y;
-            playerRotation.ZRot = transform.rotation.eulerAngles.z;
+            if (client != null)
+            {
+                playerRotation.ConnectionId = client.ServerConnectionId;
+                playerRotation.XRot = transform.rotation.eulerAngles.x;
+                playerRotation.YRot = transform.rotation.eulerAngles.y;
+                playerRotation.ZRot = transform.rotation.eulerAngles.z;
 
-            client.Send(playerRotation, client.StateUpdateChannel);
+                client.Send(playerRotation, client.StateUpdateChannel);
+            }
         }
     }
 

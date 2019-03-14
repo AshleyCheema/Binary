@@ -144,17 +144,19 @@ public class MercControls : PlayerController
                 canSprint = true;
             }
         }
-
         //When sprint is pressed the merc will be able to run for a short period of time
-        if (Input.GetButton("Sprint") && canSprint)
+        if (Input.GetKey(KeyCode.LeftShift) && canSprint)
         {
-            buttonPressed = true;
-            #region NetMsg_Sprint
-            NetMsg_AB_Sprint ab_Sprint = new NetMsg_AB_Sprint();
-            ab_Sprint.ConnectionID = client.ServerConnectionId;
-            ab_Sprint.SprintValue = runningSpeed;
-            client.Send(ab_Sprint);
-            #endregion
+           buttonPressed = true;
+           #region NetMsg_Sprint
+           NetMsg_AB_Sprint ab_Sprint = new NetMsg_AB_Sprint();
+           if (client != null)
+           {
+               ab_Sprint.ConnectionID = client.ServerConnectionId;
+               ab_Sprint.SprintValue = runningSpeed;
+               client.Send(ab_Sprint);
+           }
+           #endregion
         }
         if (buttonPressed)
         {
@@ -166,7 +168,6 @@ public class MercControls : PlayerController
                 cooldown = speedDuration;
                 canSprint = false;
                 buttonPressed = false;
-
                 currentSpeed = normalSpeed;
             }
         }
