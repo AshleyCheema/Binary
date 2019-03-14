@@ -400,6 +400,8 @@ namespace LLAPI
                             //disable the fog of war for this player
                             players[key.ConnectionID].avater.GetComponentInChildren<FOWMask>().gameObject.SetActive(false);
 
+                            players[key.ConnectionID].avater.GetComponentInChildren<UIScript>().gameObject.SetActive(false);
+
                         }
                         index += 1;
                     }

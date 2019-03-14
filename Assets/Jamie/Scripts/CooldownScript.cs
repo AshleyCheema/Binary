@@ -66,12 +66,12 @@ public class CooldownScript : MonoBehaviour
         if (isSpy)
         {
             //Debug.Log("Skill '" + Action.name + "' has been clicked");
-            if (spyController.isRunning && Action.interactable == true && abilityType == AbilityType.SPRINT)
+            if (spyController.isRunning && Action.interactable && abilityType == AbilityType.SPRINT)
             {
                 Action.interactable = false;
                 currentCooldown = 0;
             }
-            if(spyController.stunDrop && Action.interactable == true && abilityType == AbilityType.STUN)
+            if(spyController.stunDrop && Action.interactable && abilityType == AbilityType.STUN)
             {
                 Action.interactable = false;
                 currentCooldown = 0;
@@ -80,17 +80,17 @@ public class CooldownScript : MonoBehaviour
 
         if (isMerc)
         {
-            if (mercControls.noShoot && Action.interactable == true && abilityType == AbilityType.FIRE)
+            if (mercControls.noShoot && Action.interactable && abilityType == AbilityType.FIRE)
             {
                 Action.interactable = false;
                 currentCooldown = 0;
             }
-            if (!mercControls.canSprint && Action.interactable == true && abilityType == AbilityType.BURST)
+            if (!mercControls.canSprint && Action.interactable && abilityType == AbilityType.BURST)
             {
                 Action.interactable = false;
                 currentCooldown = 0;
             }
-            if (trackerAbility.trackerDown && Action.interactable == true && abilityType == AbilityType.TRACKER)
+            if (trackerAbility.trackerDown && Action.interactable && abilityType == AbilityType.TRACKER)
             {
                 Action.interactable = false;
                 currentCooldown = 0;

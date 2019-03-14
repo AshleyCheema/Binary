@@ -624,18 +624,6 @@ Transform:
   m_Father: {fileID: 1238055595}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &421218600 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 80722652396774931, guid: 4639a6967376c6f4ca6f687a0a1370ad,
-    type: 3}
-  m_PrefabInstance: {fileID: 80722652144799674}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b92b685ac5dd95d4cbaa06baec2a7c86, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &545078749
 GameObject:
   m_ObjectHideFlags: 0
@@ -1129,7 +1117,7 @@ PrefabInstance:
     - target: {fileID: 3011942314590609162, guid: 886c300e7afc8604db6d96de8e831e26,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3011942314590609162, guid: 886c300e7afc8604db6d96de8e831e26,
         type: 3}
@@ -2307,6 +2295,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 312546652755104693, guid: 4d0d07280e019bf4b950e4016b056a09,
+        type: 3}
+      propertyPath: m_Name
+      value: FlashEffect
+      objectReference: {fileID: 0}
     - target: {fileID: 312546652755104690, guid: 4d0d07280e019bf4b950e4016b056a09,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2361,11 +2354,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 312546652755104693, guid: 4d0d07280e019bf4b950e4016b056a09,
-        type: 3}
-      propertyPath: m_Name
-      value: FlashEffect
       objectReference: {fileID: 0}
     - target: {fileID: 312546652755104691, guid: 4d0d07280e019bf4b950e4016b056a09,
         type: 3}
@@ -2536,7 +2524,7 @@ PrefabInstance:
     - target: {fileID: 80722652396774936, guid: 4639a6967376c6f4ca6f687a0a1370ad,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 80722652396774937, guid: 4639a6967376c6f4ca6f687a0a1370ad,
         type: 3}
@@ -2639,16 +2627,6 @@ PrefabInstance:
       propertyPath: m_isInputParsingRequired
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1793993581211401442, guid: 4639a6967376c6f4ca6f687a0a1370ad,
-        type: 3}
-      propertyPath: mercControls
-      value: 
-      objectReference: {fileID: 1743923452}
-    - target: {fileID: 1793993581211401442, guid: 4639a6967376c6f4ca6f687a0a1370ad,
-        type: 3}
-      propertyPath: trackerAbility
-      value: 
-      objectReference: {fileID: 421218600}
     - target: {fileID: 1793993581909982141, guid: 4639a6967376c6f4ca6f687a0a1370ad,
         type: 3}
       propertyPath: m_havePropertiesChanged

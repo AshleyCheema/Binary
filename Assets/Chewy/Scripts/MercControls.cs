@@ -100,19 +100,21 @@ public class MercControls : PlayerController
 
             #region NetMsg_Fire
             NetMsg_AB_Fire ab_Fire = new NetMsg_AB_Fire();
+            if (client != null)
+            {
+                ab_Fire.ConnectionID = client.ServerConnectionId;
 
-            ab_Fire.ConnectionID = client.ServerConnectionId;
+                ab_Fire.BulletPositionX = bullet.transform.position.x;
+                ab_Fire.BulletPositionY = bullet.transform.position.y;
+                ab_Fire.BulletPositionZ = bullet.transform.position.z;
 
-            ab_Fire.BulletPositionX = bullet.transform.position.x;
-            ab_Fire.BulletPositionY = bullet.transform.position.y;
-            ab_Fire.BulletPositionZ = bullet.transform.position.z;
+                ab_Fire.VelocityX = bullet.GetComponent<Rigidbody>().velocity.x;
+                ab_Fire.VelocityY = bullet.GetComponent<Rigidbody>().velocity.y;
+                ab_Fire.VelocityZ = bullet.GetComponent<Rigidbody>().velocity.z;
 
-            ab_Fire.VelocityX = bullet.GetComponent<Rigidbody>().velocity.x;
-            ab_Fire.VelocityY = bullet.GetComponent<Rigidbody>().velocity.y;
-            ab_Fire.VelocityZ = bullet.GetComponent<Rigidbody>().velocity.z;
-
-            ab_Fire.BulletObjectIndex = 2;
-            client.Send(ab_Fire);
+                ab_Fire.BulletObjectIndex = 2;
+                client.Send(ab_Fire);
+            }
             #endregion
 
         }

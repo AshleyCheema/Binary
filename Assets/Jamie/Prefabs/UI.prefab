@@ -703,7 +703,7 @@ MonoBehaviour:
   spyController: {fileID: 0}
   mercControls: {fileID: 0}
   trackerAbility: {fileID: 0}
-  abilityType: 0
+  abilityType: 1
 --- !u!1 &2114616451905442643
 GameObject:
   m_ObjectHideFlags: 0
@@ -1581,7 +1581,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CooldownImage: {fileID: 2114616453122628365}
-  CooldownTime: 5
+  CooldownTime: 5.2
   Action: {fileID: 2114616452326917871}
   spyController: {fileID: 0}
   mercControls: {fileID: 0}

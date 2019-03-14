@@ -73,14 +73,17 @@ public class TrackerAbility : Cooldown
                 cooldown = tracker.abilityDuration;
 
                 NetMsg_AB_Tracker ab_Tracker = new NetMsg_AB_Tracker();
-                ab_Tracker.ConnectionID = client.ServerConnectionId;
-                ab_Tracker.TrackerPositionX = trackerPos.x;
-                ab_Tracker.TrackerPositionY = trackerPos.y;
-                ab_Tracker.TrackerPositionZ = trackerPos.z;
-                ab_Tracker.TrackerTriggered = false;
-                ab_Tracker.TrackerObjectIndex = 3;
+                if (client != null)
+                {
+                    ab_Tracker.ConnectionID = client.ServerConnectionId;
+                    ab_Tracker.TrackerPositionX = trackerPos.x;
+                    ab_Tracker.TrackerPositionY = trackerPos.y;
+                    ab_Tracker.TrackerPositionZ = trackerPos.z;
+                    ab_Tracker.TrackerTriggered = false;
+                    ab_Tracker.TrackerObjectIndex = 3;
 
-                client.Send(ab_Tracker);
+                    client.Send(ab_Tracker);
+                }
                 //deviceCollider.enabled = false;
             }
         }
@@ -114,14 +117,17 @@ public class TrackerAbility : Cooldown
                     #region NetMsg_Tracker
 
                     NetMsg_AB_Tracker ab_Tracker = new NetMsg_AB_Tracker();
-                    ab_Tracker.ConnectionID = client.ServerConnectionId;
-                    ab_Tracker.TrackerPositionX = trackerPos.x;
-                    ab_Tracker.TrackerPositionY = trackerPos.y;
-                    ab_Tracker.TrackerPositionZ = trackerPos.z;
-                    ab_Tracker.TrackerTriggered = true;
-                    ab_Tracker.TrackerObjectIndex = 3;
+                    if (client != null)
+                    {
+                        ab_Tracker.ConnectionID = client.ServerConnectionId;
+                        ab_Tracker.TrackerPositionX = trackerPos.x;
+                        ab_Tracker.TrackerPositionY = trackerPos.y;
+                        ab_Tracker.TrackerPositionZ = trackerPos.z;
+                        ab_Tracker.TrackerTriggered = true;
+                        ab_Tracker.TrackerObjectIndex = 3;
 
-                    client.Send(ab_Tracker);
+                        client.Send(ab_Tracker);
+                    }
                     #endregion
                 }
             }
