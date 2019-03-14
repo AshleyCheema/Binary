@@ -7,7 +7,10 @@ public class TrackerAbility : Cooldown
     public Abilities tracker;
     private GameObject trackingDevice;
     private Trigger trackerTrigger;
+
+    private bool trackerActive;
     public bool trackerDown;
+
     private Collider deviceCollider;
     private Vector3 trackerPos;
     protected Client client;
@@ -19,7 +22,10 @@ public class TrackerAbility : Cooldown
         client = FindObjectOfType<Client>();
         isCooldown = tracker.isCooldown;
         cooldown = tracker.abilityDuration;
+
+        trackerActive = false;
         trackingDevice = GameObject.Find("Tracker");
+
         trackerTrigger = trackingDevice.GetComponent<Trigger>();
         trackingDevice.SetActive(false);
         deviceCollider = trackingDevice.GetComponent<Collider>();
@@ -41,14 +47,16 @@ public class TrackerAbility : Cooldown
 
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            if (!isCooldown && cooldown == tracker.abilityDuration)
+            if (!isCooldown && !trackerActive) //&& cooldown == tracker.abilityDuration)
             {
                 trackingDevice.SetActive(true);
-                isCooldown = true;
+                trackerActive = true;
+                //isCooldown = true;
             }
-            else if(!trackerDown)
+            else if(!isCooldown && trackerActive)
             {
-                isCooldown = false;
+                //isCooldown = false;
+                trackerActive = false;
                 trackingDevice.SetActive(false);
             }
         }
@@ -60,6 +68,7 @@ public class TrackerAbility : Cooldown
             if(cooldown <= 0)
             {
                 trackerDown = false;
+                trackerActive = false;
                 trackingDevice.SetActive(false);
                 cooldown = tracker.abilityDuration;
 
@@ -76,7 +85,7 @@ public class TrackerAbility : Cooldown
             }
         }
 
-        if (isCooldown)
+        if (!isCooldown && trackerActive)
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
@@ -99,7 +108,7 @@ public class TrackerAbility : Cooldown
                 {
                     trackerPos = trackingDevice.transform.position;
                     deviceCollider.enabled = true;
-                    isCooldown = false;
+                    isCooldown = true;
                     trackerDown = true;
 
                     #region NetMsg_Tracker
