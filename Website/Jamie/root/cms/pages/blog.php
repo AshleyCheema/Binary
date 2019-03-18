@@ -38,7 +38,7 @@
             </div>
         </div>
         <div class="d-flex justify-content-center mt-5 login_container">
-            <button type="submit" name="add-blog" class="button login_btn">Submit</button>
+            <button type="submit" name="add-blog" class="button login_btn" value="add-blog" >Submit</button>
         </div> 
     </form>
 

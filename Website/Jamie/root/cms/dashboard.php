@@ -1,5 +1,7 @@
 <?php
 
+error_reporting(E_ALL);
+
  //includes login script
  include( 'functions.php' );
 
@@ -23,6 +25,8 @@
  editSlide();
 
  updateSlide();
+
+ //echo var_dump($_POST);die;
 
 ?>
 
