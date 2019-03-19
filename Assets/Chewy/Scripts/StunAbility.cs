@@ -128,11 +128,12 @@ public class StunAbility : Cooldown
         if (stunDropped)
         {
             abilityDuration -= Time.deltaTime;
-            stunActive = true;
 
             if (abilityDuration <= -2)
             {
-                if(isSpawned)
+                stunActive = true;
+
+                if (isSpawned)
                 {
                     Destroy(gameObject);
                     //remove from list in clients

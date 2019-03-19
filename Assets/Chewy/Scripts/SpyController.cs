@@ -46,8 +46,11 @@ public class SpyController : PlayerController
 
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            stun.GetComponent<StunAbility>().IsActive = true;
-            stunDrop = true;
+            if (stun.GetComponent<StunAbility>().IsActive == false)
+            {
+                stun.GetComponent<StunAbility>().IsActive = true;
+                stunDrop = true;
+            }
         }
     }
 }
