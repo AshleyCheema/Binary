@@ -28,7 +28,7 @@ namespace LLAPI
         Game
     }
 
-    public class Server : NetworkManager
+    public class Server : MonoBehaviour
     {
         private static Server instance;
         public static Server Instance
@@ -81,7 +81,7 @@ namespace LLAPI
 
             DontDestroyOnLoad(gameObject);
 
-            NetworkTransport.Init();
+            //NetworkTransport.Init();
             ConnectionConfig cc = new ConnectionConfig();
 
             reliableChannel = cc.AddChannel(QosType.Reliable);
@@ -91,7 +91,6 @@ namespace LLAPI
             HostTopology topo = new HostTopology(cc, MAX_CONNECTIONS);
 
             hostId = NetworkTransport.AddHost(topo, port, null);
-            //StartServer(cc);
 
             Network_Object[] netObjs = GameObject.FindObjectsOfType<Network_Object>();
             for (int i = 0; i < netObjs.Length; i++)

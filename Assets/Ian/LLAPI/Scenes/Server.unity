@@ -401,6 +401,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 4
+  miniGame: {fileID: 0}
 --- !u!65 &369047803
 BoxCollider:
   m_ObjectHideFlags: 0
