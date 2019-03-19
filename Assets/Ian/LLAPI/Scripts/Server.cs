@@ -90,8 +90,8 @@ namespace LLAPI
 
             HostTopology topo = new HostTopology(cc, MAX_CONNECTIONS);
 
-            // hostId = NetworkTransport.AddHost(topo, port, null);
-            StartServer(cc);
+            hostId = NetworkTransport.AddHost(topo, port, null);
+            //StartServer(cc);
 
             Network_Object[] netObjs = GameObject.FindObjectsOfType<Network_Object>();
             for (int i = 0; i < netObjs.Length; i++)
