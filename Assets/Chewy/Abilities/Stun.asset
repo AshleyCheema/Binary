@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Stun
   aClip: {fileID: 0}
-  cooldown: 60
+  cooldown: 5
   isCooldown: 0
   abilityDuration: 2
   uiImage: {fileID: 0}

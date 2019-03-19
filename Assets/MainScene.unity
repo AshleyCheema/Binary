@@ -1260,6 +1260,11 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1545181766788400031, guid: 886c300e7afc8604db6d96de8e831e26,
+        type: 3}
+      propertyPath: CooldownTime
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 886c300e7afc8604db6d96de8e831e26, type: 3}
 --- !u!1 &1155454257
@@ -2295,11 +2300,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 312546652755104693, guid: 4d0d07280e019bf4b950e4016b056a09,
-        type: 3}
-      propertyPath: m_Name
-      value: FlashEffect
-      objectReference: {fileID: 0}
     - target: {fileID: 312546652755104690, guid: 4d0d07280e019bf4b950e4016b056a09,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2354,6 +2354,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 312546652755104693, guid: 4d0d07280e019bf4b950e4016b056a09,
+        type: 3}
+      propertyPath: m_Name
+      value: FlashEffect
       objectReference: {fileID: 0}
     - target: {fileID: 312546652755104691, guid: 4d0d07280e019bf4b950e4016b056a09,
         type: 3}

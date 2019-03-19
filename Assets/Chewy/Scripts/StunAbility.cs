@@ -58,7 +58,7 @@ public class StunAbility : Cooldown
             spyControllerSc = spyController.GetComponent<SpyController>();
             if (stunG != null)
             {
-                stunG.SetActive(false);
+                IsActive = false;
             }
         }
         flash = gameObject.transform.GetChild(0).GetComponent<ParticleSystem>();
@@ -76,12 +76,12 @@ public class StunAbility : Cooldown
         {
             if (!stunActive)
             {
+                IsActive = true;
                 stunG.transform.position = new Vector3(spyController.transform.position.x,
                                                        spyController.transform.position.y,
                                                        spyController.transform.position.z - 1);
                 stunDropped = true;
                 spyControllerSc.stunDrop = false;
-
                 isCooldown = true;
                 #region NetMsg_Stun
 
@@ -119,6 +119,7 @@ public class StunAbility : Cooldown
             flash.Stop();
             if(!isCooldown)
             {
+                cooldown = stunAbility.cooldown;
                 stunActive = false;
             }
 
@@ -127,11 +128,10 @@ public class StunAbility : Cooldown
         if (stunDropped)
         {
             abilityDuration -= Time.deltaTime;
+            stunActive = true;
 
             if (abilityDuration <= -2)
             {
-                stunActive = true;
-
                 if(isSpawned)
                 {
                     Destroy(gameObject);
