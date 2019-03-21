@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,5 +14,6 @@ namespace LLAPI
         }
 
         public string Message { get; set; }
+        public long Time { get; set; }
     }
 }

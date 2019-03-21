@@ -97,64 +97,10 @@ namespace LLAPI
 
         private void Update()
         {
-            if (currentStatus == Status.Lobby)
-            {
-                UpdateInLobby();
-            }
-            else if (currentStatus == Status.Game)
-            {
-                UpdateInGame();
-            }
+            UpdateRecevied();
         }
 
-        private void UpdateInLobby()
-        {
-            if (isConnected)
-            {
-                int recHostId;
-                int recConnectionId;
-                int recChannelId;
-
-                byte[] recBuffer = new byte[1024];
-                int dataSize;
-
-                NetworkEventType recData = NetworkEventType.Nothing;
-
-                do
-                {
-                    recData = NetworkTransport.Receive(out recHostId, out recConnectionId, out recChannelId, recBuffer, recBuffer.Length, out dataSize, out error);
-
-                    if (recData == NetworkEventType.Nothing)
-                    {
-                        break;
-                    }
-
-                    byte[] workingBuffer = new byte[dataSize];
-
-                    if (dataSize > 0)
-                    {
-                        Buffer.BlockCopy(recBuffer, 0, workingBuffer, 0, dataSize);
-                    }
-
-                    switch (recData)
-                    {
-                        case NetworkEventType.ConnectEvent:
-                            Debug.Log("We have connected to server");
-                            break;
-
-                        case NetworkEventType.DisconnectEvent:
-                            Debug.Log("We have disconnected to server");
-                            break;
-
-                        case NetworkEventType.DataEvent:
-                            ReciveData(recHostId, recConnectionId, recChannelId, recBuffer);
-                            break;
-                    }
-                } while (recData != NetworkEventType.Nothing);
-            }
-        }
-
-        private void UpdateInGame()
+        private void UpdateRecevied()
         {
             if (!isConnected)
             {
@@ -165,6 +111,7 @@ namespace LLAPI
             {
                 NetMsg_StringMessage stringmsg = new NetMsg_StringMessage();
                 stringmsg.Message = "This is a test message from " + connectionId + " Client";
+                stringmsg.Time = DateTime.UtcNow.Ticks;
 
                 Send(stringmsg, reliableChannel);
             }
@@ -259,6 +206,7 @@ namespace LLAPI
 
         private void ReciveData(int a_hostId, int a_connectionId, int a_channelId, byte[] a_recBuffer)
         {
+            Debug.Log(a_recBuffer.Length);
             Stream serializedMessage = new MemoryStream(a_recBuffer);
             BinaryFormatter formatter = new BinaryFormatter();
             NetMsg message = (NetMsg)formatter.Deserialize(serializedMessage);
@@ -339,7 +287,15 @@ namespace LLAPI
                     NetMsg_ClientLoadSceneLB sceneLoadLB = (NetMsg_ClientLoadSceneLB)a_netmsg;
                     SceneManager.sceneLoaded += SceneLoaded;
                     SceneManager.LoadScene(sceneLoadLB.SceneToLoad);
+                    break;
 
+                case NetOP.NAME:
+                    NetMsg_StringMessage pong = (NetMsg_StringMessage)a_netmsg;
+
+                    TimeSpan tsServer = new TimeSpan(pong.Time);
+                    TimeSpan tsClient = new TimeSpan(DateTime.UtcNow.Ticks);
+
+                    Debug.Log("Client got message: " + (tsClient.Milliseconds - tsServer.Milliseconds));
                     break;
             }
 
