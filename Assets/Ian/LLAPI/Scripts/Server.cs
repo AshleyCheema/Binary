@@ -81,7 +81,7 @@ namespace LLAPI
 
             DontDestroyOnLoad(gameObject);
 
-            //NetworkTransport.Init();
+            NetworkTransport.Init();
             ConnectionConfig cc = new ConnectionConfig();
 
             reliableChannel = cc.AddChannel(QosType.Reliable);
