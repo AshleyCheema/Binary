@@ -88,6 +88,8 @@ namespace LLAPI
             unreliableChannel = cc.AddChannel(QosType.Unreliable);
             stateUpdateChannel = cc.AddChannel(QosType.StateUpdate);
 
+            cc.SendDelay = 0;
+
             HostTopology topo = new HostTopology(cc, MAX_CONNECTIONS);
 
             hostId = NetworkTransport.AddHost(topo, port, null);
@@ -103,14 +105,7 @@ namespace LLAPI
 
         private void Update()
         {
-            if (currentStatus == Status.Lobby)
-            {
-                UpdateInLobby();
-            }
-            else if (currentStatus == Status.Game)
-            {
-                UpdateInGame();
-            }
+            UpdateReceive();
         }
 
 
@@ -149,56 +144,7 @@ namespace LLAPI
             */
         }
 
-        private void UpdateInLobby()
-        {
-            if (!isStarted)
-            {
-                return;
-            }
-
-            int recHostId;
-            int recConnectionId;
-            int recChannelId;
-
-            byte[] recBuffer = new byte[1024];
-            int dataSize;
-
-            NetworkEventType recData = NetworkEventType.Nothing;
-
-            do
-            {
-                recData = NetworkTransport.Receive(out recHostId, out recConnectionId, out recChannelId, recBuffer, recBuffer.Length, out dataSize, out error);
-
-                if (recData == NetworkEventType.Nothing)
-                {
-                    break;
-                }
-
-                byte[] workingBuffer = new byte[dataSize];
-
-                if (dataSize > 0)
-                {
-                    Buffer.BlockCopy(recBuffer, 0, workingBuffer, 0, dataSize);
-                }
-
-                switch (recData)
-                {
-                    case NetworkEventType.ConnectEvent:
-                        OnConection(recConnectionId);
-                        break;
-
-                    case NetworkEventType.DataEvent:
-                        ReciveData(recHostId, recConnectionId, recChannelId, recBuffer);
-                        break;
-
-                    case NetworkEventType.DisconnectEvent:
-                        OnDisconnect(recConnectionId);
-                        break;
-                }
-            } while (recData != NetworkEventType.Nothing);
-        }
-
-        private void UpdateInGame()
+        private void UpdateReceive()
         {
             if (!isStarted)
             {
@@ -232,9 +178,9 @@ namespace LLAPI
 
                 switch (recData)
                 {
-                    //case NetworkEventType.ConnectEvent:
-                    //    OnConection(recConnectionId);
-                    //    break;
+                    case NetworkEventType.ConnectEvent:
+                        OnConection(recConnectionId);
+                        break;
 
                     case NetworkEventType.DisconnectEvent:
                         OnDisconnect(recConnectionId);
@@ -299,6 +245,16 @@ namespace LLAPI
                     players[conformLoadLB.ConnectionID].LoadedGame = true;
 
                     CheckForAllSceneLoads();
+                    break;
+
+                case NetOP.NAME:
+                    NetMsg_StringMessage pong = (NetMsg_StringMessage)a_netmsg;
+
+                    Debug.Log("Server got message: " + (DateTime.UtcNow.Ticks - pong.Time));
+
+                    pong.Time = DateTime.UtcNow.Ticks;
+                    Send(pong, reliableChannel, connectionId);
+
                     break;
             }
 
@@ -496,6 +452,13 @@ namespace LLAPI
             NetMsg_SendServerConnectionID id = new NetMsg_SendServerConnectionID();
             id.ConnectionId = a_connectionId;
             Send(id, reliableChannel, a_connectionId);
+
+            NetMsg_PlayerMovement pl = new NetMsg_PlayerMovement();
+            pl.connectId = -1;
+            pl.xMove = 25.0f;
+            pl.yMove = 25.0f;
+            pl.zMove = 25.0f;
+            Send(pl, reliableChannel, a_connectionId);
 
             //Create a new message to send to all players on the server apart from
             //the new player
