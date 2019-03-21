@@ -7,7 +7,7 @@ public class TrackerAbility : Cooldown
     public Abilities tracker;
     private GameObject trackingDevice;
     private Trigger trackerTrigger;
-
+    private GameObject arrowPos;
     private bool trackerActive;
     public bool trackerDown;
 
@@ -22,7 +22,7 @@ public class TrackerAbility : Cooldown
         client = FindObjectOfType<Client>();
         isCooldown = tracker.isCooldown;
         cooldown = tracker.abilityDuration;
-
+        arrowPos = gameObject.transform.GetChild(2).GetChild(4).GetChild(3).gameObject;
         trackerActive = false;
         trackingDevice = GameObject.Find("Tracker");
 
@@ -39,16 +39,18 @@ public class TrackerAbility : Cooldown
 
         if (trackerTrigger != null && trackerTrigger.isDetected)
         {
-            //Tracker Position
-            //Insert arrow pointing towards tracker position
-            //Debug.Log("Detected");
-            //ab_Tracker.TrackerTriggered = trackerTrigger.isDetected;
+            ArrowPointer();
+        }
+        else
+        {
+            arrowPos.SetActive(false);
         }
 
         if (Input.GetKeyDown(KeyCode.Q))
         {
             if (!isCooldown && !trackerActive) //&& cooldown == tracker.abilityDuration)
             {
+                trackerTrigger.isDetected = false;
                 trackingDevice.SetActive(true);
                 trackerActive = true;
                 //isCooldown = true;
@@ -67,6 +69,7 @@ public class TrackerAbility : Cooldown
 
             if(cooldown <= 0)
             {
+                trackerTrigger.isDetected = false;
                 trackerDown = false;
                 trackerActive = false;
                 trackingDevice.SetActive(false);
@@ -131,6 +134,35 @@ public class TrackerAbility : Cooldown
                     #endregion
                 }
             }
+        }
+    }
+
+    void ArrowPointer()
+    {
+       //Transform playerTransform;
+
+       Vector3 direction = transform.InverseTransformPoint(trackerPos);
+
+
+       float hideDistance = 1f;
+       
+       //Vector3 direction = trackerPos - arrowPos.transform.position;
+       
+       if(direction.magnitude < hideDistance)
+       {
+           arrowPos.SetActive(false);
+           trackerTrigger.isDetected = false;
+       }
+       else
+       {
+            arrowPos.SetActive(true);
+
+            float a = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg;
+            a += 180;
+            arrowPos.transform.localEulerAngles = new Vector3(0, 0, a);
+
+            //float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            //arrowPos.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         }
     }
 }

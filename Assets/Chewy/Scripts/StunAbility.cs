@@ -74,14 +74,13 @@ public class StunAbility : Cooldown
 
         if (spyControllerSc != null && spyControllerSc.stunDrop)
         {
-            if (!stunActive)
+            if (!stunActive && !isCooldown)
             {
                 IsActive = true;
                 stunG.transform.position = new Vector3(spyController.transform.position.x,
-                                                       spyController.transform.position.y,
+                                                       spyController.transform.position.y + 1,
                                                        spyController.transform.position.z - 1);
                 stunDropped = true;
-                spyControllerSc.stunDrop = false;
                 isCooldown = true;
                 #region NetMsg_Stun
 
@@ -119,6 +118,7 @@ public class StunAbility : Cooldown
             flash.Stop();
             if(!isCooldown)
             {
+                spyControllerSc.stunDrop = false;
                 cooldown = stunAbility.cooldown;
                 stunActive = false;
             }
