@@ -99,21 +99,17 @@ public class MercControls : PlayerController
             }
 
             #region NetMsg_Fire
-            NetMsg_AB_Fire ab_Fire = new NetMsg_AB_Fire();
-            if (client != null)
+            Msg_AB_ClientFire ab_Fire = new Msg_AB_ClientFire();
+            if (ClientManager.Instance != null)
             {
-                ab_Fire.ConnectionID = client.ServerConnectionId;
+                ab_Fire.ConnectId = ClientManager.Instance.LocalPlayer.connectionId;
 
-                ab_Fire.BulletPositionX = bullet.transform.position.x;
-                ab_Fire.BulletPositionY = bullet.transform.position.y;
-                ab_Fire.BulletPositionZ = bullet.transform.position.z;
+                ab_Fire.BulletPosition = bullet.transform.position;
 
-                ab_Fire.VelocityX = bullet.GetComponent<Rigidbody>().velocity.x;
-                ab_Fire.VelocityY = bullet.GetComponent<Rigidbody>().velocity.y;
-                ab_Fire.VelocityZ = bullet.GetComponent<Rigidbody>().velocity.z;
+                ab_Fire.BulletVelocity = bullet.GetComponent<Rigidbody>().velocity;
 
                 ab_Fire.BulletObjectIndex = 2;
-                client.Send(ab_Fire);
+                ClientManager.Instance.client.Send(MSGTYPE.CLIENT_AB_FIRE, ab_Fire);
             }
             #endregion
 
@@ -152,11 +148,11 @@ public class MercControls : PlayerController
            buttonPressed = true;
            #region NetMsg_Sprint
            NetMsg_AB_Sprint ab_Sprint = new NetMsg_AB_Sprint();
-           if (client != null)
+           if (ClientManager.Instance != null)
            {
-               ab_Sprint.ConnectionID = client.ServerConnectionId;
+               //ab_Sprint.ConnectionID = client.ServerConnectionId;
                ab_Sprint.SprintValue = runningSpeed;
-               client.Send(ab_Sprint);
+               ClientManager.Instance.Send(ab_Sprint);
            }
            #endregion
         }

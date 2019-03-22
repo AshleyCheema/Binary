@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using LLAPI;
 
-public class CS_Lobby : MonoBehaviour
+public class CS_Lobby : Singleton<CS_Lobby>
 {
     [SerializeField]
     GameObject mercLayout;
@@ -31,24 +31,35 @@ public class CS_Lobby : MonoBehaviour
 
     public void MercTeamSelected()
     {
-        CS_LobbyManager.Instance.Client.LocalPlayer.team = LLAPI.Team.Merc;
+        CS_LobbyManager.Instance.Client.LocalPlayer.playerTeam = LLAPI.Team.Merc;
         CS_LobbyManager.Instance.SetPlayerTeam(CS_LobbyManager.Instance.Client.LocalPlayer);
         SendTeamChange(CS_LobbyManager.Instance.Client.LocalPlayer);
     }
 
     public void SpyTeamSelected()
     {
-        CS_LobbyManager.Instance.Client.LocalPlayer.team = LLAPI.Team.Spy;
+        CS_LobbyManager.Instance.Client.LocalPlayer.playerTeam = LLAPI.Team.Spy;
         CS_LobbyManager.Instance.SetPlayerTeam(CS_LobbyManager.Instance.Client.LocalPlayer);
         SendTeamChange(CS_LobbyManager.Instance.Client.LocalPlayer);
     }
 
-    private void SendTeamChange(LLAPI.Player a_p)
+    public void SetPlayerTeam(LocalPlayer aPlayer)
     {
-        NetMsg_TeamChangeLB lb = new NetMsg_TeamChangeLB();
-        lb.ConnectionID = a_p.connectionId;
-        lb.Team = a_p.team;
+        CS_LobbyManager.Instance.SetPlayerTeam(aPlayer);
+    }
 
-        CS_LobbyManager.Instance.Client.Send(lb);
+    public void SendTeamChange(LocalPlayer aPlayer)
+    {
+        Msg_ClientTeamChange ctc = new Msg_ClientTeamChange();
+        ctc.ConnectionID = aPlayer.connectionId;
+        ctc.Team = aPlayer.playerTeam;
+
+        ClientManager.Instance?.client.Send(MSGTYPE.LOBBY_TEAM_CHANGE, ctc);
+
+        //NetMsg_TeamChangeLB lb = new NetMsg_TeamChangeLB();
+        //lb.ConnectionID = a_p.connectionId;
+        //lb.Team = a_p.team;
+        //
+        //CS_LobbyManager.Instance.Client.Send(lb);
     }
 }

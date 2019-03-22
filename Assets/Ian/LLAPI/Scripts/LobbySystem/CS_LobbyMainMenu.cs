@@ -25,14 +25,25 @@ public class CS_LobbyMainMenu : MonoBehaviour
 
     public void Connect()
     {
+
+        CS_LobbyManager.Instance.Host.gameObject.SetActive(false);
+        CS_LobbyManager.Instance.Client.gameObject.SetActive(true);
+
         string ip = ipInput.text;
-        CS_LobbyManager.Instance.Client.Connect(ip);
+        CS_LobbyManager.Instance.Client.ConnectToServer(ip);
+        
+        //CS_LobbyManager.Instance.Client.Connect(ip);
         CS_LobbyManager.Instance.ChangeTo(lobbyPanel);
     }
 
     public void ServerHost()
     {
+        CS_LobbyManager.Instance.Host.gameObject.SetActive(true);
         CS_LobbyManager.Instance.Client.gameObject.SetActive(false);
-        SceneManager.LoadScene(1);
+
+        HostManager.Instance.StartNewServer();
+
+        CS_LobbyManager.Instance.ChangeTo(lobbyPanel);
+        //SceneManager.LoadScene(1);
     }
 }

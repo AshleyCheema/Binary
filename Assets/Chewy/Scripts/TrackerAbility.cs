@@ -77,17 +77,15 @@ public class TrackerAbility : Cooldown
                 trackingDevice.SetActive(false);
                 cooldown = tracker.abilityDuration;
 
-                NetMsg_AB_Tracker ab_Tracker = new NetMsg_AB_Tracker();
-                if (client != null)
+                Msg_Client_AB_Tracker ab_Tracker = new Msg_Client_AB_Tracker();
+                if (ClientManager.Instance != null)
                 {
-                    ab_Tracker.ConnectionID = client.ServerConnectionId;
-                    ab_Tracker.TrackerPositionX = trackerPos.x;
-                    ab_Tracker.TrackerPositionY = trackerPos.y;
-                    ab_Tracker.TrackerPositionZ = trackerPos.z;
+                    ab_Tracker.ConnectionID = ClientManager.Instance.LocalPlayer.connectionId;
+                    ab_Tracker.TrackerPosition = trackerPos;
                     ab_Tracker.TrackerTriggered = false;
                     ab_Tracker.TrackerObjectIndex = 3;
 
-                    client.Send(ab_Tracker);
+                    ClientManager.Instance.client.Send(MSGTYPE.CLIENT_AB_TRACKER, ab_Tracker);
                 }
                 //deviceCollider.enabled = false;
             }
@@ -121,17 +119,15 @@ public class TrackerAbility : Cooldown
 
                     #region NetMsg_Tracker
 
-                    NetMsg_AB_Tracker ab_Tracker = new NetMsg_AB_Tracker();
-                    if (client != null)
+                    Msg_Client_AB_Tracker ab_Tracker = new Msg_Client_AB_Tracker();
+                    if (ClientManager.Instance != null)
                     {
-                        ab_Tracker.ConnectionID = client.ServerConnectionId;
-                        ab_Tracker.TrackerPositionX = trackerPos.x;
-                        ab_Tracker.TrackerPositionY = trackerPos.y;
-                        ab_Tracker.TrackerPositionZ = trackerPos.z;
+                        ab_Tracker.ConnectionID = ClientManager.Instance.LocalPlayer.connectionId;
+                        ab_Tracker.TrackerPosition = trackerPos;
                         ab_Tracker.TrackerTriggered = true;
                         ab_Tracker.TrackerObjectIndex = 3;
 
-                        client.Send(ab_Tracker);
+                        ClientManager.Instance.client.Send(MSGTYPE.CLIENT_AB_TRACKER, ab_Tracker);
                     }
                     #endregion
                 }
