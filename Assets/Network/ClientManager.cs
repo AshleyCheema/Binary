@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -29,6 +30,8 @@ public class ClientManager : NetworkManager
     public Dictionary<int, LocalPlayer> Players
     { get { return players; } }
 
+    private long startLongTime;
+
     private void Awake()
     {
         if(instance == null)
@@ -57,6 +60,10 @@ public class ClientManager : NetworkManager
         this.client.RegisterHandler(MSGTYPE.CLIENT_AB_FIRE, OnReceivePlayerABFire);
         this.client.RegisterHandler(MSGTYPE.CLIENT_AB_STUN, OnReceivePlayerABStun);
         this.client.RegisterHandler(MSGTYPE.CLIENT_AB_TRACKER, OnPlayerABTracker);
+        this.client.RegisterHandler(MSGTYPE.CLIENT_EXIT, OnServerExitOpen);
+        this.client.RegisterHandler(MSGTYPE.CLIENT_AB_TRIGGER, OnPlayerTrigger);
+
+        this.client.RegisterHandler(MSGTYPE.PING_PONG, OnPingPong);
     }
 
     public override void OnClientConnect(NetworkConnection conn)
@@ -69,6 +76,12 @@ public class ClientManager : NetworkManager
         mLocalPlayer.conn = conn;
 
         MiniModule_Lobby.Instance.OnLobbyPlayerAdd(mLocalPlayer, true);
+
+        //Msg_PingPong pp = new Msg_PingPong();
+        //pp.connectId = mLocalPlayer.connectionId;
+        //pp.timeStamp = DateTime.UtcNow.Millisecond;
+        //startLongTime = pp.timeStamp;
+        //this.client.Send(MSGTYPE.PING_PONG, pp);
     }
 
     public override void OnClientSceneChanged(NetworkConnection conn)
@@ -168,6 +181,8 @@ public class ClientManager : NetworkManager
 
         go.GetComponentInChildren<FOWMask>().gameObject.SetActive(false);
         go.GetComponentInChildren<UIScript>().gameObject.SetActive(false);
+        go.GetComponentInChildren<FOWAdaptiveRender>().gameObject.SetActive(false);
+        go.GetComponent<MeshRenderer>().enabled = false;
 
         for (int i = 0; i < allMonos.Length; i++)
         {
@@ -311,6 +326,52 @@ public class ClientManager : NetworkManager
         {
             tracker.SetActive(false);
         }
+    }
+
+    public void OnServerExitOpen(NetworkMessage aMsg)
+    {
+        aMsg.reader.SeekZero();
+        Msg_ClientExit ce = aMsg.ReadMessage<Msg_ClientExit>();
+
+        for (int i = 0; i < ExitManager.Instance.Exits.Length; i++)
+        {
+            if(ExitManager.Instance.Exits[i].ID == ce.ID)
+            {
+                ExitManager.Instance.Exits[i].IsOpen = ce.IsOpen;
+                ExitManager.Instance.Exits[i].gameObject.GetComponent<MeshRenderer>().material.color = Color.red;
+            }
+        }
+    }
+
+    public void OnPlayerTrigger(NetworkMessage aMsg)
+    {
+        aMsg.reader.SeekZero();
+        Msg_ClientTrigger ccp = aMsg.ReadMessage<Msg_ClientTrigger>();
+
+        if(ccp.Type == TriggerType.Bullet)
+        {
+            Debug.Log("I HAVE BEEN SHOT!!!!");
+        }
+        else if(ccp.Type == TriggerType.Stun)
+        {
+            Debug.Log("I HAVE BEEN STUNNED. NO!!!!!!!!!!!!!!");
+            //set isStunned to true
+            if (mLocalPlayer.playerTeam == LLAPI.Team.Merc &&
+                mLocalPlayer.gameAvatar.GetComponent<MercControls>())
+            {
+                mLocalPlayer.gameAvatar.GetComponent<MercControls>().IsStunned = true;
+            }
+        }
+    }
+
+    public void OnPingPong(NetworkMessage aMsg)
+    {
+        aMsg.reader.SeekZero();
+        Msg_PingPong pp = aMsg.ReadMessage<Msg_PingPong>();
+
+        Debug.Log("Client got message from server: " + (DateTime.UtcNow.Millisecond - pp.timeStamp));
+
+        Debug.Log("Total time was: " + (startLongTime - DateTime.UtcNow.Millisecond));
     }
 
     public void Send(LLAPI.NetMsg amesh, int a_channel = -1)

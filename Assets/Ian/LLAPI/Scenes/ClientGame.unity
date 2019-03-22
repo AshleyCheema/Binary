@@ -242,10 +242,9 @@ PrefabInstance:
     - target: {fileID: 7431396796162917826, guid: a54b0b73fee3ec44b90d9fc9293ca595,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8067908851162010953, guid: a54b0b73fee3ec44b90d9fc9293ca595,
-        type: 3}
+    - target: {fileID: 0}
       propertyPath: miniGame
       value: 
       objectReference: {fileID: 2144728123}
@@ -351,10 +350,7 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 87b6a0c9f890ce940b28706eadb54155,
         type: 3}
-    m_RemovedComponents:
-    - {fileID: 5210437667394293823, guid: a54b0b73fee3ec44b90d9fc9293ca595, type: 3}
-    - {fileID: 2516473074621591548, guid: a54b0b73fee3ec44b90d9fc9293ca595, type: 3}
-    - {fileID: 1261491539580236380, guid: a54b0b73fee3ec44b90d9fc9293ca595, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a54b0b73fee3ec44b90d9fc9293ca595, type: 3}
 --- !u!4 &129751769 stripped
 Transform:
@@ -401,18 +397,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 129751770}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d738aeaa3e0f93a4e9aa58625c8ba4a9, type: 3}
+  m_Script: {fileID: 11500000, guid: 2d70ec575f4dfff40b506741e8eadbd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 2
+  ID: 2
   isBeingCaptured: 0
   captureAmount: 5
   capturePercentage: 0
   tm: {fileID: 1240025762}
-  runTriggerEnter: 0
-  runTriggerExit: 0
-  runRecive: 1
-  isServer: 0
 --- !u!114 &129751776
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -422,18 +414,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 129751772}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d738aeaa3e0f93a4e9aa58625c8ba4a9, type: 3}
+  m_Script: {fileID: 11500000, guid: 2d70ec575f4dfff40b506741e8eadbd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 1
+  ID: 1
   isBeingCaptured: 0
   captureAmount: 5
   capturePercentage: 0
   tm: {fileID: 813075100}
-  runTriggerEnter: 0
-  runTriggerExit: 0
-  runRecive: 1
-  isServer: 0
 --- !u!114 &129751777
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -443,18 +431,83 @@ MonoBehaviour:
   m_GameObject: {fileID: 129751774}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d738aeaa3e0f93a4e9aa58625c8ba4a9, type: 3}
+  m_Script: {fileID: 11500000, guid: 2d70ec575f4dfff40b506741e8eadbd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 0
+  ID: 0
   isBeingCaptured: 0
   captureAmount: 5
   capturePercentage: 0
   tm: {fileID: 1707106017}
-  runTriggerEnter: 0
-  runTriggerExit: 0
-  runRecive: 1
-  isServer: 0
+--- !u!1 &129751778 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2424337970596837536, guid: a54b0b73fee3ec44b90d9fc9293ca595,
+    type: 3}
+  m_PrefabInstance: {fileID: 129751768}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &129751779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 129751778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1720e0126bffda4a86ff586e0406518, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ID: 4
+  miniGame: {fileID: 2144728123}
+--- !u!1 &143598566
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 143598568}
+  - component: {fileID: 143598567}
+  m_Layer: 0
+  m_Name: ExitManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &143598567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 143598566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 834c3720921c1c84297b7882b014b71c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  capturePoints:
+  - {fileID: 129751777}
+  - {fileID: 129751776}
+  - {fileID: 129751775}
+  exits:
+  - {fileID: 129751779}
+--- !u!4 &143598568
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 143598566}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.19092941, y: -23.173767, z: -10.191368}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &364062651
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1522,7 +1575,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1461695875}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: KillBoxes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

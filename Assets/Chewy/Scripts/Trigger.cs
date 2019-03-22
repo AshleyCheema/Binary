@@ -40,19 +40,25 @@ public class Trigger : MonoBehaviour
                     hasShot = true;
                     //Send message to client which has been hit
                     //first get the client which has been affected
-                    foreach (var key in Client.Instance.Players.Keys)
+                    foreach (var key in ClientManager.Instance?.Players.Keys)
                     {
                         //if true we have found the gameObejct hit
-                        if (other.gameObject == Client.Instance.Players[key].avater)
+                        if (other.gameObject == ClientManager.Instance.Players[key].gameAvatar)
                         {
-                            //Create the new message to send to the client who was shot
-                            NetMsg_AB_Trigger trigger = new NetMsg_AB_Trigger();
-                            trigger.ConnectionID = key;
-                            trigger.Trigger = true;
-                            trigger.Type = LLAPI.TriggerType.BULLET;
+                            Msg_ClientTrigger ct = new Msg_ClientTrigger();
+                            ct.ConnectionID = key;
+                            ct.Trigger = true;
+                            ct.Type = TriggerType.Bullet;
+                            ClientManager.Instance.client.Send(MSGTYPE.CLIENT_AB_TRIGGER, ct);
 
-                            //Send the message to the affected client
-                            Client.Instance.Send(trigger);
+                            //Create the new message to send to the client who was shot
+                            //NetMsg_AB_Trigger trigger = new NetMsg_AB_Trigger();
+                            //trigger.ConnectionID = key;
+                            //trigger.Trigger = true;
+                            //trigger.Type = LLAPI.TriggerType.BULLET;
+                            //
+                            ////Send the message to the affected client
+                            //Client.Instance.Send(trigger);
                         }
                     }
                     Debug.Log("Shot");

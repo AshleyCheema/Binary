@@ -150,26 +150,31 @@ public class StunAbility : Cooldown
 
                 if (!isSpawned)
                 {
-                    return;
                     Collider[] coll = Physics.OverlapSphere(transform.position, stunG.GetComponent<SphereCollider>().radius);
 
                     for (int i = 0; i < coll.Length; i++)
                     {
-                        foreach (var pKey in client.Players.Keys)
+                        foreach (var pKey in ClientManager.Instance.Players.Keys)
                         {
-                            if (coll[i].gameObject == client.LocalPlayer.avater)
+                            if (coll[i].gameObject == ClientManager.Instance.LocalPlayer.gameAvatar)
                             {
 
                             }
-                            else if (coll[i].gameObject == client.Players[pKey].avater)
+                            else if (coll[i].gameObject == ClientManager.Instance.Players[pKey].gameAvatar)
                             {
                                 //Send message to player tell them that they are affected
-                                NetMsg_AB_Trigger ab_trigger = new NetMsg_AB_Trigger();
-                                ab_trigger.ConnectionID = client.Players[pKey].connectionId;
-                                ab_trigger.Trigger = true;
-                                ab_trigger.Type = LLAPI.TriggerType.STUN;
+                                Msg_ClientTrigger ct = new Msg_ClientTrigger();
+                                ct.ConnectionID = pKey;
+                                ct.Trigger = true;
+                                ct.Type = TriggerType.Stun;
 
-                                client.Send(ab_trigger);
+                                ClientManager.Instance.client.Send(MSGTYPE.CLIENT_AB_TRIGGER, ct);
+                                //NetMsg_AB_Trigger ab_trigger = new NetMsg_AB_Trigger();
+                                //ab_trigger.ConnectionID = client.Players[pKey].connectionId;
+                                //ab_trigger.Trigger = true;
+                                //ab_trigger.Type = LLAPI.TriggerType.STUN;
+                                //
+                                //client.Send(ab_trigger);
                             }
                         }
                     }

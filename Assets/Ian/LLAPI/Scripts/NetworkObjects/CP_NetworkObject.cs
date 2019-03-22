@@ -57,7 +57,7 @@ namespace LLAPI
 
                     if (isServer)
                     {
-                        ExitManager.Insntane.CapturePointCaptured();
+                        //ExitManager.Insntane.CapturePointCaptured();
                     }
                 }
             }

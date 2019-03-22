@@ -8,7 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Ian/LLAPI/Scenes/ClientLobby.unity
     guid: 66da927f130624f43b847b0c00f5c51f
-  - enabled: 1
+  - enabled: 0
     path: Assets/Ian/LLAPI/Scenes/Server.unity
     guid: 443d2d4737b4a604e84cf5a1d9a752ea
   - enabled: 1
@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Jamie/Scenes/Test Data/sqlgame.unity
     guid: 3efcd2dba60121743912aef451d12a34
+  - enabled: 0
+    path: Assets/MainScene.unity
+    guid: 44af8425dad8b564580463a1b0b8c9ae
   m_configObjects: {}

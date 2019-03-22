@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -15,6 +16,10 @@ public class MSGTYPE
     public const short CLIENT_AB_FIRE = 106;
     public const short CLIENT_AB_STUN = 107;
     public const short CLIENT_AB_TRACKER = 108;
+    public const short CLIENT_CAPTURE_POINT = 109;
+    public const short CLIENT_EXIT = 110;
+    public const short CLIENT_AB_TRIGGER = 111;
+    public const short PING_PONG = 250;
 }
 
 public class HostManager : NetworkManager
@@ -26,6 +31,8 @@ public class HostManager : NetworkManager
     private Dictionary<int, LocalPlayer> players = new Dictionary<int, LocalPlayer>();
     public Dictionary<int, LocalPlayer> Players
     { get { return players; } }
+
+    private Dictionary<int, GameObject> capturePoints = new Dictionary<int, GameObject>();
 
     private void Awake()
     {
@@ -53,6 +60,10 @@ public class HostManager : NetworkManager
         NetworkServer.RegisterHandler(MSGTYPE.CLIENT_AB_FIRE, OnPlayerABFire);
         NetworkServer.RegisterHandler(MSGTYPE.CLIENT_AB_STUN, OnPlayerABStun);
         NetworkServer.RegisterHandler(MSGTYPE.CLIENT_AB_TRACKER, OnPlayerABTracker);
+        NetworkServer.RegisterHandler(MSGTYPE.CLIENT_CAPTURE_POINT, OnPlayerCapturePoint);
+        NetworkServer.RegisterHandler(MSGTYPE.CLIENT_AB_TRIGGER, OnPlayerTrigger);
+
+        //NetworkServer.RegisterHandler(MSGTYPE.PING_PONG, OnPingPong);
     }
 
     public override void OnServerConnect(NetworkConnection conn)
@@ -117,54 +128,65 @@ public class HostManager : NetworkManager
 
     public override void OnServerSceneChanged(string sceneName)
     {
-        Debug.Log("Add all player shells");
-        Camera.main.transform.position = new Vector3(-16, 100, -13);
-        Camera.main.transform.rotation = Quaternion.Euler(90, 0, 0);
-        Camera.main.GetComponent<Camera>().orthographicSize = 53;
-
-        foreach (var pKey in Players.Keys)
+        if(sceneName == "ClientGame")
         {
-            foreach (var cKey in Players.Keys)
+
+            NO_CapturePoint[] capturePoints = GameObject.FindObjectsOfType<NO_CapturePoint>();
+
+            for (int i = 0; i < capturePoints.Length; i++)
             {
-                if(cKey != pKey)
-                {
-                    Msg_ClientSpawnObject cpo = new Msg_ClientSpawnObject();
-                    cpo.ConnectionID = cKey;
-                    cpo.ObjectID = Players[cKey].playerTeam == LLAPI.Team.Merc ? 0 : 5;
-
-                    Vector3 spawnPos = Vector3.zero;
-
-                    if (cpo.ObjectID == 0)
-                    {
-                        BoxCollider bc = GameObject.FindWithTag("Merc_Spawn_Area").GetComponent<BoxCollider>();
-                        spawnPos = ExtensionFunctions.RandomPointInBounds(bc.bounds);
-                    }
-                    else
-                    {
-                        BoxCollider bc = GameObject.FindWithTag("Spy_Spawn_Area").GetComponent<BoxCollider>();
-                        spawnPos = ExtensionFunctions.RandomPointInBounds(bc.bounds);
-                    }
-
-                    cpo.position = spawnPos;
-
-                    Send(pKey, MSGTYPE.CLIENT_SPAWN_OBJECT, cpo);
-                }
+                this.capturePoints.Add(capturePoints[i].ID, capturePoints[i].gameObject);
             }
 
-            GameObject go = Instantiate(
-                MiniModule_SpawableObjects.Instance.SpawnableObjects.ObjectsToSpawn[Players[pKey].playerTeam == LLAPI.Team.Merc ? 0 : 5]);
-            BoxCollider bcoll = GameObject.FindWithTag("Spy_Spawn_Area").GetComponent<BoxCollider>();
-            Vector3 spawnPosition = ExtensionFunctions.RandomPointInBounds(bcoll.bounds);
+            Debug.Log("Add all player shells");
+            Camera.main.transform.position = new Vector3(-16, 100, -13);
+            Camera.main.transform.rotation = Quaternion.Euler(90, 0, 0);
+            Camera.main.GetComponent<Camera>().orthographicSize = 53;
 
-            go.transform.position = spawnPosition;
-            Players[pKey].gameAvatar = go;
-            go.tag = Players[pKey].playerTeam == LLAPI.Team.Merc ? "Merc" : "Spy";
-
-            MonoBehaviour[] allMonos = go.GetComponentsInChildren<MonoBehaviour>();
-
-            for (int i = 0; i < allMonos.Length; i++)
+            foreach (var pKey in Players.Keys)
             {
-                allMonos[i].enabled = false;
+                foreach (var cKey in Players.Keys)
+                {
+                    if (cKey != pKey)
+                    {
+                        Msg_ClientSpawnObject cpo = new Msg_ClientSpawnObject();
+                        cpo.ConnectionID = cKey;
+                        cpo.ObjectID = Players[cKey].playerTeam == LLAPI.Team.Merc ? 0 : 5;
+
+                        Vector3 spawnPos = Vector3.zero;
+
+                        if (cpo.ObjectID == 0)
+                        {
+                            BoxCollider bc = GameObject.FindWithTag("Merc_Spawn_Area").GetComponent<BoxCollider>();
+                            spawnPos = ExtensionFunctions.RandomPointInBounds(bc.bounds);
+                        }
+                        else
+                        {
+                            BoxCollider bc = GameObject.FindWithTag("Spy_Spawn_Area").GetComponent<BoxCollider>();
+                            spawnPos = ExtensionFunctions.RandomPointInBounds(bc.bounds);
+                        }
+
+                        cpo.position = spawnPos;
+
+                        Send(pKey, MSGTYPE.CLIENT_SPAWN_OBJECT, cpo);
+                    }
+                }
+
+                GameObject go = Instantiate(
+                    MiniModule_SpawableObjects.Instance.SpawnableObjects.ObjectsToSpawn[Players[pKey].playerTeam == LLAPI.Team.Merc ? 0 : 5]);
+                BoxCollider bcoll = GameObject.FindWithTag("Spy_Spawn_Area").GetComponent<BoxCollider>();
+                Vector3 spawnPosition = ExtensionFunctions.RandomPointInBounds(bcoll.bounds);
+
+                go.transform.position = spawnPosition;
+                Players[pKey].gameAvatar = go;
+                go.tag = Players[pKey].playerTeam == LLAPI.Team.Merc ? "Merc" : "Spy";
+
+                MonoBehaviour[] allMonos = go.GetComponentsInChildren<MonoBehaviour>();
+
+                for (int i = 0; i < allMonos.Length; i++)
+                {
+                    allMonos[i].enabled = false;
+                }
             }
         }
     }
@@ -342,6 +364,43 @@ public class HostManager : NetworkManager
         Send(ct.ConnectionID, MSGTYPE.CLIENT_AB_TRACKER, ct, false);
     }
 
+    public void OnPlayerCapturePoint(NetworkMessage aMsg)
+    {
+        aMsg.reader.SeekZero();
+        Msg_ClientCapaturePoint ccp = aMsg.ReadMessage<Msg_ClientCapaturePoint>();
+
+        if (ccp.IsBeingCaptured)
+        {
+            capturePoints[ccp.ID].GetComponent<NO_CapturePoint>().IsBeingCaptured = true;
+        }
+        else
+        {
+            capturePoints[ccp.ID].GetComponent<NO_CapturePoint>().IsBeingCaptured = false;
+
+            //Sync both capture points
+            //Desync could happen
+        }
+    }
+
+    public void OnPlayerTrigger(NetworkMessage aMsg)
+    {
+        aMsg.reader.SeekZero();
+        Msg_ClientTrigger ccp = aMsg.ReadMessage<Msg_ClientTrigger>();
+
+        Send(ccp.ConnectionID, MSGTYPE.CLIENT_AB_TRIGGER, ccp);
+    }
+
+    public void OnPingPong(NetworkMessage aMsg)
+    {
+        aMsg.reader.SeekZero();
+        Msg_PingPong pp = aMsg.ReadMessage<Msg_PingPong>();
+
+        Debug.Log("Server got message: " + (DateTime.UtcNow.Millisecond - pp.timeStamp));
+
+        pp.timeStamp = DateTime.UtcNow.Millisecond;
+        NetworkServer.SendToClient(pp.connectId, MSGTYPE.PING_PONG, pp);
+    }
+
     public void Send(int a_connectionId, short aType, MessageBase aMsg, bool inclusive = true)
     {
         List<int> p = new List<int>();
@@ -371,5 +430,10 @@ public class HostManager : NetworkManager
         {
             NetworkServer.SendToClient(item, aType, aMsg);
         }
+    }
+
+    public void SendAll(short aType, MessageBase aMsg)
+    {
+        NetworkServer.SendToAll(aType, aMsg);
     }
 }

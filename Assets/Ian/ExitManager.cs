@@ -3,17 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using LLAPI;
 
-public class ExitManager : MonoBehaviour
+public class ExitManager : Singleton<ExitManager>
 {
-    private static ExitManager insntane;
-    public static ExitManager Insntane
-    { get{return insntane;}}
+    [SerializeField]
+    private NO_CapturePoint[] capturePoints;
 
     [SerializeField]
-    private CP_NetworkObject[] capturePoints;
-
-    [SerializeField]
-    private Exit_NetworkObject[] exits;
+    private NO_Exit[] exits;
+    public NO_Exit[] Exits
+    { get { return exits; } }
 
     bool ExitsOpen
     {
@@ -36,25 +34,6 @@ public class ExitManager : MonoBehaviour
         }
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        if(insntane == null)
-        {
-            insntane = this;
-        }
-        else
-        {
-            Destroy(this);
-        }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void CapturePointCaptured()
     {
         if(ExitsOpen)
@@ -65,19 +44,27 @@ public class ExitManager : MonoBehaviour
                 exits[i].IsOpen = true;
             }
 
-            NetMsg_Exit_Open exitOpen = new NetMsg_Exit_Open();
-            exitOpen.IsOpen = true;
-            exitOpen.ID = 4;
-            Server.Instance.Send(exitOpen, Server.Instance.ReliableChannel);
+            for (int i = 0; i < exits.Length; i++)
+            {
+                Msg_ClientExit ce = new Msg_ClientExit();
+                ce.IsOpen = true;
+                ce.ID = exits[i].ID;
+                HostManager.Instance.SendAll(MSGTYPE.CLIENT_EXIT, ce);
+            }
 
-            exitOpen = new NetMsg_Exit_Open();
-            exitOpen.IsOpen = true;
-            exitOpen.ID = 5;
+            //NetMsg_Exit_Open exitOpen = new NetMsg_Exit_Open();
+            //exitOpen.IsOpen = true;
+            //exitOpen.ID = 4;
             //Server.Instance.Send(exitOpen, Server.Instance.ReliableChannel);
 
-            exitOpen = new NetMsg_Exit_Open();
-            exitOpen.IsOpen = true;
-            exitOpen.ID = 6;
+            //exitOpen = new NetMsg_Exit_Open();
+            //exitOpen.IsOpen = true;
+            //exitOpen.ID = 5;
+            //Server.Instance.Send(exitOpen, Server.Instance.ReliableChannel);
+
+            //exitOpen = new NetMsg_Exit_Open();
+            //exitOpen.IsOpen = true;
+            //exitOpen.ID = 6;
             //Server.Instance.Send(exitOpen, Server.Instance.ReliableChannel);
         }
     }

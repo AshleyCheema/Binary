@@ -94,7 +94,6 @@ GameObject:
   - component: {fileID: 993017172766470587}
   - component: {fileID: 7502866560013866424}
   - component: {fileID: 6342016080058657495}
-  - component: {fileID: 8067908851162010953}
   m_Layer: 0
   m_Name: Exit_1
   m_TagString: Untagged
@@ -176,20 +175,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8067908851162010953
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2424337970596837536}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41b2e32e164b7d246a2d7bd59dff83e8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  id: 4
-  miniGame: {fileID: 0}
 --- !u!1 &7431396796162917826
 GameObject:
   m_ObjectHideFlags: 0
@@ -867,7 +852,6 @@ GameObject:
   - component: {fileID: 9061004800231788260}
   - component: {fileID: 9061004800231788261}
   - component: {fileID: 9061004800231788262}
-  - component: {fileID: 1261491539580236380}
   m_Layer: 0
   m_Name: CapturePoint
   m_TagString: Untagged
@@ -947,27 +931,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1261491539580236380
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9061004800231788263}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d137f82fe4a3ea546bebc420b093be15, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  percentageUI: {fileID: 0}
-  miniGame: {fileID: 0}
-  spyIsCapturing: 0
-  showMiniGame: 0
-  capturePercentage: 0
-  captureMulitiplier: 3
-  spyCount: 0
-  text: {fileID: 0}
-  testInput: 0
 --- !u!1 &9061004800321778191
 GameObject:
   m_ObjectHideFlags: 0
@@ -980,7 +943,6 @@ GameObject:
   - component: {fileID: 9061004800321778188}
   - component: {fileID: 9061004800321778189}
   - component: {fileID: 9061004800321778190}
-  - component: {fileID: 2516473074621591548}
   m_Layer: 0
   m_Name: CapturePoint
   m_TagString: Untagged
@@ -1060,27 +1022,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2516473074621591548
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9061004800321778191}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d137f82fe4a3ea546bebc420b093be15, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  percentageUI: {fileID: 0}
-  miniGame: {fileID: 0}
-  spyIsCapturing: 0
-  showMiniGame: 0
-  capturePercentage: 0
-  captureMulitiplier: 3
-  spyCount: 0
-  text: {fileID: 0}
-  testInput: 0
 --- !u!1 &9061004800498570281
 GameObject:
   m_ObjectHideFlags: 0
@@ -1093,7 +1034,6 @@ GameObject:
   - component: {fileID: 9061004800498570286}
   - component: {fileID: 9061004800498570287}
   - component: {fileID: 9061004800498570280}
-  - component: {fileID: 5210437667394293823}
   m_Layer: 0
   m_Name: CapturePoint
   m_TagString: Untagged
@@ -1173,27 +1113,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5210437667394293823
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9061004800498570281}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d137f82fe4a3ea546bebc420b093be15, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  percentageUI: {fileID: 0}
-  miniGame: {fileID: 0}
-  spyIsCapturing: 0
-  showMiniGame: 0
-  capturePercentage: 0
-  captureMulitiplier: 3
-  spyCount: 0
-  text: {fileID: 0}
-  testInput: 0
 --- !u!1 &9061004800652132430
 GameObject:
   m_ObjectHideFlags: 0
@@ -1356,16 +1275,6 @@ PrefabInstance:
       propertyPath: m_AssetId.i15
       value: 17
       objectReference: {fileID: 0}
-    - target: {fileID: 4082119631255391670, guid: add8949f2623016449032dd16a9f1811,
-        type: 3}
-      propertyPath: m_Name
-      value: MiniGame
-      objectReference: {fileID: 0}
-    - target: {fileID: 4082119631255391670, guid: add8949f2623016449032dd16a9f1811,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4082119631255391671, guid: add8949f2623016449032dd16a9f1811,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1479,6 +1388,16 @@ PrefabInstance:
     - target: {fileID: 4082119631255391671, guid: add8949f2623016449032dd16a9f1811,
         type: 3}
       propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4082119631255391670, guid: add8949f2623016449032dd16a9f1811,
+        type: 3}
+      propertyPath: m_Name
+      value: MiniGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 4082119631255391670, guid: add8949f2623016449032dd16a9f1811,
+        type: 3}
+      propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4082119631255391672, guid: add8949f2623016449032dd16a9f1811,
