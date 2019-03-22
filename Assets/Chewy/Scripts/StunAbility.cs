@@ -32,7 +32,10 @@ public class StunAbility : Cooldown
                     item.enabled = false;
                 }
 
-                GetComponent<MeshRenderer>().enabled = false;
+                if (!isSpawned)
+                {
+                    GetComponent<MeshRenderer>().enabled = false;
+                }
             }
             else
             {
@@ -84,12 +87,12 @@ public class StunAbility : Cooldown
                 isCooldown = true;
                 #region NetMsg_Stun
 
-                NetMsg_AB_Stun ab_Stun = new NetMsg_AB_Stun();
-                ab_Stun.ConnectionID = client.ServerConnectionId;
+                Msg_AB_ClientStun ab_Stun = new Msg_AB_ClientStun();
+                ab_Stun.ConnectionID = ClientManager.Instance.LocalPlayer.connectionId;
                 ab_Stun.StunObjectIndex = 4;
                 //ab_Stun.StunParticle
                 ab_Stun.Stunned = trigger.isStunned;
-                client.Send(ab_Stun);
+                ClientManager.Instance.client.Send(MSGTYPE.CLIENT_AB_STUN, ab_Stun);
 
                 #endregion
             }
@@ -104,6 +107,7 @@ public class StunAbility : Cooldown
                 {
                     spyControllerSc.stun = stunG;
                     //stunG.SetActive(false);
+
                     IsActive = false;
                 }
             }
@@ -146,6 +150,7 @@ public class StunAbility : Cooldown
 
                 if (!isSpawned)
                 {
+                    return;
                     Collider[] coll = Physics.OverlapSphere(transform.position, stunG.GetComponent<SphereCollider>().radius);
 
                     for (int i = 0; i < coll.Length; i++)
@@ -176,5 +181,10 @@ public class StunAbility : Cooldown
     public void SetShell()
     {
         flash = gameObject.transform.GetChild(0).GetComponent<ParticleSystem>();
+    }
+
+    public void Play()
+    {
+        flash.Play();
     }
 }

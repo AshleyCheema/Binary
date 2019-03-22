@@ -32,15 +32,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     protected Rigidbody rb;
 
-    [SerializeField]
-    protected Client client;
-
     private Vector3 velocity;
 
     // Start is called before the first frame update
     public virtual void Start()
     {
-        client = FindObjectOfType<Client>();
         rb = GetComponent<Rigidbody>();
     }
 
@@ -48,10 +44,6 @@ public class PlayerController : MonoBehaviour
     public virtual void Update()
     {
         //Maybe add a client check if need
-        if(client == null)
-        {
-            client = FindObjectOfType<Client>();
-        }
 
         if (player == Player.PlayerTwo)
         {
@@ -83,15 +75,12 @@ public class PlayerController : MonoBehaviour
         if (velocity != Vector3.zero)
         {
             //Update server setting for this object
-            NetMsg_PlayerMovement playerMovement = new NetMsg_PlayerMovement();
-            if (client != null)
+            Msg_ClientMove playerMovement = new Msg_ClientMove();
+            if (ClientManager.Instance != null)
             {
-                playerMovement.connectId = client.ServerConnectionId;
-                playerMovement.xMove = rb.position.x;
-                playerMovement.yMove = rb.position.y;
-                playerMovement.zMove = rb.position.z;
-
-                client.Send(playerMovement, client.ReliableChannel);
+                playerMovement.connectId = ClientManager.Instance.LocalPlayer.connectionId;
+                playerMovement.position = rb.position;
+                ClientManager.Instance.client.Send(MSGTYPE.CLIENT_MOVE, playerMovement);
             }
         }
 
@@ -99,15 +88,13 @@ public class PlayerController : MonoBehaviour
         if(oldRot != transform.rotation)
         {
             //Update server seting for this object
-            NetMsg_PlayerRotation playerRotation = new NetMsg_PlayerRotation();
-            if (client != null)
+            Msg_ClientRotation playerRotation = new Msg_ClientRotation();
+            if (ClientManager.Instance != null)
             {
-                playerRotation.ConnectionId = client.ServerConnectionId;
-                playerRotation.XRot = transform.rotation.eulerAngles.x;
-                playerRotation.YRot = transform.rotation.eulerAngles.y;
-                playerRotation.ZRot = transform.rotation.eulerAngles.z;
+                playerRotation.connectId = ClientManager.Instance.LocalPlayer.connectionId;
+                playerRotation.rot = transform.rotation;
 
-                client.Send(playerRotation, client.StateUpdateChannel);
+                ClientManager.Instance.client.Send(MSGTYPE.CLIENT_ROTATION, playerRotation);
             }
         }
     }

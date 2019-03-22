@@ -17,18 +17,11 @@ namespace LLAPI
     }
 
     [System.Serializable]
-    public struct SpawnableObject
+    public class SpawnableObject
     {
-        public int ConnectionID { get; set; }
-        public int ObjectID { get; set; }
+        public int ConnectionID;
+        public int ObjectID;
 
-        public float XPos { get; set; }
-        public float YPos { get; set; }
-        public float ZPos { get; set; }
-
-        public float XRot { get; set; }
-        public float YRot { get; set; }
-        public float ZRot { get; set; }
-
+        public Vector3 position;
     }
 }

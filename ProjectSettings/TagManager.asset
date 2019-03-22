@@ -10,6 +10,8 @@ TagManager:
   - Spy
   - Destroy
   - playerColourIndication
+  - Merc_Spawn_Area
+  - Spy_Spawn_Area
   layers:
   - Default
   - TransparentFX

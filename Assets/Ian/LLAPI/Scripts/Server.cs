@@ -509,17 +509,17 @@ namespace LLAPI
                     spawnPosition = ExtensionFunctions.RandomPointInBounds(spySpawnTrigger.bounds);
                 }
 
-                spawnNewPlayer.ObjectsToSpawn.Add(new SpawnableObject
-                {
-                    ConnectionID = pKey,
-                    ObjectID = players[pKey].team == Team.Merc ? 0 : 5,
-                    XPos = spawnPosition.x,
-                    YPos = spawnPosition.y,
-                    ZPos = spawnPosition.z,
-                    XRot = 0,
-                    YRot = 0,
-                    ZRot = 0
-                });
+                //spawnNewPlayer.ObjectsToSpawn.Add(new SpawnableObject
+                //{
+                //    ConnectionID = pKey,
+                //    ObjectID = players[pKey].team == Team.Merc ? 0 : 5,
+                //    XPos = spawnPosition.x,
+                //    YPos = spawnPosition.y,
+                //    ZPos = spawnPosition.z,
+                //    XRot = 0,
+                //    YRot = 0,
+                //    ZRot = 0
+                //});
 
                 //Spawn server avater
                 players[pKey].avater = Instantiate(spawnableObjects.ObjectsToSpawn[(players[pKey].team == Team.Merc ? 0 : 5)],

@@ -58,7 +58,8 @@ public static class ExtensionFunctions
     /// <returns></returns>
     public static Vector3 GetVector3(this Vector3 a_vector3, LLAPI.SpawnableObject a_object)
     {
-        return new Vector3(a_object.XPos, a_object.YPos, a_object.ZPos);
+        return new Vector3(0,0,0);
+        //return new Vector3(a_object.XPos, a_object.YPos, a_object.ZPos);
     }
 
     public static void SetVector3(Vector3 a_input, float a_x, float a_y, float a_z)

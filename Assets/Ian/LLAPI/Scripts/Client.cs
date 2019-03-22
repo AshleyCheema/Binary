@@ -248,7 +248,7 @@ namespace LLAPI
                     localPlayer.connectionId = serverConnectionId;
                     localPlayer.lobbyAvater = Instantiate(spawnableObjects.ObjectsToSpawn[1], CS_LobbyManager.Instance.transform);
 
-                    CS_LobbyManager.Instance.AddLobbyPlayer(localPlayer);
+                    //CS_LobbyManager.Instance.AddLobbyPlayer(localPlayer);
                     break;
 
                 case NetOP.SPAWN_PLAYER_LB:
@@ -264,23 +264,23 @@ namespace LLAPI
 
                     players.Add(p.connectionId, p);
 
-                    CS_LobbyManager.Instance.SetShell(p);
-                    CS_LobbyManager.Instance.AddLobbyPlayer(p, true);
-                    CS_LobbyManager.Instance.SetPlayerName(p);
-                    CS_LobbyManager.Instance.SetPlayerTeam(p);
+                    //CS_LobbyManager.Instance.SetShell(p);
+                    //CS_LobbyManager.Instance.AddLobbyPlayer(p, true);
+                    //CS_LobbyManager.Instance.SetPlayerName(p);
+                   // CS_LobbyManager.Instance.SetPlayerTeam(p);
 
                     break;
 
                 case NetOP.NAME_CHANGE_LB:
                     NetMsg_NameChangeLB nameLB = (NetMsg_NameChangeLB)a_netmsg;
                     players[nameLB.ConnectionID].playerName = nameLB.NewName;
-                    CS_LobbyManager.Instance.SetPlayerName(players[nameLB.ConnectionID]);
+                   // CS_LobbyManager.Instance.SetPlayerName(players[nameLB.ConnectionID]);
                     break;
 
                 case NetOP.TEAM_CHANGE_LB:
                     NetMsg_TeamChangeLB teamLB = (NetMsg_TeamChangeLB)a_netmsg;
                     players[teamLB.ConnectionID].team = teamLB.Team;
-                    CS_LobbyManager.Instance.SetPlayerTeam(players[teamLB.ConnectionID]);
+                    //CS_LobbyManager.Instance.SetPlayerTeam(players[teamLB.ConnectionID]);
                     break;
 
                 case NetOP.CLIENT_LOAD_SCENE_LB:
@@ -314,12 +314,12 @@ namespace LLAPI
                     {
                         if (key.ConnectionID == serverConnectionId)
                         {
-                            localPlayer.avater = Instantiate(spawnableObjects.ObjectsToSpawn[key.ObjectID], new Vector3(spawnObject.ObjectsToSpawn[index].XPos,
-                                                                                                                        spawnObject.ObjectsToSpawn[index].YPos, 
-                                                                                                                        spawnObject.ObjectsToSpawn[index].ZPos), 
-                                                                                                                        Quaternion.Euler(spawnObject.ObjectsToSpawn[index].XRot,
-                                                                                                                        spawnObject.ObjectsToSpawn[index].YRot,
-                                                                                                                        spawnObject.ObjectsToSpawn[index].ZRot));
+                            //localPlayer.avater = Instantiate(spawnableObjects.ObjectsToSpawn[key.ObjectID], new Vector3(spawnObject.ObjectsToSpawn[index].XPos,
+                            //                                                                                            spawnObject.ObjectsToSpawn[index].YPos, 
+                            //                                                                                            spawnObject.ObjectsToSpawn[index].ZPos), 
+                            //                                                                                            Quaternion.Euler(spawnObject.ObjectsToSpawn[index].XRot,
+                            //                                                                                            spawnObject.ObjectsToSpawn[index].YRot,
+                            //                                                                                            spawnObject.ObjectsToSpawn[index].ZRot));
                             //localPlayer.avater.GetComponent<PlayerController>().client = this;
                             localPlayer.team = (key.ObjectID == 0) ? Team.Merc : Team.Spy;
                             localPlayer.avater.tag = (localPlayer.team == Team.Merc) ? "Merc" : "Spy";
@@ -331,13 +331,13 @@ namespace LLAPI
                         }
                         else
                         {
-                            players[key.ConnectionID].avater =
-                             Instantiate(spawnableObjects.ObjectsToSpawn[key.ObjectID], new Vector3(spawnObject.ObjectsToSpawn[index].XPos,
-                                                                                                    spawnObject.ObjectsToSpawn[index].YPos,
-                                                                                                    spawnObject.ObjectsToSpawn[index].ZPos), 
-                                                                                                    Quaternion.Euler(spawnObject.ObjectsToSpawn[index].XRot,
-                                                                                                    spawnObject.ObjectsToSpawn[index].YRot,
-                                                                                                    spawnObject.ObjectsToSpawn[index].ZRot));
+                            //players[key.ConnectionID].avater =
+                            // Instantiate(spawnableObjects.ObjectsToSpawn[key.ObjectID], new Vector3(spawnObject.ObjectsToSpawn[index].XPos,
+                            //                                                                        spawnObject.ObjectsToSpawn[index].YPos,
+                            //                                                                        spawnObject.ObjectsToSpawn[index].ZPos), 
+                            //                                                                        Quaternion.Euler(spawnObject.ObjectsToSpawn[index].XRot,
+                            //                                                                        spawnObject.ObjectsToSpawn[index].YRot,
+                            //                                                                        spawnObject.ObjectsToSpawn[index].ZRot));
                             players[key.ConnectionID].team = (key.ObjectID == 0) ? Team.Merc : Team.Spy;
                             players[key.ConnectionID].avater.tag = (players[key.ConnectionID].team == Team.Merc) ? "Merc" : "Spy";
                             players[key.ConnectionID].avaterObjects = new List<GameObject>();

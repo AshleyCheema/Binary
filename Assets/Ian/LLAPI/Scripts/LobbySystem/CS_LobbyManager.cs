@@ -14,9 +14,14 @@ public class CS_LobbyManager : MonoBehaviour
     { get { return instance; } }
 
     [SerializeField]
-    private Client client;
-    public Client Client
+    private ClientManager client;
+    public ClientManager Client
     { get { return client; } }
+
+    [SerializeField]
+    private HostManager host;
+    public HostManager Host
+    { get { return host; } }
 
     [SerializeField]
     private CS_Lobby cs_lobby;
@@ -51,10 +56,10 @@ public class CS_LobbyManager : MonoBehaviour
         currentPanel = a_newPanel;
     }
 
-    public void SetShell(LLAPI.Player a_p)
+    public void SetShell(LocalPlayer aPlayer)
     {
-        a_p.lobbyAvater.GetComponentInChildren<TMP_InputField>().interactable = false;
-        Button[] buttons = a_p.lobbyAvater.GetComponentsInChildren<Button>();
+        aPlayer.lobbyAvatar.GetComponentInChildren<TMP_InputField>().interactable = false;
+        Button[] buttons = aPlayer.lobbyAvatar.GetComponentsInChildren<Button>();
 
         for (int i = 0; i < buttons.Length; i++)
         {
@@ -63,77 +68,93 @@ public class CS_LobbyManager : MonoBehaviour
 
     }
 
-    public void AddLobbyPlayer(LLAPI.Player a_p, bool isLocal = false)
+    public void AddLobbyPlayer(LocalPlayer aPlayer, bool isLocal = false)
     {
-        cs_lobby.AddUnassignedPlayer(a_p.lobbyAvater);
-        a_p.lobbyAvater.name = a_p.connectionId.ToString();
+        SetPlayerTeam(aPlayer);
+        aPlayer.lobbyAvatar.name = aPlayer.connectionId.ToString();
 
-        TMP_InputField input = a_p.lobbyAvater.GetComponentInChildren<TMP_InputField>();
-        Button readyButton = a_p.lobbyAvater.GetComponentInChildren<Button>();
+        if(!isLocal)
+        {
+            SetShell(aPlayer);
+            return;
+        }
+
+        TMP_InputField input = aPlayer.lobbyAvatar.GetComponentInChildren<TMP_InputField>();
+        Button readyButton = aPlayer.lobbyAvatar.GetComponentInChildren<Button>();
 
         //Add a listener to the name input
         //When text has been entered then call OnNameChange
-        input.onEndEdit.AddListener(delegate { OnNameChange(input, a_p); });
+        input.onEndEdit.AddListener(delegate { OnNameChange(input, aPlayer); });
 
         //Add a listener to the ready button.
         //When the ready button has been pressed then tell the server
         //this client is ready
         readyButton.onClick.AddListener(delegate 
         {
-            NetMsg_IsReadyLB readyLB = new NetMsg_IsReadyLB();
-            readyLB.ConnectionID = a_p.connectionId;
-            readyLB.IsReady = true;
-
-            client.Send(readyLB);
+            ClientManager.Instance.SetClientReady();
+            //NetMsg_IsReadyLB readyLB = new NetMsg_IsReadyLB();
+            //readyLB.ConnectionID = a_p.connectionId;
+            //readyLB.IsReady = true;
+            //
+            //client.Send(readyLB);
         });
 
     }
 
-    private void OnNameChange(TMP_InputField a_i, LLAPI.Player a_p)
+    private void OnNameChange(TMP_InputField a_i, LocalPlayer aPlayer)
     {
-        NetMsg_NameChangeLB lb = new NetMsg_NameChangeLB();
-        lb.ConnectionID = a_p.connectionId;
-        lb.NewName = a_i.text;
+        Msg_ClientNameChange nc = new Msg_ClientNameChange();
+        nc.connectionID = aPlayer.connectionId;
+        nc.name = a_i.text;
+        ClientManager.Instance.client.Send(MSGTYPE.LOBBY_NAME_CHANGE, nc);
+        //NetMsg_NameChangeLB lb = new NetMsg_NameChangeLB();
+        //lb.ConnectionID = a_p.connectionId;
+        //lb.NewName = a_i.text;
 
         //Send the new data to the server to inform all other clients
-        client.Send(lb);
+        //client.Send(lb);
 
         //Set the player name on the local client
-        a_p.playerName = lb.NewName;
+        SetName(a_i, aPlayer);
     }
 
-    public void SetPlayerName(LLAPI.Player a_p)
+    public void SetName(TMP_InputField a_i, LocalPlayer aPlayer)
     {
-        a_p.lobbyAvater.GetComponentInChildren<TMP_InputField>().text = a_p.playerName;
+        aPlayer.playerName = a_i.name;
     }
 
-    public void SetPlayerTeam(LLAPI.Player a_p)
+    public void SetPlayerName(LocalPlayer aPlayer)
     {
-        if(a_p.team == Team.Merc)
+        aPlayer.lobbyAvatar.GetComponentInChildren<TMP_InputField>().text = aPlayer.playerName;
+    }
+
+    public void SetPlayerTeam(LocalPlayer aPlayer)
+    {
+        if(aPlayer.playerTeam == Team.Merc)
         {
-            cs_lobby.AddMercPlayer(a_p.lobbyAvater);
-            for(int i = 0; i < a_p.lobbyAvater.transform.childCount; ++i)
+            cs_lobby.AddMercPlayer(aPlayer.lobbyAvatar);
+            for(int i = 0; i < aPlayer.lobbyAvatar.transform.childCount; ++i)
             {
-                if(a_p.lobbyAvater.transform.GetChild(i).gameObject.tag == "playerColourIndication")
+                if(aPlayer.lobbyAvatar.transform.GetChild(i).gameObject.tag == "playerColourIndication")
                 {
-                    a_p.lobbyAvater.transform.GetChild(i).gameObject.GetComponent<Image>().color = new Color32(142,23,23,255);
+                    aPlayer.lobbyAvatar.transform.GetChild(i).gameObject.GetComponent<Image>().color = new Color32(142,23,23,255);
                 }
             }
         }
-        else if(a_p.team == Team.Spy)
+        else if(aPlayer.playerTeam == Team.Spy)
         {
-            cs_lobby.AddSpyPlayer(a_p.lobbyAvater);
-            for (int i = 0; i < a_p.lobbyAvater.transform.childCount; ++i)
+            cs_lobby.AddSpyPlayer(aPlayer.lobbyAvatar);
+            for (int i = 0; i < aPlayer.lobbyAvatar.transform.childCount; ++i)
             {
-                if (a_p.lobbyAvater.transform.GetChild(i).gameObject.tag == "playerColourIndication")
+                if (aPlayer.lobbyAvatar.transform.GetChild(i).gameObject.tag == "playerColourIndication")
                 {
-                    a_p.lobbyAvater.transform.GetChild(i).gameObject.GetComponent<Image>().color = new Color32(51, 134, 160, 255);
+                    aPlayer.lobbyAvatar.transform.GetChild(i).gameObject.GetComponent<Image>().color = new Color32(51, 134, 160, 255);
                 }
             }
         }
         else
         {
-            cs_lobby.AddUnassignedPlayer(a_p.lobbyAvater);
+            cs_lobby.AddUnassignedPlayer(aPlayer.lobbyAvatar);
         }
     }
 }
