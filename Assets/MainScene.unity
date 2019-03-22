@@ -2305,6 +2305,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 312546652755104693, guid: 4d0d07280e019bf4b950e4016b056a09,
+        type: 3}
+      propertyPath: m_Name
+      value: FlashEffect
+      objectReference: {fileID: 0}
     - target: {fileID: 312546652755104690, guid: 4d0d07280e019bf4b950e4016b056a09,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2359,11 +2364,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 312546652755104693, guid: 4d0d07280e019bf4b950e4016b056a09,
-        type: 3}
-      propertyPath: m_Name
-      value: FlashEffect
       objectReference: {fileID: 0}
     - target: {fileID: 312546652755104691, guid: 4d0d07280e019bf4b950e4016b056a09,
         type: 3}
@@ -2536,6 +2536,17 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 80722652396774937, guid: 4639a6967376c6f4ca6f687a0a1370ad,
+        type: 3}
+      propertyPath: triggerScript
+      value: 
+      objectReference: {fileID: 2054288086}
+    - target: {fileID: 80722652396774937, guid: 4639a6967376c6f4ca6f687a0a1370ad,
+        type: 3}
+      propertyPath: bulletSound
+      value: 
+      objectReference: {fileID: 11400000, guid: 4835d93a7342ad74388309a81f79bb28,
+        type: 2}
     - target: {fileID: 80722652396774930, guid: 4639a6967376c6f4ca6f687a0a1370ad,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2591,17 +2602,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 80722652396774937, guid: 4639a6967376c6f4ca6f687a0a1370ad,
-        type: 3}
-      propertyPath: triggerScript
-      value: 
-      objectReference: {fileID: 2054288086}
-    - target: {fileID: 80722652396774937, guid: 4639a6967376c6f4ca6f687a0a1370ad,
-        type: 3}
-      propertyPath: bulletSound
-      value: 
-      objectReference: {fileID: 11400000, guid: 4835d93a7342ad74388309a81f79bb28,
-        type: 2}
     - target: {fileID: 80722653263740984, guid: 4639a6967376c6f4ca6f687a0a1370ad,
         type: 3}
       propertyPath: m_LocalPosition.z
@@ -2690,12 +2690,12 @@ PrefabInstance:
     - target: {fileID: 6383911579229911006, guid: 4639a6967376c6f4ca6f687a0a1370ad,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -600
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6383911579229911006, guid: 4639a6967376c6f4ca6f687a0a1370ad,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 350
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6383911579229911006, guid: 4639a6967376c6f4ca6f687a0a1370ad,
         type: 3}
@@ -2705,6 +2705,16 @@ PrefabInstance:
     - target: {fileID: 6383911579229911006, guid: 4639a6967376c6f4ca6f687a0a1370ad,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6383911579229911006, guid: 4639a6967376c6f4ca6f687a0a1370ad,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6383911579229911006, guid: 4639a6967376c6f4ca6f687a0a1370ad,
+        type: 3}
+      propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4829548229522522897, guid: 4639a6967376c6f4ca6f687a0a1370ad,

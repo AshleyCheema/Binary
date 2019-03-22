@@ -7,10 +7,11 @@ public class TrackerAbility : Cooldown
     public Abilities tracker;
     private GameObject trackingDevice;
     private Trigger trackerTrigger;
-    private GameObject arrowPos;
+    private GameObject arrowPointer;
+    private RectTransform arrowRect;
     private bool trackerActive;
     public bool trackerDown;
-
+    private Camera camera;
     private Collider deviceCollider;
     private Vector3 trackerPos;
     protected Client client;
@@ -22,10 +23,11 @@ public class TrackerAbility : Cooldown
         client = FindObjectOfType<Client>();
         isCooldown = tracker.isCooldown;
         cooldown = tracker.abilityDuration;
-        arrowPos = gameObject.transform.GetChild(2).GetChild(4).GetChild(3).gameObject;
+        arrowPointer = gameObject.transform.GetChild(2).GetChild(4).GetChild(3).gameObject;
+        arrowRect = arrowPointer.GetComponent<RectTransform>();
         trackerActive = false;
         trackingDevice = GameObject.Find("Tracker");
-
+        camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         trackerTrigger = trackingDevice.GetComponent<Trigger>();
         trackingDevice.SetActive(false);
         deviceCollider = trackingDevice.GetComponent<Collider>();
@@ -43,7 +45,7 @@ public class TrackerAbility : Cooldown
         }
         else
         {
-            arrowPos.SetActive(false);
+            arrowPointer.SetActive(false);
         }
 
         if (Input.GetKeyDown(KeyCode.Q))
@@ -135,30 +137,57 @@ public class TrackerAbility : Cooldown
 
     void ArrowPointer()
     {
-       //Transform playerTransform;
+        //Vector3 direction = transform.InverseTransformPoint(trackerPos);
+        //float hideDistance = 1f;
 
-       Vector3 direction = transform.InverseTransformPoint(trackerPos);
+        arrowPointer.SetActive(true);
+        Vector3 direction = trackerPos;
+        Vector3 fromPosition = Camera.main.transform.position;
+        Vector3 targetPositionScreenPoint = Camera.main.WorldToScreenPoint(trackerPos);
+        bool isOffScreen = targetPositionScreenPoint.x <= 0 || targetPositionScreenPoint.x >= Screen.width || targetPositionScreenPoint.y <= 0 || targetPositionScreenPoint.y >= Screen.height;
 
 
-       float hideDistance = 1f;
-       
-       //Vector3 direction = trackerPos - arrowPos.transform.position;
-       
-       if(direction.magnitude < hideDistance)
-       {
-           arrowPos.SetActive(false);
-           trackerTrigger.isDetected = false;
-       }
-       else
-       {
-            arrowPos.SetActive(true);
+        fromPosition.z = 0f;
+        Vector3 dir = (direction - fromPosition).normalized;
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        arrowRect.localEulerAngles = new Vector3(0, 0, angle);
+        
+        if(isOffScreen)
+        {
+            Vector3 cappedTargetScreenPos = targetPositionScreenPoint;
+            if (cappedTargetScreenPos.x <= 0) cappedTargetScreenPos.x = 0f;
+            if (cappedTargetScreenPos.x >= Screen.width) cappedTargetScreenPos.x = Screen.width;
+            if (cappedTargetScreenPos.y <= 0) cappedTargetScreenPos.y = 0f;
+            if (cappedTargetScreenPos.x >= Screen.height) cappedTargetScreenPos.x = Screen.height;
 
-            float a = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg;
-            a += 180;
-            arrowPos.transform.localEulerAngles = new Vector3(0, 0, a);
-
-            //float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-            //arrowPos.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            Vector3 arrowWorldPos = camera.ScreenToWorldPoint(cappedTargetScreenPos);
+            arrowRect.position = arrowWorldPos;
+            arrowRect.localPosition = new Vector3(arrowRect.localPosition.x, arrowRect.localPosition.y, 0f);
         }
+
+
+
+
+
+
+        //Vector3 direction = trackerPos - arrowPointer.transform.position;
+
+        //if (direction.magnitude < hideDistance)
+        //{
+        //    arrowPointer.SetActive(false);
+        //    trackerTrigger.isDetected = false;
+        //}
+        //else
+        //{
+        //    arrowPointer.SetActive(true);
+        //
+        //
+        //    //float a = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg;
+        //    //a += 180;
+        //    //arrowPointer.transform.localEulerAngles = new Vector3(0, 0, a);
+        //
+        //    //float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        //    //arrowPointer.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        //}
     }
 }
