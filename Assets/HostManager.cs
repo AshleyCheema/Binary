@@ -22,7 +22,7 @@ public class HostManager : NetworkManager
 
         Mover mover = new Mover();
 
-        mover.m_move = Vector3.zero
+        mover.m_move = Vector3.zero;
 
     }
 
@@ -42,6 +42,6 @@ public class LobbyMManger : MonoBehaviour
 
     private void Start()
     {
-        manager.client.re
+        //manager.client.re
     }
 }
