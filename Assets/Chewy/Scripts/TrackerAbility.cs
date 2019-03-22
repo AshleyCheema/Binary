@@ -23,7 +23,7 @@ public class TrackerAbility : Cooldown
         client = FindObjectOfType<Client>();
         isCooldown = tracker.isCooldown;
         cooldown = tracker.abilityDuration;
-        arrowPointer = gameObject.transform.GetChild(2).GetChild(4).GetChild(3).gameObject;
+        arrowPointer = gameObject.transform.GetChild(2).GetChild(0).gameObject;
         arrowRect = arrowPointer.GetComponent<RectTransform>();
         trackerActive = false;
         trackingDevice = GameObject.Find("Tracker");
@@ -141,38 +141,40 @@ public class TrackerAbility : Cooldown
 
     void ArrowPointer()
     {
+
+        arrowPointer.SetActive(true);
+        Vector3 dir = Camera.main.transform.InverseTransformPoint(trackerPos);
+        //Vector3 dir = trackerPos - transform.position;
+        float angle = -Mathf.Atan2(dir.z, dir.x) * Mathf.Rad2Deg;
+        arrowRect.transform.eulerAngles = new Vector3(0, 0, angle);
+
+
         //Vector3 direction = transform.InverseTransformPoint(trackerPos);
         //float hideDistance = 1f;
 
-        arrowPointer.SetActive(true);
-        Vector3 direction = trackerPos;
-        Vector3 fromPosition = Camera.main.transform.position;
-        Vector3 targetPositionScreenPoint = Camera.main.WorldToScreenPoint(trackerPos);
-        bool isOffScreen = targetPositionScreenPoint.x <= 0 || targetPositionScreenPoint.x >= Screen.width || targetPositionScreenPoint.y <= 0 || targetPositionScreenPoint.y >= Screen.height;
+        //Vector3 direction = trackerPos;
+        //Vector3 fromPosition = Camera.main.transform.position;
+        //Vector3 targetPositionScreenPoint = Camera.main.WorldToScreenPoint(trackerPos);
+        //bool isOffScreen = targetPositionScreenPoint.x <= 0 || targetPositionScreenPoint.x >= Screen.width || targetPositionScreenPoint.y <= 0 || targetPositionScreenPoint.y >= Screen.height;
+        //
+        //
+        //fromPosition.z = 0f;
+        //Vector3 dir = (direction - fromPosition).normalized;
+        //float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        //arrowRect.localEulerAngles = new Vector3(0, 0, angle);
 
-
-        fromPosition.z = 0f;
-        Vector3 dir = (direction - fromPosition).normalized;
-        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        arrowRect.localEulerAngles = new Vector3(0, 0, angle);
-        
-        if(isOffScreen)
-        {
-            Vector3 cappedTargetScreenPos = targetPositionScreenPoint;
-            if (cappedTargetScreenPos.x <= 0) cappedTargetScreenPos.x = 0f;
-            if (cappedTargetScreenPos.x >= Screen.width) cappedTargetScreenPos.x = Screen.width;
-            if (cappedTargetScreenPos.y <= 0) cappedTargetScreenPos.y = 0f;
-            if (cappedTargetScreenPos.x >= Screen.height) cappedTargetScreenPos.x = Screen.height;
-
-            Vector3 arrowWorldPos = camera.ScreenToWorldPoint(cappedTargetScreenPos);
-            arrowRect.position = arrowWorldPos;
-            arrowRect.localPosition = new Vector3(arrowRect.localPosition.x, arrowRect.localPosition.y, 0f);
-        }
-
-
-
-
-
+        //if(isOffScreen)
+        //{
+        //    Vector3 cappedTargetScreenPos = targetPositionScreenPoint;
+        //    if (cappedTargetScreenPos.x <= 0) cappedTargetScreenPos.x = 0f;
+        //    if (cappedTargetScreenPos.x >= Screen.width) cappedTargetScreenPos.x = Screen.width;
+        //    if (cappedTargetScreenPos.y <= 0) cappedTargetScreenPos.y = 0f;
+        //    if (cappedTargetScreenPos.x >= Screen.height) cappedTargetScreenPos.x = Screen.height;
+        //
+        //    Vector3 arrowWorldPos = camera.ScreenToWorldPoint(cappedTargetScreenPos);
+        //    arrowRect.position = arrowWorldPos;
+        //    arrowRect.localPosition = new Vector3(arrowRect.localPosition.x, arrowRect.localPosition.y, 0f);
+        //}
 
         //Vector3 direction = trackerPos - arrowPointer.transform.position;
 
