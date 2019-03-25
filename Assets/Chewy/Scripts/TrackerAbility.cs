@@ -39,14 +39,14 @@ public class TrackerAbility : Cooldown
     {
         base.Update();
 
-        if (trackerTrigger != null && trackerTrigger.isDetected)
-        {
-            ArrowPointer();
-        }
-        else
-        {
-            arrowPointer.SetActive(false);
-        }
+        //if (trackerTrigger != null && trackerTrigger.isDetected)
+        //{
+        //    ArrowPointer();
+        //}
+        //else
+        //{
+        //    arrowPointer.SetActive(false);
+        //}
 
         if (Input.GetKeyDown(KeyCode.Q))
         {
@@ -135,61 +135,38 @@ public class TrackerAbility : Cooldown
         }
     }
 
-    void ArrowPointer()
-    {
-
-        arrowPointer.SetActive(true);
-        Vector3 dir = Camera.main.transform.InverseTransformPoint(trackerPos);
-        //Vector3 dir = trackerPos - transform.position;
-        float angle = -Mathf.Atan2(dir.z, dir.x) * Mathf.Rad2Deg;
-        arrowRect.transform.eulerAngles = new Vector3(0, 0, angle);
-
-
-        //Vector3 direction = transform.InverseTransformPoint(trackerPos);
-        //float hideDistance = 1f;
-
-        //Vector3 direction = trackerPos;
-        //Vector3 fromPosition = Camera.main.transform.position;
-        //Vector3 targetPositionScreenPoint = Camera.main.WorldToScreenPoint(trackerPos);
-        //bool isOffScreen = targetPositionScreenPoint.x <= 0 || targetPositionScreenPoint.x >= Screen.width || targetPositionScreenPoint.y <= 0 || targetPositionScreenPoint.y >= Screen.height;
-        //
-        //
-        //fromPosition.z = 0f;
-        //Vector3 dir = (direction - fromPosition).normalized;
-        //float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        //arrowRect.localEulerAngles = new Vector3(0, 0, angle);
-
-        //if(isOffScreen)
-        //{
-        //    Vector3 cappedTargetScreenPos = targetPositionScreenPoint;
-        //    if (cappedTargetScreenPos.x <= 0) cappedTargetScreenPos.x = 0f;
-        //    if (cappedTargetScreenPos.x >= Screen.width) cappedTargetScreenPos.x = Screen.width;
-        //    if (cappedTargetScreenPos.y <= 0) cappedTargetScreenPos.y = 0f;
-        //    if (cappedTargetScreenPos.x >= Screen.height) cappedTargetScreenPos.x = Screen.height;
-        //
-        //    Vector3 arrowWorldPos = camera.ScreenToWorldPoint(cappedTargetScreenPos);
-        //    arrowRect.position = arrowWorldPos;
-        //    arrowRect.localPosition = new Vector3(arrowRect.localPosition.x, arrowRect.localPosition.y, 0f);
-        //}
-
-        //Vector3 direction = trackerPos - arrowPointer.transform.position;
-
-        //if (direction.magnitude < hideDistance)
-        //{
-        //    arrowPointer.SetActive(false);
-        //    trackerTrigger.isDetected = false;
-        //}
-        //else
-        //{
-        //    arrowPointer.SetActive(true);
-        //
-        //
-        //    //float a = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg;
-        //    //a += 180;
-        //    //arrowPointer.transform.localEulerAngles = new Vector3(0, 0, a);
-        //
-        //    //float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        //    //arrowPointer.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-        //}
-    }
+    //void ArrowPointer()
+    //{
+    //
+    //    arrowPointer.SetActive(true);
+    //
+    //    Vector3 dir = Camera.main.WorldToViewportPoint(transform.position) - Camera.main.WorldToViewportPoint(trackerPos);
+    //    dir.Normalize();
+    //    float angle = Mathf.Atan2(dir.z, dir.x) * Mathf.Rad2Deg;
+    //    
+    //    angle += 180f;
+    //    arrowRect.transform.eulerAngles = new Vector3(0, 0, angle);
+    //
+    //    Debug.Log(dir);
+    //    Debug.Log(angle);
+    //    //float hideDistance = 1f;
+    //
+    //    //if (direction.magnitude < hideDistance)
+    //    //{
+    //    //    arrowPointer.SetActive(false);
+    //    //    trackerTrigger.isDetected = false;
+    //    //}
+    //    //else
+    //    //{
+    //    //    arrowPointer.SetActive(true);
+    //    //
+    //    //
+    //    //    //float a = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg;
+    //    //    //a += 180;
+    //    //    //arrowPointer.transform.localEulerAngles = new Vector3(0, 0, a);
+    //    //
+    //    //    //float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+    //    //    //arrowPointer.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+    //    //}
+    //}
 }
