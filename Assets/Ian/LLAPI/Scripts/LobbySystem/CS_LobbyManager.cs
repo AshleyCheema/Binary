@@ -16,12 +16,12 @@ public class CS_LobbyManager : MonoBehaviour
     [SerializeField]
     private ClientManager client;
     public ClientManager Client
-    { get { return client; } }
+    { get { return client; } set { client = value; } }
 
     [SerializeField]
     private HostManager host;
     public HostManager Host
-    { get { return host; } }
+    { get { return host; } set { host = value; } }
 
     [SerializeField]
     private CS_Lobby cs_lobby;

@@ -22,6 +22,7 @@ public class MSGTYPE
     public const short CLIENT_EXITED_LEVEL = 112;
     public const short CLIENT_STATE = 113;
     public const short CLIENT_GAME_OVER = 114;
+    public const short CLIENT_READY = 115;
     public const short PING_PONG = 250;
 }
 
@@ -55,6 +56,7 @@ public class HostManager : NetworkManager
 
         Debug.Log("Server stated");
 
+        NetworkServer.RegisterHandler(MSGTYPE.CLIENT_READY, OnPlayerReady);
         NetworkServer.RegisterHandler(MSGTYPE.LOBBY_TEAM_CHANGE, OnPlayerTeamChange);
         NetworkServer.RegisterHandler(MSGTYPE.LOBBY_NAME_CHANGE, OnPlayerNameChange);
         NetworkServer.RegisterHandler(MSGTYPE.CLIENT_MOVE, OnPlayerMoveChange);
@@ -111,6 +113,7 @@ public class HostManager : NetworkManager
 
     public override void OnServerReady(NetworkConnection conn)
     {
+        return;
         Debug.Log("Client: " + conn.connectionId + " is ready.");
         Players[conn.connectionId].isReady = true;
 
@@ -140,7 +143,14 @@ public class HostManager : NetworkManager
 
             for (int i = 0; i < capturePoints.Length; i++)
             {
-                this.capturePoints.Add(capturePoints[i].ID, capturePoints[i].gameObject);
+                if (this.capturePoints.ContainsKey(capturePoints[i].ID) == false)
+                {
+                    this.capturePoints.Add(capturePoints[i].ID, capturePoints[i].gameObject);
+                }
+                else if(this.capturePoints[capturePoints[i].ID] == null)
+                {
+                    this.capturePoints[capturePoints[i].ID] = capturePoints[i].gameObject;
+                }
             }
 
             Debug.Log("Add all player shells");
@@ -196,12 +206,56 @@ public class HostManager : NetworkManager
         }
         else if(sceneName == "ClientLobby")
         {
-            NetworkServer.SetAllClientsNotReady();
+            CS_LobbyManager.Instance.Host = this;
+
+            CS_LobbyManager.Instance.ChangeTo(CS_LobbyMainMenu.Instance.LobbyPanel);
+            //destory the new network object
+            DontDestroyOnLoad[] network = GameObject.FindObjectsOfType<DontDestroyOnLoad>();
+            for (int i = 0; i < network.Length; i++)
+            {
+                if (!network[i].transform.GetChild(1).gameObject.activeInHierarchy &&
+                    network[i].gameObject.name == "Network")
+                {
+                    Destroy(network[i].gameObject);
+                }
+            }
+
+            foreach (var v in Players.Values)
+            {
+                v.isReady = false;
+                MiniModule_Lobby.Instance.OnLobbyPlayerAdd(v);
+                CS_Lobby.Instance.SetPlayerTeam(v);
+            }
         }
     }
 
     public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId)
     {
+    }
+
+    public void OnPlayerReady(NetworkMessage aMsg)
+    {
+        aMsg.reader.SeekZero();
+        Msg_ClientReady cr = aMsg.ReadMessage<Msg_ClientReady>();
+
+        Debug.Log("Client: " + cr.connectId + " is ready.");
+        Players[cr.connectId].isReady = true;
+
+        bool ready = true;
+
+        foreach (var v in Players.Values)
+        {
+            if (!v.isReady)
+            {
+                ready = false;
+                break;
+            }
+        }
+
+        if (ready)
+        {
+            ServerChangeScene("ClientGame");
+        }
     }
 
     public void OnPlayerTeamChange(NetworkMessage aMsg)
@@ -240,8 +294,10 @@ public class HostManager : NetworkManager
         aMsg.reader.SeekZero();
         Msg_ClientRotation cm = aMsg.ReadMessage<Msg_ClientRotation>();
 
-        Players[cm.connectId].gameAvatar.transform.rotation = cm.rot;
-
+        if (Players[cm.connectId].gameAvatar != null)
+        {
+            Players[cm.connectId].gameAvatar.transform.rotation = cm.rot;
+        }
         Send(cm.connectId, MSGTYPE.CLIENT_ROTATION, cm, false);
     }
 

@@ -99,6 +99,7 @@ public class ClientManager : NetworkManager
         }
         else if (SceneManager.GetActiveScene().name == "ClientLobby")
         {
+            CS_LobbyManager.Instance.Client = this;
             CS_LobbyManager.Instance.ChangeTo(CS_LobbyMainMenu.Instance.LobbyPanel);
             //destory the new network object
             DontDestroyOnLoad[] network = GameObject.FindObjectsOfType<DontDestroyOnLoad>();
@@ -114,14 +115,23 @@ public class ClientManager : NetworkManager
             //create all the players
             MiniModule_Lobby.Instance.OnLobbyPlayerAdd(mLocalPlayer, true);
             CS_Lobby.Instance.SetPlayerTeam(LocalPlayer);
-            CS_Lobby.Instance.SendTeamChange(LocalPlayer);
+
+            foreach (var v in Players.Values)
+            {
+                MiniModule_Lobby.Instance.OnLobbyPlayerAdd(v);
+                CS_Lobby.Instance.SetPlayerTeam(v);
+            }
         }
     }
 
     public void SetClientReady()
     {
-        ClientScene.Ready(mLocalPlayer.conn);
+        //ClientScene.Ready(mLocalPlayer.conn);
         mLocalPlayer.isReady = true;
+
+        Msg_ClientReady cr = new Msg_ClientReady();
+        cr.connectId = LocalPlayer.connectionId;
+        client.Send(MSGTYPE.CLIENT_READY, cr);
     }
 
     private GameObject SpawnPlayerObject(LocalPlayer aPlayer)
@@ -366,7 +376,6 @@ public class ClientManager : NetworkManager
             if(ExitManager.Instance.Exits[i].ID == ce.ID)
             {
                 ExitManager.Instance.Exits[i].IsOpen = ce.IsOpen;
-                ExitManager.Instance.Exits[i].gameObject.GetComponent<MeshRenderer>().material.color = Color.red;
             }
         }
     }

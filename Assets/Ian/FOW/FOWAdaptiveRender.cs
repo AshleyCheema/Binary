@@ -19,6 +19,10 @@ public class FOWAdaptiveRender : MonoBehaviour
             {
                 other.GetComponent<MeshRenderer>().enabled = true;
             }
+            if (other.tag == "Spy")
+            {
+                other.GetComponent<MeshRenderer>().enabled = true;
+            }
         }
     }
 
@@ -34,6 +38,10 @@ public class FOWAdaptiveRender : MonoBehaviour
         else if (ClientManager.Instance?.LocalPlayer.playerTeam == LLAPI.Team.Spy)
         {
             if (other.tag == "Merc")
+            {
+                other.GetComponent<MeshRenderer>().enabled = false;
+            }
+            if (other.tag == "Spy")
             {
                 other.GetComponent<MeshRenderer>().enabled = false;
             }
