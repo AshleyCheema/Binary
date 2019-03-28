@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 
 public class LocalPlayer
 {
@@ -29,6 +30,9 @@ public class ClientManager : NetworkManager
     private Dictionary<int, LocalPlayer> players = new Dictionary<int, LocalPlayer>();
     public Dictionary<int, LocalPlayer> Players
     { get { return players; } }
+
+    [SerializeField]
+    private GameObject gameOverUI;
 
     private long startLongTime;
 
@@ -62,6 +66,7 @@ public class ClientManager : NetworkManager
         this.client.RegisterHandler(MSGTYPE.CLIENT_AB_TRACKER, OnPlayerABTracker);
         this.client.RegisterHandler(MSGTYPE.CLIENT_EXIT, OnServerExitOpen);
         this.client.RegisterHandler(MSGTYPE.CLIENT_AB_TRIGGER, OnPlayerTrigger);
+        this.client.RegisterHandler(MSGTYPE.CLIENT_GAME_OVER, OnGameOver);
 
         this.client.RegisterHandler(MSGTYPE.PING_PONG, OnPingPong);
     }
@@ -85,18 +90,38 @@ public class ClientManager : NetworkManager
     }
 
     public override void OnClientSceneChanged(NetworkConnection conn)
-    {  
-        //Spawn local avatar        
-        mLocalPlayer.gameAvatar = SpawnPlayerObject(mLocalPlayer);
-        Camera.main.GetComponent<CameraScript>().SetTarget(mLocalPlayer.gameAvatar.transform);
+    {
+        if (SceneManager.GetActiveScene().name == "ClientGame")
+        {
+            //Spawn local avatar        
+            mLocalPlayer.gameAvatar = SpawnPlayerObject(mLocalPlayer);
+            Camera.main.GetComponent<CameraScript>().SetTarget(mLocalPlayer.gameAvatar.transform);
+        }
+        else if (SceneManager.GetActiveScene().name == "ClientLobby")
+        {
+            CS_LobbyManager.Instance.ChangeTo(CS_LobbyMainMenu.Instance.LobbyPanel);
+            //destory the new network object
+            DontDestroyOnLoad[] network = GameObject.FindObjectsOfType<DontDestroyOnLoad>();
+            for (int i = 0; i < network.Length; i++)
+            {
+                if(!network[i].transform.GetChild(0).gameObject.activeInHierarchy && 
+                    network[i].gameObject.name == "Network")
+                {
+                    Destroy(network[i].gameObject);
+                }
+            }
+
+            //create all the players
+            MiniModule_Lobby.Instance.OnLobbyPlayerAdd(mLocalPlayer, true);
+            CS_Lobby.Instance.SetPlayerTeam(LocalPlayer);
+            CS_Lobby.Instance.SendTeamChange(LocalPlayer);
+        }
     }
 
     public void SetClientReady()
     {
         ClientScene.Ready(mLocalPlayer.conn);
         mLocalPlayer.isReady = true;
-
-        Debug.Log(ClientScene.ready);
     }
 
     private GameObject SpawnPlayerObject(LocalPlayer aPlayer)
@@ -203,7 +228,10 @@ public class ClientManager : NetworkManager
         aMsg.reader.SeekZero();
         Msg_ClientRotation cm = aMsg.ReadMessage<Msg_ClientRotation>();
 
-        Players[cm.connectId].gameAvatar.transform.rotation = cm.rot;
+        if (Players[cm.connectId].gameAvatar != null)
+        {
+            Players[cm.connectId].gameAvatar.transform.rotation = cm.rot;
+        }
     }
 
     public void OnReceivePlayerABFire(NetworkMessage aMsg)
@@ -350,7 +378,7 @@ public class ClientManager : NetworkManager
 
         if(ccp.Type == TriggerType.Bullet)
         {
-            Debug.Log("I HAVE BEEN SHOT!!!!");
+            LocalPlayer.gameAvatar.GetComponent<SpyController>().Shot();
         }
         else if(ccp.Type == TriggerType.Stun)
         {
@@ -361,6 +389,19 @@ public class ClientManager : NetworkManager
             {
                 mLocalPlayer.gameAvatar.GetComponent<MercControls>().IsStunned = true;
             }
+        }
+    }
+
+    public void OnGameOver(NetworkMessage aMsg)
+    {
+        aMsg.reader.SeekZero();
+        Msg_ClientGameOver cgo = aMsg.ReadMessage<Msg_ClientGameOver>();
+
+        //enable the UI fade and show the game over screen 
+        //ths is where all the state can be shown in need.
+        if(gameOverUI)
+        {
+            gameOverUI.SetActive(true);
         }
     }
 

@@ -6,7 +6,7 @@ using TMPro;
 using LLAPI;
 using UnityEngine.SceneManagement;
 
-public class CS_LobbyMainMenu : MonoBehaviour
+public class CS_LobbyMainMenu : Singleton<CS_LobbyMainMenu>
 {
     [SerializeField]
     private Button serverHost;
@@ -17,6 +17,8 @@ public class CS_LobbyMainMenu : MonoBehaviour
 
     [SerializeField]
     RectTransform lobbyPanel;
+    public RectTransform LobbyPanel
+    { get { return lobbyPanel; } }
 
     private void Start()
     {

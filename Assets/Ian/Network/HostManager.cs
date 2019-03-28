@@ -20,6 +20,8 @@ public class MSGTYPE
     public const short CLIENT_EXIT = 110;
     public const short CLIENT_AB_TRIGGER = 111;
     public const short CLIENT_EXITED_LEVEL = 112;
+    public const short CLIENT_STATE = 113;
+    public const short CLIENT_GAME_OVER = 114;
     public const short PING_PONG = 250;
 }
 
@@ -64,6 +66,7 @@ public class HostManager : NetworkManager
         NetworkServer.RegisterHandler(MSGTYPE.CLIENT_CAPTURE_POINT, OnPlayerCapturePoint);
         NetworkServer.RegisterHandler(MSGTYPE.CLIENT_AB_TRIGGER, OnPlayerTrigger);
         NetworkServer.RegisterHandler(MSGTYPE.CLIENT_EXITED_LEVEL, OnSpyExitedLevel);
+        NetworkServer.RegisterHandler(MSGTYPE.CLIENT_STATE, OnSpyChangeState);
 
         //NetworkServer.RegisterHandler(MSGTYPE.PING_PONG, OnPingPong);
     }
@@ -190,6 +193,10 @@ public class HostManager : NetworkManager
                     allMonos[i].enabled = false;
                 }
             }
+        }
+        else if(sceneName == "ClientLobby")
+        {
+            NetworkServer.SetAllClientsNotReady();
         }
     }
 
@@ -392,10 +399,44 @@ public class HostManager : NetworkManager
         Send(ccp.ConnectionID, MSGTYPE.CLIENT_AB_TRIGGER, ccp);
     }
 
-
     public void OnSpyExitedLevel(NetworkMessage aMsg)
     {
         MiniModule_GameOver.Instance.SpyExitedLevel(aMsg.conn.connectionId);
+    }
+
+    public void OnSpyChangeState(NetworkMessage aMsg)
+    {
+        aMsg.reader.SeekZero();
+        Msg_ClientState cs = aMsg.ReadMessage<Msg_ClientState>();
+
+        if(cs.state == SpyState.Dead)
+        {
+            MiniModule_GameOver.Instance.SpyDead(cs.connectId);
+
+            //send message to other clients
+
+        }
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            OnGameLoadLobby();
+        }
+    }
+
+    public void OnGameLoadLobby()
+    {
+        //load the lobby and 
+        StartCoroutine(nameof(LoadLobby));
+    }
+
+    private IEnumerator LoadLobby()
+    {
+        yield return new WaitForSeconds(2.0f);
+
+        ServerChangeScene("ClientLobby");
     }
 
     public void OnPingPong(NetworkMessage aMsg)
