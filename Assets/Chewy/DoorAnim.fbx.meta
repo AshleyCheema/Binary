@@ -1,14 +1,26 @@
 fileFormatVersion: 2
-guid: e3a88afacc87f064cb85d0512a076e5e
+guid: 2860e35364ee09d4cb889e471c1c485c
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    100000: //RootNode
-    400000: //RootNode
+    100000: Door_1
+    100002: Door_2
+    100004: Door_Frame
+    100006: //RootNode
+    400000: Door_1
+    400002: Door_2
+    400004: Door_Frame
+    400006: //RootNode
     2100000: Low_Default
-    2300000: //RootNode
-    3300000: //RootNode
-    4300000: E_Door
+    2300000: Door_1
+    2300002: Door_2
+    2300004: Door_Frame
+    3300000: Door_1
+    3300002: Door_2
+    3300004: Door_Frame
+    4300000: Door_Frame
+    4300002: Door_2
+    4300004: Door_1
     7400000: Take 001
     9500000: //RootNode
     2186277476908879412: ImportLogs
