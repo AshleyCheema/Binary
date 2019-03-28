@@ -6,13 +6,13 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Ian/LLAPI/Scenes/ClientLobby.unity
+    path: Assets/Ian/Network/Scene/ClientLobby.unity
     guid: 66da927f130624f43b847b0c00f5c51f
   - enabled: 0
     path: Assets/Ian/LLAPI/Scenes/Server.unity
     guid: 443d2d4737b4a604e84cf5a1d9a752ea
   - enabled: 1
-    path: Assets/Ian/LLAPI/Scenes/ClientGame.unity
+    path: Assets/Ian/Network/Scene/ClientGame.unity
     guid: f5c196c8272316f49904c90f57fbda47
   - enabled: 0
     path: Assets/Jamie/Scenes/Test Data/sqlmenu.unity

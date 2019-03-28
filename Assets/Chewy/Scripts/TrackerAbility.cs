@@ -39,14 +39,14 @@ public class TrackerAbility : Cooldown
     {
         base.Update();
 
-        //if (trackerTrigger != null && trackerTrigger.isDetected)
-        //{
-        //    ArrowPointer();
-        //}
-        //else
-        //{
-        //    arrowPointer.SetActive(false);
-        //}
+        if (trackerTrigger != null && trackerTrigger.isDetected)
+        {
+            ArrowPointer();
+        }
+        else
+        {
+            arrowPointer.SetActive(false);
+        }
 
         if (Input.GetKeyDown(KeyCode.Q))
         {
@@ -135,10 +135,16 @@ public class TrackerAbility : Cooldown
         }
     }
 
-    //void ArrowPointer()
-    //{
-    //
-    //    arrowPointer.SetActive(true);
+    void ArrowPointer()
+    {
+        //arrowPointer.SetActive(true);
+        //Vector3 targetPos = Camera.main.WorldToScreenPoint(trackerPos);
+        //Vector3 fromPos = Camera.main.WorldToScreenPoint(transform.position);
+        //Vector3 dir = targetPos - fromPos;
+
+        //float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        //arrowPointer.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+
     //
     //    Vector3 dir = Camera.main.WorldToViewportPoint(transform.position) - Camera.main.WorldToViewportPoint(trackerPos);
     //    dir.Normalize();
@@ -168,5 +174,5 @@ public class TrackerAbility : Cooldown
     //    //    //float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
     //    //    //arrowPointer.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     //    //}
-    //}
+    }
 }

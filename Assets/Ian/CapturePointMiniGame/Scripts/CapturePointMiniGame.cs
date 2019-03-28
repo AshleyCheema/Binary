@@ -47,6 +47,8 @@ public class CapturePointMiniGame : MonoBehaviour
     public void Show()
     {
         parent.SetActive(true);
+        parent.transform.LookAt(parent.transform.position+ Camera.main.transform.rotation * Vector3.forward,
+            Camera.main.transform.rotation * Vector3.up);
     }
 
     /// <summary>
