@@ -3,8 +3,9 @@
  * Description: Player controller to controll any player. 
  * This includes basic movements features.
  * Created: 04/02/2019
- * Edited By:
+ * Edited By: Ash + Ian
  */
+
 using LLAPI;
 using System.Collections;
 using System.Collections.Generic;

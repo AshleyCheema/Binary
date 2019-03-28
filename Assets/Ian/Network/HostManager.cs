@@ -19,6 +19,7 @@ public class MSGTYPE
     public const short CLIENT_CAPTURE_POINT = 109;
     public const short CLIENT_EXIT = 110;
     public const short CLIENT_AB_TRIGGER = 111;
+    public const short CLIENT_EXITED_LEVEL = 112;
     public const short PING_PONG = 250;
 }
 
@@ -62,6 +63,7 @@ public class HostManager : NetworkManager
         NetworkServer.RegisterHandler(MSGTYPE.CLIENT_AB_TRACKER, OnPlayerABTracker);
         NetworkServer.RegisterHandler(MSGTYPE.CLIENT_CAPTURE_POINT, OnPlayerCapturePoint);
         NetworkServer.RegisterHandler(MSGTYPE.CLIENT_AB_TRIGGER, OnPlayerTrigger);
+        NetworkServer.RegisterHandler(MSGTYPE.CLIENT_EXITED_LEVEL, OnSpyExitedLevel);
 
         //NetworkServer.RegisterHandler(MSGTYPE.PING_PONG, OnPingPong);
     }
@@ -388,6 +390,12 @@ public class HostManager : NetworkManager
         Msg_ClientTrigger ccp = aMsg.ReadMessage<Msg_ClientTrigger>();
 
         Send(ccp.ConnectionID, MSGTYPE.CLIENT_AB_TRIGGER, ccp);
+    }
+
+
+    public void OnSpyExitedLevel(NetworkMessage aMsg)
+    {
+        MiniModule_GameOver.Instance.SpyExitedLevel(aMsg.conn.connectionId);
     }
 
     public void OnPingPong(NetworkMessage aMsg)

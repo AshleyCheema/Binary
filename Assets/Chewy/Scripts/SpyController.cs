@@ -2,6 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum SpyState
+{
+    Normal,
+    Hurt,
+    Dead
+}
+
 public class SpyController : PlayerController
 {
     [SerializeField]
@@ -9,7 +16,7 @@ public class SpyController : PlayerController
     [SerializeField]
     public GameObject stun;
     private Trigger bulletTrigger;
-    private bool isHurt;
+    private SpyState currentState;
     public bool stunDrop;
     // Start is called before the first frame update
     public override void Start()
@@ -29,18 +36,22 @@ public class SpyController : PlayerController
 
         if(bulletTrigger.hasShot)
         {
-            if (!isHurt)
+            if (currentState == SpyState.Normal)
             {
                 //Change animation
                 //Maybe drip blood?
                 Debug.Log("Hurt State");
-                isHurt = true;
+                currentState = SpyState.Hurt;
                 bulletTrigger.hasShot = false;
             }
             else
             {
                 bulletTrigger.hasShot = false;
+                currentState = SpyState.Dead;
                 Debug.Log("Die");
+
+                //Send message to host
+                //spy is daed
             }
         }
 
