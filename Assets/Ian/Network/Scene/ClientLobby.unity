@@ -704,6 +704,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1831818766907641766, guid: cfef1562dd8ab46428783508f7964a20,
+        type: 3}
+      propertyPath: m_Name
+      value: Network
+      objectReference: {fileID: 0}
     - target: {fileID: 7476766460674826132, guid: cfef1562dd8ab46428783508f7964a20,
         type: 3}
       propertyPath: m_isInputParsingRequired
@@ -733,11 +738,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1831818766907641766, guid: cfef1562dd8ab46428783508f7964a20,
-        type: 3}
-      propertyPath: m_Name
-      value: Network
       objectReference: {fileID: 0}
     - target: {fileID: 8375924618900648999, guid: cfef1562dd8ab46428783508f7964a20,
         type: 3}
