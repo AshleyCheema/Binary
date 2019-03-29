@@ -217,7 +217,7 @@ public class ClientManager : NetworkManager
         go.GetComponentInChildren<FOWMask>().gameObject.SetActive(false);
         go.GetComponentInChildren<UIScript>().gameObject.SetActive(false);
         go.GetComponentInChildren<FOWAdaptiveRender>().gameObject.SetActive(false);
-        go.GetComponent<MeshRenderer>().enabled = false;
+        go.transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().enabled = false;
 
         for (int i = 0; i < allMonos.Length; i++)
         {

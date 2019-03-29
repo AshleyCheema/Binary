@@ -10,18 +10,18 @@ public class FOWAdaptiveRender : MonoBehaviour
         {
             if(other.tag == "Spy")
             {
-                other.GetComponent<MeshRenderer>().enabled = true;
+                other.transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().enabled = true;
             }
         }
         else if(ClientManager.Instance?.LocalPlayer.playerTeam == LLAPI.Team.Spy)
         {
             if (other.tag == "Merc")
             {
-                other.GetComponent<MeshRenderer>().enabled = true;
+                other.transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().enabled = true;
             }
             if (other.tag == "Spy")
             {
-                other.GetComponent<MeshRenderer>().enabled = true;
+                other.transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().enabled = true;
             }
         }
     }
@@ -32,18 +32,18 @@ public class FOWAdaptiveRender : MonoBehaviour
         {
             if (other.tag == "Spy")
             {
-                other.GetComponent<MeshRenderer>().enabled = false;
+                other.transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().enabled = false;
             }
         }
         else if (ClientManager.Instance?.LocalPlayer.playerTeam == LLAPI.Team.Spy)
         {
             if (other.tag == "Merc")
             {
-                other.GetComponent<MeshRenderer>().enabled = false;
+                other.transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().enabled = false;
             }
             if (other.tag == "Spy")
             {
-                other.GetComponent<MeshRenderer>().enabled = false;
+                other.transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().enabled = false;
             }
         }
     }
