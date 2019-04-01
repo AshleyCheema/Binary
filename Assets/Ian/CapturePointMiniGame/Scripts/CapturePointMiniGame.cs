@@ -100,6 +100,8 @@ public class CapturePointMiniGame : MonoBehaviour
 
                     //incrase capturerate
                     parentCapturePoint.IncreaseCaptureAmount();
+
+                    //reset
                 }
             }
             else if (!isCompleted && Input.anyKeyDown && CheckInput())

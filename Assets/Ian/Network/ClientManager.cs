@@ -31,6 +31,8 @@ public class ClientManager : NetworkManager
     public Dictionary<int, LocalPlayer> Players
     { get { return players; } }
 
+    private Dictionary<int, GameObject> capturePoints = new Dictionary<int, GameObject>();
+
     [SerializeField]
     private GameObject gameOverUI;
 
@@ -67,6 +69,7 @@ public class ClientManager : NetworkManager
         this.client.RegisterHandler(MSGTYPE.CLIENT_EXIT, OnServerExitOpen);
         this.client.RegisterHandler(MSGTYPE.CLIENT_AB_TRIGGER, OnPlayerTrigger);
         this.client.RegisterHandler(MSGTYPE.CLIENT_GAME_OVER, OnGameOver);
+        this.client.RegisterHandler(MSGTYPE.CLIENT_CAPTURE_POINT_INCREASE, OnSpyCaptureIncrease);
 
         this.client.RegisterHandler(MSGTYPE.PING_PONG, OnPingPong);
     }
@@ -96,6 +99,20 @@ public class ClientManager : NetworkManager
             //Spawn local avatar        
             mLocalPlayer.gameAvatar = SpawnPlayerObject(mLocalPlayer);
             Camera.main.GetComponent<CameraScript>().SetTarget(mLocalPlayer.gameAvatar.transform);
+
+            NO_CapturePoint[] capturePoints = GameObject.FindObjectsOfType<NO_CapturePoint>();
+
+            for (int i = 0; i < capturePoints.Length; i++)
+            {
+                if (this.capturePoints.ContainsKey(capturePoints[i].ID) == false)
+                {
+                    this.capturePoints.Add(capturePoints[i].ID, capturePoints[i].gameObject);
+                }
+                else if (this.capturePoints[capturePoints[i].ID] == null)
+                {
+                    this.capturePoints[capturePoints[i].ID] = capturePoints[i].gameObject;
+                }
+            }
         }
         else if (SceneManager.GetActiveScene().name == "ClientLobby")
         {
@@ -156,6 +173,26 @@ public class ClientManager : NetworkManager
         return go;
     }
 
+    private void SpawnOtherPlayerObject(LocalPlayer aPlayer)
+    {
+        GameObject go = Instantiate(
+            MiniModule_SpawableObjects.Instance.SpawnableObjects.ObjectsToSpawn[aPlayer.playerTeam == LLAPI.Team.Merc ? 0 : 5]);
+        Players[aPlayer.connectionId].gameAvatar = go;
+        go.tag = Players[aPlayer.connectionId].playerTeam == LLAPI.Team.Merc ? "Merc" : "Spy";
+
+        MonoBehaviour[] allMonos = go.GetComponentsInChildren<MonoBehaviour>();
+
+        go.GetComponentInChildren<FOWMask>().gameObject.SetActive(false);
+        go.GetComponentInChildren<UIScript>().gameObject.SetActive(false);
+        go.GetComponentInChildren<FOWAdaptiveRender>().gameObject.SetActive(false);
+        go.transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().enabled = false;
+
+        for (int i = 0; i < allMonos.Length; i++)
+        {
+            allMonos[i].enabled = false;
+        }
+    }
+
     public void OnReceiveNewPlayerLobby(NetworkMessage aMsg)
     {
         aMsg.reader.SeekZero();
@@ -205,7 +242,6 @@ public class ClientManager : NetworkManager
     {
         aMsg.reader.SeekZero();
         Msg_ClientSpawnObject cso = aMsg.ReadMessage<Msg_ClientSpawnObject>();
-
         GameObject go = Instantiate(
             MiniModule_SpawableObjects.Instance.SpawnableObjects.ObjectsToSpawn[cso.ObjectID]);
         Players[cso.ConnectionID].gameAvatar = go;
@@ -229,8 +265,15 @@ public class ClientManager : NetworkManager
     {
         aMsg.reader.SeekZero();
         Msg_ClientMove cm = aMsg.ReadMessage<Msg_ClientMove>();
-
-        Players[cm.connectId].gameAvatar.transform.position = cm.position;
+        if (Players[cm.connectId].gameAvatar != null)
+        {
+            Players[cm.connectId].gameAvatar.transform.position = cm.position;
+        }
+        else
+        {
+            //create the game object
+            SpawnOtherPlayerObject(Players[cm.connectId]);
+        }
     }
 
     public void OnReceivePlayerRotationChange(NetworkMessage aMsg)
@@ -241,6 +284,11 @@ public class ClientManager : NetworkManager
         if (Players[cm.connectId].gameAvatar != null)
         {
             Players[cm.connectId].gameAvatar.transform.rotation = cm.rot;
+        }
+        else
+        {
+            //create the game object
+            SpawnOtherPlayerObject(Players[cm.connectId]);
         }
     }
 
@@ -412,6 +460,13 @@ public class ClientManager : NetworkManager
         {
             gameOverUI.SetActive(true);
         }
+    }
+
+    public void OnSpyCaptureIncrease(NetworkMessage aMsg)
+    {
+        aMsg.reader.SeekZero();
+        Msg_ClientCapturePointIncrease ccpi = aMsg.ReadMessage<Msg_ClientCapturePointIncrease>();
+        capturePoints[ccpi.NOIndex].GetComponent<NO_CapturePoint>().IncreaseCaptureAmount(false);
     }
 
     public void OnPingPong(NetworkMessage aMsg)
