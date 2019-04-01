@@ -23,6 +23,7 @@ public class MSGTYPE
     public const short CLIENT_STATE = 113;
     public const short CLIENT_GAME_OVER = 114;
     public const short CLIENT_READY = 115;
+    public const short CLIENT_CAPTURE_POINT_INCREASE = 116;
     public const short PING_PONG = 250;
 }
 
@@ -69,6 +70,7 @@ public class HostManager : NetworkManager
         NetworkServer.RegisterHandler(MSGTYPE.CLIENT_AB_TRIGGER, OnPlayerTrigger);
         NetworkServer.RegisterHandler(MSGTYPE.CLIENT_EXITED_LEVEL, OnSpyExitedLevel);
         NetworkServer.RegisterHandler(MSGTYPE.CLIENT_STATE, OnSpyChangeState);
+        NetworkServer.RegisterHandler(MSGTYPE.CLIENT_CAPTURE_POINT_INCREASE, OnSpyCaptureIncrease);
 
         //NetworkServer.RegisterHandler(MSGTYPE.PING_PONG, OnPingPong);
     }
@@ -138,7 +140,6 @@ public class HostManager : NetworkManager
     {
         if(sceneName == "ClientGame")
         {
-
             NO_CapturePoint[] capturePoints = GameObject.FindObjectsOfType<NO_CapturePoint>();
 
             for (int i = 0; i < capturePoints.Length; i++)
@@ -472,6 +473,14 @@ public class HostManager : NetworkManager
             //send message to other clients
 
         }
+    }
+
+    public void OnSpyCaptureIncrease(NetworkMessage aMsg)
+    {
+        aMsg.reader.SeekZero();
+        Msg_ClientCapturePointIncrease ccpi = aMsg.ReadMessage<Msg_ClientCapturePointIncrease>();
+        capturePoints[ccpi.NOIndex].GetComponent<NO_CapturePoint>().IncreaseCaptureAmount(false);
+        Send(aMsg.conn.connectionId, MSGTYPE.CLIENT_CAPTURE_POINT_INCREASE, ccpi, false);
     }
 
     private void Update()
