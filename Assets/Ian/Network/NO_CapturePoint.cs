@@ -17,6 +17,9 @@ public class NO_CapturePoint : MonoBehaviour
     [SerializeField]
     private TextMesh tm;
 
+    [SerializeField]
+    private GameObject miniGame;
+
     //has this capture point been captured
     public bool IsCaptured
     {
@@ -61,6 +64,13 @@ public class NO_CapturePoint : MonoBehaviour
         }
     }
 
+    public void IncreaseCaptureAmount()
+    {
+        captureAmount += 5.0f;
+
+        //send message to server and clients 
+    }
+
     /// <summary>
     /// Enter trigger
     /// </summary>
@@ -81,6 +91,11 @@ public class NO_CapturePoint : MonoBehaviour
                 ccp.ID = ID;
 
                 ClientManager.Instance.client.Send(MSGTYPE.CLIENT_CAPTURE_POINT, ccp);
+
+                if (ClientManager.Instance.LocalPlayer.gameAvatar == other.gameObject)
+                {
+                    miniGame.SetActive(true);
+                }
                 //NetMsg_CP_Capture capture = new NetMsg_CP_Capture();
                 //capture.ID = ID;
                 //capture.IsBeingCaptured = isBeingCaptured;
@@ -111,6 +126,27 @@ public class NO_CapturePoint : MonoBehaviour
                 ccp.ID = ID;
 
                 ClientManager.Instance.client.Send(MSGTYPE.CLIENT_CAPTURE_POINT, ccp);
+
+                if (ClientManager.Instance.LocalPlayer.gameAvatar == other.gameObject)
+                {
+                    miniGame.SetActive(false);
+                }
+
+                Collider[] allColls = Physics.OverlapSphere(transform.position, GetComponent<SphereCollider>().radius);
+                bool reset = true;
+                for (int i = 0; i < allColls.Length; i++)
+                {
+                    if(allColls[i].gameObject.tag == "Spy")
+                    {
+                        reset = false;
+                        break;
+                    }
+                }
+
+                if(reset)
+                {
+                    captureAmount = 5.0f;
+                }
                 //NetMsg_CP_Capture capture = new NetMsg_CP_Capture();
                 //capture.ID = ID;
                 //capture.IsBeingCaptured = isBeingCaptured;

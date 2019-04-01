@@ -17,6 +17,9 @@ public class TrackerAbility : Cooldown
     protected Client client;
     //private bool isThrowing;
 
+    [SerializeField]
+    private GameObject trackerFeedback;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -45,7 +48,8 @@ public class TrackerAbility : Cooldown
         }
         else
         {
-            arrowPointer.SetActive(false);
+            //arrowPointer.SetActive(false);
+            trackerFeedback.SetActive(false);
         }
 
         if (Input.GetKeyDown(KeyCode.Q))
@@ -137,6 +141,16 @@ public class TrackerAbility : Cooldown
 
     void ArrowPointer()
     {
+        trackerFeedback.SetActive(true);
+
+        //get the direction
+        Vector3 dir = trackerFeedback.transform.position - trackerPos;
+        //normalise the direction
+        dir.Normalize();
+        //set the direction
+        trackerFeedback.transform.forward = dir;
+        trackerFeedback.transform.up = new Vector3(0, 1, 0);
+
         //arrowPointer.SetActive(true);
         //Vector3 targetPos = Camera.main.WorldToScreenPoint(trackerPos);
         //Vector3 fromPos = Camera.main.WorldToScreenPoint(transform.position);
@@ -145,34 +159,34 @@ public class TrackerAbility : Cooldown
         //float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         //arrowPointer.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
-    //
-    //    Vector3 dir = Camera.main.WorldToViewportPoint(transform.position) - Camera.main.WorldToViewportPoint(trackerPos);
-    //    dir.Normalize();
-    //    float angle = Mathf.Atan2(dir.z, dir.x) * Mathf.Rad2Deg;
-    //    
-    //    angle += 180f;
-    //    arrowRect.transform.eulerAngles = new Vector3(0, 0, angle);
-    //
-    //    Debug.Log(dir);
-    //    Debug.Log(angle);
-    //    //float hideDistance = 1f;
-    //
-    //    //if (direction.magnitude < hideDistance)
-    //    //{
-    //    //    arrowPointer.SetActive(false);
-    //    //    trackerTrigger.isDetected = false;
-    //    //}
-    //    //else
-    //    //{
-    //    //    arrowPointer.SetActive(true);
-    //    //
-    //    //
-    //    //    //float a = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg;
-    //    //    //a += 180;
-    //    //    //arrowPointer.transform.localEulerAngles = new Vector3(0, 0, a);
-    //    //
-    //    //    //float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-    //    //    //arrowPointer.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-    //    //}
+        //
+        //    Vector3 dir = Camera.main.WorldToViewportPoint(transform.position) - Camera.main.WorldToViewportPoint(trackerPos);
+        //    dir.Normalize();
+        //    float angle = Mathf.Atan2(dir.z, dir.x) * Mathf.Rad2Deg;
+        //    
+        //    angle += 180f;
+        //    arrowRect.transform.eulerAngles = new Vector3(0, 0, angle);
+        //
+        //    Debug.Log(dir);
+        //    Debug.Log(angle);
+        //    //float hideDistance = 1f;
+        //
+        //    //if (direction.magnitude < hideDistance)
+        //    //{
+        //    //    arrowPointer.SetActive(false);
+        //    //    trackerTrigger.isDetected = false;
+        //    //}
+        //    //else
+        //    //{
+        //    //    arrowPointer.SetActive(true);
+        //    //
+        //    //
+        //    //    //float a = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg;
+        //    //    //a += 180;
+        //    //    //arrowPointer.transform.localEulerAngles = new Vector3(0, 0, a);
+        //    //
+        //    //    //float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        //    //    //arrowPointer.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        //    //}
     }
 }

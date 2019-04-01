@@ -35,6 +35,11 @@ public class CapturePointMiniGame : MonoBehaviour
 
     [SerializeField]
     private bool isCompleted = false;
+    public bool IsCompleted
+    { get { return isCompleted; } }
+
+    [SerializeField]
+    private NO_CapturePoint parentCapturePoint;
 
     private Camera camera;
 
@@ -68,7 +73,9 @@ public class CapturePointMiniGame : MonoBehaviour
     {
     }
 
-    // Update is called once per frame
+    /// <summary>
+    /// Update is called once per frame
+    /// </summary>
     void Update()
     {
         //if (hasAuthority)
@@ -85,10 +92,14 @@ public class CapturePointMiniGame : MonoBehaviour
 
                 if (inputsIndex > inputsNeeded.Length - 1)
                 {
-                    //isCompleted = true;
+                    isCompleted = true;
                     inputsIndex = 0;
 
                     //Mini Game is completed
+                    transform.parent.gameObject.SetActive(false);
+
+                    //incrase capturerate
+                    parentCapturePoint.IncreaseCaptureAmount();
                 }
             }
             else if (!isCompleted && Input.anyKeyDown && CheckInput())
@@ -98,6 +109,7 @@ public class CapturePointMiniGame : MonoBehaviour
             }
        // }
     }
+
     /// <summary>
     /// 
     /// </summary>
