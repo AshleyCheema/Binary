@@ -48,6 +48,7 @@ public static class InputManager
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
+        Debug.DrawRay(ray.origin, ray.direction * Mathf.Infinity, Color.magenta, 5f);
 
         if (Physics.Raycast(ray, out hit))
         {
@@ -55,7 +56,7 @@ public static class InputManager
             {
                 Vector3 newDir = hit.point - a_pos;
                 newDir.y = 0;
-
+                
                 return newDir.normalized;
             }
         }

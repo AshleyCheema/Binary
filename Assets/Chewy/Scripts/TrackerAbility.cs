@@ -9,9 +9,8 @@ public class TrackerAbility : Cooldown
     private Trigger trackerTrigger;
     private GameObject arrowPointer;
     private RectTransform arrowRect;
-    private bool trackerActive;
+    public bool trackerActive;
     public bool trackerDown;
-    private Camera camera;
     private Collider deviceCollider;
     private Vector3 trackerPos;
     protected Client client;
@@ -27,7 +26,6 @@ public class TrackerAbility : Cooldown
         arrowRect = arrowPointer.GetComponent<RectTransform>();
         trackerActive = false;
         trackingDevice = GameObject.Find("Tracker");
-        camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         trackerTrigger = trackingDevice.GetComponent<Trigger>();
         trackingDevice.SetActive(false);
         deviceCollider = trackingDevice.GetComponent<Collider>();
@@ -67,13 +65,12 @@ public class TrackerAbility : Cooldown
 
         if(trackerDown)
         {
-            cooldown -= Time.deltaTime;
+            trackerActive = false;
 
             if(cooldown <= 0)
             {
                 trackerTrigger.isDetected = false;
                 trackerDown = false;
-                trackerActive = false;
                 trackingDevice.SetActive(false);
                 cooldown = tracker.abilityDuration;
 
@@ -91,7 +88,7 @@ public class TrackerAbility : Cooldown
             }
         }
 
-        if (!isCooldown && trackerActive)
+        if (!isCooldown)
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
@@ -114,9 +111,7 @@ public class TrackerAbility : Cooldown
                 {
                     trackerPos = trackingDevice.transform.position;
                     deviceCollider.enabled = true;
-                    isCooldown = true;
                     trackerDown = true;
-
                     #region NetMsg_Tracker
 
                     Msg_Client_AB_Tracker ab_Tracker = new Msg_Client_AB_Tracker();
@@ -130,6 +125,7 @@ public class TrackerAbility : Cooldown
                         ClientManager.Instance.client.Send(MSGTYPE.CLIENT_AB_TRACKER, ab_Tracker);
                     }
                     #endregion
+                    isCooldown = true;
                 }
             }
         }

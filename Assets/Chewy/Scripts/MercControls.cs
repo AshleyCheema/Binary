@@ -17,7 +17,7 @@ public class MercControls : PlayerController
     private float speedDuration;
     public bool canSprint;
     private bool buttonPressed;
-
+    private TrackerAbility trackerAbility;
     public bool noShoot;
     private float shotCooldown = 5f;
     public float reloadSpeed = 2f;
@@ -43,7 +43,7 @@ public class MercControls : PlayerController
     public override void Start()
     {
         base.Start();
-
+        trackerAbility = GetComponent<TrackerAbility>();
         source = gameObject.GetComponent<AudioSource>();
         cooldown = sprint.cooldown;
         canSprint = sprint.isCooldown;
@@ -81,7 +81,7 @@ public class MercControls : PlayerController
                 }
             }
         //}
-        if (Input.GetKeyDown(KeyCode.Mouse0) && !noShoot)
+        if (Input.GetKeyDown(KeyCode.Mouse0) && !noShoot && !trackerAbility.trackerActive)
         {
             //Sound/Animation?
             if (bullet != null)

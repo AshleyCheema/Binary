@@ -111,6 +111,7 @@ MonoBehaviour:
   cooldown: 0
   isCooldown: 0
   tracker: {fileID: 11400000, guid: e4779c9dd9e9d084f8a8d27b4f263931, type: 2}
+  trackerActive: 0
   trackerDown: 0
 --- !u!82 &7549425195692174827
 AudioSource:
@@ -586,7 +587,7 @@ GameObject:
   - component: {fileID: 4201355897117978685}
   - component: {fileID: 8815222507777294139}
   - component: {fileID: 1729882261717242484}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: FOWAdaptive
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -817,7 +818,7 @@ PrefabInstance:
     - target: {fileID: 2114616452149704712, guid: 8f6103cceb54f204bb9b9e80b393eab9,
         type: 3}
       propertyPath: CooldownTime
-      value: 45
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 2114616452326917868, guid: 8f6103cceb54f204bb9b9e80b393eab9,
         type: 3}
