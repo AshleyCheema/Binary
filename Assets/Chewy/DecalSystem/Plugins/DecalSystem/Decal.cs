@@ -50,7 +50,7 @@ namespace DecalSystem {
         void Awake() {
             var mesh = MeshFilter.sharedMesh;
             var meshes = GameObject.FindObjectsOfType<Decal>().Select( i => i.MeshFilter.sharedMesh );
-            if (meshes.Contains( mesh )) MeshFilter.sharedMesh = null; // if mesh was copied
+            //if (meshes.Contains( mesh )) MeshFilter.sharedMesh = null; // if mesh was copied
         }
 
         void OnEnable() {
