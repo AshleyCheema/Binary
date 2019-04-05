@@ -301,7 +301,7 @@ GameObject:
   - component: {fileID: 1942065022}
   - component: {fileID: 1624943680482335571}
   - component: {fileID: 5069160438234436569}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: DoorAnim
   m_TagString: Untagged
   m_Icon: {fileID: 0}

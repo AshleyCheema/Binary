@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5921680451006135778}
   - component: {fileID: 5921680451007430082}
   - component: {fileID: 5921680451008560898}
+  - component: {fileID: 8004226346553298904}
   m_Layer: 0
   m_Name: WDesk_Curved
   m_TagString: Untagged
@@ -77,6 +78,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &8004226346553298904
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5921680451006620098}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_Mesh: {fileID: 4300000, guid: d30271df4eb73984e8d6d3071ded1448, type: 3}
 --- !u!1 &6776070620372159970
 GameObject:
   m_ObjectHideFlags: 0
@@ -87,7 +102,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6806561245144550072}
   m_Layer: 0
-  m_Name: CurvedDesk 1
+  m_Name: CurvedDesk
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

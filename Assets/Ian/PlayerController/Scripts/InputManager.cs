@@ -48,9 +48,8 @@ public static class InputManager
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
-        Debug.DrawRay(ray.origin, ray.direction * Mathf.Infinity, Color.magenta, 5f);
-
-        if (Physics.Raycast(ray, out hit))
+        int layerMask = 1 << 9;
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity))
         {
             if (Input.GetKey(KeyCode.W))
             {
@@ -64,7 +63,6 @@ public static class InputManager
         // return new Vector3(Horizontal(a_player), 0, Vertical(a_player));
 
     }
-
 
     /// <summary>
     /// Return true or false for if the return key has been pressed
