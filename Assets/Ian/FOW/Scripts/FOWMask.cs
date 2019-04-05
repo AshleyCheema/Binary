@@ -13,6 +13,9 @@ public class FOWMask : MonoBehaviour
     private Vector3 position;
     private Quaternion rotation;
 
+    [SerializeField]
+    bool isCone = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,8 +25,17 @@ public class FOWMask : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        position = transform.parent.transform.position + new Vector3(4.0f, 0.0f, 0.0f);
-        transform.position = position;
-        transform.rotation = Quaternion.identity;
+        if (!isCone)
+        {
+            position = transform.parent.transform.position + new Vector3(4.0f, 0.0f, 0.0f);
+            transform.position = position;
+            transform.rotation = Quaternion.identity;
+        }
+        else
+        {
+            position = transform.parent.transform.position + new Vector3(4.0f, 0.0f, 0.0f);
+            transform.position = position;
+            transform.forward = transform.parent.transform.forward;
+        }
     }
 }

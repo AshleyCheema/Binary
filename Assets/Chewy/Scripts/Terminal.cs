@@ -12,7 +12,7 @@ public class Terminal : MonoBehaviour
     private Renderer renderer;
     private bool cameraActive;
     [SerializeField]
-    private MercControls mercController;
+    private MercControls mercController = null;
     private int currentCamera;
     //[SerializeField]
     //private GameObject hackingCanvas;

@@ -34,10 +34,7 @@ public class FogOgWarMesh : MonoBehaviour
         viewMesh = new Mesh();
         viewMesh.name = "View Mesh";
         viewMeshFilter.mesh = viewMesh;
-    }
 
-    void LateUpdate()
-    {
         DrawFieldOfView();
     }
 

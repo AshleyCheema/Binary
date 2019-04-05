@@ -25,8 +25,8 @@ public class TrackerAbility : Cooldown
         client = FindObjectOfType<Client>();
         isCooldown = tracker.isCooldown;
         cooldown = tracker.abilityDuration;
-        arrowPointer = gameObject.transform.GetChild(2).GetChild(0).gameObject;
-        arrowRect = arrowPointer.GetComponent<RectTransform>();
+        //arrowPointer = gameObject.transform.GetChild(2).GetChild(0).gameObject;
+        //arrowRect = arrowPointer.GetComponent<RectTransform>();
         trackerActive = false;
         trackingDevice = GameObject.Find("Tracker");
         trackerTrigger = trackingDevice.GetComponent<Trigger>();
@@ -109,7 +109,15 @@ public class TrackerAbility : Cooldown
                     hit.point = centerPosition + fromOrigin;
                 }
 
-                trackingDevice.transform.position = new Vector3(hit.point.x, 0, hit.point.z);
+                if (trackingDevice)
+                {
+                    trackingDevice.transform.position = new Vector3(hit.point.x, 0, hit.point.z);
+                }
+                else
+                {
+                    trackingDevice = GameObject.Find("Tracker");
+                    deviceCollider = trackingDevice.GetComponent<Collider>();
+                }
 
                 if (Input.GetMouseButtonDown(0))
                 {
@@ -140,12 +148,26 @@ public class TrackerAbility : Cooldown
         trackerFeedback.SetActive(true);
 
         //get the direction
-        Vector3 dir = trackerFeedback.transform.position - trackerPos;
-        //normalise the direction
-        dir.Normalize();
-        //set the direction
-        trackerFeedback.transform.forward = dir;
-        trackerFeedback.transform.up = new Vector3(0, 1, 0);
+        //Vector3 dir = transform.position - trackerPos;
+        ////normalise the direction
+        //dir.Normalize();
+        //
+        ////set the direction
+        //float angle = Mathf.Atan2(dir.z, dir.x) * Mathf.Rad2Deg;
+        //if(dir.x < 0 && dir.z< 0)
+        //{
+        //    angle += 180;
+        //}
+        //else if(dir.x < 0)
+        //{
+        //    angle += 180;
+        //}
+        //else if(dir.z < 0)
+        //{
+        //    angle = 270 + (90 + angle);
+        //}
+        //Debug.Log("Dir: " + dir.x + ", " + dir.z +  "   Angle: " + angle);
+        //trackerFeedback.transform.rotation = Quaternion.Euler(90, 0, angle);
 
         //arrowPointer.SetActive(true);
         //Vector3 targetPos = Camera.main.WorldToScreenPoint(trackerPos);

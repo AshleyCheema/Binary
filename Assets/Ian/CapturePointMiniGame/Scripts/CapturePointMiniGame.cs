@@ -13,10 +13,10 @@ using UnityEngine.UI;
 public class CapturePointMiniGame : MonoBehaviour
 {
     [SerializeField]
-    private GameObject parent;
+    private GameObject parent = null;
 
     [SerializeField]
-    private ScrollRect scroll;
+    private ScrollRect scroll = null;
 
     [SerializeField]
     private KeyCode[] inputsNeeded =
@@ -39,12 +39,7 @@ public class CapturePointMiniGame : MonoBehaviour
     { get { return isCompleted; } }
 
     [SerializeField]
-    private NO_CapturePoint parentCapturePoint;
-
-    private Camera camera;
-
-    [SerializeField]
-    private GameObject billboardUI;
+    private NO_CapturePoint parentCapturePoint = null;
 
     /// <summary>
     /// Show this mini game

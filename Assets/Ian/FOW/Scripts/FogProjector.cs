@@ -12,10 +12,10 @@ public class FogProjector : MonoBehaviour
 {
     //Projector material
     [SerializeField]
-    private Material projectorMaterial;
+    private Material projectorMaterial = null;
     //Blur material
     [SerializeField]
-    private Material blurMat;
+    private Material blurMat = null;
 
     //Blend speed. How fast to blend the two materials
     [SerializeField]
@@ -26,15 +26,15 @@ public class FogProjector : MonoBehaviour
 
     //Fog Texture. Fog of war texture
     [SerializeField]
-    private RenderTexture fogTexture;
+    private RenderTexture fogTexture = null;
 
     //Previous texture 
-    private RenderTexture prevTexture;
+    private RenderTexture prevTexture = null;
     //current texture
-    private RenderTexture currTexture;
+    private RenderTexture currTexture = null;
     //projector
     [SerializeField]
-    private Projector projector;
+    private Projector projector = null;
 
     //Blend Amount
     private float blendAmount;

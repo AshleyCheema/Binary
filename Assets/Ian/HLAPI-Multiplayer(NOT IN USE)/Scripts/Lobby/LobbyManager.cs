@@ -40,8 +40,6 @@ public class LobbyManager : NetworkLobbyManager
     [SerializeField]
     private TextMeshProUGUI hostInfo;
 
-    private int numOfPlayers = 0;
-
     protected ulong currentMatchID;
 
     protected LobbyHook lobbyHooks;
