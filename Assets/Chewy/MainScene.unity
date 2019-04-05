@@ -1181,16 +1181,6 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Spy
       objectReference: {fileID: 0}
-    - target: {fileID: 3505184697141787877, guid: 886c300e7afc8604db6d96de8e831e26,
-        type: 3}
-      propertyPath: bullet
-      value: 
-      objectReference: {fileID: 1760232273}
-    - target: {fileID: 3505184697141787877, guid: 886c300e7afc8604db6d96de8e831e26,
-        type: 3}
-      propertyPath: stun
-      value: 
-      objectReference: {fileID: 1560964686}
     - target: {fileID: 3011942314590609167, guid: 886c300e7afc8604db6d96de8e831e26,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1246,6 +1236,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3505184697141787877, guid: 886c300e7afc8604db6d96de8e831e26,
+        type: 3}
+      propertyPath: bullet
+      value: 
+      objectReference: {fileID: 1760232273}
+    - target: {fileID: 3505184697141787877, guid: 886c300e7afc8604db6d96de8e831e26,
+        type: 3}
+      propertyPath: stun
+      value: 
+      objectReference: {fileID: 1560964686}
     - target: {fileID: 31665380683015414, guid: 886c300e7afc8604db6d96de8e831e26,
         type: 3}
       propertyPath: m_RootOrder
@@ -1740,11 +1740,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1503450634}
     m_Modifications:
+<<<<<<< HEAD
     - target: {fileID: 3107841369660205009, guid: 220fdd6abb23a764aad25d7fecb69764,
         type: 3}
       propertyPath: m_Name
       value: 5x5FloorPlane (40)
       objectReference: {fileID: 0}
+=======
+>>>>>>> master
     - target: {fileID: 6915994515896852416, guid: 220fdd6abb23a764aad25d7fecb69764,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1775,6 +1778,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -10
       objectReference: {fileID: 0}
+<<<<<<< HEAD
+=======
+    - target: {fileID: 3107841369660205009, guid: 220fdd6abb23a764aad25d7fecb69764,
+        type: 3}
+      propertyPath: m_Name
+      value: 5x5FloorPlane (40)
+      objectReference: {fileID: 0}
+>>>>>>> master
     - target: {fileID: 4314329565133441235, guid: 220fdd6abb23a764aad25d7fecb69764,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -5685,11 +5696,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1503450634}
     m_Modifications:
+<<<<<<< HEAD
     - target: {fileID: 3107841369660205009, guid: 220fdd6abb23a764aad25d7fecb69764,
         type: 3}
       propertyPath: m_Name
       value: 5x5FloorPlane (39)
       objectReference: {fileID: 0}
+=======
+>>>>>>> master
     - target: {fileID: 6915994515896852416, guid: 220fdd6abb23a764aad25d7fecb69764,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5720,6 +5734,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -15
       objectReference: {fileID: 0}
+<<<<<<< HEAD
+=======
+    - target: {fileID: 3107841369660205009, guid: 220fdd6abb23a764aad25d7fecb69764,
+        type: 3}
+      propertyPath: m_Name
+      value: 5x5FloorPlane (39)
+      objectReference: {fileID: 0}
+>>>>>>> master
     - target: {fileID: 4314329565133441235, guid: 220fdd6abb23a764aad25d7fecb69764,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -5746,11 +5768,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 312546652755104693, guid: 4d0d07280e019bf4b950e4016b056a09,
-        type: 3}
-      propertyPath: m_Name
-      value: FlashEffect
-      objectReference: {fileID: 0}
     - target: {fileID: 312546652755104690, guid: 4d0d07280e019bf4b950e4016b056a09,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5805,6 +5822,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 312546652755104693, guid: 4d0d07280e019bf4b950e4016b056a09,
+        type: 3}
+      propertyPath: m_Name
+      value: FlashEffect
       objectReference: {fileID: 0}
     - target: {fileID: 312546652755104691, guid: 4d0d07280e019bf4b950e4016b056a09,
         type: 3}
@@ -6047,6 +6069,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 80722652396774943, guid: 4639a6967376c6f4ca6f687a0a1370ad,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 80722652396774937, guid: 4639a6967376c6f4ca6f687a0a1370ad,
         type: 3}
       propertyPath: triggerScript
@@ -6058,11 +6085,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 4835d93a7342ad74388309a81f79bb28,
         type: 2}
-    - target: {fileID: 80722652396774943, guid: 4639a6967376c6f4ca6f687a0a1370ad,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5723696155773210619, guid: 4639a6967376c6f4ca6f687a0a1370ad,
         type: 3}
       propertyPath: m_LocalPosition.z
