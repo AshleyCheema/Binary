@@ -120,7 +120,7 @@ public class PlayerController : MonoBehaviour
 
         for (int i = hits.Length - 1; i >= 0; --i)
         {
-            if (hits[i].collider.gameObject.layer == 12)
+            if (hits[i].collider.gameObject.layer == 9)
             {
                 Vector3 newDirection = transform.position - hits[i].point;
                 newDirection.y = 0.5f;
