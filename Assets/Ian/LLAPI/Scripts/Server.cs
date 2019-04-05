@@ -58,7 +58,7 @@ namespace LLAPI
         private Status currentStatus = Status.Lobby;
 
         [SerializeField]
-        private SpawnableObjects spawnableObjects;
+        private SpawnableObjects spawnableObjects = null;
         private Dictionary<int, Player> players = new Dictionary<int, Player>();
         public Dictionary<int, Player> Players
         { get { return players; } }
@@ -108,8 +108,6 @@ namespace LLAPI
             UpdateReceive();
         }
 
-
-        private int syncCount = 0;
         private void FixedUpdate()
         {
             /*

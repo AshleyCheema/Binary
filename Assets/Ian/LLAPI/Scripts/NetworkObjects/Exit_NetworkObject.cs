@@ -24,7 +24,7 @@ namespace LLAPI
         }
 
         [SerializeField]
-        private GameObject miniGame;
+        private GameObject miniGame = null;
 
         private void SendIsOpen()
         {

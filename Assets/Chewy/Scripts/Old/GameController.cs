@@ -10,7 +10,7 @@ public class GameController : MonoBehaviour
     private RaycastHit hit;
     private RaycastHit hitRight;
     private Ray ray;
-    private bool _isClimbing = false;
+    //private bool _isClimbing = false;
     private bool enemySelected = false;
     public GameObject drone;
     public bool isDrone = false;

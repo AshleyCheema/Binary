@@ -54,7 +54,6 @@ namespace LLAPI
 
         private float connectionTime;
         private bool isConnected = false;
-        private bool isStarted = false;
         private byte error;
 
         private string clientName;

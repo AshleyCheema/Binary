@@ -9,14 +9,10 @@ using UnityEngine.SceneManagement;
 public class CS_LobbyMainMenu : Singleton<CS_LobbyMainMenu>
 {
     [SerializeField]
-    private Button serverHost;
-    [SerializeField]
-    private TMP_InputField ipInput;
-    [SerializeField]
-    private Button connect;
+    private TMP_InputField ipInput = null;
 
     [SerializeField]
-    RectTransform lobbyPanel;
+    RectTransform lobbyPanel = null;
     public RectTransform LobbyPanel
     { get { return lobbyPanel; } }
 

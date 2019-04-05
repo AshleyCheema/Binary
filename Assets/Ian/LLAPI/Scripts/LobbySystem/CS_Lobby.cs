@@ -6,13 +6,13 @@ using LLAPI;
 public class CS_Lobby : Singleton<CS_Lobby>
 {
     [SerializeField]
-    GameObject mercLayout;
+    GameObject mercLayout = null;
 
     [SerializeField]
-    GameObject spyLayout;
+    GameObject spyLayout = null;
 
     [SerializeField]
-    GameObject unassignedLayout;
+    GameObject unassignedLayout = null;
 
     public void AddMercPlayer(GameObject a_go)
     {

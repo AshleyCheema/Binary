@@ -18,7 +18,7 @@ public class LobbyTopPanel : MonoBehaviour
     protected bool isDisplayed = true;
 
     [SerializeField]
-    private Image panelImage;
+    private Image panelImage = null;
 
 
     // Update is called once per frame

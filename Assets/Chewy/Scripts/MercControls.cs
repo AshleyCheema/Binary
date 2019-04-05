@@ -60,6 +60,7 @@ public class MercControls : PlayerController
     {
         //UpdateDirection();
         base.Update();
+
         //if(Input.GetKey(KeyCode.P))
         //{
         //    sprint.Trigger();
