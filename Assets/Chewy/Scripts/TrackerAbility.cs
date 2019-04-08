@@ -40,16 +40,6 @@ public class TrackerAbility : Cooldown
     {
         base.Update();
 
-        if (trackerTrigger != null && trackerTrigger.isDetected)
-        {
-            ArrowPointer();
-        }
-        else
-        {
-            //arrowPointer.SetActive(false);
-            trackerFeedback.SetActive(false);
-        }
-
         if (Input.GetKeyDown(KeyCode.Q))
         {
             if (!isCooldown && !trackerActive) //&& cooldown == tracker.abilityDuration)
@@ -143,17 +133,30 @@ public class TrackerAbility : Cooldown
         }
     }
 
+    private void LateUpdate()
+    {
+        if (trackerTrigger != null && trackerTrigger.isDetected)
+        {
+            ArrowPointer();
+        }
+        else
+        {
+            //arrowPointer.SetActive(false);
+            trackerFeedback.SetActive(false);
+        }
+    }
+
     void ArrowPointer()
     {
         trackerFeedback.SetActive(true);
-
+        
         //get the direction
-        //Vector3 dir = transform.position - trackerPos;
+        Vector3 dir = trackerPos - transform.position;
         ////normalise the direction
-        //dir.Normalize();
-        //
-        ////set the direction
-        //float angle = Mathf.Atan2(dir.z, dir.x) * Mathf.Rad2Deg;
+        dir.Normalize();
+        //set the direction
+        float angle = (Mathf.Atan2(dir.x, dir.z) / Mathf.PI) * 180f;
+        if (angle < 0) angle += 360;
         //if(dir.x < 0 && dir.z< 0)
         //{
         //    angle += 180;
@@ -166,8 +169,8 @@ public class TrackerAbility : Cooldown
         //{
         //    angle = 270 + (90 + angle);
         //}
-        //Debug.Log("Dir: " + dir.x + ", " + dir.z +  "   Angle: " + angle);
-        //trackerFeedback.transform.rotation = Quaternion.Euler(90, 0, angle);
+        Debug.Log("Dir: " + dir.x + ", " + dir.z +  "   Angle: " + angle);
+        trackerFeedback.transform.rotation = Quaternion.Euler(90, angle, 0);
 
         //arrowPointer.SetActive(true);
         //Vector3 targetPos = Camera.main.WorldToScreenPoint(trackerPos);

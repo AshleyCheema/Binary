@@ -91,12 +91,13 @@ public class CapturePointMiniGame : MonoBehaviour
                     inputsIndex = 0;
 
                     //Mini Game is completed
-                    transform.parent.gameObject.SetActive(false);
+                    //transform.parent.gameObject.SetActive(false);
 
                     //incrase capturerate
                     parentCapturePoint.IncreaseCaptureAmount();
 
                     //reset
+                    ResetGame();
                 }
             }
             else if (!isCompleted && Input.anyKeyDown && CheckInput())
@@ -105,6 +106,19 @@ public class CapturePointMiniGame : MonoBehaviour
                 scroll.horizontalNormalizedPosition = 0;
             }
        // }
+    }
+
+    private void ResetGame()
+    {
+        isCompleted = false;
+        scroll.horizontalNormalizedPosition = 0;
+
+        SetInputs();
+    }
+
+    private void SetInputs()
+    {
+
     }
 
     /// <summary>
