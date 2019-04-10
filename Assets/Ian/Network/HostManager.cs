@@ -487,6 +487,8 @@ public class HostManager : NetworkManager
     {
         if (Input.GetKeyDown(KeyCode.A))
         {
+            Msg_ClientGameOver cgo = new Msg_ClientGameOver();
+            HostManager.Instance?.SendAll(MSGTYPE.CLIENT_GAME_OVER, cgo);
             OnGameLoadLobby();
         }
     }
@@ -499,7 +501,7 @@ public class HostManager : NetworkManager
 
     private IEnumerator LoadLobby()
     {
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(5.0f);
 
         ServerChangeScene("ClientLobby");
     }

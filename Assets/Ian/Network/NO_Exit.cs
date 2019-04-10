@@ -12,15 +12,53 @@ public class NO_Exit : MonoBehaviour
     [SerializeField]
     private GameObject miniGame;
 
+    [SerializeField]
+    private HackingPuzzleManager hackingGame;
+
+    private bool allowMiniGame;
+    private bool exitOpen;
+
+    private void Update()
+    {
+        if(isOpen && allowMiniGame)
+        {
+            if(Input.GetKeyDown(KeyCode.E))
+            {
+                miniGame.SetActive(!miniGame.activeInHierarchy);
+            }
+        }
+    }
+
+    public void Hack()
+    {
+        bool resualt = hackingGame.StartPuzzle();
+
+        if(resualt)
+        {
+            //open exit game object
+            exitOpen = true;
+            miniGame.SetActive(false);
+
+            //tell every one that the exit is open
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if(isOpen)
         {
-            if(other.tag == "Spy")
+            if(exitOpen)
+            {
+                //leave level completed
+                MiniModule_GameOver.Instance.SpyExitedLevel(ClientManager.Instance.LocalPlayer.connectionId);
+            }
+
+            if(other.gameObject == ClientManager.Instance?.LocalPlayer.gameAvatar &&
+                other.tag == "Spy")
             {
                 if(ClientManager.Instance != null)
                 {
-                    miniGame.SetActive(true);
+                    allowMiniGame = true;
                 }
             }
         }
@@ -30,11 +68,12 @@ public class NO_Exit : MonoBehaviour
     {
         if (isOpen)
         {
-            if (other.tag == "Spy")
+            if (other.gameObject == ClientManager.Instance?.LocalPlayer.gameAvatar &&
+                other.tag == "Spy")
             {
                 if (ClientManager.Instance != null)
                 {
-                    miniGame.SetActive(false);
+                    allowMiniGame = false;
                 }
             }
         }

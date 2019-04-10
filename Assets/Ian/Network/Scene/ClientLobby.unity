@@ -709,35 +709,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Network
       objectReference: {fileID: 0}
-    - target: {fileID: 7476766460674826132, guid: cfef1562dd8ab46428783508f7964a20,
-        type: 3}
-      propertyPath: m_isInputParsingRequired
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7476766460674826132, guid: cfef1562dd8ab46428783508f7964a20,
-        type: 3}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3407197213679051145, guid: cfef1562dd8ab46428783508f7964a20,
-        type: 3}
-      propertyPath: m_AdditionalShaderChannelsFlag
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 2209752472483053177, guid: cfef1562dd8ab46428783508f7964a20,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 372174065930439459, guid: cfef1562dd8ab46428783508f7964a20,
         type: 3}
       propertyPath: m_IsActive
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2499428382740066456, guid: cfef1562dd8ab46428783508f7964a20,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8375924618900648999, guid: cfef1562dd8ab46428783508f7964a20,
         type: 3}
@@ -804,35 +779,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3162577197126584691, guid: cfef1562dd8ab46428783508f7964a20,
+    - target: {fileID: 2209752472483053177, guid: cfef1562dd8ab46428783508f7964a20,
         type: 3}
-      propertyPath: m_inputSource
+      propertyPath: m_LocalPosition.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3162577197126584691, guid: cfef1562dd8ab46428783508f7964a20,
-        type: 3}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3162577197126584691, guid: cfef1562dd8ab46428783508f7964a20,
-        type: 3}
-      propertyPath: m_isInputParsingRequired
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5847943356961709185, guid: cfef1562dd8ab46428783508f7964a20,
-        type: 3}
-      propertyPath: m_inputSource
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5847943356961709185, guid: cfef1562dd8ab46428783508f7964a20,
-        type: 3}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5847943356961709185, guid: cfef1562dd8ab46428783508f7964a20,
-        type: 3}
-      propertyPath: m_isInputParsingRequired
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2338410640955246237, guid: cfef1562dd8ab46428783508f7964a20,
         type: 3}
@@ -843,6 +793,76 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -0.00012207031
+      objectReference: {fileID: 0}
+    - target: {fileID: 2499428382740066456, guid: cfef1562dd8ab46428783508f7964a20,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3407197213679051145, guid: cfef1562dd8ab46428783508f7964a20,
+        type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5773085627628297376, guid: cfef1562dd8ab46428783508f7964a20,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2069183819396923913, guid: cfef1562dd8ab46428783508f7964a20,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8152630750467944866, guid: cfef1562dd8ab46428783508f7964a20,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7476766460674826132, guid: cfef1562dd8ab46428783508f7964a20,
+        type: 3}
+      propertyPath: m_isInputParsingRequired
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7476766460674826132, guid: cfef1562dd8ab46428783508f7964a20,
+        type: 3}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8478770269808935397, guid: cfef1562dd8ab46428783508f7964a20,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5847943356961709185, guid: cfef1562dd8ab46428783508f7964a20,
+        type: 3}
+      propertyPath: m_inputSource
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5847943356961709185, guid: cfef1562dd8ab46428783508f7964a20,
+        type: 3}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5847943356961709185, guid: cfef1562dd8ab46428783508f7964a20,
+        type: 3}
+      propertyPath: m_isInputParsingRequired
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3162577197126584691, guid: cfef1562dd8ab46428783508f7964a20,
+        type: 3}
+      propertyPath: m_inputSource
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3162577197126584691, guid: cfef1562dd8ab46428783508f7964a20,
+        type: 3}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3162577197126584691, guid: cfef1562dd8ab46428783508f7964a20,
+        type: 3}
+      propertyPath: m_isInputParsingRequired
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cfef1562dd8ab46428783508f7964a20, type: 3}
@@ -3832,9 +3852,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1fb59aae3311d64cac23ebaeb7ee25c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  serverHost: {fileID: 150418234}
   ipInput: {fileID: 1530457138}
-  connect: {fileID: 111044872}
   lobbyPanel: {fileID: 591807203}
 --- !u!1 &1888825897
 GameObject:

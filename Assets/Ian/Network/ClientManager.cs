@@ -96,6 +96,7 @@ public class ClientManager : NetworkManager
     {
         if (SceneManager.GetActiveScene().name == "ClientGame")
         {
+            gameOverUI.SetActive(false);
             //Spawn local avatar        
             mLocalPlayer.gameAvatar = SpawnPlayerObject(mLocalPlayer);
             Camera.main.GetComponent<CameraScript>().SetTarget(mLocalPlayer.gameAvatar.transform);

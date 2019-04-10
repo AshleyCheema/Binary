@@ -7,7 +7,7 @@ public class FOWAdaptiveRender : MonoBehaviour
     [SerializeField]
     private float countdownMesh = 5.0f;
 
-    List<Coroutine> activeMeshes = new List<Coroutine>();
+    List<CoutDownMeshObj> activeMeshes = new List<CoutDownMeshObj>();
 
     private void OnTriggerEnter(Collider other)
     {
@@ -32,6 +32,7 @@ public class FOWAdaptiveRender : MonoBehaviour
                         other.transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().enabled = true;
                     }
                 }
+                CheckForGameObject(other.transform.GetChild(0).gameObject);
             }
         }
         else if(ClientManager.Instance?.LocalPlayer.playerTeam == LLAPI.Team.Spy)
@@ -39,10 +40,12 @@ public class FOWAdaptiveRender : MonoBehaviour
             if (other.tag == "Merc")
             {
                 other.transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().enabled = true;
+                CheckForGameObject(other.transform.GetChild(0).gameObject);
             }
             if (other.tag == "Spy")
             {
                 other.transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().enabled = true;
+                CheckForGameObject(other.transform.GetChild(0).gameObject);
             }
         }
     }
@@ -54,7 +57,11 @@ public class FOWAdaptiveRender : MonoBehaviour
             if (other.tag == "Spy")
             {
                 //other.transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().enabled = false;
-                Coroutine c = StartCoroutine(CountdownMesh(other.transform.GetChild(0).gameObject));
+                CoutDownMeshObj c = new CoutDownMeshObj
+                {
+                    GameObject = other.transform.GetChild(0).gameObject,
+                    Coroutine = StartCoroutine(CountdownMesh(other.transform.GetChild(0).gameObject))
+                };
                 activeMeshes.Add(c);
             }
         }
@@ -63,14 +70,34 @@ public class FOWAdaptiveRender : MonoBehaviour
             if (other.tag == "Merc")
             {
                 //other.transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().enabled = false;
-                Coroutine c = StartCoroutine(CountdownMesh(other.transform.GetChild(0).gameObject));
+                CoutDownMeshObj c = new CoutDownMeshObj
+                {
+                    GameObject = other.transform.GetChild(0).gameObject,
+                    Coroutine = StartCoroutine(CountdownMesh(other.transform.GetChild(0).gameObject))
+                };
                 activeMeshes.Add(c);
             }
             if (other.tag == "Spy")
             {
                 //other.transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().enabled = false;
-                Coroutine c = StartCoroutine(CountdownMesh(other.transform.GetChild(0).gameObject));
+                CoutDownMeshObj c = new CoutDownMeshObj
+                {
+                    GameObject = other.transform.GetChild(0).gameObject,
+                    Coroutine = StartCoroutine(CountdownMesh(other.transform.GetChild(0).gameObject))
+                };
                 activeMeshes.Add(c);
+            }
+        }
+    }
+
+    private void CheckForGameObject(GameObject aGameObject)
+    {
+        for (int i = 0; i < activeMeshes.Count; i++)
+        {
+            if (activeMeshes[i].GameObject == aGameObject)
+            {
+                StopCoroutine(activeMeshes[i].Coroutine);
+                activeMeshes.Remove(activeMeshes[i]);
             }
         }
     }
@@ -85,5 +112,19 @@ public class FOWAdaptiveRender : MonoBehaviour
         }
         //turn mesh off
         mesh.GetComponent<MeshRenderer>().enabled = false;
+
+        for (int i = 0; i < activeMeshes.Count; i++)
+        {
+            if(activeMeshes[i].GameObject == mesh)
+            {
+                activeMeshes.Remove(activeMeshes[i]);
+            }
+        }
     }
+}
+
+struct CoutDownMeshObj
+{
+    public GameObject GameObject;
+    public Coroutine Coroutine;
 }

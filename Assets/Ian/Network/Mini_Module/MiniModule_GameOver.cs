@@ -57,6 +57,10 @@ public class MiniModule_GameOver : Singleton<MiniModule_GameOver>
         if(!newSpy)
         {
             Debug.Log("Spyies have left the level");
+            Msg_ClientGameOver cgo = new Msg_ClientGameOver();
+            HostManager.Instance?.SendAll(MSGTYPE.CLIENT_GAME_OVER, cgo);
+
+            HostManager.Instance?.OnGameLoadLobby();
         }
     }
 }
