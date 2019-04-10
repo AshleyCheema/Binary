@@ -242,22 +242,25 @@ public class ClientManager : NetworkManager
     {
         aMsg.reader.SeekZero();
         Msg_ClientSpawnObject cso = aMsg.ReadMessage<Msg_ClientSpawnObject>();
-        GameObject go = Instantiate(
-            MiniModule_SpawableObjects.Instance.SpawnableObjects.ObjectsToSpawn[cso.ObjectID]);
-        Players[cso.ConnectionID].gameAvatar = go;
-        go.transform.position = cso.position;
-        go.tag = Players[cso.ConnectionID].playerTeam == LLAPI.Team.Merc ? "Merc" : "Spy";
-
-        MonoBehaviour[] allMonos = go.GetComponentsInChildren<MonoBehaviour>();
-
-        go.GetComponentInChildren<FOWMask>().gameObject.SetActive(false);
-        go.GetComponentInChildren<UIScript>().gameObject.SetActive(false);
-        go.GetComponentInChildren<FOWAdaptiveRender>().gameObject.SetActive(false);
-        go.transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().enabled = false;
-
-        for (int i = 0; i < allMonos.Length; i++)
+        if (Players[cso.ConnectionID].gameAvatar == null)
         {
-            allMonos[i].enabled = false;
+            GameObject go = Instantiate(
+                MiniModule_SpawableObjects.Instance.SpawnableObjects.ObjectsToSpawn[cso.ObjectID]);
+            Players[cso.ConnectionID].gameAvatar = go;
+            go.transform.position = cso.position != new Vector3(0,1,0) ? cso.position : new Vector3(0,25,0);
+            go.tag = Players[cso.ConnectionID].playerTeam == LLAPI.Team.Merc ? "Merc" : "Spy";
+
+            MonoBehaviour[] allMonos = go.GetComponentsInChildren<MonoBehaviour>();
+
+            go.GetComponentInChildren<FOWMask>().gameObject.SetActive(false);
+            go.GetComponentInChildren<UIScript>().gameObject.SetActive(false);
+            go.GetComponentInChildren<FOWAdaptiveRender>().gameObject.SetActive(false);
+            go.transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().enabled = false;
+
+            for (int i = 0; i < allMonos.Length; i++)
+            {
+                allMonos[i].enabled = false;
+            }
         }
     }
 
@@ -267,12 +270,15 @@ public class ClientManager : NetworkManager
         Msg_ClientMove cm = aMsg.ReadMessage<Msg_ClientMove>();
         if (Players[cm.connectId].gameAvatar != null)
         {
-            Players[cm.connectId].gameAvatar.transform.position = cm.position;
+            Players[cm.connectId].gameAvatar.transform.position = Vector3.Lerp(Players[cm.connectId].gameAvatar.transform.position,
+                                                                               cm.position, 0.5f);
         }
         else
         {
             //create the game object
-            SpawnOtherPlayerObject(Players[cm.connectId]);
+            //SpawnOtherPlayerObject(Players[cm.connectId]);
+            //Players[cm.connectId].gameAvatar.transform.position = Vector3.Lerp(Players[cm.connectId].gameAvatar.transform.position,
+            //                                                                 cm.position, 0.5f);
         }
     }
 
@@ -288,7 +294,7 @@ public class ClientManager : NetworkManager
         else
         {
             //create the game object
-            SpawnOtherPlayerObject(Players[cm.connectId]);
+            //SpawnOtherPlayerObject(Players[cm.connectId]);
         }
     }
 

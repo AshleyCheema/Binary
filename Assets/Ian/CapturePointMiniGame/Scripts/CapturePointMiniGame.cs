@@ -1,7 +1,7 @@
 ﻿/*
  * Author: Ian Hudson
- * Description: HLAPI - This script is used for a mini game which is shown to the player.
- * The mini game is based on Simon Says. Now used in LLAPI
+ * Description: This script is used for a mini game which is shown to the player.
+ * The mini game is based on Simon Says. 
  * Created: 20/02/2019
  * Edited By: Ian
  */
@@ -12,32 +12,37 @@ using UnityEngine.UI;
 
 public class CapturePointMiniGame : MonoBehaviour
 {
+    //Parent ref
     [SerializeField]
     private GameObject parent = null;
 
+    //Scroll rect ref
     [SerializeField]
     private ScrollRect scroll = null;
 
+    //Define the inputs needed to complete the mini game
     [SerializeField]
-    private KeyCode[] inputsNeeded =
-    {
-        KeyCode.UpArrow,
-        KeyCode.LeftArrow,
-        KeyCode.DownArrow,
-        KeyCode.RightArrow,
-        KeyCode.RightArrow,
-        KeyCode.RightArrow,
-        KeyCode.RightArrow,
-    };
+    private KeyCode[] inputsNeeded;
 
+    //Deifne which inputs are allowed
+    [SerializeField]
+    private KeyAllowed[] inputsAllowed;
+
+    //The UI image elemetns 
+    [SerializeField]
+    private GameObject[] elements;
+
+    //Which input is the player at
     [SerializeField]
     private int inputsIndex = 0;
 
+    //Has the mini game been completed
     [SerializeField]
     private bool isCompleted = false;
     public bool IsCompleted
     { get { return isCompleted; } }
 
+    //Parent capture point this mini game is attahced to
     [SerializeField]
     private NO_CapturePoint parentCapturePoint = null;
 
@@ -64,8 +69,12 @@ public class CapturePointMiniGame : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Start
+    /// </summary>
     private void Start()
     {
+        SetInputs();
     }
 
     /// <summary>
@@ -108,6 +117,9 @@ public class CapturePointMiniGame : MonoBehaviour
        // }
     }
 
+    /// <summary>
+    /// Reset the mini game
+    /// </summary>
     private void ResetGame()
     {
         isCompleted = false;
@@ -116,13 +128,23 @@ public class CapturePointMiniGame : MonoBehaviour
         SetInputs();
     }
 
+    /// <summary>
+    /// Set all the needed inputs for the mini game
+    /// </summary>
     private void SetInputs()
     {
+        inputsNeeded = new KeyCode[6];
 
+        for (int i = 0; i < inputsNeeded.Length; i++)
+        {
+            int rand = Random.Range(0, 4);
+            inputsNeeded[i] = inputsAllowed[rand].KeyCode;
+            elements[i].GetComponent<Image>().sprite = inputsAllowed[rand].Sprite;
+        }
     }
 
     /// <summary>
-    /// 
+    /// Check if the corect input has been processed
     /// </summary>
     /// <returns></returns>
     private bool CheckInput()
@@ -138,7 +160,7 @@ public class CapturePointMiniGame : MonoBehaviour
     }
 
     /// <summary>
-    /// 
+    /// Check if element is within an array 
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="a_array"></param>
@@ -155,4 +177,14 @@ public class CapturePointMiniGame : MonoBehaviour
         }
         return false;
     }
+}
+
+/// <summary>
+/// Struct: Define the keycode which is allowed with it's corisponding sprite
+/// </summary>
+[System.Serializable]
+public struct KeyAllowed
+{
+    public KeyCode KeyCode;
+    public Sprite Sprite;
 }

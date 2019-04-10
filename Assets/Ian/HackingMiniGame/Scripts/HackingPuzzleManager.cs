@@ -76,11 +76,11 @@ public class HackingPuzzleManager : MonoBehaviour
         return null;
     }
 
-    public void TESTFUNC()
+    public void PuzzleCompleted()
     {
         bool re = StartPuzzle();
 
-        Debug.Log(re);
+        StartCoroutine(PuzzleColourCooldown());
     }
 
     /// <summary>
@@ -158,6 +158,26 @@ public class HackingPuzzleManager : MonoBehaviour
         }
 
         return isCompleted;
+    }
+
+    IEnumerator PuzzleColourCooldown()
+    {
+        float step = 1.5f;
+        while(step > 0.0f)
+        {
+            step -= Time.deltaTime;
+            yield return null;
+        }
+
+        //reset all the colours 
+        for (int i = 0; i < tiles.GetLength(0); i++)
+        {
+            for (int j = 0; j < tiles.GetLength(1); j++)
+            {
+                tiles[i, j].ChangeColour(Color.white);
+            }
+        }
+
     }
 
     private int GetDistance(Tile a_tileOne, Tile a_tileTwo)
