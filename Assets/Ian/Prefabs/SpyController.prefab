@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7699702780602286048}
   - component: {fileID: 8642502472438777308}
   - component: {fileID: 3316925988884654812}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: FOWAdaptive
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e773a84f45a640c41b1c168ae6423d38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  countdownMesh: 5
 --- !u!135 &3316925988884654812
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -340,6 +341,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98b02eb2fe13dc1469c8efd9d3f7bea0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isCone: 0
 --- !u!1001 &588061513738872499
 PrefabInstance:
   m_ObjectHideFlags: 0

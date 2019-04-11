@@ -177,21 +177,24 @@ public class ClientManager : NetworkManager
 
     private void SpawnOtherPlayerObject(LocalPlayer aPlayer)
     {
-        GameObject go = Instantiate(
-            MiniModule_SpawableObjects.Instance.SpawnableObjects.ObjectsToSpawn[aPlayer.playerTeam == LLAPI.Team.Merc ? 0 : 5]);
-        Players[aPlayer.connectionId].gameAvatar = go;
-        go.tag = Players[aPlayer.connectionId].playerTeam == LLAPI.Team.Merc ? "Merc" : "Spy";
-
-        MonoBehaviour[] allMonos = go.GetComponentsInChildren<MonoBehaviour>();
-
-        go.GetComponentInChildren<FOWMask>().gameObject.SetActive(false);
-        go.GetComponentInChildren<UIScript>().gameObject.SetActive(false);
-        go.GetComponentInChildren<FOWAdaptiveRender>().gameObject.SetActive(false);
-        go.transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().enabled = false;
-
-        for (int i = 0; i < allMonos.Length; i++)
+        if (Players[aPlayer.connectionId].gameAvatar == null)
         {
-            allMonos[i].enabled = false;
+            GameObject go = Instantiate(
+                MiniModule_SpawableObjects.Instance.SpawnableObjects.ObjectsToSpawn[aPlayer.playerTeam == LLAPI.Team.Merc ? 0 : 5]);
+            Players[aPlayer.connectionId].gameAvatar = go;
+            go.tag = Players[aPlayer.connectionId].playerTeam == LLAPI.Team.Merc ? "Merc" : "Spy";
+
+            MonoBehaviour[] allMonos = go.GetComponentsInChildren<MonoBehaviour>();
+
+            go.GetComponentInChildren<FOWMask>().gameObject.SetActive(false);
+            go.GetComponentInChildren<UIScript>().gameObject.SetActive(false);
+            go.GetComponentInChildren<FOWAdaptiveRender>().gameObject.SetActive(false);
+            go.transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().enabled = false;
+
+            for (int i = 0; i < allMonos.Length; i++)
+            {
+                allMonos[i].enabled = false;
+            }
         }
     }
 
@@ -278,9 +281,9 @@ public class ClientManager : NetworkManager
         else
         {
             //create the game object
-            //SpawnOtherPlayerObject(Players[cm.connectId]);
-            //Players[cm.connectId].gameAvatar.transform.position = Vector3.Lerp(Players[cm.connectId].gameAvatar.transform.position,
-            //                                                                 cm.position, 0.5f);
+            SpawnOtherPlayerObject(Players[cm.connectId]);
+            Players[cm.connectId].gameAvatar.transform.position = Vector3.Lerp(Players[cm.connectId].gameAvatar.transform.position,
+                                                                             cm.position, 0.5f);
         }
     }
 
@@ -296,7 +299,8 @@ public class ClientManager : NetworkManager
         else
         {
             //create the game object
-            //SpawnOtherPlayerObject(Players[cm.connectId]);
+            SpawnOtherPlayerObject(Players[cm.connectId]);
+            Players[cm.connectId].gameAvatar.transform.rotation = cm.rot;
         }
     }
 
