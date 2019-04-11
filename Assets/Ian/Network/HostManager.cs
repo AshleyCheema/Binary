@@ -24,6 +24,7 @@ public class MSGTYPE
     public const short CLIENT_GAME_OVER = 114;
     public const short CLIENT_READY = 115;
     public const short CLIENT_CAPTURE_POINT_INCREASE = 116;
+    public const short CLIENT_FEEDBACK = 117;
     public const short PING_PONG = 250;
 }
 
@@ -71,6 +72,7 @@ public class HostManager : NetworkManager
         NetworkServer.RegisterHandler(MSGTYPE.CLIENT_EXITED_LEVEL, OnSpyExitedLevel);
         NetworkServer.RegisterHandler(MSGTYPE.CLIENT_STATE, OnSpyChangeState);
         NetworkServer.RegisterHandler(MSGTYPE.CLIENT_CAPTURE_POINT_INCREASE, OnSpyCaptureIncrease);
+        NetworkServer.RegisterHandler(MSGTYPE.CLIENT_FEEDBACK, OnClientFeedback);
 
         //NetworkServer.RegisterHandler(MSGTYPE.PING_PONG, OnPingPong);
     }
@@ -285,7 +287,10 @@ public class HostManager : NetworkManager
         aMsg.reader.SeekZero();
         Msg_ClientMove cm = aMsg.ReadMessage<Msg_ClientMove>();
 
-        Players[cm.connectId].gameAvatar.transform.position = cm.position;
+        if (Players[cm.connectId].gameAvatar != null)
+        {
+            Players[cm.connectId].gameAvatar.transform.position = cm.position;
+        }
 
         Send(cm.connectId, MSGTYPE.CLIENT_MOVE, cm, false);
     }
@@ -481,6 +486,21 @@ public class HostManager : NetworkManager
         Msg_ClientCapturePointIncrease ccpi = aMsg.ReadMessage<Msg_ClientCapturePointIncrease>();
         capturePoints[ccpi.NOIndex].GetComponent<NO_CapturePoint>().IncreaseCaptureAmount(false);
         Send(aMsg.conn.connectionId, MSGTYPE.CLIENT_CAPTURE_POINT_INCREASE, ccpi, false);
+    }
+
+    public void OnClientFeedback(NetworkMessage aMsg)
+    {
+        aMsg.reader.SeekZero();
+        Msg_ClientMercFeedback cmf = aMsg.ReadMessage<Msg_ClientMercFeedback>();
+
+        foreach(var pKey in Players.Keys)
+        {
+            if(Players[pKey].playerTeam == LLAPI.Team.Merc)
+            {
+                Send(Players[pKey].connectionId, MSGTYPE.CLIENT_FEEDBACK, cmf);
+                break;
+            }
+        }
     }
 
     private void Update()

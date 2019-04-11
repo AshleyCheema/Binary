@@ -5,6 +5,7 @@
  * Created: 20/02/2019
  * Edited By: Ian
  */
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -84,36 +85,52 @@ public class CapturePointMiniGame : MonoBehaviour
     {
         //if (hasAuthority)
         //{
-            if (!isCompleted && Input.GetKeyDown(inputsNeeded[inputsIndex]))
+        bool doneInput = false;
+        if (!isCompleted && Input.GetKeyDown(inputsNeeded[inputsIndex]))
+        {
+            inputsIndex++;
+            if (inputsIndex == 1)
             {
-                inputsIndex++;
-                if (inputsIndex == 1)
-                {
-                    scroll.horizontalNormalizedPosition = 0;
-                }
-
-                scroll.horizontalNormalizedPosition += 1.0f / (inputsNeeded.Length + 1);
-
-                if (inputsIndex > inputsNeeded.Length - 1)
-                {
-                    isCompleted = true;
-                    inputsIndex = 0;
-
-                    //Mini Game is completed
-                    //transform.parent.gameObject.SetActive(false);
-
-                    //incrase capturerate
-                    parentCapturePoint.IncreaseCaptureAmount();
-
-                    //reset
-                    ResetGame();
-                }
-            }
-            else if (!isCompleted && Input.anyKeyDown && CheckInput())
-            {
-                inputsIndex = 0;
                 scroll.horizontalNormalizedPosition = 0;
             }
+
+            scroll.horizontalNormalizedPosition += 1.0f / (inputsNeeded.Length + 1);
+
+            if (inputsIndex > inputsNeeded.Length - 1)
+            {
+                isCompleted = true;
+                inputsIndex = 0;
+
+                //Mini Game is completed
+                //transform.parent.gameObject.SetActive(false);
+
+                //incrase capturerate
+                parentCapturePoint.IncreaseCaptureAmount();
+
+                //reset
+                ResetGame();
+            }
+            doneInput = true;
+        }
+        if (!doneInput && !isCompleted && CheckInput())
+        {
+            inputsIndex = 0;
+            scroll.horizontalNormalizedPosition = 0;
+
+            //error. Wrong key pressed
+            Msg_ClientMercFeedback cmf = new Msg_ClientMercFeedback();
+            cmf.Location = transform.position;
+
+            ClientManager.Instance?.client.Send(MSGTYPE.CLIENT_FEEDBACK, cmf);
+        }
+
+        foreach (KeyCode item in Enum.GetValues(typeof(KeyCode)))
+        {
+            if(Input.GetKeyDown(item))
+            {
+                Debug.Log("KeyCode Down: " + item);
+            }
+        }
        // }
     }
 
@@ -137,7 +154,7 @@ public class CapturePointMiniGame : MonoBehaviour
 
         for (int i = 0; i < inputsNeeded.Length; i++)
         {
-            int rand = Random.Range(0, 4);
+            int rand = UnityEngine.Random.Range(0, 4);
             inputsNeeded[i] = inputsAllowed[rand].KeyCode;
             elements[i].GetComponent<Image>().sprite = inputsAllowed[rand].Sprite;
         }

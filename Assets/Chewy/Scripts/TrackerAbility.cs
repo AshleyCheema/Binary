@@ -18,6 +18,7 @@ public class TrackerAbility : Cooldown
 
     [SerializeField]
     private GameObject trackerFeedback;
+    private Coroutine trackerFeedbackCoro;
 
     // Start is called before the first frame update
     void Start()
@@ -114,8 +115,9 @@ public class TrackerAbility : Cooldown
                     trackerPos = trackingDevice.transform.position;
                     deviceCollider.enabled = true;
                     trackerDown = true;
-                    #region NetMsg_Tracker
+                    StopCoroutine(trackerFeedbackCoro);
 
+                    #region NetMsg_Tracker
                     Msg_Client_AB_Tracker ab_Tracker = new Msg_Client_AB_Tracker();
                     if (ClientManager.Instance != null)
                     {
@@ -127,10 +129,30 @@ public class TrackerAbility : Cooldown
                         ClientManager.Instance.client.Send(MSGTYPE.CLIENT_AB_TRACKER, ab_Tracker);
                     }
                     #endregion
+
                     isCooldown = true;
                 }
             }
         }
+    }
+
+    public void SetFeedback(Vector3 aLocation)
+    {
+        trackerPos = aLocation;
+        trackerFeedbackCoro = StartCoroutine(DisplayFeedback(aLocation));
+    }
+
+    private IEnumerator DisplayFeedback(Vector3 aLocation)
+    {
+        float step = 5.0f;
+        while(step > 0.0f)
+        {
+            step -= Time.deltaTime;
+            ArrowPointer();
+            yield return new WaitForEndOfFrame();
+        }
+        //when the coroutine has finshed then display the pointer for the feedback
+        trackerFeedback.SetActive(false);
     }
 
     private void LateUpdate()
@@ -142,7 +164,7 @@ public class TrackerAbility : Cooldown
         else
         {
             //arrowPointer.SetActive(false);
-            trackerFeedback.SetActive(false);
+            //trackerFeedback.SetActive(false);
         }
     }
 
@@ -169,7 +191,6 @@ public class TrackerAbility : Cooldown
         //{
         //    angle = 270 + (90 + angle);
         //}
-        Debug.Log("Dir: " + dir.x + ", " + dir.z +  "   Angle: " + angle);
         trackerFeedback.transform.rotation = Quaternion.Euler(90, angle, 0);
 
         //arrowPointer.SetActive(true);

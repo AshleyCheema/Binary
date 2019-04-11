@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking.NetworkSystem;
 
 public class NO_Exit : MonoBehaviour
 {
@@ -40,6 +41,10 @@ public class NO_Exit : MonoBehaviour
             miniGame.SetActive(false);
 
             //tell every one that the exit is open
+            EmptyMessage msg = new EmptyMessage();
+            ClientManager.Instance.client.Send(MSGTYPE.CLIENT_EXITED_LEVEL, msg);
+
+            //exit level do something 
         }
     }
 
@@ -49,8 +54,17 @@ public class NO_Exit : MonoBehaviour
         {
             if(exitOpen)
             {
-                //leave level completed
-                MiniModule_GameOver.Instance.SpyExitedLevel(ClientManager.Instance.LocalPlayer.connectionId);
+                if (other.gameObject == ClientManager.Instance?.LocalPlayer.gameAvatar &&
+                    other.tag == "Spy")
+                {
+                    //leave level completed
+                    //tell every one that the exit is open
+                    //tell every one that the exit is open
+                    EmptyMessage msg = new EmptyMessage();
+                    ClientManager.Instance.client.Send(MSGTYPE.CLIENT_EXITED_LEVEL, msg);
+
+                    //exit level do something 
+                }
             }
 
             if(other.gameObject == ClientManager.Instance?.LocalPlayer.gameAvatar &&

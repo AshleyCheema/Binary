@@ -70,6 +70,7 @@ public class ClientManager : NetworkManager
         this.client.RegisterHandler(MSGTYPE.CLIENT_AB_TRIGGER, OnPlayerTrigger);
         this.client.RegisterHandler(MSGTYPE.CLIENT_GAME_OVER, OnGameOver);
         this.client.RegisterHandler(MSGTYPE.CLIENT_CAPTURE_POINT_INCREASE, OnSpyCaptureIncrease);
+        this.client.RegisterHandler(MSGTYPE.CLIENT_FEEDBACK, OnReceivePlayerFeedback);
 
         this.client.RegisterHandler(MSGTYPE.PING_PONG, OnPingPong);
     }
@@ -474,6 +475,16 @@ public class ClientManager : NetworkManager
         aMsg.reader.SeekZero();
         Msg_ClientCapturePointIncrease ccpi = aMsg.ReadMessage<Msg_ClientCapturePointIncrease>();
         capturePoints[ccpi.NOIndex].GetComponent<NO_CapturePoint>().IncreaseCaptureAmount(false);
+    }
+
+    public void OnReceivePlayerFeedback(NetworkMessage aMsg)
+    {
+        aMsg.reader.SeekZero();
+        Msg_ClientMercFeedback cmf = aMsg.ReadMessage<Msg_ClientMercFeedback>();
+
+        //should be merc player only
+        //do something as we have been notified of somethig
+        LocalPlayer.gameAvatar?.GetComponent<TrackerAbility>().SetFeedback(cmf.Location);
     }
 
     public void OnPingPong(NetworkMessage aMsg)

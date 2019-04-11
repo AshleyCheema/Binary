@@ -46,15 +46,13 @@ public class MiniModule_GameOver : Singleton<MiniModule_GameOver>
 
     public void SpyExitedLevel(int a_spy)
     {
-        bool newSpy = false;
         if(!spyiesCompleted.Contains(a_spy))
         {
-            newSpy = true;
             spyiesCompleted.Add(a_spy);
         }
 
         // if false then all the spyies have exited the level
-        if(!newSpy)
+        if(spyiesCompleted.Count == 2)
         {
             Debug.Log("Spyies have left the level");
             Msg_ClientGameOver cgo = new Msg_ClientGameOver();

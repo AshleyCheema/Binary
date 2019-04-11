@@ -80,7 +80,7 @@ public class PlayerController : MonoBehaviour
             {
                 playerMovement.connectId = ClientManager.Instance.LocalPlayer.connectionId;
                 playerMovement.position = rb.position;
-                ClientManager.Instance.client.Send(MSGTYPE.CLIENT_MOVE, playerMovement);
+                ClientManager.Instance.client?.Send(MSGTYPE.CLIENT_MOVE, playerMovement);
             }
         }
 
@@ -94,7 +94,7 @@ public class PlayerController : MonoBehaviour
                 playerRotation.connectId = ClientManager.Instance.LocalPlayer.connectionId;
                 playerRotation.rot = transform.rotation;
 
-                ClientManager.Instance.client.Send(MSGTYPE.CLIENT_ROTATION, playerRotation);
+                ClientManager.Instance.client?.Send(MSGTYPE.CLIENT_ROTATION, playerRotation);
             }
         }
     }
