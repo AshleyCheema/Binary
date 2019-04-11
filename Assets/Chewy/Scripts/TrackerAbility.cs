@@ -115,7 +115,10 @@ public class TrackerAbility : Cooldown
                     trackerPos = trackingDevice.transform.position;
                     deviceCollider.enabled = true;
                     trackerDown = true;
-                    StopCoroutine(trackerFeedbackCoro);
+                    if (trackerFeedbackCoro != null)
+                    {
+                        StopCoroutine(trackerFeedbackCoro);
+                    }
 
                     #region NetMsg_Tracker
                     Msg_Client_AB_Tracker ab_Tracker = new Msg_Client_AB_Tracker();
