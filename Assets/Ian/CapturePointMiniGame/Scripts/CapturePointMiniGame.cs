@@ -166,9 +166,9 @@ public class CapturePointMiniGame : MonoBehaviour
     /// <returns></returns>
     private bool CheckInput()
     {
-        for (int i = 0; i < inputsNeeded.Length; i++)
+        for (int i = 0; i < inputsAllowed.Length; i++)
         {
-            if(Input.GetKeyDown(inputsNeeded[i]))
+            if (Input.GetKeyDown(inputsAllowed[i].KeyCode))
             {
                 return true;
             }
