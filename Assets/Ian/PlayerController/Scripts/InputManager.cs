@@ -22,9 +22,9 @@ public static class InputManager
     /// Return Horizontal value
     /// </summary>
     /// <returns></returns>
-    public static float Horizontal(Player a_player)
+    public static float Horizontal(Player a_player = Player.PlayerOne)
     {
-        float v = Input.GetAxis("P" + ((int)a_player + 1) + "Horizontal");
+        float v = Input.GetAxis("P1Horizontal");//("P" + ((int)a_player + 1) + "Horizontal");
         //v = Mathf.Clamp(v, -1.0f, 1.0f);
         return v;
     }
@@ -33,9 +33,9 @@ public static class InputManager
     /// Return Vertical value
     /// </summary>
     /// <returns></returns>
-    public static float Vertical(Player a_player)
+    public static float Vertical(Player a_player = Player.PlayerOne)
     {
-        float v = Input.GetAxis("P" + ((int)a_player + 1) + "Vertical");
+        float v = Input.GetAxis("P1Vertical");//("P" + ((int)a_player + 1) + "Vertical");
         //v = Mathf.Clamp(v, -1.0f, 1.0f);
         return v;
     }
@@ -48,20 +48,43 @@ public static class InputManager
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
-        int layerMask = 1 << 9;
+
         if (Physics.Raycast(ray, out hit, Mathf.Infinity))
         {
+            Vector3 forward = hit.point - a_pos;
+            forward.y = 0;
+            forward.Normalize();
+            Vector3 right = Vector3.Cross(forward, Vector3.up);
+            right.Normalize();
+
+            Vector3 returnV = Vector3.zero;
+
             if (Input.GetKey(KeyCode.W))
             {
-                Vector3 newDir = hit.point - a_pos;
-                newDir.y = 0;
-                
-                return newDir.normalized;
+                returnV += forward;
             }
+            if(Input.GetKey(KeyCode.A))
+            {
+                returnV += right;
+            }
+            if(Input.GetKey(KeyCode.D))
+            {
+                returnV += -right;
+            }
+            if (Input.GetKey(KeyCode.S))
+            {
+                returnV += -forward;
+            }
+            return returnV.normalized;
         }
         return Vector3.zero;
         // return new Vector3(Horizontal(a_player), 0, Vertical(a_player));
 
+    }
+
+    public static Vector3 Joystick1(Player a_player, Vector3 a_pos)
+    {
+        return new Vector3(Horizontal(), 0, Vertical());
     }
 
     /// <summary>

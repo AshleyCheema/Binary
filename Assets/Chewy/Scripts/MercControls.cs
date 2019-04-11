@@ -90,7 +90,7 @@ public class MercControls : PlayerController
                 bullet.transform.position = transform.position;//transform.GetChild(0).transform.position;//new Vector3(transform.position.x, transform.position.y, transform.position.z);
                 bullet.transform.position += transform.forward * 2.5f;//transform.GetChild(0).transform.forward * 2.5f;
                 bullet.transform.rotation = transform.rotation;//transform.GetChild(0).transform.rotation;
-                bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * 5;
+                bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * 20;
                 bullet.SetActive(true);
             }
             //walkingSound.SetSourceProperties(source);
