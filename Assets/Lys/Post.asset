@@ -18,6 +18,7 @@ MonoBehaviour:
   - {fileID: 114776334310064244}
   - {fileID: 114715689750876610}
   - {fileID: 114480306023507388}
+  - {fileID: 114559286382882224}
 --- !u!114 &114184878439205808
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -92,7 +93,7 @@ MonoBehaviour:
     value: {x: 0.5, y: 0.5}
   intensity:
     overrideState: 1
-    value: 0.138
+    value: 0.19
   smoothness:
     overrideState: 1
     value: 0.094
@@ -109,6 +110,43 @@ MonoBehaviour:
   opacity:
     overrideState: 0
     value: 1
+--- !u!114 &114559286382882224
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a34fa72bd4185749832024e9c8010bf, type: 3}
+  m_Name: ScreenSpaceReflections
+  m_EditorClassIdentifier: 
+  active: 1
+  enabled:
+    overrideState: 1
+    value: 1
+  preset:
+    overrideState: 1
+    value: 6
+  maximumIterationCount:
+    overrideState: 0
+    value: 16
+  resolution:
+    overrideState: 0
+    value: 0
+  thickness:
+    overrideState: 0
+    value: 8
+  maximumMarchDistance:
+    overrideState: 1
+    value: 70
+  distanceFade:
+    overrideState: 1
+    value: 0.236
+  vignette:
+    overrideState: 1
+    value: 0.585
 --- !u!114 &114656348001896264
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -134,25 +172,25 @@ MonoBehaviour:
     defaultState: 1
   tonemapper:
     overrideState: 1
-    value: 0
+    value: 3
   toneCurveToeStrength:
-    overrideState: 0
-    value: 0
+    overrideState: 1
+    value: 0.052
   toneCurveToeLength:
-    overrideState: 0
-    value: 0.5
+    overrideState: 1
+    value: 0.591
   toneCurveShoulderStrength:
-    overrideState: 0
+    overrideState: 1
     value: 0
   toneCurveShoulderLength:
-    overrideState: 0
+    overrideState: 1
     value: 0.5
   toneCurveShoulderAngle:
-    overrideState: 0
+    overrideState: 1
     value: 0
   toneCurveGamma:
-    overrideState: 0
-    value: 1
+    overrideState: 1
+    value: 1.1
   ldrLut:
     overrideState: 0
     value: {fileID: 0}
@@ -162,7 +200,7 @@ MonoBehaviour:
     value: 1
   temperature:
     overrideState: 1
-    value: -15
+    value: -9
   tint:
     overrideState: 1
     value: -10
@@ -180,7 +218,7 @@ MonoBehaviour:
     value: 0
   postExposure:
     overrideState: 1
-    value: 0
+    value: -0.3
   contrast:
     overrideState: 1
     value: 5
@@ -212,14 +250,14 @@ MonoBehaviour:
     overrideState: 0
     value: 100
   lift:
-    overrideState: 0
-    value: {x: 1, y: 1, z: 1, w: 0}
+    overrideState: 1
+    value: {x: 1, y: 0.9607005, z: 0.8895056, w: 0}
   gamma:
-    overrideState: 0
-    value: {x: 1, y: 1, z: 1, w: 0}
+    overrideState: 1
+    value: {x: 1, y: 0.96248686, z: 0.8382941, w: -0.07858547}
   gain:
-    overrideState: 0
-    value: {x: 1, y: 1, z: 1, w: 0}
+    overrideState: 1
+    value: {x: 1, y: 1, z: 1, w: -0.35363463}
   masterCurve:
     overrideState: 0
     value:
@@ -1442,7 +1480,7 @@ MonoBehaviour:
     defaultState: 1
   intensity:
     overrideState: 1
-    value: 0.04
+    value: 0.06
   fastMode:
     overrideState: 1
     value: 0
@@ -1464,10 +1502,10 @@ MonoBehaviour:
     value: 1
   mode:
     overrideState: 1
-    value: 1
+    value: 0
   intensity:
     overrideState: 1
-    value: 1.34
+    value: 3.32
   color:
     overrideState: 0
     value: {r: 0, g: 0, b: 0, a: 1}
@@ -1490,8 +1528,8 @@ MonoBehaviour:
     overrideState: 0
     value: 0
   radius:
-    overrideState: 0
-    value: 0.25
+    overrideState: 1
+    value: 0.86
   quality:
-    overrideState: 0
-    value: 2
+    overrideState: 1
+    value: 4
