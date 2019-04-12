@@ -64,7 +64,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        velocity = InputManager.Joystick(player, transform.position);
+        velocity = InputManager.MovementRelativeToCamera(InputManager.Joystick(player, transform.position));
 
         Quaternion oldRot = transform.rotation;
 

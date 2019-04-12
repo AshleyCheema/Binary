@@ -51,29 +51,33 @@ public static class InputManager
 
         if (Physics.Raycast(ray, out hit, Mathf.Infinity))
         {
-            Vector3 forward = hit.point - a_pos;
-            forward.y = 0;
-            forward.Normalize();
-            Vector3 right = Vector3.Cross(forward, Vector3.up);
-            right.Normalize();
+            //Vector3 forward = hit.point - a_pos;
+            //forward.y = 0;
+            //forward.Normalize();
+            //Vector3 right = Vector3.Cross(forward, Vector3.up);
+            //right.Normalize();
 
             Vector3 returnV = Vector3.zero;
 
             if (Input.GetKey(KeyCode.W))
             {
-                returnV += forward;
+                //returnV += forward;
+                returnV.z += 1f;
             }
-            if(Input.GetKey(KeyCode.A))
+            if (Input.GetKey(KeyCode.A))
             {
-                returnV += right;
+                //returnV += right;
+                returnV.x -= 1f;
             }
-            if(Input.GetKey(KeyCode.D))
+            if (Input.GetKey(KeyCode.D))
             {
-                returnV += -right;
+                //returnV += -right;
+                returnV.x += 1f;
             }
             if (Input.GetKey(KeyCode.S))
             {
-                returnV += -forward;
+                //returnV += -forward;
+                returnV.z -= 1f;
             }
             return returnV.normalized;
         }
@@ -81,6 +85,27 @@ public static class InputManager
         // return new Vector3(Horizontal(a_player), 0, Vertical(a_player));
 
     }
+
+    public static Vector3 MovementRelativeToCamera(Vector3 a_input)
+    {
+        Camera cam = Camera.main;
+        Vector3 camForward = cam.transform.forward;
+        Vector3 camRight = cam.transform.right;
+        camForward.y = 0f;
+        camRight.y = 0f;
+        camForward = camForward.normalized;
+        camRight = camRight.normalized;
+        return (a_input.x * camRight + a_input.z * camForward);
+    }
+
+    //Camera cam = Camera.main;
+    //Vector3 camForward = cam.transform.forward;
+    //Vector3 camRight = cam.transform.right;
+    //camForward.y = 0f;
+    //    camRight.y = 0f;
+    //    camForward = camForward.normalized;
+    //    camRight = camRight.normalized;
+    //return (a_pos.x* camRight + a_pos.z* camForward);
 
     public static Vector3 Joystick1(Player a_player, Vector3 a_pos)
     {
