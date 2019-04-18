@@ -21,7 +21,8 @@ public class SqlLogin : MonoBehaviour
         form.AddField("name", nameField.text);
         form.AddField("password", passwordField.text);
 
-        WWW www = new WWW("http://localhost/sqlconnect/login.php", form);
+        //WWW www = new WWW("http://localhost/sqlconnect/login.php", form);
+        WWW www = new WWW("http://retrogecko.studentsites.glos.ac.uk/binary/login.php", form);
         yield return www;
 
         if (www.text[0] == '0')
@@ -29,7 +30,7 @@ public class SqlLogin : MonoBehaviour
             //Debug.Log("Successfully Logged In");
             DBManager.username = nameField.text;
             DBManager.score = int.Parse(www.text.Split('\t')[1]);
-            UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+            UnityEngine.SceneManagement.SceneManager.LoadScene("sqlmenu");
         }
         else
         {

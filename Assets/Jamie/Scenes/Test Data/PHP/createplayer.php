@@ -1,29 +1,24 @@
 <?php
-
-    //Connection details: (host, user, password, database-name)
-    // $con = mysqli_connect('localhost', 'root', 'root', 'unityaccess');
   
     //Includes connection details
     include "gameconfig.php";
 
     //check that connection happened
-
     if (mysqli_connect_errno())
     {
     	echo "1: Connection failed"; //error code #1 = connection failed
     	exit();
     }
 
-    $username = $_POST["name"];
-    $password = $_POST["password"];
+    $name = $_POST["name"];
 
     //Check to see if the name already exists.
-    $namecheckquery = "SELECT username FROM players WHERE username = '$username' ";
-    $namecheck = mysqli_query($con, $namecheckquery) or die("2: Username check query failed"); //error code #2 = username check query failed.
+    $namecheckquery = "SELECT name FROM playerstats WHERE name = '$name'";
+    $namecheck = mysqli_query($con, $namecheckquery) or die("2: Player check query failed"); //error code #2 = username check query failed.
 
     if (mysqli_num_rows($namecheck) > 0 )
     {
-    	echo "3: Username already exists"; //error code #3 = Username already exists cannot register
+    	echo "3: Player already exists"; //error code #3 = User already exists in database
     	exit();
     }
 
@@ -33,7 +28,7 @@
 
 	//Insert the player into the database
 	//$insertuserquery = "INSERT INTO players (username, hash, salt) VALUES ('" . $username . "', '" . $hash . "', '" . $salt . "');";
-	$insertuserquery = "INSERT INTO players (`username`, `hash`, `salt`) VALUES ('$username', '$hash', '$salt');";
+	$insertuserquery = "INSERT INTO playerstats (name) VALUES ('$name')";
 	$result = mysqli_query($con, $insertuserquery) or die("4: Insert player query failed"); //error code #4 = Insert query failed.
 
 	echo("0");

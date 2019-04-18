@@ -1,6 +1,10 @@
 <?php
-    //Connection details: (host, user, password, database-name)
-	$con = mysqli_connect('localhost', 'root', 'root', 'unityaccess');
+
+  //Connection details: (host, user, password, database-name)
+  // $con = mysqli_connect('localhost', 'root', 'root', 'unityaccess');
+  
+  //Includes connection details
+  include "gameconfig.php";
 
   //check that connection happened
 

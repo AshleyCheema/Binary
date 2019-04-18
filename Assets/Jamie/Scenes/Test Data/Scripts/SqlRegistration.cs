@@ -21,13 +21,14 @@ public class SqlRegistration : MonoBehaviour
         form.AddField("name", nameField.text);
         form.AddField("password", passwordField.text);
 
-        WWW www = new WWW("http://localhost/sqlconnect/register.php", form);
+        //WWW www = new WWW("http://localhost/sqlconnect/register.php", form);
+        WWW www = new WWW("http://retrogecko.studentsites.glos.ac.uk/binary/createplayer.php", form);
         yield return www;
 
         if (www.text == "0")
         {
             Debug.Log("User Created Successfully.");
-            UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+            UnityEngine.SceneManagement.SceneManager.LoadScene("sqlmenu");
         }
         else
         {

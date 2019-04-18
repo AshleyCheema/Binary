@@ -30,7 +30,8 @@ public class SqlGame : MonoBehaviour
         form.AddField("name", DBManager.username);
         form.AddField("score", DBManager.score);
 
-        WWW www = new WWW("http://localhost/sqlconnect/savedata.php", form);
+        //WWW www = new WWW("http://localhost/sqlconnect/savedata.php", form);
+        WWW www = new WWW("http://retrogecko.studentsites.glos.ac.uk/binary/savedata.php", form);
         yield return www;
         if (www.text == "0")
         {
@@ -42,7 +43,7 @@ public class SqlGame : MonoBehaviour
         }
 
         DBManager.LogOut();
-        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+        UnityEngine.SceneManagement.SceneManager.LoadScene("sqlmenu");
     }
 
     public void IncreaseScore()

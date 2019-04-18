@@ -27,16 +27,16 @@ public class SqlMenuScript : MonoBehaviour
 
     public void GoToRegister()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene("sqlreg");
     }
 
     public void GoToLogin()
     {
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene("sqllogin");
     }
 
     public void GoToGame()
     {
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene("sqlgame");
     }
 }
