@@ -3,23 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SqlRegistration : MonoBehaviour
+public class CreatePlayer : MonoBehaviour
 {
     public InputField nameField;
-    public InputField passwordField;
 
-    public Button submitButton;
-
-    public void CallRegister()
-    {
-        StartCoroutine(Register());
-    }
-
-    private IEnumerator Register()
+    private IEnumerator AddPlayer()
     {
         WWWForm form = new WWWForm();
         form.AddField("name", nameField.text);
-        form.AddField("password", passwordField.text);
 
         WWW www = new WWW("http://retrogecko.studentsites.glos.ac.uk/binary/createplayer.php", form);
         yield return www;
@@ -33,10 +24,5 @@ public class SqlRegistration : MonoBehaviour
         {
             Debug.Log("User Creation failed. Error #" + www.text);
         }
-    }
-
-    public void VerifyInputs()
-    {
-        submitButton.interactable = (nameField.text.Length >= 8 && passwordField.text.Length >= 8);
     }
 }

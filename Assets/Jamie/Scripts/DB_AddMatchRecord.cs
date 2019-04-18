@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AddMatchRecord : MonoBehaviour
+public class DB_AddMatchRecord : MonoBehaviour
 {
     public string gameDuration;
     public string gameWinner;
