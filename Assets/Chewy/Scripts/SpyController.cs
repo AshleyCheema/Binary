@@ -43,6 +43,7 @@ public class SpyController : PlayerController
                 stunDrop = true;
             }
         }
+        
     }
 
     public void Shot()

@@ -44,11 +44,11 @@ public static class InputManager
     /// Return both Horizontal & Vertical values
     /// </summary>
     /// <returns></returns>
-    public static Vector3 Joystick(Player a_player, Vector3 a_pos)
+    public static Vector3 Joystick(Player a_player, Animator animator)
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
-
+        
         if (Physics.Raycast(ray, out hit, Mathf.Infinity))
         {
             //Vector3 forward = hit.point - a_pos;
@@ -58,27 +58,32 @@ public static class InputManager
             //right.Normalize();
 
             Vector3 returnV = Vector3.zero;
-
+            bool isMoving = false;
             if (Input.GetKey(KeyCode.W))
             {
                 //returnV += forward;
+                isMoving = true;
                 returnV.z += 1f;
             }
             if (Input.GetKey(KeyCode.A))
             {
                 //returnV += right;
+                isMoving = true;
                 returnV.x -= 1f;
             }
             if (Input.GetKey(KeyCode.D))
             {
                 //returnV += -right;
+                isMoving = true;
                 returnV.x += 1f;
             }
             if (Input.GetKey(KeyCode.S))
             {
                 //returnV += -forward;
+                isMoving = true;
                 returnV.z -= 1f;
             }
+            animator.SetBool("isMoving", isMoving);
             return returnV.normalized;
         }
         return Vector3.zero;
