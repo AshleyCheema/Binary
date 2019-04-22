@@ -26,6 +26,8 @@ public class PlayerController : MonoBehaviour
 
     public float currentSpeed = 5f;
 
+    public Animator animator;
+
     [SerializeField]
     public Player player;
 
@@ -63,8 +65,8 @@ public class PlayerController : MonoBehaviour
                 currentSpeed = normalSpeed;
             }
         }
-
-        velocity = InputManager.MovementRelativeToCamera(InputManager.Joystick(player));
+        animator.SetBool("isRunning", isRunning);
+        velocity = InputManager.MovementRelativeToCamera(InputManager.Joystick(player, animator));
 
         Quaternion oldRot = transform.rotation;
 

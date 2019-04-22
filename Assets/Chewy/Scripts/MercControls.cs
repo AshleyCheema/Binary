@@ -70,17 +70,19 @@ public class MercControls : PlayerController
 
         //if (triggerScript != null)
         //{
-            if (isStunned)
+        if (isStunned)
+        {
+            currentSpeed = reloadSpeed;
+            canSprint = false;
+            stunCountDown -= Time.deltaTime;
+            if (stunCountDown <= 0)
             {
-                currentSpeed = reloadSpeed;
-                stunCountDown -= Time.deltaTime;
-                if (stunCountDown <= 0)
-                {
-                    stunCountDown = 2.0f;
-                    currentSpeed = normalSpeed;
-                    isStunned = false;
-                }
+                stunCountDown = 2.0f;
+                currentSpeed = normalSpeed;
+                isStunned = false;
+                canSprint = true;
             }
+        }
         //}
         if (Input.GetKeyDown(KeyCode.Mouse0) && !noShoot && !trackerAbility.trackerActive)
         {
@@ -134,7 +136,7 @@ public class MercControls : PlayerController
 
 
         //If sprint has been used up then increase cooldown until it's back to it's original time
-        if(!canSprint)
+        if(!canSprint && !buttonPressed)
         {
             cooldown += Time.deltaTime;
             if (cooldown >= sprint.cooldown)

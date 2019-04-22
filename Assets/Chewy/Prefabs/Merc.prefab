@@ -87,9 +87,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   normalSpeed: 3
   crouchingSpeed: 2.5
-  runningSpeed: 8
+  runningSpeed: 6
   isRunning: 0
   currentSpeed: 3
+  animator: {fileID: 0}
   player: 0
   rb: {fileID: 80722652396774942}
   canSprint: 0

@@ -58,32 +58,28 @@ public static class InputManager
             //right.Normalize();
 
             Vector3 returnV = Vector3.zero;
-            bool isMoving = false;
             if (Input.GetKey(KeyCode.W))
             {
                 //returnV += forward;
-                isMoving = true;
                 returnV.z += 1f;
             }
             if (Input.GetKey(KeyCode.A))
             {
                 //returnV += right;
-                isMoving = true;
                 returnV.x -= 1f;
             }
             if (Input.GetKey(KeyCode.D))
             {
                 //returnV += -right;
-                isMoving = true;
                 returnV.x += 1f;
             }
             if (Input.GetKey(KeyCode.S))
             {
                 //returnV += -forward;
-                isMoving = true;
                 returnV.z -= 1f;
             }
-            animator.SetBool("isMoving", isMoving);
+            animator.SetFloat("InputX+", returnV.x);
+            animator.SetFloat("InputX-", returnV.z);
             return returnV.normalized;
         }
         return Vector3.zero;
