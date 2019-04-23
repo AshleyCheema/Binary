@@ -756,8 +756,8 @@
                 </div>
 
                 <div class="container text-white">
-                    <div class="col-9 post">
-                        <h1 class="mt-5"><?php echo $row[ 'blog_title' ]; ?></h1>
+                    <div class="col-12 post">
+                        <h1 class=""><?php echo $row[ 'blog_title' ]; ?></h1>
                         <hr>
                     <!--  <p>Sub title about some Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquam
                             corrupti

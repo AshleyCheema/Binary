@@ -48,8 +48,9 @@ error_reporting(E_ALL);
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
         crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.3.5/css/swiper.min.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP"
-        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/brands.css" integrity="sha384-n9+6/aSqa9lBidZMRCQHTHKJscPq6NW4pCQBiMmHdUCvPN8ZOg2zJJTkC7WIezWv" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/fontawesome.css" integrity="sha384-vd1e11sR28tEK9YANUtpIOdjGW14pS87bUBuOIoBILVWLFnS+MCX9T6MMf0VdPGq" crossorigin="anonymous">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <link rel="stylesheet" href="/font/customfonts.css">
     <link rel="stylesheet" href="css/dashboard.css">
@@ -62,12 +63,16 @@ error_reporting(E_ALL);
         <nav class="navbar navbar-default navbar-static-top panel p-bot text-white fixed-top">
             <h3><span class="rwthin pl-3 ">RETRO</span><span class="sym">GECKO</span></h3>
 
-            <a href="logout.php">Logout <i class="fas fa-sign-out-alt"></i> </a>
+            <div class="float-right">
+                <a href="logout.php" class="mr-2">Logout <i class="fas fa-sign-out-alt"></i></a>
+                <a href="/">Back <i class="fas fa-arrow-left"></i> </a>
+            </div>
+            
         </nav>
 
         <div id="sidenav" class="panel p-right">
 
-            <div class="profile mb-5">
+            <div class="profilePic mb-5">
 
                 <div class="row">
                     <div class="d-inline-flex ml-5 mt-5">
@@ -80,43 +85,50 @@ error_reporting(E_ALL);
                 </div>
             </div>
 
-            <a class="a-link a-1" href="dashboard.php?page=profile">
-                <div class="nav-btn nav-btn-active d-flex justify-content-left align-items-center">
+            <a class="a-link" href="dashboard.php?page=profile">
+                <div class="profile nav-btn d-flex justify-content-left align-items-center">
                     <div class="item ml-3"><i class="fas fa-home"></i></div>
                     <div class="item vr ml-3"></div>
                     <p class="ml-3">Home</p>
                 </div>
             </a>
-
-            <!-- <a class="a-link a-2" href="pages/profile.php">
-                <div class="nav-btn d-flex justify-content-left align-items-center">
-                    <div class="item ml-3"><i class="fas fa-user-alt"></i></div>
-                    <div class="item vr ml-3"></div>
-                    <p class="ml-3">Profile</p>
-                </div>
-            </a> -->
-          <!--   <a class="a-link a-3" href="pages/users.php">
-                <div class="nav-btn d-flex justify-content-left align-items-center">
-                    <div class="item ml-3"><i class="fas fa-users"></i></div>
-                    <div class="item vr ml-3"></div>
-                    <p class="ml-3 mt-3">Users</p>
-                </div>
-            </a> -->
-            <a class="a-link a-4" href="dashboard.php?page=slideshow">
-                <div class="nav-btn d-flex justify-content-left align-items-center">
+            <a class="a-link" href="dashboard.php?page=slideshow">
+                <div class="slideshow nav-btn d-flex justify-content-left align-items-center">
                     <div class="item ml-3"><i class="fas fa-image"></i></div>
                     <div class="item vr ml-3"></div>
                     <p class="ml-3">Slideshow</p>
                 </div>
             </a>
-            <a class="a-link a-5" href="dashboard.php?page=blog">
-                <div class="nav-btn d-flex justify-content-left align-items-center">
+            <a class="a-link" href="dashboard.php?page=blog">
+                <div class="blog nav-btn d-flex justify-content-left align-items-center">
                     <div class="item ml-3"><i class="fas fa-font"></i></div>
                     <div class="item vr ml-3"></div>
                     <p class="ml-3">Blog</p>
                 </div>
             </a>
 
+            <a class="a-link" href="/cpanel" target="_blank">
+                <div class="nav-btn d-flex justify-content-left align-items-center">
+                    <div class="item ml-3"><i class="fab fa-cpanel"></i></div>
+                    <div class="item vr ml-3"></div>
+                    <p class="ml-3">cPanel</p>
+                </div>
+            </a>
+            
+            <a class="a-link" href="http://ct.glos.ac.uk/jira" target="_blank">
+                <div class="nav-btn d-flex justify-content-left align-items-center">
+                    <div class="item ml-3"><i class="fab fa-jira"></i></div>
+                    <div class="item vr ml-3"></div>
+                    <p class="ml-3">Jira</p>
+                </div>
+            </a>
+            <a class="a-link" href="http://ct.glos.ac.uk/confluence" target="_blank">
+                <div class="nav-btn d-flex justify-content-left align-items-center">
+                    <div class="item ml-3"><i class="fab fa-confluence"></i></div>
+                    <div class="item vr ml-3"></div>
+                    <p class="ml-3">Confluence</p>
+                </div>
+            </a>
             <a href="#" style="font-size: 32pt;" id="close-btn" class="item light-text fixed-bottom">
                 <i class=" fas fa-caret-left float-right pr-3"></i>
             </a>
@@ -128,47 +140,46 @@ error_reporting(E_ALL);
             <div class="profile mb-5 mt-2">
             <div class="pro-img-small" style="background-image:url('<?php echo $_SESSION[ 'pic' ]?>');"></div>
             </div>
-            <a class="a-link a-1" href="dashboard.php?page=profile">
-                <div class="nav-btn nav-btn-active d-flex justify-content-left align-items-center">
+            <a class="a-link" href="dashboard.php?page=profile">
+                <div class="profile nav-btn d-flex justify-content-left align-items-center">
                     <div class="item ml-3"><i class="fas fa-home"></i></div>
                 </div>
             </a>
-            <!-- <a class="a-link a-2" href="pages/profile.php">
-                <div class="nav-btn d-flex justify-content-left align-items-center">
-                    <div class="item ml-3"><i class="fas fa-user-alt"></i></div>
-
-                </div>
-            </a> -->
-          <!--   <a class="a-link a-3" href="pages/users.php">
-                <div class="nav-btn d-flex justify-content-left align-items-center">
-                    <div class="item ml-3"><i class="fas fa-users"></i></div>
-                </div>
-            </a> -->
-            <a class="a-link a-4" href="dashboard.php?page=slideshow">
-                <div class="nav-btn d-flex justify-content-left align-items-center">
+            <a class="a-link" href="dashboard.php?page=slideshow">
+                <div class="slideshow nav-btn d-flex justify-content-left align-items-center">
                     <div class="item ml-3"><i class="fas fa-image"></i></div>
                 </div>
             </a>
-            <a class="a-link a-5" href="dashboard.php?page=blog">
-                <div class="nav-btn d-flex justify-content-left align-items-center">
+            <a class="a-link" href="dashboard.php?page=blog">
+                <div class="blog nav-btn d-flex justify-content-left align-items-center">
                     <div class="item ml-3"><i class="fas fa-font"></i></div>
                 </div>
             </a>
-
+            <a class="a-link" href="/cpanel" target="_blank">
+                <div class="nav-btn d-flex justify-content-left align-items-center">
+                    <div class="item ml-3"><i class="fab fa-cpanel"></i></div>
+                </div>
+            </a>
+            <a class="a-link" href="http://ct.glos.ac.uk/jira" target="_blank">
+                <div class="nav-btn d-flex justify-content-left align-items-center">
+                    <div class="item ml-3"><i class="fab fa-jira"></i></div>
+                </div>
+            </a> 
+            <a class="a-link" href="http://ct.glos.ac.uk/confluence" target="_blank">
+                <div class="nav-btn d-flex justify-content-left align-items-center">
+                    <div class="item ml-3"><i class="fab fa-confluence"></i></div>
+                </div>
+            </a>
             <a href="#" style="font-size: 32pt;" id="open-btn" class="item light-text fixed-bottom">
                 <i class=" fas fa-caret-right float-right pr-3"></i>
             </a>
 
         </div>
+        <!-- Content rendered here through Ajax -->
         <div id="content-panel">
-
-  
-           
+            
         </div>
-
     </div>
-
-
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
         crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="

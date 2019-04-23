@@ -51,13 +51,10 @@ include( 'cms/functions.php' );
                             <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="about.html">About</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link" href="blog.php">Blog</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="leaderboard.php">Leaderboard</a>
+                            <a class="nav-link" href="leaderboard.html">Leaderboard</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/cms">Sign in</a>
@@ -92,35 +89,13 @@ include( 'cms/functions.php' );
                 <div class="page mt-5 text-white">
                     <h2 class="mb-2">Meet the Team</h2>
                     <hr>
-
-                    <!-- <div class="container">
-                        <div class="row mt-5 mb-5">
-                            <div class="col-md-12 col-lg-4 pl-5">
-                                <h2 class="sym">
-                                    <span style="font-size:24pt;">our</span>
-                                    <br>
-                                    <span style="font-size:46pt;">story</span>
-                                </h2>
-                            </div>
-                            <div class="col-md-12 col-lg-8">
-                                <p style="font-size:16pt;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-                                    eget tellus id diam faucibus convallis sit amet sit amet libero. Suspendisse sed
-                                    ligula vehicula, pellentesque sapien ut, feugiat mauris. Maecenas purus tortor,
-                                    vulputate non velit non, pretium imperdiet tortor. Proin tempus finibus velit, sed
-                                    maximus ipsum feugiat non.<br> Maecenas maximus, erat vitae tempor ullamcorper, mi
-                                    purus porttitor velit, at rutrum mauris neque at metus. Sed ut metus aliquet,
-                                    efficitur orci vitae, aliquam ligula. Fusce vitae eros sit amet mi facilisis ornare
-                                    at vitae elit. Nunc a libero porta elit volutpat tincidunt. </p>
-                            </div>
-                        </div>
-                    </div> -->
-
                     <div class="owl-carousel meet-carousel">
                         <div class="team-mem chewy">
                             <div class="overlay">
                                 <div>
                                     <h4>Ashley Cheema</h4>
                                     <p>Project Manager & Programmer</p>
+                                    <a class="team-link" href="https://ashleycheema.github.io" target="_blank">Visit Ashley's website</a>
                                 </div>
                             </div>
                         </div>
@@ -129,6 +104,7 @@ include( 'cms/functions.php' );
                                 <div>
                                     <h4>Ian Hudson</h4>
                                     <p>Programmer</p>
+                                    <a class="team-link" href="https://i-hudson.github.io/" target="_blank">Visit Ian's website</a>
                                 </div>
                             </div>
                         </div>
@@ -137,6 +113,7 @@ include( 'cms/functions.php' );
                                 <div>
                                     <h4>Lysander Foster</h4>
                                     <p>3D art & Design</p>
+                                    <a class="team-link" href="https://lysanderfoster.com" target="_blank">Visit Lysander's website</a>
                                 </div>
                             </div>
                         </div>
@@ -145,6 +122,7 @@ include( 'cms/functions.php' );
                                 <div>
                                     <h4>Jess Barrett</h4>
                                     <p>Concept art & Design</p>
+                                    <a class="team-link" href="https://jessbarrett96.wixsite.com/website" target="_blank">Visit Jess' website</a>
                                 </div>
                             </div>
                         </div>
@@ -153,6 +131,7 @@ include( 'cms/functions.php' );
                                 <div>
                                     <h4>James Barrett</h4>
                                     <p>Level Design</p>
+                                    <a class="team-link" href="https://jamesgbarrett.portfoliobox.net/" target="_blank">Visit James' website</a>
                                 </div>
                             </div>
                         </div>
@@ -161,12 +140,13 @@ include( 'cms/functions.php' );
                                 <div>
                                     <h4>Jamie Laurence</h4>
                                     <p>Media Developer</p>
+                                    <a class="team-link" href="http://www.jamielaurence.co.uk" target="_blank">Visit Jamie's website</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="row pt-4">
-                        <a class="button middle" href="blog.html">Learn more about us</a>
+                        
                     </div>
                 </div>
                 <!--END Meet the team-->

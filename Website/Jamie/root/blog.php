@@ -45,9 +45,6 @@ include( 'cms/functions.php' );
                         <li class="nav-item">
                             <a class="nav-link" href="index.php">Home </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="about.html">About</a>
-                        </li>
                         <li class="nav-item active">
                             <a class="nav-link" href="blog.php">Blog<span class="sr-only">(current)</span></a>
                         </li>

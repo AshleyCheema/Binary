@@ -49,7 +49,9 @@ hr {
     font-weight: 200;
     font-size: 18pt;
     text-align: center;
-
+    display: block;
+    margin: 0 auto;
+    width: fit-content;
 }
 
 .button:hover {
@@ -128,6 +130,7 @@ hr {
 }
 
 #newBody {
+    min-width: 100vw;
     background-color: #0f0f0f;
     padding-bottom: 20px;
 }
@@ -227,12 +230,18 @@ canvas {
 }
 
 .overlay p {
+    height: auto;
+    text-align: center;
+}
+
+.overlay a {
+    display: block;
     height: 200px;
     text-align: center;
 }
 
 .overlay:hover {
-    padding-top: 190px;
+    padding-top: 150px;
 }
 
 .sandles {
@@ -378,6 +387,7 @@ footer p {
 .post-wrap {
     margin-top: 50px;
     margin-bottom: 50px;
+    min-height: calc(100vh - 260px);
 }
 
 
@@ -512,6 +522,95 @@ footer p {
     cursor: pointer;
 }
 
+/*CSS for Filter button on leaderboard*/
+.filter {
+    margin: 0;
+    color: #fff !important;
+
+}
+
+.filter li {
+    display: block;
+    list-style: none;
+    float: right;
+    margin-right: 10px;
+    position: relative;
+}
+
+.filter li a {
+    font: 700 16px dosis;
+    position: relative;
+    color: rgba(255, 255, 255, .5);
+    text-decoration: none;
+    border: 3px solid #fff;
+    padding: 10px 15px 10px 25px;
+    display: block;
+    width: 150px;
+    z-index: 5000;
+}
+
+.filter li a i {
+    font-size: 12px !important;
+    position: absolute;
+    right: 10px;
+    top: 14px;
+}
+
+.filter li .drop-down {
+    position: absolute;
+    padding: 0;
+    display: none;
+    margin: 0;
+    left: 0;
+    z-index: 0;
+}
+
+.filter li .drop-down li {
+    position: relative;
+    float: none;
+}
+
+.filter li .drop-down li a {
+    border-top: none;
+    width: 150px;
+}
+
+.filter li .drop-down li a:hover {
+    background: #000;
+    color: #FFF;
+}
+
+.filter li .drop-down li:nth-of-type(1) a {
+    border-top: none;
+}
+
+.accent {
+    width: 0%;
+    height: 100%;
+    background: #000;
+    position: absolute;
+    top: 0;
+    left: 0;
+    -webkit-transition: 0.3s ease;
+    -moz-transition: 0.3s ease;
+    -o-transition: 0.3s ease;
+    -ms-transition: 0.3s ease;
+    transition: 0.3s ease;
+}
+
+.animate {
+    width: 100%;
+    -webkit-transition: 0.3s ease;
+    -moz-transition: 0.3s ease;
+    -o-transition: 0.3s ease;
+    -ms-transition: 0.3s ease;
+    transition: 0.3s ease;
+}
+
+.item:hover {
+    color: #FFF;
+}
+
 @media only screen and (max-width: 1024px) {
     .owl-carousel .owl-item .slide-img {
         max-height: 600px;
@@ -568,6 +667,16 @@ footer p {
     #title-text {
         font-size: 36pt;
     }
+
+    .post-wrap {
+        margin-top: 10px;
+        margin-bottom: 20px;
+    }
+
+    .post {
+        margin-top: 10px;
+        margin-bottom: 20px;
+    }
 }
 
 @media only screen and (max-width: 425px) {
@@ -590,4 +699,34 @@ footer p {
         margin-bottom: 20px !important;
         height: 300px;
     }
+
+    .button {
+        width: 100%;
+        margin-left: 25px;
+        margin-right: 25px;
+    }
+}
+
+@media only screen and (max-width: 320px) {
+    #navbar #brandtitle {
+        font-size: 18pt;
+    }
+
+    p {
+        font-size: 10pt;
+    }
+
+    h1 {
+        font-size: 18pt;
+    }
+
+    .button {
+        font-size: 14pt;
+    }
+
+    footer p {
+        font-size: 10pt;
+    }
+
+
 }
