@@ -412,6 +412,11 @@ PrefabInstance:
       propertyPath: spyController
       value: 
       objectReference: {fileID: 3505184697141787877}
+    - target: {fileID: 2114616451882984748, guid: 8f6103cceb54f204bb9b9e80b393eab9,
+        type: 3}
+      propertyPath: CooldownTime
+      value: 20.1
+      objectReference: {fileID: 0}
     - target: {fileID: 2114616453571805619, guid: 8f6103cceb54f204bb9b9e80b393eab9,
         type: 3}
       propertyPath: m_havePropertiesChanged
@@ -538,7 +543,7 @@ PrefabInstance:
     - target: {fileID: 13700000, guid: 9e0d59b926ff6fa46bd497dc908c7e15, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 1b5cbb2973042144cacd4a47b142cf38, type: 2}
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 9500000, guid: 9e0d59b926ff6fa46bd497dc908c7e15, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 9e0d59b926ff6fa46bd497dc908c7e15, type: 3}

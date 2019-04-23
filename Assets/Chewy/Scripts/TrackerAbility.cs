@@ -110,7 +110,7 @@ public class TrackerAbility : Cooldown
                     deviceCollider = trackingDevice.GetComponent<Collider>();
                 }
 
-                if (Input.GetMouseButtonDown(0))
+                if (Input.GetMouseButtonDown(0) && trackerActive)
                 {
                     trackerPos = trackingDevice.transform.position;
                     deviceCollider.enabled = true;

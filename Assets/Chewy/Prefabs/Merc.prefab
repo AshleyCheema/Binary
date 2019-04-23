@@ -93,9 +93,11 @@ MonoBehaviour:
   animator: {fileID: 0}
   player: 0
   rb: {fileID: 80722652396774942}
+  flashPanel: {fileID: 3829680164023310756}
   canSprint: 0
   noShoot: 0
-  reloadSpeed: 2
+  triggerScript: {fileID: 0}
+  isStunned: 0
   walkingSound: {fileID: 0}
   fireSound: {fileID: 0}
   burstRunSound: {fileID: 0}
@@ -1115,6 +1117,11 @@ PrefabInstance:
       propertyPath: isHurt
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2114616452955906412, guid: 8f6103cceb54f204bb9b9e80b393eab9,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2114616453546974326, guid: 8f6103cceb54f204bb9b9e80b393eab9,
         type: 3}
       propertyPath: m_IsActive
@@ -1259,3 +1266,15 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 413534971463678478}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3829680164023310756 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3501806047670248362, guid: 8f6103cceb54f204bb9b9e80b393eab9,
+    type: 3}
+  m_PrefabInstance: {fileID: 413534971463678478}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
