@@ -146,7 +146,7 @@ public class StunAbility : Cooldown
 
             if (abilityDuration <= 0)
             {
-                flash.Play();
+                //flash.Play();
 
                 if (!isSpawned)
                 {

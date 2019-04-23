@@ -10,26 +10,27 @@ using LLAPI;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MercControls : PlayerController
 {
     private float cooldown;
     private float speedDuration;
+    public Image flashPanel;
+    private Color panelColor = new Color(255, 255, 255);
     public bool canSprint;
     private bool buttonPressed;
     private TrackerAbility trackerAbility;
     public bool noShoot;
     private float shotCooldown = 5f;
-    public float reloadSpeed = 2f;
+    private float reloadSpeed = 2f;
     private GameObject bullet;
+    public Trigger triggerScript;
 
-    //[SerializeField]
-    //private Trigger triggerScript;
-
-    private bool isStunned = false;
+    public bool isStunned = false;
     public bool IsStunned
     { get { return isStunned; } set { isStunned = value; } }
-    private float stunCountDown = 2.0f;
+    private float stunCountDown = 5.0f;
 
     //Audio
     private AudioSource source;
@@ -45,6 +46,7 @@ public class MercControls : PlayerController
         base.Start();
         trackerAbility = GetComponent<TrackerAbility>();
         source = gameObject.GetComponent<AudioSource>();
+        flashPanel.canvasRenderer.SetAlpha(1.0f);
         cooldown = sprint.cooldown;
         canSprint = sprint.isCooldown;
         speedDuration = sprint.abilityDuration;
@@ -70,23 +72,27 @@ public class MercControls : PlayerController
 
         //if (triggerScript != null)
         //{
-        if (isStunned)
+        if (triggerScript.isStunned)
         {
             currentSpeed = reloadSpeed;
             canSprint = false;
             stunCountDown -= Time.deltaTime;
+            flashPanel.gameObject.SetActive(true);
+            flashPanel.CrossFadeAlpha(0.0f, stunCountDown, false);
             if (stunCountDown <= 0)
             {
-                stunCountDown = 2.0f;
+                stunCountDown = 5.0f;
                 currentSpeed = normalSpeed;
-                isStunned = false;
+                triggerScript.isStunned = false;
                 canSprint = true;
+                flashPanel.gameObject.SetActive(false);
             }
         }
+
         //}
         if (Input.GetKeyDown(KeyCode.Mouse0) && !noShoot && !trackerAbility.trackerActive)
         {
-            //Sound/Animation?
+            //Sound?
             if (bullet != null)
             {
                 bullet.transform.position = transform.position;//transform.GetChild(0).transform.position;//new Vector3(transform.position.x, transform.position.y, transform.position.z);
@@ -130,6 +136,7 @@ public class MercControls : PlayerController
                     bullet.SetActive(false);
                 }
                 shotCooldown = 5f;
+                currentSpeed = normalSpeed;
                 noShoot = false;
             }
         }

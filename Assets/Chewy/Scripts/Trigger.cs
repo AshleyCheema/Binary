@@ -76,13 +76,10 @@ public class Trigger : MonoBehaviour
     {
         if(other.gameObject.tag == "Merc")
         {
-            if(triggerType == TriggerType.Stun)
+            if (triggerType == TriggerType.Stun)
             {
-                if (stunAbility != null && stunAbility.stunActive)
-                {
-                    isStunned = true;
-                    Debug.Log("Flashed");
-                }
+                isStunned = true;
+                Debug.Log("Flashed");
             }
         }
         if(GameObject.FindGameObjectWithTag("Spy"))
