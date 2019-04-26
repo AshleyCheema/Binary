@@ -18,9 +18,15 @@ public class SpyController : PlayerController
     private Trigger bulletTrigger;
     private SpyState currentState;
     public bool stunDrop;
+
+    //Audio
+    private AudioSource audioSource;
+    public AudioSO walking;
+
     // Start is called before the first frame update
     public override void Start()
     {
+        audioSource = gameObject.GetComponent<AudioSource>();
         bullet = GameObject.Find("Bullet");
         if (stun == null)
         {
@@ -68,5 +74,11 @@ public class SpyController : PlayerController
             cs.state = currentState;
             ClientManager.Instance?.client.Send(MSGTYPE.CLIENT_STATE, cs);
         }
+    }
+
+    private void Step()
+    {
+        walking.SetSourceProperties(audioSource);
+        audioSource.Play();
     }
 }

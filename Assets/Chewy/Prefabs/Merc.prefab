@@ -99,7 +99,7 @@ MonoBehaviour:
   triggerScript: {fileID: 0}
   isStunned: 0
   walkingSound: {fileID: 0}
-  fireSound: {fileID: 0}
+  fireSound: {fileID: 11400000, guid: 0fdf04cda94ce694c88dfd86fad52b49, type: 2}
   burstRunSound: {fileID: 0}
   sprint: {fileID: 11400000, guid: 9c139523592586d4aa0d7eff0ba7f97f, type: 2}
 --- !u!114 &80722652396774931
@@ -131,7 +131,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -141,7 +141,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 15
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -1152,11 +1152,6 @@ PrefabInstance:
       propertyPath: mercControls
       value: 
       objectReference: {fileID: 80722652396774937}
-    - target: {fileID: 2114616451759763333, guid: 8f6103cceb54f204bb9b9e80b393eab9,
-        type: 3}
-      propertyPath: abilityType
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 2114616451759763333, guid: 8f6103cceb54f204bb9b9e80b393eab9,
         type: 3}
       propertyPath: trackerAbility

@@ -12,9 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9507256ebeee2fa44adc3020e4bf9e01, type: 3}
   m_Name: MercGun
   m_EditorClassIdentifier: 
-  AudioName: 
-  clip: []
+  AudioName: Fire
+  clip:
+  - {fileID: 8300000, guid: af2ecc241d95ae94c83175d13def1e3b, type: 3}
   volume: 1
   pitch: 1
   loop: 0
   spatialBlend: 1
+  rolloffMode: 0
+  audioMinDistance: 1
+  audioMaxDistance: 500

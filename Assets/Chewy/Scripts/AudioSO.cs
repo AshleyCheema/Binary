@@ -21,9 +21,9 @@ public class AudioSO : ScriptableObject
 
     public AudioRolloffMode rolloffMode;
 
-    public float audioMinDistance;
+    public float audioMinDistance = 1f;
 
-    public float audioMaxDistance;
+    public float audioMaxDistance = 10f;
 
     public void SetSourceProperties(AudioSource _audioSource)
     {

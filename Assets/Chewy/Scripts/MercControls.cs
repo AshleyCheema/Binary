@@ -22,7 +22,7 @@ public class MercControls : PlayerController
     private bool buttonPressed;
     private TrackerAbility trackerAbility;
     public bool noShoot;
-    private float shotCooldown = 5f;
+    private float shotCooldown = 1.5f;
     private float reloadSpeed = 2f;
     private GameObject bullet;
     public Trigger triggerScript;
@@ -101,11 +101,12 @@ public class MercControls : PlayerController
                 bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * 20;
                 bullet.SetActive(true);
             }
-            //walkingSound.SetSourceProperties(source);
             noShoot = true;
+
             if (fireSound != null)
             {
                 fireSound.SetSourceProperties(source);
+                source.Play();
             }
 
             #region NetMsg_Fire
@@ -135,7 +136,7 @@ public class MercControls : PlayerController
                 {
                     bullet.SetActive(false);
                 }
-                shotCooldown = 5f;
+                shotCooldown = 1.5f;
                 currentSpeed = normalSpeed;
                 noShoot = false;
             }
