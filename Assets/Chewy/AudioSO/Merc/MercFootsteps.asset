@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9507256ebeee2fa44adc3020e4bf9e01, type: 3}
+  m_Name: MercFootsteps
+  m_EditorClassIdentifier: 
+  AudioName: MercFootstepsLight
+  clip:
+  - {fileID: 8300000, guid: 99a42d044bdb03f468965b06086c8776, type: 3}
+  - {fileID: 8300000, guid: cdcc33c1f7ad83a4abe0c0c975907d6c, type: 3}
+  - {fileID: 8300000, guid: 4dcccad92346660408093c672bf68a03, type: 3}
+  - {fileID: 8300000, guid: c3d15c7ebc360514da125813b59da9ce, type: 3}
+  volume: 1
+  pitch: 1
+  loop: 0
+  spatialBlend: 1
+  rolloffMode: 0
+  audioMinDistance: 1
+  audioMaxDistance: 10

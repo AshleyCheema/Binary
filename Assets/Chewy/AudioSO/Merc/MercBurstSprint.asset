@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9507256ebeee2fa44adc3020e4bf9e01, type: 3}
+  m_Name: MercBurstSprint
+  m_EditorClassIdentifier: 
+  AudioName: 
+  clip:
+  - {fileID: 8300000, guid: b4e66ffdae7c2cb42af24433e881f44b, type: 3}
+  - {fileID: 8300000, guid: 3c3390b2897e2f84bb5f09c1fadf4433, type: 3}
+  - {fileID: 8300000, guid: 227ecdf04450b8446b28bb6e2f7b5498, type: 3}
+  - {fileID: 8300000, guid: 2a845f8f13668444bab13ed2b52e8769, type: 3}
+  volume: 1
+  pitch: 1
+  loop: 0
+  spatialBlend: 1
+  rolloffMode: 0
+  audioMinDistance: 1
+  audioMaxDistance: 10

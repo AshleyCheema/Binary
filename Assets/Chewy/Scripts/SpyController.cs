@@ -22,6 +22,7 @@ public class SpyController : PlayerController
     //Audio
     private AudioSource audioSource;
     public AudioSO walking;
+    public AudioSO run;
 
     // Start is called before the first frame update
     public override void Start()
@@ -79,6 +80,12 @@ public class SpyController : PlayerController
     private void Step()
     {
         walking.SetSourceProperties(audioSource);
+        audioSource.Play();
+    }
+    
+    private void Run()
+    {
+        run.SetSourceProperties(audioSource);
         audioSource.Play();
     }
 }

@@ -15,7 +15,7 @@ MonoBehaviour:
   AudioName: Door Open
   clip:
   - {fileID: 8300000, guid: a033f551df2cf2a4897dd00a951736f5, type: 3}
-  volume: 1
+  volume: 0.5
   pitch: 1
   loop: 0
   spatialBlend: 1

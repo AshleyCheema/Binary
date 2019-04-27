@@ -262,6 +262,7 @@ MonoBehaviour:
   stun: {fileID: 0}
   stunDrop: 0
   walking: {fileID: 11400000, guid: 256c532da8d680f4eacf1d823dbced93, type: 2}
+  run: {fileID: 11400000, guid: 2fd8bddd7cd567d439dfad460962b30e, type: 2}
 --- !u!1 &7269465081944859801
 GameObject:
   m_ObjectHideFlags: 0
@@ -590,6 +591,18 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Spy
       objectReference: {fileID: 0}
+    - target: {fileID: 400022, guid: 9e0d59b926ff6fa46bd497dc908c7e15, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400022, guid: 9e0d59b926ff6fa46bd497dc908c7e15, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400022, guid: 9e0d59b926ff6fa46bd497dc908c7e15, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 400024, guid: 9e0d59b926ff6fa46bd497dc908c7e15, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -639,18 +652,6 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400024, guid: 9e0d59b926ff6fa46bd497dc908c7e15, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 400022, guid: 9e0d59b926ff6fa46bd497dc908c7e15, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 400022, guid: 9e0d59b926ff6fa46bd497dc908c7e15, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 400022, guid: 9e0d59b926ff6fa46bd497dc908c7e15, type: 3}
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
