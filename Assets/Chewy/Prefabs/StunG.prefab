@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 1170343424564217716}
   - component: {fileID: 8053444857443078783}
   - component: {fileID: 8519871034857106576}
+  - component: {fileID: 2321195348134607983}
   m_Layer: 0
   m_Name: StunG
   m_TagString: Untagged
@@ -117,13 +118,13 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1170343424564217715}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 5
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 122
   m_CollisionDetection: 0
 --- !u!114 &8053444857443078783
 MonoBehaviour:
@@ -141,6 +142,7 @@ MonoBehaviour:
   hasShot: 0
   isDetected: 0
   isStunned: 0
+  IsSpawned: 0
 --- !u!114 &8519871034857106576
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,11 +155,109 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e9512ef81fe03a4aba99ff192cb5941, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cooldown: 0
+  isCooldown: 0
   stunActive: 0
+  stunDropped: 0
   stunAbility: {fileID: 11400000, guid: dcb674641ca9fc7498c21cc58a8a4d86, type: 2}
-  spyController: {fileID: 3505184697141787877, guid: 886c300e7afc8604db6d96de8e831e26,
-    type: 3}
   flash: {fileID: 312546652755104691, guid: 4d0d07280e019bf4b950e4016b056a09, type: 3}
+  isSpawned: 0
+--- !u!82 &2321195348134607983
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1170343424564217715}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: f231f7a09c49418419e0d41f81113455, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 10
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &5871736404160863565
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -165,6 +265,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1170343424564217719}
     m_Modifications:
+    - target: {fileID: 312546652755104693, guid: 4d0d07280e019bf4b950e4016b056a09,
+        type: 3}
+      propertyPath: m_Name
+      value: FlashEffect
+      objectReference: {fileID: 0}
     - target: {fileID: 312546652755104690, guid: 4d0d07280e019bf4b950e4016b056a09,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -219,11 +324,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 312546652755104693, guid: 4d0d07280e019bf4b950e4016b056a09,
-        type: 3}
-      propertyPath: m_Name
-      value: FlashEffect
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4d0d07280e019bf4b950e4016b056a09, type: 3}

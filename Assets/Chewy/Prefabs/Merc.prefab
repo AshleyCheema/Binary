@@ -98,9 +98,10 @@ MonoBehaviour:
   noShoot: 0
   triggerScript: {fileID: 0}
   isStunned: 0
-  walkingSound: {fileID: 0}
+  walkingSound: {fileID: 11400000, guid: 4835d93a7342ad74388309a81f79bb28, type: 2}
   fireSound: {fileID: 11400000, guid: 0fdf04cda94ce694c88dfd86fad52b49, type: 2}
-  burstRunSound: {fileID: 0}
+  burstRunSound: {fileID: 11400000, guid: 706955ae5460b1540a03c21a7f338bde, type: 2}
+  tinnitus: {fileID: 11400000, guid: 47a1149bf0b63b240a6dd2ebd665dca8, type: 2}
   sprint: {fileID: 11400000, guid: 9c139523592586d4aa0d7eff0ba7f97f, type: 2}
 --- !u!114 &80722652396774931
 MonoBehaviour:

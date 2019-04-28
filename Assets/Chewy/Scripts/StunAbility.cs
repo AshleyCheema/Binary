@@ -14,6 +14,7 @@ public class StunAbility : Cooldown
     public Abilities stunAbility;
     private GameObject spyController;
     private SpyController spyControllerSc;
+    private AudioSource audioSource;
     public ParticleSystem flash;
 
     public bool IsActive
@@ -64,6 +65,7 @@ public class StunAbility : Cooldown
                 IsActive = false;
             }
         }
+        audioSource = gameObject.GetComponent<AudioSource>();
         flash = gameObject.transform.GetChild(0).GetComponent<ParticleSystem>();
         trigger = gameObject.GetComponent<Trigger>();
         cooldown = stunAbility.cooldown;
@@ -97,7 +99,7 @@ public class StunAbility : Cooldown
                 #endregion
             }
         }
-        else if(spyControllerSc == null)
+        else if (spyControllerSc == null)
         {
             spyController = GameObject.FindGameObjectWithTag("Spy");
             if (spyController)
@@ -113,14 +115,14 @@ public class StunAbility : Cooldown
             }
         }
 
-        if(stunActive)
+        if (stunActive)
         {
             abilityDuration = stunAbility.abilityDuration;
             //stunG.SetActive(false);
             IsActive = false;
             stunDropped = false;
             flash.Stop();
-            if(!isCooldown)
+            if (!isCooldown)
             {
                 spyControllerSc.stunDrop = false;
                 cooldown = stunAbility.cooldown;
@@ -133,21 +135,17 @@ public class StunAbility : Cooldown
         {
             abilityDuration -= Time.deltaTime;
 
-            if (abilityDuration <= -2)
+            if (isSpawned)
             {
-                stunActive = true;
-
-                if (isSpawned)
-                {
-                    Destroy(gameObject);
-                    //remove from list in clients
-                }
+                Destroy(gameObject);
+                //remove from list in clients
             }
 
             if (abilityDuration <= 0)
             {
                 //flash.Play();
-
+                stunActive = true;
+                audioSource.Play();
                 if (!isSpawned)
                 {
                     Collider[] coll = Physics.OverlapSphere(transform.position, stunG.GetComponent<SphereCollider>().radius);

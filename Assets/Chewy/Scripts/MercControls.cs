@@ -37,6 +37,7 @@ public class MercControls : PlayerController
     public AudioSO walkingSound;
     public AudioSO fireSound;
     public AudioSO burstRunSound;
+    public AudioSO /*Thats How You Get*/ tinnitus;
 
     public Abilities sprint;
 
@@ -76,6 +77,8 @@ public class MercControls : PlayerController
         {
             currentSpeed = reloadSpeed;
             canSprint = false;
+            tinnitus.SetSourceProperties(source);
+            source.Play();
             stunCountDown -= Time.deltaTime;
             flashPanel.gameObject.SetActive(true);
             flashPanel.CrossFadeAlpha(0.0f, stunCountDown, false);

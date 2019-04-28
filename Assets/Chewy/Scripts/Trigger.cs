@@ -21,6 +21,11 @@ public class Trigger : MonoBehaviour
     private MercControls mercControls;
     public bool IsSpawned = false;
 
+    private void Start()
+    {
+        stunAbility = GetComponent<StunAbility>();
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (!IsSpawned)
@@ -78,8 +83,11 @@ public class Trigger : MonoBehaviour
         {
             if (triggerType == TriggerType.Stun)
             {
-                isStunned = true;
-                Debug.Log("Flashed");
+                if (stunAbility.stunActive)
+                {
+                    isStunned = true;
+                    Debug.Log("Flashed");
+                }
             }
         }
         if(GameObject.FindGameObjectWithTag("Spy"))

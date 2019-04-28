@@ -522,7 +522,7 @@ PrefabInstance:
         type: 3}
       propertyPath: spyController
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 4678575365300117747}
     - target: {fileID: 2114616451882984748, guid: 8f6103cceb54f204bb9b9e80b393eab9,
         type: 3}
       propertyPath: CooldownTime
@@ -542,7 +542,7 @@ PrefabInstance:
         type: 3}
       propertyPath: spyController
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 4678575365300117747}
     - target: {fileID: 2114616452573148149, guid: 8f6103cceb54f204bb9b9e80b393eab9,
         type: 3}
       propertyPath: m_havePropertiesChanged
@@ -590,18 +590,6 @@ PrefabInstance:
     - target: {fileID: 100024, guid: 9e0d59b926ff6fa46bd497dc908c7e15, type: 3}
       propertyPath: m_TagString
       value: Spy
-      objectReference: {fileID: 0}
-    - target: {fileID: 400022, guid: 9e0d59b926ff6fa46bd497dc908c7e15, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 400022, guid: 9e0d59b926ff6fa46bd497dc908c7e15, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 400022, guid: 9e0d59b926ff6fa46bd497dc908c7e15, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400024, guid: 9e0d59b926ff6fa46bd497dc908c7e15, type: 3}
       propertyPath: m_LocalPosition.x
@@ -652,6 +640,18 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400024, guid: 9e0d59b926ff6fa46bd497dc908c7e15, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400022, guid: 9e0d59b926ff6fa46bd497dc908c7e15, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400022, guid: 9e0d59b926ff6fa46bd497dc908c7e15, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400022, guid: 9e0d59b926ff6fa46bd497dc908c7e15, type: 3}
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
