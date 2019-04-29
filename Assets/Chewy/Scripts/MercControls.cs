@@ -73,6 +73,9 @@ public class MercControls : PlayerController
 
         //if (triggerScript != null)
         //{
+
+        animator.SetBool("isBurst", buttonPressed);
+        animator.SetBool("isBlinded", triggerScript.isStunned);
         if (triggerScript.isStunned)
         {
             currentSpeed = reloadSpeed;

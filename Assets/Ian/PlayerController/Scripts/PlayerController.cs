@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     public virtual void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        //rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -67,7 +67,6 @@ public class PlayerController : MonoBehaviour
         }
         animator.SetBool("isRunning", isRunning);
         velocity = InputManager.MovementRelativeToCamera(InputManager.Joystick(player, animator));
-
         Quaternion oldRot = transform.rotation;
 
         UpdateDirection();
