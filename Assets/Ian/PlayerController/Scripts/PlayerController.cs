@@ -28,6 +28,8 @@ public class PlayerController : MonoBehaviour
 
     public Animator animator;
 
+    public bool isMoving;
+
     [SerializeField]
     public Player player;
 
@@ -74,6 +76,8 @@ public class PlayerController : MonoBehaviour
         //Check if the velocity is not zero
         if (velocity != Vector3.zero)
         {
+            isMoving = true;
+            animator.SetBool("isHacking", false);
             //Update server setting for this object
             Msg_ClientMove playerMovement = new Msg_ClientMove();
             if (ClientManager.Instance != null)
@@ -82,6 +86,10 @@ public class PlayerController : MonoBehaviour
                 playerMovement.position = rb.position;
                 ClientManager.Instance.client?.Send(MSGTYPE.CLIENT_MOVE, playerMovement);
             }
+        }
+        else
+        {
+            isMoving = false;
         }
 
         //Check if the rotation has changed

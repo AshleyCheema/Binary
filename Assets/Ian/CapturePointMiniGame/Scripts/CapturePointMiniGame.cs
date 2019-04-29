@@ -95,6 +95,10 @@ public class CapturePointMiniGame : MonoBehaviour
             bool doneInput = false;
             if (!isCompleted && Input.GetKeyDown(inputsNeeded[inputsIndex]))
             {
+                if(ClientManager.Instance != null && ClientManager.Instance.LocalPlayer.gameAvatar.tag == "Spy")
+                {
+                    ClientManager.Instance.LocalPlayer.gameAvatar.GetComponentInChildren<Animator>().SetBool("isHacking", true);
+                }
                 inCoroutine = true;
                 //start coroutine to change colour
                 StartCoroutine(Feedback(true));

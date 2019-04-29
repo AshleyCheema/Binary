@@ -44,6 +44,7 @@ public class SpyController : PlayerController
     public override void Update()
     {
         base.Update();
+        animator.SetInteger("currentState", (int)currentState);
 
         if (Input.GetKeyDown(KeyCode.Q))
         {

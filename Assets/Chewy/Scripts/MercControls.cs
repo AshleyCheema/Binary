@@ -33,7 +33,7 @@ public class MercControls : PlayerController
     private float stunCountDown = 5.0f;
 
     //Audio
-    private AudioSource source;
+    private AudioSource audioSource;
     public AudioSO walkingSound;
     public AudioSO fireSound;
     public AudioSO burstRunSound;
@@ -46,7 +46,7 @@ public class MercControls : PlayerController
     {
         base.Start();
         trackerAbility = GetComponent<TrackerAbility>();
-        source = gameObject.GetComponent<AudioSource>();
+        audioSource = gameObject.GetComponent<AudioSource>();
         flashPanel.canvasRenderer.SetAlpha(1.0f);
         cooldown = sprint.cooldown;
         canSprint = sprint.isCooldown;
@@ -80,8 +80,8 @@ public class MercControls : PlayerController
         {
             currentSpeed = reloadSpeed;
             canSprint = false;
-            tinnitus.SetSourceProperties(source);
-            source.Play();
+            tinnitus.SetSourceProperties(audioSource);
+            audioSource.Play();
             stunCountDown -= Time.deltaTime;
             flashPanel.gameObject.SetActive(true);
             flashPanel.CrossFadeAlpha(0.0f, stunCountDown, false);
@@ -111,8 +111,8 @@ public class MercControls : PlayerController
 
             if (fireSound != null)
             {
-                fireSound.SetSourceProperties(source);
-                source.Play();
+                fireSound.SetSourceProperties(audioSource);
+                audioSource.Play();
             }
 
             #region NetMsg_Fire
@@ -187,5 +187,17 @@ public class MercControls : PlayerController
                 currentSpeed = normalSpeed;
             }
         }
+    }
+
+    private void Step()
+    {
+        walkingSound.SetSourceProperties(audioSource);
+        audioSource.Play();
+    }
+
+    private void Run()
+    {
+        burstRunSound.SetSourceProperties(audioSource);
+        audioSource.Play();
     }
 }
