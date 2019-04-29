@@ -15,6 +15,8 @@ public class TrackerAbility : Cooldown
     private Vector3 trackerPos;
     protected Client client;
     //private bool isThrowing;
+    [SerializeField]
+    private float arrowFeedback = 10.0f;
 
     [SerializeField]
     private GameObject trackerFeedback;
@@ -147,7 +149,7 @@ public class TrackerAbility : Cooldown
 
     private IEnumerator DisplayFeedback(Vector3 aLocation)
     {
-        float step = 5.0f;
+        float step = arrowFeedback;
         while(step > 0.0f)
         {
             step -= Time.deltaTime;
