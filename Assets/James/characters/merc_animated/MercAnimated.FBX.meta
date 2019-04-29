@@ -1,0 +1,185 @@
+fileFormatVersion: 2
+guid: 92b52d4b2711c744c8f30dc2e6bdfb56
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: connectBone001
+    100002: connectBone003
+    100004: connectBone003(mirrored)
+    100006: connectBone005
+    100008: IK Chain001
+    100010: IK Chain002
+    100012: IK Chain003
+    100014: IK Chain004
+    100016: IK Chain005
+    100018: IK Chain006
+    100020: IK Chain007
+    100022: Merc_Body_Low
+    100024: //RootNode
+    100026: SMG
+    100028: Spy_Head
+    100030: Spy_L_Fingers
+    100032: Spy_L_Foot
+    100034: Spy_L_Hand
+    100036: Spy_L_LowerArm
+    100038: Spy_L_Lowerleg
+    100040: Spy_L_Thumb
+    100042: Spy_L_Toe
+    100044: Spy_L_UpperArm
+    100046: Spy_L_Upperleg
+    100048: Spy_LowerSpine
+    100050: Spy_Neck
+    100052: Spy_Pelvis
+    100054: Spy_R_Fingers
+    100056: Spy_R_foot
+    100058: Spy_R_Hand
+    100060: Spy_R_LowerArm
+    100062: Spy_R_LowerLeg
+    100064: Spy_R_Thumb
+    100066: Spy_R_Toe
+    100068: Spy_R_UpperArm
+    100070: Spy_R_Upperleg
+    100072: Spy_Root
+    100074: Spy_UpperSpine
+    100076: Target_L_Elbow
+    100078: Target_L_Knee
+    100080: Target_R_Elbow
+    100082: Target_R_Knee
+    400000: connectBone001
+    400002: connectBone003
+    400004: connectBone003(mirrored)
+    400006: connectBone005
+    400008: IK Chain001
+    400010: IK Chain002
+    400012: IK Chain003
+    400014: IK Chain004
+    400016: IK Chain005
+    400018: IK Chain006
+    400020: IK Chain007
+    400022: Merc_Body_Low
+    400024: //RootNode
+    400026: SMG
+    400028: Spy_Head
+    400030: Spy_L_Fingers
+    400032: Spy_L_Foot
+    400034: Spy_L_Hand
+    400036: Spy_L_LowerArm
+    400038: Spy_L_Lowerleg
+    400040: Spy_L_Thumb
+    400042: Spy_L_Toe
+    400044: Spy_L_UpperArm
+    400046: Spy_L_Upperleg
+    400048: Spy_LowerSpine
+    400050: Spy_Neck
+    400052: Spy_Pelvis
+    400054: Spy_R_Fingers
+    400056: Spy_R_foot
+    400058: Spy_R_Hand
+    400060: Spy_R_LowerArm
+    400062: Spy_R_LowerLeg
+    400064: Spy_R_Thumb
+    400066: Spy_R_Toe
+    400068: Spy_R_UpperArm
+    400070: Spy_R_Upperleg
+    400072: Spy_Root
+    400074: Spy_UpperSpine
+    400076: Target_L_Elbow
+    400078: Target_L_Knee
+    400080: Target_R_Elbow
+    400082: Target_R_Knee
+    2100000: SMG_Low
+    2100002: Low
+    2300000: SMG
+    3300000: SMG
+    4300000: SMG
+    4300002: Merc_Body_Low
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: Merc_Body_Low
+    2186277476908879412: ImportLogs
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 0.0254
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
