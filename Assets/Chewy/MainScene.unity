@@ -1738,7 +1738,7 @@ PrefabInstance:
     - target: {fileID: 3011942314590609162, guid: 886c300e7afc8604db6d96de8e831e26,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3011942314590609162, guid: 886c300e7afc8604db6d96de8e831e26,
         type: 3}
@@ -1921,6 +1921,26 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Spy
       objectReference: {fileID: 0}
+    - target: {fileID: 614528025523762019, guid: 886c300e7afc8604db6d96de8e831e26,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 304b5f46857c9244b9e4ab08c1e27f62, type: 2}
+    - target: {fileID: 3999682921971188250, guid: 886c300e7afc8604db6d96de8e831e26,
+        type: 3}
+      propertyPath: bullet
+      value: 
+      objectReference: {fileID: 1760232273}
+    - target: {fileID: 3999682921971188250, guid: 886c300e7afc8604db6d96de8e831e26,
+        type: 3}
+      propertyPath: stun
+      value: 
+      objectReference: {fileID: 1560964686}
+    - target: {fileID: 614528025519476131, guid: 886c300e7afc8604db6d96de8e831e26,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d39d738ac000ae047a167b109679762b, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 886c300e7afc8604db6d96de8e831e26, type: 3}
 --- !u!1 &1155454257
@@ -3552,7 +3572,7 @@ PrefabInstance:
     - target: {fileID: 80722652396774936, guid: 4639a6967376c6f4ca6f687a0a1370ad,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 80722652396774936, guid: 4639a6967376c6f4ca6f687a0a1370ad,
         type: 3}
