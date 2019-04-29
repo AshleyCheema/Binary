@@ -17,6 +17,9 @@ public class SpyController : PlayerController
     public GameObject stun;
     private Trigger bulletTrigger;
     private SpyState currentState;
+    public SpyState CurrentState
+    { get { return currentState; } set { currentState = value; } }
+
     public bool stunDrop;
 
     //Audio

@@ -33,6 +33,10 @@ public class CapturePointMiniGame : MonoBehaviour
     [SerializeField]
     private GameObject[] elements;
 
+    //The Image for the feedback
+    [SerializeField]
+    private Image feedback;
+
     //Which input is the player at
     [SerializeField]
     private int inputsIndex = 0;
@@ -46,6 +50,9 @@ public class CapturePointMiniGame : MonoBehaviour
     //Parent capture point this mini game is attahced to
     [SerializeField]
     private NO_CapturePoint parentCapturePoint = null;
+
+    //Keep track if we are in a coroutine
+    private bool inCoroutine = false;
 
     /// <summary>
     /// Show this mini game
@@ -83,55 +90,92 @@ public class CapturePointMiniGame : MonoBehaviour
     /// </summary>
     void Update()
     {
-        //if (hasAuthority)
-        //{
-        bool doneInput = false;
-        if (!isCompleted && Input.GetKeyDown(inputsNeeded[inputsIndex]))
+        if (!inCoroutine)
         {
-            inputsIndex++;
-            if (inputsIndex == 1)
+            bool doneInput = false;
+            if (!isCompleted && Input.GetKeyDown(inputsNeeded[inputsIndex]))
             {
-                scroll.horizontalNormalizedPosition = 0;
+                inCoroutine = true;
+                //start coroutine to change colour
+                StartCoroutine(Feedback(true));
+                doneInput = true;
             }
-
-            scroll.horizontalNormalizedPosition += 1.0f / (inputsNeeded.Length + 1);
-
-            if (inputsIndex > inputsNeeded.Length - 1)
+            if (!doneInput && !isCompleted && CheckInput())
             {
-                isCompleted = true;
+                inCoroutine = true;
+                StartCoroutine(Feedback(false));
                 inputsIndex = 0;
+                scroll.horizontalNormalizedPosition = 0;
 
-                //Mini Game is completed
-                //transform.parent.gameObject.SetActive(false);
+                //error. Wrong key pressed
+                Msg_ClientMercFeedback cmf = new Msg_ClientMercFeedback();
+                cmf.Location = transform.position;
 
-                //incrase capturerate
-                parentCapturePoint.IncreaseCaptureAmount();
-
-                //reset
-                ResetGame();
+                ClientManager.Instance?.client.Send(MSGTYPE.CLIENT_FEEDBACK, cmf);
             }
-            doneInput = true;
-        }
-        if (!doneInput && !isCompleted && CheckInput())
-        {
-            inputsIndex = 0;
-            scroll.horizontalNormalizedPosition = 0;
 
-            //error. Wrong key pressed
-            Msg_ClientMercFeedback cmf = new Msg_ClientMercFeedback();
-            cmf.Location = transform.position;
-
-            ClientManager.Instance?.client.Send(MSGTYPE.CLIENT_FEEDBACK, cmf);
-        }
-
-        foreach (KeyCode item in Enum.GetValues(typeof(KeyCode)))
-        {
-            if(Input.GetKeyDown(item))
+            foreach (KeyCode item in Enum.GetValues(typeof(KeyCode)))
             {
-                Debug.Log("KeyCode Down: " + item);
+                if (Input.GetKeyDown(item))
+                {
+                    Debug.Log("KeyCode Down: " + item);
+                }
             }
         }
-       // }
+    }
+
+    private void IncerrmentIndex()
+    {
+        inputsIndex++;
+        if (inputsIndex == 1)
+        {
+            scroll.horizontalNormalizedPosition = 0;
+        }
+
+        scroll.horizontalNormalizedPosition += 1.0f / (inputsNeeded.Length + 1);
+
+        if (inputsIndex > inputsNeeded.Length - 1)
+        {
+            isCompleted = true;
+            inputsIndex = 0;
+
+            //Mini Game is completed
+            //transform.parent.gameObject.SetActive(false);
+
+            //incrase capturerate
+            parentCapturePoint.IncreaseCaptureAmount();
+
+            //reset
+            ResetGame();
+        }
+    }
+
+    /// <summary>
+    /// Feedback for the key press
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator Feedback(bool aInput)
+    {
+        if (aInput)
+        {
+            feedback.color = Color.green;
+        }
+        else
+        {
+            feedback.color = Color.red;
+        }
+        float step = 0.5f;
+        while(step >= 0.0f)
+        {
+            step -= Time.deltaTime;
+            yield return null;
+        }
+        if (aInput)
+        {
+            IncerrmentIndex();
+        }
+        feedback.color = Color.white;
+        inCoroutine = false;
     }
 
     /// <summary>

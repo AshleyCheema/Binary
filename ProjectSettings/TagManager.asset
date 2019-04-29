@@ -12,6 +12,9 @@ TagManager:
   - playerColourIndication
   - Merc_Spawn_Area
   - Spy_Spawn_Area
+  - Ladder
+  - Enemy
+  - HealthPack
   layers:
   - Default
   - TransparentFX
