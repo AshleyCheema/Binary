@@ -97,7 +97,7 @@ public class MercControls : PlayerController
         }
 
         //}
-        if (Input.GetKeyDown(KeyCode.Mouse0) && !noShoot && !trackerAbility.trackerActive)
+        if (Input.GetKeyDown(KeyCode.Mouse0) && !noShoot && !trackerAbility.trackerActive && !buttonPressed)
         {
             //Sound?
             if (bullet != null)

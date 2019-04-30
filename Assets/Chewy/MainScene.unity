@@ -1686,12 +1686,12 @@ PrefabInstance:
     - target: {fileID: 3011942314590609162, guid: 886c300e7afc8604db6d96de8e831e26,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3011942314590609162, guid: 886c300e7afc8604db6d96de8e831e26,
         type: 3}
       propertyPath: m_TagString
-      value: Spy
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 3011942314590609167, guid: 886c300e7afc8604db6d96de8e831e26,
         type: 3}
@@ -2121,6 +2121,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 719ee2abb6051de41936d7a5c15cc8ac, type: 3}
+--- !u!4 &1226683177 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3011942314590609167, guid: 886c300e7afc8604db6d96de8e831e26,
+    type: 3}
+  m_PrefabInstance: {fileID: 1134720160}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1238055594
 GameObject:
   m_ObjectHideFlags: 0
@@ -2265,7 +2271,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4df19f591c109a49b5563b83eb7dd0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 1357665750}
+  target: {fileID: 1226683177}
   smoothing: 5
 --- !u!82 &1247808633
 AudioSource:
@@ -2747,12 +2753,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 90.00001, y: 0, z: 0}
---- !u!4 &1357665750 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 80722652396774930, guid: 4639a6967376c6f4ca6f687a0a1370ad,
-    type: 3}
-  m_PrefabInstance: {fileID: 80722652144799674}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1487790172
 GameObject:
   m_ObjectHideFlags: 0
@@ -3483,7 +3483,7 @@ PrefabInstance:
     - target: {fileID: 80722652396774936, guid: 4639a6967376c6f4ca6f687a0a1370ad,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 80722652396774936, guid: 4639a6967376c6f4ca6f687a0a1370ad,
         type: 3}
