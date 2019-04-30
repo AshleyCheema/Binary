@@ -290,6 +290,7 @@ MonoBehaviour:
   noShoot: 0
   triggerScript: {fileID: 0}
   firePosition: {fileID: 3425531728897892762}
+  laser: {fileID: 4930375935262626286}
   isStunned: 0
   walkingSound: {fileID: 11400000, guid: 4835d93a7342ad74388309a81f79bb28, type: 2}
   fireSound: {fileID: 11400000, guid: 0fdf04cda94ce694c88dfd86fad52b49, type: 2}
