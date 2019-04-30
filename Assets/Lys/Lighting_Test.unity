@@ -485,7 +485,7 @@ PrefabInstance:
     - target: {fileID: 2185853955851854732, guid: 2d90df9a8a41b55418a693a269c97c3a,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2185853955851854732, guid: 2d90df9a8a41b55418a693a269c97c3a,
         type: 3}
@@ -504,6 +504,75 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2d90df9a8a41b55418a693a269c97c3a, type: 3}
+--- !u!1001 &254026203
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4468341550452606900, guid: 9cf956bd804df9d468b432f17cf061a2,
+        type: 3}
+      propertyPath: m_Name
+      value: Terranium (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1741644326611619669, guid: 9cf956bd804df9d468b432f17cf061a2,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 8.107791
+      objectReference: {fileID: 0}
+    - target: {fileID: 1741644326611619669, guid: 9cf956bd804df9d468b432f17cf061a2,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.64437693
+      objectReference: {fileID: 0}
+    - target: {fileID: 1741644326611619669, guid: 9cf956bd804df9d468b432f17cf061a2,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -3.684
+      objectReference: {fileID: 0}
+    - target: {fileID: 1741644326611619669, guid: 9cf956bd804df9d468b432f17cf061a2,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1741644326611619669, guid: 9cf956bd804df9d468b432f17cf061a2,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1741644326611619669, guid: 9cf956bd804df9d468b432f17cf061a2,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1741644326611619669, guid: 9cf956bd804df9d468b432f17cf061a2,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1741644326611619669, guid: 9cf956bd804df9d468b432f17cf061a2,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1741644326611619669, guid: 9cf956bd804df9d468b432f17cf061a2,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1741644326611619669, guid: 9cf956bd804df9d468b432f17cf061a2,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1741644326611619669, guid: 9cf956bd804df9d468b432f17cf061a2,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9cf956bd804df9d468b432f17cf061a2, type: 3}
 --- !u!43 &285523893
 Mesh:
   m_ObjectHideFlags: 0
@@ -675,14 +744,14 @@ Mesh:
   m_SubMeshes:
   - serializedVersion: 2
     firstByte: 0
-    indexCount: 18
+    indexCount: 6
     topology: 0
     baseVertex: 0
     firstVertex: 0
-    vertexCount: 8
+    vertexCount: 4
     localAABB:
-      m_Center: {x: 0, y: 0, z: -0.008888239}
-      m_Extent: {x: 0.5, y: 0.5, z: 0.00000017369166}
+      m_Center: {x: 0, y: 0, z: -0.008119427}
+      m_Extent: {x: 0.5, y: 0.5, z: 0.0000003320165}
   m_Shapes:
     vertices: []
     shapes: []
@@ -696,10 +765,10 @@ Mesh:
   m_KeepVertices: 1
   m_KeepIndices: 1
   m_IndexFormat: 0
-  m_IndexBuffer: 000001000200000002000300000003000400030002000500010000000600010006000700
+  m_IndexBuffer: 000001000200000002000300
   m_VertexData:
     serializedVersion: 2
-    m_VertexCount: 8
+    m_VertexCount: 4
     m_Channels:
     - stream: 0
       offset: 0
@@ -757,8 +826,8 @@ Mesh:
       offset: 0
       format: 0
       dimension: 0
-    m_DataSize: 256
-    _typelessdata: 67fc7d3d000000bf409f11bc100d0eb5f68181ab000080bfcec9133edba05e3f78fc7d3d0000003f409f11bc516fbbb350023d28000080bfd0c9133e243f7f3f2621d93e0000003f74a011bc153955b5b3eeabab000080bf905d713e243f7f3f0000003f4094b33eb5a011bc033955b54c27aeab000080bf4a7e823ec8607a3f0000003f000000bfb5a011bc823955b500000000000080bf4a7e823edba05e3f0000003f0000003fb5a011bc823855b500000000000080bf4a7e823e243f7f3f000000bf000000bfe09f11bcfcef8e34fcef0ea8000080bf946f223bdba05e3f000000bf0000003fe09f11bcfbef8e3400000000000080bf946f223b243f7f3f
+    m_DataSize: 128
+    _typelessdata: 0000003f0000003f2b0805bc00280eb500a01034000080bf4a7e823e243f7f3f0000003ffeffffbebc0805bc01280eb501a01034000080bf4a7e823edba05e3f000000bf000000bf830605bc00280eb500a01034000080bf946f223bdba05e3f000000bf0000003ff30505bc00280eb500a01034000080bf946f223b243f7f3f
   m_CompressedMesh:
     m_Vertices:
       m_NumItems: 0
@@ -812,8 +881,8 @@ Mesh:
       m_BitSize: 0
     m_UVInfo: 0
   m_LocalAABB:
-    m_Center: {x: 0, y: 0, z: -0.008888239}
-    m_Extent: {x: 0.5, y: 0.5, z: 0.00000017369166}
+    m_Center: {x: 0, y: 0, z: -0.008119427}
+    m_Extent: {x: 0.5, y: 0.5, z: 0.0000003320165}
   m_MeshUsageFlags: 0
   m_BakedConvexCollisionMesh: 
   m_BakedTriangleCollisionMesh: 
@@ -874,7 +943,7 @@ PrefabInstance:
     - target: {fileID: 5010720502148452961, guid: af7565066555c7846bf6d800d1a3dd7a,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5010720502148452961, guid: af7565066555c7846bf6d800d1a3dd7a,
         type: 3}
@@ -943,7 +1012,7 @@ PrefabInstance:
     - target: {fileID: 320508113971229973, guid: 635d3e0a04f20e7439cdfe32a483199b,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 320508113971229973, guid: 635d3e0a04f20e7439cdfe32a483199b,
         type: 3}
@@ -1082,7 +1151,7 @@ PrefabInstance:
     - target: {fileID: 8054532244065430334, guid: 7e0d7afe580296140a5c7bd41e04f779,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8054532244065430334, guid: 7e0d7afe580296140a5c7bd41e04f779,
         type: 3}
@@ -1151,7 +1220,7 @@ PrefabInstance:
     - target: {fileID: 1121030930621245686, guid: af7e16de96897944db531532ecf1cf5d,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1121030930621245686, guid: af7e16de96897944db531532ecf1cf5d,
         type: 3}
