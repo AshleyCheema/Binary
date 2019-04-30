@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2185853955851854732}
   - component: {fileID: 5936004783998909880}
   - component: {fileID: 2599914855098643716}
+  - component: {fileID: 3455650811936171606}
   m_Layer: 0
   m_Name: TankMain
   m_TagString: Untagged
@@ -78,6 +79,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &3455650811936171606
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5227682059960608810}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.2570856, y: 1.1638685, z: 2.645238}
+  m_Center: {x: -0.0074937064, y: -0.00000010751745, z: -0.04959811}
 --- !u!1001 &4000117921514640383
 PrefabInstance:
   m_ObjectHideFlags: 0
