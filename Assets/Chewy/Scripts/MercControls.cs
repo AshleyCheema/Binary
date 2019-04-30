@@ -27,6 +27,7 @@ public class MercControls : PlayerController
     private GameObject bullet;
     public Trigger triggerScript;
     public GameObject firePosition;
+    public GameObject laser;
 
     public bool isStunned = false;
     public bool IsStunned
@@ -97,7 +98,7 @@ public class MercControls : PlayerController
         }
 
         //}
-        if (Input.GetKeyDown(KeyCode.Mouse0) && !noShoot && !trackerAbility.trackerActive)
+        if (Input.GetKeyDown(KeyCode.Mouse0) && !noShoot && !trackerAbility.trackerActive && !buttonPressed)
         {
             //Sound?
             if (bullet != null)
@@ -164,7 +165,8 @@ public class MercControls : PlayerController
         //When sprint is pressed the merc will be able to run for a short period of time
         if (Input.GetKey(KeyCode.LeftShift) && canSprint)
         {
-           buttonPressed = true;
+            buttonPressed = true;
+            laser.SetActive(false);
            #region NetMsg_Sprint
            NetMsg_AB_Sprint ab_Sprint = new NetMsg_AB_Sprint();
            if (ClientManager.Instance != null)
@@ -182,6 +184,7 @@ public class MercControls : PlayerController
 
             if (speedDuration <= 0)
             {
+                laser.SetActive(true);
                 cooldown = speedDuration;
                 canSprint = false;
                 buttonPressed = false;

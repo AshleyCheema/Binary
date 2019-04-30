@@ -99,6 +99,7 @@ public class CapturePointMiniGame : MonoBehaviour
                 {
                     ClientManager.Instance.LocalPlayer.gameAvatar.GetComponentInChildren<Animator>().SetBool("isHacking", true);
                 }
+                GameObject.FindGameObjectWithTag("Spy").GetComponentInChildren<Animator>().SetBool("isHacking", true);
                 inCoroutine = true;
                 //start coroutine to change colour
                 StartCoroutine(Feedback(true));
