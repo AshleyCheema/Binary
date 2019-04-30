@@ -26,6 +26,7 @@ public class MercControls : PlayerController
     private float reloadSpeed = 2f;
     private GameObject bullet;
     public Trigger triggerScript;
+    public GameObject firePosition;
 
     public bool isStunned = false;
     public bool IsStunned
@@ -101,9 +102,9 @@ public class MercControls : PlayerController
             //Sound?
             if (bullet != null)
             {
-                bullet.transform.position = transform.position;//transform.GetChild(0).transform.position;//new Vector3(transform.position.x, transform.position.y, transform.position.z);
-                bullet.transform.position += transform.forward * 2.5f;//transform.GetChild(0).transform.forward * 2.5f;
-                bullet.transform.rotation = transform.rotation;//transform.GetChild(0).transform.rotation;
+                bullet.transform.position = firePosition.transform.position;//transform.GetChild(0).transform.position;//new Vector3(transform.position.x, transform.position.y, transform.position.z);
+               // bullet.transform.position += transform.forward * 2.5f;//transform.GetChild(0).transform.forward * 2.5f;
+                bullet.transform.rotation = firePosition.transform.rotation;//transform.GetChild(0).transform.rotation;
                 bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * 20;
                 bullet.SetActive(true);
             }
@@ -191,13 +192,19 @@ public class MercControls : PlayerController
 
     private void Step()
     {
-        walkingSound.SetSourceProperties(audioSource);
-        audioSource.Play();
+        if (!audioSource.isPlaying)
+        {
+            walkingSound.SetSourceProperties(audioSource);
+            audioSource.Play();
+        }
     }
 
     private void Run()
     {
-        burstRunSound.SetSourceProperties(audioSource);
-        audioSource.Play();
+        if (!audioSource.isPlaying)
+        {
+            burstRunSound.SetSourceProperties(audioSource);
+            audioSource.Play();
+        }
     }
 }

@@ -7,6 +7,7 @@ public class Laser : MonoBehaviour
     private LineRenderer lineRenderer;
     Gradient gradientRed = new Gradient();
     Gradient gradientGreen = new Gradient();
+    public GameObject firePos;
 
     // Start is called before the first frame update
     void Start()
@@ -23,15 +24,17 @@ public class Laser : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        lineRenderer.SetPosition(0, transform.position);
+        lineRenderer.SetPosition(0, firePos.transform.position);
         RaycastHit hit;
         if(Physics.Raycast(transform.position, transform.forward, out hit, 10f))
         {
             if(hit.collider)
             {
-                lineRenderer.SetPosition(1, hit.point);
+                Vector3 pos = lineRenderer.GetPosition(0);
+                pos += firePos.transform.forward * hit.distance;
+                lineRenderer.SetPosition(1, pos);
                 lineRenderer.colorGradient = gradientGreen;
-
+        
             }
             if (hit.collider.tag == "Spy")
             {
@@ -40,7 +43,9 @@ public class Laser : MonoBehaviour
         }
         else
         {
-            lineRenderer.SetPosition(1, transform.forward * 500);
+            Vector3 pos = lineRenderer.GetPosition(0);
+            pos += firePos.transform.forward * 500;
+            lineRenderer.SetPosition(1, pos);
         }
     }
 }
