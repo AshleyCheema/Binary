@@ -67,13 +67,13 @@ public class FOWAdaptiveRender : MonoBehaviour
         }
         else if (ClientManager.Instance?.LocalPlayer.playerTeam == LLAPI.Team.Spy)
         {
-            if (other.tag == "Merc")
+            if (other.tag == "Merc" && other.name == "Merc(Clone)")
             {
                 //other.transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().enabled = false;
                 CoutDownMeshObj c = new CoutDownMeshObj
                 {
-                    GameObject = other.transform.GetChild(7).gameObject,
-                    Coroutine = StartCoroutine(CountdownMesh(other.transform.GetChild(7).gameObject))
+                    GameObject = other.transform.GetChild(0).transform.GetChild(7).gameObject,
+                    Coroutine = StartCoroutine(CountdownMesh(other.transform.GetChild(0).transform.GetChild(7).gameObject))
                 };
                 activeMeshes.Add(c);
             }
