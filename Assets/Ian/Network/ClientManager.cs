@@ -38,9 +38,11 @@ public class ClientManager : NetworkManager
 
     private long startLongTime;
 
+    private string leveToLoad = "NewLevel";
+
     private void Awake()
     {
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
         }
@@ -52,7 +54,7 @@ public class ClientManager : NetworkManager
 
     public void ConnectToServer(string aIPAdress)
     {
-        if(aIPAdress != "")
+        if (aIPAdress != "")
         {
             networkAddress = aIPAdress;
         }
@@ -95,7 +97,7 @@ public class ClientManager : NetworkManager
 
     public override void OnClientSceneChanged(NetworkConnection conn)
     {
-        if (SceneManager.GetActiveScene().name == "ClientGame")
+        if (SceneManager.GetActiveScene().name == leveToLoad)
         {
             gameOverUI.SetActive(false);
             //Spawn local avatar        
@@ -124,7 +126,7 @@ public class ClientManager : NetworkManager
             DontDestroyOnLoad[] network = GameObject.FindObjectsOfType<DontDestroyOnLoad>();
             for (int i = 0; i < network.Length; i++)
             {
-                if(!network[i].transform.GetChild(0).gameObject.activeInHierarchy && 
+                if (!network[i].transform.GetChild(0).gameObject.activeInHierarchy &&
                     network[i].gameObject.name == "Network")
                 {
                     Destroy(network[i].gameObject);
@@ -168,7 +170,7 @@ public class ClientManager : NetworkManager
             spawnPosition = ExtensionFunctions.RandomPointInBounds(bc.bounds);
         }
 
-        go = Instantiate(MiniModule_SpawableObjects.Instance.SpawnableObjects.ObjectsToSpawn[(aPlayer.playerTeam == LLAPI.Team.Merc) ? 0 : 5], 
+        go = Instantiate(MiniModule_SpawableObjects.Instance.SpawnableObjects.ObjectsToSpawn[(aPlayer.playerTeam == LLAPI.Team.Merc) ? 0 : 5],
             spawnPosition, Quaternion.identity);
         go.tag = (aPlayer.playerTeam == LLAPI.Team.Merc) ? "Merc" : "Spy";
 
@@ -189,7 +191,14 @@ public class ClientManager : NetworkManager
             go.GetComponentInChildren<FOWMask>().gameObject.SetActive(false);
             go.GetComponentInChildren<UIScript>().gameObject.SetActive(false);
             go.GetComponentInChildren<FOWAdaptiveRender>().gameObject.SetActive(false);
-            go.transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().enabled = false;
+            if (go.tag == "Merc")
+            {
+                go.transform.GetChild(0).GetChild(7).gameObject.GetComponent<SkinnedMeshRenderer>().enabled = false;
+            }
+            else
+            {
+                go.transform.GetChild(0).GetChild(5).gameObject.GetComponent<SkinnedMeshRenderer>().enabled = false;
+            }
 
             for (int i = 0; i < allMonos.Length; i++)
             {
@@ -252,7 +261,7 @@ public class ClientManager : NetworkManager
             GameObject go = Instantiate(
                 MiniModule_SpawableObjects.Instance.SpawnableObjects.ObjectsToSpawn[cso.ObjectID]);
             Players[cso.ConnectionID].gameAvatar = go;
-            go.transform.position = cso.position != new Vector3(0,1,0) ? cso.position : new Vector3(0,25,0);
+            go.transform.position = cso.position != new Vector3(0, 1, 0) ? cso.position : new Vector3(0, 25, 0);
             go.tag = Players[cso.ConnectionID].playerTeam == LLAPI.Team.Merc ? "Merc" : "Spy";
 
             MonoBehaviour[] allMonos = go.GetComponentsInChildren<MonoBehaviour>();
@@ -260,7 +269,15 @@ public class ClientManager : NetworkManager
             go.GetComponentInChildren<FOWMask>().gameObject.SetActive(false);
             go.GetComponentInChildren<UIScript>().gameObject.SetActive(false);
             go.GetComponentInChildren<FOWAdaptiveRender>().gameObject.SetActive(false);
-            go.transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().enabled = false;
+
+            if (go.tag == "Merc")
+            {
+                go.transform.GetChild(0).GetChild(7).gameObject.GetComponent<SkinnedMeshRenderer>().enabled = false;
+            }
+            else
+            {
+                go.transform.GetChild(0).GetChild(5).gameObject.GetComponent<SkinnedMeshRenderer>().enabled = false;
+            }
 
             for (int i = 0; i < allMonos.Length; i++)
             {
@@ -433,7 +450,7 @@ public class ClientManager : NetworkManager
 
         for (int i = 0; i < ExitManager.Instance.Exits.Length; i++)
         {
-            if(ExitManager.Instance.Exits[i].ID == ce.ID)
+            if (ExitManager.Instance.Exits[i].ID == ce.ID)
             {
                 ExitManager.Instance.Exits[i].IsOpen = ce.IsOpen;
             }
@@ -445,11 +462,11 @@ public class ClientManager : NetworkManager
         aMsg.reader.SeekZero();
         Msg_ClientTrigger ccp = aMsg.ReadMessage<Msg_ClientTrigger>();
 
-        if(ccp.Type == TriggerType.Bullet)
+        if (ccp.Type == TriggerType.Bullet)
         {
-            LocalPlayer.gameAvatar.GetComponent<SpyController>().Shot();
+            LocalPlayer.gameAvatar.transform.GetChild(0).GetComponent<SpyController>().Shot();
         }
-        else if(ccp.Type == TriggerType.Stun)
+        else if (ccp.Type == TriggerType.Stun)
         {
             Debug.Log("I HAVE BEEN STUNNED. NO!!!!!!!!!!!!!!");
             //set isStunned to true
@@ -468,7 +485,7 @@ public class ClientManager : NetworkManager
 
         //enable the UI fade and show the game over screen 
         //ths is where all the state can be shown in need.
-        if(gameOverUI)
+        if (gameOverUI)
         {
             gameOverUI.SetActive(true);
         }

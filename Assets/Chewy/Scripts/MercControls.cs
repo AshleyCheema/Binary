@@ -75,6 +75,10 @@ public class MercControls : PlayerController
 
         //if (triggerScript != null)
         //{
+        if (triggerScript == null)
+        {
+            triggerScript = GameObject.Find("StunG").GetComponent<Trigger>();
+        }
 
         animator.SetBool("isBurst", buttonPressed);
         animator.SetBool("isBlinded", triggerScript.isStunned);

@@ -21,9 +21,9 @@ public class NO_Exit : MonoBehaviour
 
     private void Update()
     {
-        if(isOpen && allowMiniGame)
+        if (isOpen && allowMiniGame)
         {
-            if(Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.E))
             {
                 miniGame.SetActive(!miniGame.activeInHierarchy);
             }
@@ -34,7 +34,7 @@ public class NO_Exit : MonoBehaviour
     {
         bool resualt = hackingGame.StartPuzzle();
 
-        if(resualt)
+        if (resualt)
         {
             //open exit game object
             exitOpen = true;
@@ -45,16 +45,17 @@ public class NO_Exit : MonoBehaviour
             ClientManager.Instance.client.Send(MSGTYPE.CLIENT_EXITED_LEVEL, msg);
 
             //exit level do something 
+
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(isOpen)
+        if (isOpen)
         {
-            if(exitOpen)
+            if (exitOpen)
             {
-                if (other.gameObject == ClientManager.Instance?.LocalPlayer.gameAvatar &&
+                if (other.transform.parent.gameObject == ClientManager.Instance?.LocalPlayer.gameAvatar &&
                     other.tag == "Spy")
                 {
                     //leave level completed
@@ -67,10 +68,10 @@ public class NO_Exit : MonoBehaviour
                 }
             }
 
-            if(other.gameObject == ClientManager.Instance?.LocalPlayer.gameAvatar &&
+            if (other.transform.parent.gameObject == ClientManager.Instance?.LocalPlayer.gameAvatar &&
                 other.tag == "Spy")
             {
-                if(ClientManager.Instance != null)
+                if (ClientManager.Instance != null)
                 {
                     allowMiniGame = true;
                 }
@@ -82,7 +83,7 @@ public class NO_Exit : MonoBehaviour
     {
         if (isOpen)
         {
-            if (other.gameObject == ClientManager.Instance?.LocalPlayer.gameAvatar &&
+            if (other.transform.parent.gameObject == ClientManager.Instance?.LocalPlayer.gameAvatar &&
                 other.tag == "Spy")
             {
                 if (ClientManager.Instance != null)

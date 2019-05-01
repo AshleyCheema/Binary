@@ -48,7 +48,7 @@ public class Trigger : MonoBehaviour
                     foreach (var key in ClientManager.Instance?.Players.Keys)
                     {
                         //if true we have found the gameObejct hit
-                        if (other.gameObject == ClientManager.Instance.Players[key].gameAvatar)
+                        if (other.transform.parent.gameObject == ClientManager.Instance.Players[key].gameAvatar)
                         {
                             Msg_ClientTrigger ct = new Msg_ClientTrigger();
                             ct.ConnectionID = key;

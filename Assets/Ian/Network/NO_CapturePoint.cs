@@ -67,7 +67,7 @@ public class NO_CapturePoint : MonoBehaviour
     public void IncreaseCaptureAmount(bool aSend = true)
     {
         captureAmount += 0.5f;
-        if(captureAmount > 3.0f)
+        if (captureAmount > 3.0f)
         {
             captureAmount = 3.0f;
         }
@@ -103,7 +103,7 @@ public class NO_CapturePoint : MonoBehaviour
 
                 ClientManager.Instance.client.Send(MSGTYPE.CLIENT_CAPTURE_POINT, ccp);
 
-                if (ClientManager.Instance.LocalPlayer.gameAvatar == other.gameObject)
+                if (ClientManager.Instance.LocalPlayer.gameAvatar == other.transform.parent.gameObject)
                 {
                     miniGame.SetActive(true);
                 }
@@ -145,14 +145,13 @@ public class NO_CapturePoint : MonoBehaviour
 
                     isBeingCaptured = false;
 
-                    //Msg_ClientCapaturePoint ccp = new Msg_ClientCapaturePoint();
-                    //ccp.connectId = ClientManager.Instance.LocalPlayer.connectionId;
-                    //ccp.IsBeingCaptured = false;
-                    //ccp.ID = ID;
-                    //
-                    //ClientManager.Instance.client.Send(MSGTYPE.CLIENT_CAPTURE_POINT, ccp);
+                    Msg_ClientCapaturePoint ccp = new Msg_ClientCapaturePoint();
+                    ccp.connectId = ClientManager.Instance.LocalPlayer.connectionId;
+                    ccp.IsBeingCaptured = isBeingCaptured;
+                    ccp.ID = ID;
+                    ClientManager.Instance.client.Send(MSGTYPE.CLIENT_CAPTURE_POINT, ccp);
 
-                    if (ClientManager.Instance.LocalPlayer.gameAvatar == other.gameObject)
+                    if (ClientManager.Instance.LocalPlayer.gameAvatar == other.transform.parent.gameObject)
                     {
                         miniGame.SetActive(false);
                     }

@@ -102,7 +102,7 @@ public class HostManager : NetworkManager
 
         foreach (var item in Players.Keys)
         {
-            if(item != conn.connectionId)
+            if (item != conn.connectionId)
             {
                 cc.connectID = (int)item;
                 Send(conn.connectionId, MSGTYPE.ADD_NEW_LOBBY_PLAYER, cc);
@@ -125,14 +125,14 @@ public class HostManager : NetworkManager
 
         foreach (var v in Players.Values)
         {
-            if(!v.isReady)
+            if (!v.isReady)
             {
                 ready = false;
                 break;
             }
         }
 
-        if(ready)
+        if (ready)
         {
             ServerChangeScene("ClientGame");
         }
@@ -140,7 +140,7 @@ public class HostManager : NetworkManager
 
     public override void OnServerSceneChanged(string sceneName)
     {
-        if(sceneName == "ClientGame")
+        if (sceneName == "NewLevel")
         {
             NO_CapturePoint[] capturePoints = GameObject.FindObjectsOfType<NO_CapturePoint>();
 
@@ -150,7 +150,7 @@ public class HostManager : NetworkManager
                 {
                     this.capturePoints.Add(capturePoints[i].ID, capturePoints[i].gameObject);
                 }
-                else if(this.capturePoints[capturePoints[i].ID] == null)
+                else if (this.capturePoints[capturePoints[i].ID] == null)
                 {
                     this.capturePoints[capturePoints[i].ID] = capturePoints[i].gameObject;
                 }
@@ -207,7 +207,7 @@ public class HostManager : NetworkManager
                 }
             }
         }
-        else if(sceneName == "ClientLobby")
+        else if (sceneName == "ClientLobby")
         {
             CS_LobbyManager.Instance.Host = this;
 
@@ -257,7 +257,7 @@ public class HostManager : NetworkManager
 
         if (ready)
         {
-            ServerChangeScene("ClientGame");
+            ServerChangeScene("NewLevel");
         }
     }
 
@@ -423,7 +423,7 @@ public class HostManager : NetworkManager
             tracker.transform.position = ct.TrackerPosition;
         }
 
-        if(ct.TrackerTriggered)
+        if (ct.TrackerTriggered)
         {
             tracker.SetActive(true);
         }
@@ -471,7 +471,7 @@ public class HostManager : NetworkManager
         aMsg.reader.SeekZero();
         Msg_ClientState cs = aMsg.ReadMessage<Msg_ClientState>();
 
-        if(cs.state == SpyState.Dead)
+        if (cs.state == SpyState.Dead)
         {
             MiniModule_GameOver.Instance.SpyDead(cs.connectId);
 
@@ -493,9 +493,9 @@ public class HostManager : NetworkManager
         aMsg.reader.SeekZero();
         Msg_ClientMercFeedback cmf = aMsg.ReadMessage<Msg_ClientMercFeedback>();
 
-        foreach(var pKey in Players.Keys)
+        foreach (var pKey in Players.Keys)
         {
-            if(Players[pKey].playerTeam == LLAPI.Team.Merc)
+            if (Players[pKey].playerTeam == LLAPI.Team.Merc)
             {
                 Send(Players[pKey].connectionId, MSGTYPE.CLIENT_FEEDBACK, cmf);
                 break;
