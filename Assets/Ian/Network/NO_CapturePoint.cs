@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class NO_CapturePoint : MonoBehaviour
 {
@@ -15,7 +16,7 @@ public class NO_CapturePoint : MonoBehaviour
     [SerializeField]
     private float capturePercentage = 0.0f;
     [SerializeField]
-    private TextMesh tm;
+    private TextMeshPro tm;
 
     [SerializeField]
     private GameObject miniGame;
@@ -40,7 +41,7 @@ public class NO_CapturePoint : MonoBehaviour
     {
         if (tm != null)
         {
-            tm.text = capturePercentage.ToString();
+            tm.text = ((int)capturePercentage).ToString();
         }
         if (isBeingCaptured)
         {
