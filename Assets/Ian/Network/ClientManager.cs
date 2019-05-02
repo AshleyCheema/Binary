@@ -15,6 +15,7 @@ public class LocalPlayer
     public List<GameObject> gameObjects;
     public NetworkConnection conn;
     public bool isReady;
+    public Vector3 latestPosition;
 }
 
 public class ClientManager : NetworkManager
@@ -40,6 +41,9 @@ public class ClientManager : NetworkManager
 
     private string leveToLoad = "NewLevel";
 
+    [SerializeField]
+    private float movementSmooth = 1.5f;
+
     private void Awake()
     {
         if (instance == null)
@@ -52,8 +56,22 @@ public class ClientManager : NetworkManager
         }
     }
 
+    private void Update()
+    {
+        if (players.Count > 0)
+        {
+            foreach (LocalPlayer lp in players.Values)
+            {
+                if (lp.gameAvatar != null)
+                {
+                    lp.gameAvatar.transform.position = Vector3.Lerp(lp.gameAvatar.transform.position, lp.latestPosition, Time.deltaTime * movementSmooth);
+                }
+            }
+        }
+    }
     public void ConnectToServer(string aIPAdress)
     {
+        connectionConfig.SendDelay = 0;
         if (aIPAdress != "")
         {
             networkAddress = aIPAdress;
@@ -290,10 +308,14 @@ public class ClientManager : NetworkManager
     {
         aMsg.reader.SeekZero();
         Msg_ClientMove cm = aMsg.ReadMessage<Msg_ClientMove>();
+
+        int mil = DateTime.UtcNow.Millisecond;
+        Debug.Log(mil - cm.Time);
         if (Players[cm.connectId].gameAvatar != null)
         {
-            Players[cm.connectId].gameAvatar.transform.position = Vector3.Lerp(Players[cm.connectId].gameAvatar.transform.position,
-                                                                               cm.position, 0.5f);
+            //Players[cm.connectId].gameAvatar.transform.position = Vector3.Lerp(Players[cm.connectId].gameAvatar.transform.position,
+            //                                                                   cm.position, 0.5f);
+            Players[cm.connectId].latestPosition = cm.position;
         }
         else
         {

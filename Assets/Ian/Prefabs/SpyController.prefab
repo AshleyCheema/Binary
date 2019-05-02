@@ -96,6 +96,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!136 &4281852007482752915
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 614528025514262763}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.4
+  m_Height: 1.65
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.8, z: 0}
 --- !u!114 &3999682921971188250
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122,20 +136,6 @@ MonoBehaviour:
   stunDrop: 0
   walking: {fileID: 11400000, guid: 256c532da8d680f4eacf1d823dbced93, type: 2}
   run: {fileID: 11400000, guid: 2fd8bddd7cd567d439dfad460962b30e, type: 2}
---- !u!136 &4281852007482752915
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 614528025514262763}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.4
-  m_Height: 1.65
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.8, z: 0}
 --- !u!1 &747239420701823996
 GameObject:
   m_ObjectHideFlags: 0
@@ -539,7 +539,7 @@ PrefabInstance:
         type: 3}
       propertyPath: spyController
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 3999682921971188250}
     - target: {fileID: 2114616451882984748, guid: 8f6103cceb54f204bb9b9e80b393eab9,
         type: 3}
       propertyPath: CooldownTime
@@ -549,7 +549,7 @@ PrefabInstance:
         type: 3}
       propertyPath: spyController
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 3999682921971188250}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8f6103cceb54f204bb9b9e80b393eab9, type: 3}
 --- !u!224 &1545181765714954144 stripped
@@ -617,6 +617,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9500000, guid: c30af275bacc8e04b9068e0eba2d8e3c, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 304b5f46857c9244b9e4ab08c1e27f62, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c30af275bacc8e04b9068e0eba2d8e3c, type: 3}
 --- !u!1 &614528025514262763 stripped

@@ -7,4 +7,5 @@ public class Msg_ClientMove : MessageBase
 {
     public int connectId;
     public Vector3 position;
+    public int Time;
 }

@@ -709,6 +709,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Network
       objectReference: {fileID: 0}
+    - target: {fileID: 3034001978153183727, guid: cfef1562dd8ab46428783508f7964a20,
+        type: 3}
+      propertyPath: movementSmooth
+      value: 2.5
+      objectReference: {fileID: 0}
     - target: {fileID: 372174065930439459, guid: cfef1562dd8ab46428783508f7964a20,
         type: 3}
       propertyPath: m_IsActive

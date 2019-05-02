@@ -849,6 +849,7 @@ MonoBehaviour:
   isNetworkActive: 0
   matchMaker: {fileID: 0}
   gameOverUI: {fileID: 372174065930439459}
+  movementSmooth: 15
 --- !u!1 &4555554488134228164
 GameObject:
   m_ObjectHideFlags: 0

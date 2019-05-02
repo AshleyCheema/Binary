@@ -54,6 +54,7 @@ public class HostManager : NetworkManager
 
     public void StartNewServer()
     {
+        connectionConfig.SendDelay = 0;
         StartServer();
 
         Debug.Log("Server stated");
@@ -286,13 +287,16 @@ public class HostManager : NetworkManager
     {
         aMsg.reader.SeekZero();
         Msg_ClientMove cm = aMsg.ReadMessage<Msg_ClientMove>();
+        Send(cm.connectId, MSGTYPE.CLIENT_MOVE, cm, false);
+
+        int mil = DateTime.UtcNow.Millisecond;
+
+        Debug.Log(mil - cm.Time);
 
         if (Players[cm.connectId].gameAvatar != null)
         {
             Players[cm.connectId].gameAvatar.transform.position = cm.position;
         }
-
-        Send(cm.connectId, MSGTYPE.CLIENT_MOVE, cm, false);
     }
 
     public void OnPlayerRotationChange(NetworkMessage aMsg)
