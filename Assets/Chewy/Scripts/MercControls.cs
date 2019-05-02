@@ -29,6 +29,8 @@ public class MercControls : PlayerController
     public GameObject firePosition;
     public GameObject laser;
 
+    public ParticleSystem bulletEffect;
+
     public bool isStunned = false;
     public bool IsStunned
     { get { return isStunned; }
@@ -118,6 +120,8 @@ public class MercControls : PlayerController
                 bullet.transform.rotation = firePosition.transform.rotation;//transform.GetChild(0).transform.rotation;
                 bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * 20;
                 bullet.SetActive(true);
+
+                bulletEffect.Play();
             }
             noShoot = true;
 
