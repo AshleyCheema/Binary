@@ -500,6 +500,16 @@ PrefabInstance:
       propertyPath: m_isInputParsingRequired
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2114616451882984748, guid: 8f6103cceb54f204bb9b9e80b393eab9,
+        type: 3}
+      propertyPath: spyController
+      value: 
+      objectReference: {fileID: 3999682921971188250}
+    - target: {fileID: 2114616451882984748, guid: 8f6103cceb54f204bb9b9e80b393eab9,
+        type: 3}
+      propertyPath: CooldownTime
+      value: 20.1
+      objectReference: {fileID: 0}
     - target: {fileID: 2114616453571805619, guid: 8f6103cceb54f204bb9b9e80b393eab9,
         type: 3}
       propertyPath: m_havePropertiesChanged
@@ -510,6 +520,11 @@ PrefabInstance:
       propertyPath: m_isInputParsingRequired
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2114616453402851463, guid: 8f6103cceb54f204bb9b9e80b393eab9,
+        type: 3}
+      propertyPath: spyController
+      value: 
+      objectReference: {fileID: 3999682921971188250}
     - target: {fileID: 2114616452573148149, guid: 8f6103cceb54f204bb9b9e80b393eab9,
         type: 3}
       propertyPath: m_havePropertiesChanged
@@ -535,21 +550,6 @@ PrefabInstance:
       propertyPath: m_havePropertiesChanged
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 2114616451882984748, guid: 8f6103cceb54f204bb9b9e80b393eab9,
-        type: 3}
-      propertyPath: spyController
-      value: 
-      objectReference: {fileID: 3999682921971188250}
-    - target: {fileID: 2114616451882984748, guid: 8f6103cceb54f204bb9b9e80b393eab9,
-        type: 3}
-      propertyPath: CooldownTime
-      value: 20.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2114616453402851463, guid: 8f6103cceb54f204bb9b9e80b393eab9,
-        type: 3}
-      propertyPath: spyController
-      value: 
-      objectReference: {fileID: 3999682921971188250}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8f6103cceb54f204bb9b9e80b393eab9, type: 3}
 --- !u!224 &1545181765714954144 stripped
@@ -621,6 +621,10 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 304b5f46857c9244b9e4ab08c1e27f62, type: 2}
+    - target: {fileID: 13700000, guid: c30af275bacc8e04b9068e0eba2d8e3c, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d39d738ac000ae047a167b109679762b, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c30af275bacc8e04b9068e0eba2d8e3c, type: 3}
 --- !u!1 &614528025514262763 stripped
