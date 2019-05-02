@@ -44,11 +44,12 @@ public class PlayerController : MonoBehaviour
         //rb = GetComponent<Rigidbody>();
     }
 
+    float sendTime = 0.0f;
+    int sendAmount = 0;
     // Update is called once per frame
     public virtual void Update()
     {
         //Maybe add a client check if need
-
         if (player == Player.PlayerTwo)
         {
             if (Input.GetButton("Crouching"))
@@ -85,6 +86,7 @@ public class PlayerController : MonoBehaviour
                 playerMovement.connectId = ClientManager.Instance.LocalPlayer.connectionId;
                 playerMovement.position = rb.position;
                 ClientManager.Instance.client?.Send(MSGTYPE.CLIENT_MOVE, playerMovement);
+                sendAmount++;
             }
         }
         else
@@ -104,6 +106,14 @@ public class PlayerController : MonoBehaviour
 
                 ClientManager.Instance.client?.Send(MSGTYPE.CLIENT_ROTATION, playerRotation);
             }
+        }
+
+        sendTime += Time.deltaTime;
+        if(sendTime > 1.0f)
+        {
+            Debug.Log("Amount Sent: " + sendAmount);
+            sendTime = 0.0f;
+            sendAmount = 0;
         }
     }
 
