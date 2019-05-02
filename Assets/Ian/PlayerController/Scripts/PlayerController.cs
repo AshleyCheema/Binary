@@ -69,6 +69,7 @@ public class PlayerController : MonoBehaviour
         //{
         //    c = StartCoroutine(SendPosition());
         //}
+
         //Maybe add a client check if need
         if (player == Player.PlayerTwo)
         {
