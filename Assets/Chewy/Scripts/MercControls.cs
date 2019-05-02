@@ -31,7 +31,13 @@ public class MercControls : PlayerController
 
     public bool isStunned = false;
     public bool IsStunned
-    { get { return isStunned; } set { isStunned = value; } }
+    { get { return isStunned; }
+        set
+        {
+            isStunned = value;
+            triggerScript.isStunned = true;
+        }
+    }
     private float stunCountDown = 5.0f;
 
     //Audio

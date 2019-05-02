@@ -1419,6 +1419,11 @@ PrefabInstance:
       propertyPath: m_isInputParsingRequired
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3501806047670248362, guid: 8f6103cceb54f204bb9b9e80b393eab9,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2114616451759763333, guid: 8f6103cceb54f204bb9b9e80b393eab9,
         type: 3}
       propertyPath: mercControls

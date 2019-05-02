@@ -130,13 +130,13 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        sendTime += Time.deltaTime;
-        if(sendTime > 1.0f)
-        {
-            Debug.Log("Amount Sent: " + sendAmount);
-            sendTime = 0.0f;
-            sendAmount = 0;
-        }
+        //sendTime += Time.deltaTime;
+        //if(sendTime > 1.0f)
+        //{
+        //    Debug.Log("Amount Sent: " + sendAmount);
+        //    sendTime = 0.0f;
+        //    sendAmount = 0;
+        //}
     }
 
     private void FixedUpdate()

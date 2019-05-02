@@ -309,8 +309,9 @@ public class ClientManager : NetworkManager
         aMsg.reader.SeekZero();
         Msg_ClientMove cm = aMsg.ReadMessage<Msg_ClientMove>();
 
-        int mil = DateTime.UtcNow.Millisecond;
-        Debug.Log(mil - cm.Time);
+        //int mil = DateTime.UtcNow.Millisecond;
+        //Debug.Log(mil - cm.Time);
+
         if (Players[cm.connectId].gameAvatar != null)
         {
             //Players[cm.connectId].gameAvatar.transform.position = Vector3.Lerp(Players[cm.connectId].gameAvatar.transform.position,
@@ -493,9 +494,9 @@ public class ClientManager : NetworkManager
             Debug.Log("I HAVE BEEN STUNNED. NO!!!!!!!!!!!!!!");
             //set isStunned to true
             if (mLocalPlayer.playerTeam == LLAPI.Team.Merc &&
-                mLocalPlayer.gameAvatar.GetComponent<MercControls>())
+                mLocalPlayer.gameAvatar.transform.GetChild(0).gameObject.GetComponent<MercControls>())
             {
-                mLocalPlayer.gameAvatar.GetComponent<MercControls>().IsStunned = true;
+                mLocalPlayer.gameAvatar.transform.GetChild(0).gameObject.GetComponent<MercControls>().IsStunned = true;
             }
         }
     }
@@ -527,7 +528,7 @@ public class ClientManager : NetworkManager
 
         //should be merc player only
         //do something as we have been notified of somethig
-        LocalPlayer.gameAvatar?.GetComponent<TrackerAbility>().SetFeedback(cmf.Location);
+        LocalPlayer.gameAvatar?.transform.GetChild(0).gameObject.GetComponent<TrackerAbility>().SetFeedback(cmf.Location);
     }
 
     public void OnPingPong(NetworkMessage aMsg)

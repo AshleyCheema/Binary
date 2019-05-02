@@ -83,7 +83,7 @@ public class StunAbility : Cooldown
             {
                 IsActive = true;
                 stunG.transform.position = new Vector3(spyController.transform.position.x,
-                                                       spyController.transform.position.y + 1,
+                                                       0,
                                                        spyController.transform.position.z - 1);
                 stunDropped = true;
                 isCooldown = true;
@@ -135,12 +135,6 @@ public class StunAbility : Cooldown
         {
             abilityDuration -= Time.deltaTime;
 
-            if (isSpawned)
-            {
-                Destroy(gameObject);
-                //remove from list in clients
-            }
-
             if (abilityDuration <= 0)
             {
                 //flash.Play();
@@ -176,6 +170,11 @@ public class StunAbility : Cooldown
                             }
                         }
                     }
+                }
+                if (isSpawned)
+                {
+                    Destroy(gameObject);
+                    //remove from list in clients
                 }
             }
         }

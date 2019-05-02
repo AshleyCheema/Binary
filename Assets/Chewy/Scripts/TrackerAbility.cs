@@ -162,15 +162,15 @@ public class TrackerAbility : Cooldown
 
     private void LateUpdate()
     {
-        if (trackerTrigger != null && trackerTrigger.isDetected)
-        {
-            ArrowPointer();
-        }
-        else
-        {
-            //arrowPointer.SetActive(false);
-            //trackerFeedback.SetActive(false);
-        }
+        //if (trackerTrigger != null && trackerTrigger.isDetected)
+        //{
+        //    ArrowPointer();
+        //}
+        //else
+        //{
+        //   // arrowPointer.SetActive(false);
+        //    //trackerFeedback.SetActive(false);
+        //}
     }
 
     void ArrowPointer()
