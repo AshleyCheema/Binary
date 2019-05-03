@@ -41,6 +41,8 @@ public class ClientManager : NetworkManager
 
     private string leveToLoad = "NewLevel";
 
+    public RuntimeAnimatorController shellAnim;
+
     [SerializeField]
     private float movementSmooth = 1.5f;
 
@@ -69,9 +71,9 @@ public class ClientManager : NetworkManager
             }
         }
     }
+
     public void ConnectToServer(string aIPAdress)
     {
-        connectionConfig.SendDelay = 0;
         if (aIPAdress != "")
         {
             networkAddress = aIPAdress;
@@ -91,6 +93,7 @@ public class ClientManager : NetworkManager
         this.client.RegisterHandler(MSGTYPE.CLIENT_GAME_OVER, OnGameOver);
         this.client.RegisterHandler(MSGTYPE.CLIENT_CAPTURE_POINT_INCREASE, OnSpyCaptureIncrease);
         this.client.RegisterHandler(MSGTYPE.CLIENT_FEEDBACK, OnReceivePlayerFeedback);
+        this.client.RegisterHandler(MSGTYPE.CLIENT_ANIM_CHANGE, OnReceiveClientAnim);
 
         this.client.RegisterHandler(MSGTYPE.PING_PONG, OnPingPong);
     }
@@ -529,6 +532,21 @@ public class ClientManager : NetworkManager
         //should be merc player only
         //do something as we have been notified of somethig
         LocalPlayer.gameAvatar?.transform.GetChild(0).gameObject.GetComponent<TrackerAbility>().SetFeedback(cmf.Location);
+    }
+
+    public void OnReceiveClientAnim(NetworkMessage aMsg)
+    {
+        aMsg.reader.SeekZero();
+        Msg_ClientAnimChange cac = aMsg.ReadMessage<Msg_ClientAnimChange>();
+        
+        if (Players[cac.connectId].gameAvatar != null)
+        {
+            if (Players[cac.connectId].gameAvatar.transform.GetChild(0).gameObject.GetComponent<Animator>().runtimeAnimatorController != shellAnim)
+            {
+                Players[cac.connectId].gameAvatar.transform.GetChild(0).gameObject.GetComponent<Animator>().runtimeAnimatorController = shellAnim;
+            }
+            Players[cac.connectId].gameAvatar.transform.GetChild(0).gameObject.GetComponent<Animator>().Play(cac.hash);
+        }
     }
 
     public void OnPingPong(NetworkMessage aMsg)

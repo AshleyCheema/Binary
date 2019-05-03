@@ -44,31 +44,32 @@ public class PlayerController : MonoBehaviour
     {
         //rb = GetComponent<Rigidbody>();
     }
-   // Coroutine c = null;
-   //IEnumerator SendPosition()
-   // {
-   //     while(true)
-   //     {
-   //         if (ClientManager.Instance?.LocalPlayer.gameAvatar != null)
-   //         {
-   //             Msg_ClientMove playerMovement = new Msg_ClientMove();
-   //             playerMovement.connectId = ClientManager.Instance.LocalPlayer.connectionId;
-   //             playerMovement.position = rb.position;
-   //             ClientManager.Instance.client?.Send(MSGTYPE.CLIENT_MOVE, playerMovement);
-   //         }
-   //         yield return new WaitForSeconds(0.2f);
-   //     }
-   // }
+    Coroutine c = null;
+    IEnumerator SendPosition()
+     {
+         while(true)
+         {
+             if (ClientManager.Instance?.LocalPlayer.gameAvatar != null)
+             {
+                Msg_ClientMove playerMovement = new Msg_ClientMove();
+                playerMovement.connectId = ClientManager.Instance.LocalPlayer.connectionId;
+                playerMovement.position = rb.position;
+                playerMovement.Time = DateTime.UtcNow.Millisecond;
+                //ClientManager.Instance.client?.SendUnreliable(MSGTYPE.CLIENT_MOVE, playerMovement);
+             }
+             yield return new WaitForSeconds(1f);
+         }
+     }
 
     float sendTime = 0.0f;
     int sendAmount = 0;
     // Update is called once per frame
     public virtual void Update()
     {
-        //if(c == null)
-        //{
-        //    c = StartCoroutine(SendPosition());
-        //}
+        if(c == null)
+        {
+            //c = StartCoroutine(SendPosition());
+        }
 
         //Maybe add a client check if need
         if (player == Player.PlayerTwo)

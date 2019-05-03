@@ -23,7 +23,10 @@ public class Trigger : MonoBehaviour
 
     private void Start()
     {
-        stunAbility = GetComponent<StunAbility>();
+        if (GetComponent<StunAbility>())
+        {
+            stunAbility = GetComponent<StunAbility>();
+        }
     }
 
     private void OnTriggerEnter(Collider other)
