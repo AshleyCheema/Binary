@@ -31,12 +31,12 @@ public class SpyController : PlayerController
     public override void Start()
     {
         audioSource = gameObject.GetComponent<AudioSource>();
-        bullet = GameObject.Find("Bullet");
+        //bullet = GameObject.Find("Bullet");
+        //bulletTrigger = bullet.GetComponent<Trigger>();
         if (stun == null)
         {
             stun = GameObject.Find("StunG");
         }
-        bulletTrigger = bullet.GetComponent<Trigger>();
         currentState = SpyState.Normal;
     }
 
@@ -68,7 +68,7 @@ public class SpyController : PlayerController
         }
         else if (currentState == SpyState.Hurt)
         {
-            bulletTrigger.hasShot = false;
+            //bulletTrigger.hasShot = false;
             currentState = SpyState.Dead;
             Debug.Log("Dead");
 

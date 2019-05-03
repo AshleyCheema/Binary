@@ -714,6 +714,11 @@ PrefabInstance:
       propertyPath: movementSmooth
       value: 2.5
       objectReference: {fileID: 0}
+    - target: {fileID: 3034001978153183727, guid: cfef1562dd8ab46428783508f7964a20,
+        type: 3}
+      propertyPath: shellAnim
+      value: 
+      objectReference: {fileID: 9100000, guid: c230d8db1947f024d858896d2cd4467a, type: 2}
     - target: {fileID: 372174065930439459, guid: cfef1562dd8ab46428783508f7964a20,
         type: 3}
       propertyPath: m_IsActive

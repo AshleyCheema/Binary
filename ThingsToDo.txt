@@ -1,0 +1,27 @@
+Things to do:
+
+Add feedback audio
+Add visual feedback - change emmisives - outline on control rooms
+Tutorial - Intro video
+Ring around Merc
+Tracker Shader - Make collider bigger
+
+Visual feedback for when player is shot - Blood
+UI Playername change
+UI Health Change
+UI feedback - Merc running etc
+
+Networking Animations
+Update Lightning 
+Testing/Balancing gameplay
+Controller support
+
+Recording of game statistics
+UI Assets
+Tablet asset 2d
+Make Endgame minigame tablet UI
+
+Retexture Merc
+
+Add side animations
+Update animations/skinning

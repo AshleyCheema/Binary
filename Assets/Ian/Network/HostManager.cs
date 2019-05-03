@@ -25,6 +25,7 @@ public class MSGTYPE
     public const short CLIENT_READY = 115;
     public const short CLIENT_CAPTURE_POINT_INCREASE = 116;
     public const short CLIENT_FEEDBACK = 117;
+    public const short CLIENT_ANIM_CHANGE = 118;
     public const short PING_PONG = 250;
 }
 
@@ -54,7 +55,6 @@ public class HostManager : NetworkManager
 
     public void StartNewServer()
     {
-        connectionConfig.SendDelay = 0;
         StartServer();
 
         Debug.Log("Server stated");
@@ -74,6 +74,7 @@ public class HostManager : NetworkManager
         NetworkServer.RegisterHandler(MSGTYPE.CLIENT_STATE, OnSpyChangeState);
         NetworkServer.RegisterHandler(MSGTYPE.CLIENT_CAPTURE_POINT_INCREASE, OnSpyCaptureIncrease);
         NetworkServer.RegisterHandler(MSGTYPE.CLIENT_FEEDBACK, OnClientFeedback);
+        NetworkServer.RegisterHandler(MSGTYPE.CLIENT_ANIM_CHANGE, OnClientAnimChange);
 
         //NetworkServer.RegisterHandler(MSGTYPE.PING_PONG, OnPingPong);
     }
@@ -290,7 +291,6 @@ public class HostManager : NetworkManager
         Send(cm.connectId, MSGTYPE.CLIENT_MOVE, cm, false);
 
         int mil = DateTime.UtcNow.Millisecond;
-
         Debug.Log(mil - cm.Time);
 
         if (Players[cm.connectId].gameAvatar != null)
@@ -505,6 +505,14 @@ public class HostManager : NetworkManager
                 break;
             }
         }
+    }
+
+    public void OnClientAnimChange(NetworkMessage aMsg)
+    {
+        aMsg.reader.SeekZero();
+        Msg_ClientAnimChange cac = aMsg.ReadMessage<Msg_ClientAnimChange>();
+
+        Send(aMsg.conn.connectionId, MSGTYPE.CLIENT_ANIM_CHANGE, cac, false);
     }
 
     private void Update()
