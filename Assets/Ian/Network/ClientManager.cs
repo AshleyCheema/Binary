@@ -206,7 +206,7 @@ public class ClientManager : NetworkManager
                 MiniModule_SpawableObjects.Instance.SpawnableObjects.ObjectsToSpawn[aPlayer.playerTeam == LLAPI.Team.Merc ? 0 : 5]);
             Players[aPlayer.connectionId].gameAvatar = go;
             go.tag = Players[aPlayer.connectionId].playerTeam == LLAPI.Team.Merc ? "Merc" : "Spy";
-
+            
             MonoBehaviour[] allMonos = go.GetComponentsInChildren<MonoBehaviour>();
 
             go.GetComponentInChildren<FOWMask>().gameObject.SetActive(false);
@@ -282,7 +282,7 @@ public class ClientManager : NetworkManager
             GameObject go = Instantiate(
                 MiniModule_SpawableObjects.Instance.SpawnableObjects.ObjectsToSpawn[cso.ObjectID]);
             Players[cso.ConnectionID].gameAvatar = go;
-            go.transform.position = cso.position != new Vector3(0, 1, 0) ? cso.position : new Vector3(0, 25, 0);
+            go.transform.position = cso.position != new Vector3(0, 0, 0) ? cso.position : new Vector3(0, 25, 0);
             go.tag = Players[cso.ConnectionID].playerTeam == LLAPI.Team.Merc ? "Merc" : "Spy";
 
             MonoBehaviour[] allMonos = go.GetComponentsInChildren<MonoBehaviour>();

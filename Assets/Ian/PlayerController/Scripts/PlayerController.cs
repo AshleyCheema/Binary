@@ -42,6 +42,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     public virtual void Start()
     {
+        transform.parent.transform.position = new Vector3(transform.parent.transform.position.x, 0, transform.parent.transform.position.z);
         //rb = GetComponent<Rigidbody>();
     }
     Coroutine c = null;
