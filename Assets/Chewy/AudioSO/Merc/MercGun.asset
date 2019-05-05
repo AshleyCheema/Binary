@@ -15,10 +15,10 @@ MonoBehaviour:
   AudioName: Fire
   clip:
   - {fileID: 8300000, guid: af2ecc241d95ae94c83175d13def1e3b, type: 3}
-  volume: 1
+  volume: 0.8
   pitch: 1
   loop: 0
   spatialBlend: 1
-  rolloffMode: 0
-  audioMinDistance: 1
-  audioMaxDistance: 500
+  rolloffMode: 2
+  audioMinDistance: 10
+  audioMaxDistance: 20

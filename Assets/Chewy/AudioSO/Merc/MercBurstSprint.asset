@@ -18,10 +18,10 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 3c3390b2897e2f84bb5f09c1fadf4433, type: 3}
   - {fileID: 8300000, guid: 227ecdf04450b8446b28bb6e2f7b5498, type: 3}
   - {fileID: 8300000, guid: 2a845f8f13668444bab13ed2b52e8769, type: 3}
-  volume: 1
+  volume: 0.5
   pitch: 1
   loop: 0
   spatialBlend: 1
-  rolloffMode: 0
-  audioMinDistance: 1
+  rolloffMode: 2
+  audioMinDistance: 5
   audioMaxDistance: 10

@@ -1451,6 +1451,17 @@ PrefabInstance:
       propertyPath: trackerAbility
       value: 
       objectReference: {fileID: 8794924992807069814}
+    - target: {fileID: 2114616452149704712, guid: 8f6103cceb54f204bb9b9e80b393eab9,
+        type: 3}
+      propertyPath: burstActiveSprite
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2114616452149704712, guid: 8f6103cceb54f204bb9b9e80b393eab9,
+        type: 3}
+      propertyPath: trackerActiveSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 7a21244b1b2a8614ebdf6241f0b7c92b,
+        type: 3}
     - target: {fileID: 2114616452326917868, guid: 8f6103cceb54f204bb9b9e80b393eab9,
         type: 3}
       propertyPath: mercControls
