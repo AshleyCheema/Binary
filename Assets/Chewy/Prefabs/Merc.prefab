@@ -287,6 +287,7 @@ MonoBehaviour:
   rb: {fileID: 80722652396774942}
   flashPanel: {fileID: 3829680164023310756}
   canSprint: 0
+  buttonPressed: 0
   noShoot: 0
   triggerScript: {fileID: 0}
   firePosition: {fileID: 3425531728897892762}
@@ -1447,19 +1448,9 @@ PrefabInstance:
       objectReference: {fileID: 3533286257736986787}
     - target: {fileID: 2114616452149704712, guid: 8f6103cceb54f204bb9b9e80b393eab9,
         type: 3}
-      propertyPath: abilityType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2114616452149704712, guid: 8f6103cceb54f204bb9b9e80b393eab9,
-        type: 3}
       propertyPath: trackerAbility
       value: 
       objectReference: {fileID: 8794924992807069814}
-    - target: {fileID: 2114616452149704712, guid: 8f6103cceb54f204bb9b9e80b393eab9,
-        type: 3}
-      propertyPath: CooldownTime
-      value: 30
-      objectReference: {fileID: 0}
     - target: {fileID: 2114616452326917868, guid: 8f6103cceb54f204bb9b9e80b393eab9,
         type: 3}
       propertyPath: mercControls

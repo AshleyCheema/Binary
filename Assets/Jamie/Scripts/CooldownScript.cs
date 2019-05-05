@@ -13,6 +13,11 @@ public class CooldownScript : MonoBehaviour
     public SpyController spyController;
     public MercControls mercControls;
     public TrackerAbility trackerAbility;
+    //public Sprite trackerActiveSprite;
+    //public Sprite burstActiveSprite;
+    private Image sprite;
+    private Color activeColor = new Color(127, 194, 233, 255);
+    //private Sprite notActiveSprite;
 
     private bool isSpy;
     private bool isMerc;
@@ -33,7 +38,10 @@ public class CooldownScript : MonoBehaviour
     private void Start()
     {
 
-        if(mercControls != null)
+        sprite = GetComponent<Image>();
+        //notActiveSprite = sprite;
+
+        if (mercControls != null)
         {
             isMerc = true;
         }
@@ -90,10 +98,29 @@ public class CooldownScript : MonoBehaviour
                 Action.interactable = false;
                 currentCooldown = 0;
             }
+
+            if (mercControls.buttonPressed && mercControls.canSprint && abilityType == AbilityType.BURST)
+            {
+                sprite.color = activeColor;
+            }
+            else
+            {
+                //sprite.color = Color.white;
+            }
+
             if (trackerAbility.trackerDown && Action.interactable && abilityType == AbilityType.TRACKER)
             {
                 Action.interactable = false;
                 currentCooldown = 0;
+            }
+
+            if (trackerAbility.trackerActive && !trackerAbility.trackerDown && abilityType == AbilityType.TRACKER)
+            {
+                sprite.color = Color.blue;
+            }
+            else
+            {
+
             }
         }
     }
@@ -102,5 +129,4 @@ public class CooldownScript : MonoBehaviour
     {
         CooldownImage.color = new Color32(255, 255, 255, 255);
     }
-
 }
