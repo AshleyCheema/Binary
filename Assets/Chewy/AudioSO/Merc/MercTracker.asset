@@ -18,6 +18,6 @@ MonoBehaviour:
   pitch: 1
   loop: 0
   spatialBlend: 1
-  rolloffMode: 0
-  audioMinDistance: 1
-  audioMaxDistance: 10
+  rolloffMode: 2
+  audioMinDistance: 3
+  audioMaxDistance: 6

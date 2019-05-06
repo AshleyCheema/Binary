@@ -19,7 +19,7 @@ public class MercControls : PlayerController
     public Image flashPanel;
     private Color panelColor = new Color(255, 255, 255);
     public bool canSprint;
-    private bool buttonPressed;
+    public bool buttonPressed;
     private TrackerAbility trackerAbility;
     public bool noShoot;
     private float shotCooldown = 1.5f;
