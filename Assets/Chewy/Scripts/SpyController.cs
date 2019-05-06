@@ -83,7 +83,7 @@ public class SpyController : PlayerController
 
     private void Step()
     {
-        if (!audioSource.isPlaying)
+        if (audioSource != null && !audioSource.isPlaying)
         {
             walking.SetSourceProperties(audioSource);
             audioSource.Play();
@@ -92,7 +92,7 @@ public class SpyController : PlayerController
     
     private void Run()
     {
-        if (!audioSource.isPlaying)
+        if (audioSource != null && !audioSource.isPlaying)
         {
             run.SetSourceProperties(audioSource);
             audioSource.Play();

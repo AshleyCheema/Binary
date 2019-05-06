@@ -7,4 +7,5 @@ public class Msg_ClientAnimChange : MessageBase
 {
     public byte connectId;
     public int hash;
+    public byte direction;
 }

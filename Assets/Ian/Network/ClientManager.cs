@@ -534,8 +534,14 @@ public class ClientManager : NetworkManager
         LocalPlayer.gameAvatar?.transform.GetChild(0).gameObject.GetComponent<TrackerAbility>().SetFeedback(cmf.Location);
     }
 
+    int animationRevice = 0;
     public void OnReceiveClientAnim(NetworkMessage aMsg)
     {
+        if(animationRevice == 1)
+        {
+            animationRevice = 0;
+            return;
+        }
         aMsg.reader.SeekZero();
         Msg_ClientAnimChange cac = aMsg.ReadMessage<Msg_ClientAnimChange>();
         
@@ -546,7 +552,11 @@ public class ClientManager : NetworkManager
                 Players[cac.connectId].gameAvatar.transform.GetChild(0).gameObject.GetComponent<Animator>().runtimeAnimatorController = shellAnim;
             }
             Players[cac.connectId].gameAvatar.transform.GetChild(0).gameObject.GetComponent<Animator>().Play(cac.hash);
+            Players[cac.connectId].gameAvatar.transform.GetChild(0).gameObject.GetComponent<Animator>().SetInteger("Direction", cac.direction);
+            Debug.Log(cac.direction);
         }
+
+        animationRevice++;
     }
 
     public void OnPingPong(NetworkMessage aMsg)

@@ -11,7 +11,7 @@ public class AnimationCallBack : StateMachineBehaviour
         Msg_ClientAnimChange cac = new Msg_ClientAnimChange();
         cac.hash = stateInfo.fullPathHash;
         cac.connectId = (byte)ClientManager.Instance?.LocalPlayer.connectionId;
-
+        cac.direction = (byte)(animator.GetFloat("InputX+") + 2);
         ClientManager.Instance?.client.Send(MSGTYPE.CLIENT_ANIM_CHANGE, cac);
     }
 
