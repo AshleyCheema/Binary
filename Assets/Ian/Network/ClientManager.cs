@@ -171,6 +171,11 @@ public class ClientManager : NetworkManager
 
     public void SetClientReady()
     {
+        if(mLocalPlayer.playerName == "" || mLocalPlayer.playerName == null)
+        {
+            return;
+        }
+
         //ClientScene.Ready(mLocalPlayer.conn);
         mLocalPlayer.isReady = true;
 
