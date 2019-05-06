@@ -11,9 +11,7 @@ public enum SpyState
 
 public class SpyController : PlayerController
 {
-    [SerializeField]
-    private GameObject bullet;
-    [SerializeField]
+    public bool isHacking;
     public GameObject stun;
     private Trigger bulletTrigger;
     private SpyState currentState;
@@ -26,13 +24,12 @@ public class SpyController : PlayerController
     private AudioSource audioSource;
     public AudioSO walking;
     public AudioSO run;
+    public AudioSO hacking;
 
     // Start is called before the first frame update
     public override void Start()
     {
         audioSource = gameObject.GetComponent<AudioSource>();
-        //bullet = GameObject.Find("Bullet");
-        //bulletTrigger = bullet.GetComponent<Trigger>();
         if (stun == null)
         {
             stun = GameObject.Find("StunG");
@@ -46,12 +43,21 @@ public class SpyController : PlayerController
         base.Update();
         animator.SetInteger("currentState", (int)currentState);
 
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Q) && !isHacking)
         {
             if (stun.GetComponent<StunAbility>().IsActive == false)
             {
                 stun.GetComponent<StunAbility>().IsActive = true;
                 stunDrop = true;
+            }
+        }
+
+        if(isHacking == true)
+        {
+            if (!audioSource.isPlaying)
+            {
+                hacking.SetSourceProperties(audioSource);
+                audioSource.Play();
             }
         }
         

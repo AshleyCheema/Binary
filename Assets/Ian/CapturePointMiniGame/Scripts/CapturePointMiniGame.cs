@@ -54,6 +54,12 @@ public class CapturePointMiniGame : MonoBehaviour
     //Keep track if we are in a coroutine
     private bool inCoroutine = false;
 
+    private SpyController spyController;
+
+    public AudioSO hackingSound;
+    public AudioSO completeSound;
+    private AudioSource audioSource;
+
     /// <summary>
     /// Show this mini game
     /// </summary>
@@ -83,6 +89,8 @@ public class CapturePointMiniGame : MonoBehaviour
     private void Start()
     {
         SetInputs();
+        spyController = GameObject.FindGameObjectWithTag("Spy").GetComponentInChildren<SpyController>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     /// <summary>
@@ -96,10 +104,17 @@ public class CapturePointMiniGame : MonoBehaviour
             if (!isCompleted && Input.GetKeyDown(inputsNeeded[inputsIndex]))
             {
                 if(ClientManager.Instance != null && ClientManager.Instance.LocalPlayer.gameAvatar.tag == "Spy")
-                {
-                    ClientManager.Instance.LocalPlayer.gameAvatar.GetComponentInChildren<Animator>().SetBool("isHacking", true);
+                {                 
+                    spyController.animator.SetBool("isHacking", true);
+                    spyController.isHacking = parentCapturePoint.IsBeingCaptured;
                 }
-                GameObject.FindGameObjectWithTag("Spy").GetComponentInChildren<Animator>().SetBool("isHacking", true);
+                //Need to test if the if statement is needed and then increment min + max distacne and volume
+                if (!audioSource.isPlaying)
+                {
+                    hackingSound.SetSourceProperties(audioSource);
+                    audioSource.Play();
+                }
+                //GameObject.FindGameObjectWithTag("Spy").GetComponentInChildren<Animator>().SetBool("isHacking", true);
                 inCoroutine = true;
                 //start coroutine to change colour
                 StartCoroutine(Feedback(true));
@@ -118,7 +133,11 @@ public class CapturePointMiniGame : MonoBehaviour
 
                 ClientManager.Instance?.client.Send(MSGTYPE.CLIENT_FEEDBACK, cmf);
             }
-
+            if(isCompleted)
+            {
+                completeSound.SetSourceProperties(audioSource);
+                audioSource.Play();
+            }
             foreach (KeyCode item in Enum.GetValues(typeof(KeyCode)))
             {
                 if (Input.GetKeyDown(item))
