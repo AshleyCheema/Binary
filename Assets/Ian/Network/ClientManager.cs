@@ -41,7 +41,10 @@ public class ClientManager : NetworkManager
 
     private string leveToLoad = "NewLevel";
 
-    public RuntimeAnimatorController shellAnim;
+    [SerializeField]
+    private RuntimeAnimatorController spyShellAnim;
+    [SerializeField]
+    private RuntimeAnimatorController mercShellAnim;
 
     [SerializeField]
     private float movementSmooth = 1.5f;
@@ -534,29 +537,27 @@ public class ClientManager : NetworkManager
         LocalPlayer.gameAvatar?.transform.GetChild(0).gameObject.GetComponent<TrackerAbility>().SetFeedback(cmf.Location);
     }
 
-    int animationRevice = 0;
     public void OnReceiveClientAnim(NetworkMessage aMsg)
     {
-        if(animationRevice == 1)
-        {
-            animationRevice = 0;
-            return;
-        }
         aMsg.reader.SeekZero();
         Msg_ClientAnimChange cac = aMsg.ReadMessage<Msg_ClientAnimChange>();
         
         if (Players[cac.connectId].gameAvatar != null)
         {
-            if (Players[cac.connectId].gameAvatar.transform.GetChild(0).gameObject.GetComponent<Animator>().runtimeAnimatorController != shellAnim)
+            if (Players[cac.connectId].gameAvatar.transform.GetChild(0).gameObject.GetComponent<Animator>().runtimeAnimatorController != spyShellAnim ||
+                Players[cac.connectId].gameAvatar.transform.GetChild(0).gameObject.GetComponent<Animator>().runtimeAnimatorController != mercShellAnim)
             {
-                Players[cac.connectId].gameAvatar.transform.GetChild(0).gameObject.GetComponent<Animator>().runtimeAnimatorController = shellAnim;
+                if (Players[cac.connectId].playerTeam == LLAPI.Team.Merc)
+                {
+                    Players[cac.connectId].gameAvatar.transform.GetChild(0).gameObject.GetComponent<Animator>().runtimeAnimatorController = mercShellAnim;
+                }
+                else
+                {
+                    Players[cac.connectId].gameAvatar.transform.GetChild(0).gameObject.GetComponent<Animator>().runtimeAnimatorController = spyShellAnim;
+                }
             }
             Players[cac.connectId].gameAvatar.transform.GetChild(0).gameObject.GetComponent<Animator>().Play(cac.hash);
-            Players[cac.connectId].gameAvatar.transform.GetChild(0).gameObject.GetComponent<Animator>().SetInteger("Direction", cac.direction);
-            Debug.Log(cac.direction);
         }
-
-        animationRevice++;
     }
 
     public void OnPingPong(NetworkMessage aMsg)

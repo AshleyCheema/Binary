@@ -11,7 +11,7 @@ public class ShellAnimationController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        animatorController = GetComponent<Animator>();
+        animatorController = transform.GetChild(0).gameObject.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -19,11 +19,25 @@ public class ShellAnimationController : MonoBehaviour
     {
         //if the current poisiton in not equal to lastPosition
         //then the position has changed
-        //if(transform.position != lastPosition)
-        //{
-        //    Vector3 dir = 
-        //}
-        //float direction
-        Debug.Log(GetComponent<Rigidbody>().velocity);
+        if (transform.position != lastPosition)
+        {
+            Vector3 dir = lastPosition - transform.position;
+            dir.Normalize();
+            lastPosition = transform.position;
+            Debug.Log(dir);
+
+            if (Mathf.Sign(dir.z) == -1)
+            {
+                animatorController.SetFloat("Direction", 1.0f);
+            }
+            else if (Mathf.Sign(dir.z) == 1)
+            {
+                animatorController.SetFloat("Direction", -1.0f);
+            }
+        }
+        else
+        {
+            animatorController.SetFloat("Direction", 0.0f);
+        }
     }
 }

@@ -209,7 +209,7 @@ public class MercControls : PlayerController
 
     private void Step()
     {
-        if (!audioSource.isPlaying)
+        if (audioSource != null && !audioSource.isPlaying)
         {
             walkingSound.SetSourceProperties(audioSource);
             audioSource.Play();
@@ -218,7 +218,7 @@ public class MercControls : PlayerController
 
     private void Run()
     {
-        if (!audioSource.isPlaying)
+        if (audioSource != null && !audioSource.isPlaying)
         {
             burstRunSound.SetSourceProperties(audioSource);
             audioSource.Play();
