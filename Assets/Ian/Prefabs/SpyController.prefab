@@ -96,20 +96,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!136 &4281852007482752915
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 614528025514262763}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.4
-  m_Height: 1.65
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.8, z: 0}
 --- !u!114 &3999682921971188250
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,6 +122,14 @@ MonoBehaviour:
   stunDrop: 0
   walking: {fileID: 11400000, guid: 256c532da8d680f4eacf1d823dbced93, type: 2}
   run: {fileID: 11400000, guid: 2fd8bddd7cd567d439dfad460962b30e, type: 2}
+--- !u!81 &6827687171942422739
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 614528025514262763}
+  m_Enabled: 1
 --- !u!1 &747239420701823996
 GameObject:
   m_ObjectHideFlags: 0
@@ -204,9 +198,10 @@ GameObject:
   m_Component:
   - component: {fileID: 3011942314590609167}
   - component: {fileID: 3011942314590609163}
+  - component: {fileID: 2019301434843762433}
   m_Layer: 0
   m_Name: SpyController
-  m_TagString: Untagged
+  m_TagString: Spy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -245,6 +240,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 0
+--- !u!136 &2019301434843762433
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3011942314590609162}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.4
+  m_Height: 1.65
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.8, z: 0}
 --- !u!1 &7269465081944859801
 GameObject:
   m_ObjectHideFlags: 0
