@@ -15,6 +15,7 @@ TagManager:
   - Ladder
   - Enemy
   - HealthPack
+  - RoomColliders
   layers:
   - Default
   - TransparentFX

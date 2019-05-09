@@ -90,7 +90,7 @@ public class CapturePointMiniGame : MonoBehaviour
     {
         SetInputs();
         spyController = GameObject.FindGameObjectWithTag("Spy").GetComponentInChildren<SpyController>();
-        audioSource = GetComponent<AudioSource>();
+        audioSource = gameObject.GetComponent<AudioSource>();
     }
 
     /// <summary>
@@ -101,7 +101,7 @@ public class CapturePointMiniGame : MonoBehaviour
         if (!inCoroutine)
         {
             bool doneInput = false;
-            if (!isCompleted && Input.GetKeyDown(inputsNeeded[inputsIndex]))
+            if (!isCompleted) //&& //Input.GetKeyDown(inputsNeeded[inputsIndex]))
             {
                 if(ClientManager.Instance != null && ClientManager.Instance.LocalPlayer.gameAvatar.tag == "Spy")
                 {                 
@@ -113,6 +113,10 @@ public class CapturePointMiniGame : MonoBehaviour
                 {
                     hackingSound.SetSourceProperties(audioSource);
                     audioSource.Play();
+                }
+                if (25 % parentCapturePoint.capturePercentage == 0)
+                {
+                    hackingSound.audioMaxDistance += 5;
                 }
                 //GameObject.FindGameObjectWithTag("Spy").GetComponentInChildren<Animator>().SetBool("isHacking", true);
                 inCoroutine = true;
@@ -133,6 +137,7 @@ public class CapturePointMiniGame : MonoBehaviour
 
                 ClientManager.Instance?.client.Send(MSGTYPE.CLIENT_FEEDBACK, cmf);
             }
+            //This will probably make it go off more then once. NEED TO TEST
             if(isCompleted)
             {
                 completeSound.SetSourceProperties(audioSource);

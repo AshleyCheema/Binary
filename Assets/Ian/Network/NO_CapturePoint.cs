@@ -14,7 +14,7 @@ public class NO_CapturePoint : MonoBehaviour
     [SerializeField]
     private float captureAmount = 0.5f;
     [SerializeField]
-    private float capturePercentage = 0.0f;
+    public float capturePercentage = 0.0f;
     [SerializeField]
     private TextMeshPro tm;
 

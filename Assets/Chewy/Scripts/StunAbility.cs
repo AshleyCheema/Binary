@@ -104,7 +104,7 @@ public class StunAbility : Cooldown
             spyController = GameObject.FindGameObjectWithTag("Spy");
             if (spyController)
             {
-                spyControllerSc = spyController.GetComponent<SpyController>();
+                spyControllerSc = spyController.GetComponentInChildren<SpyController>();
                 if (stunG != null)
                 {
                     spyControllerSc.stun = stunG;

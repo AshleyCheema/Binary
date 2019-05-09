@@ -20,6 +20,7 @@ public class Trigger : MonoBehaviour
     private StunAbility stunAbility;
     private MercControls mercControls;
     public bool IsSpawned = false;
+    private BoxCollider roomCollider;
 
     private void Start()
     {
@@ -31,6 +32,11 @@ public class Trigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if(other.gameObject.tag == "RoomColliders")
+        {
+            roomCollider = other.gameObject.GetComponent<BoxCollider>();
+        }
+
         if (!IsSpawned)
         {
             if (other.gameObject.tag == "Spy")
