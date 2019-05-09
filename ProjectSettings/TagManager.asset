@@ -16,6 +16,7 @@ TagManager:
   - Enemy
   - HealthPack
   - RoomColliders
+  - Tracker
   layers:
   - Default
   - TransparentFX

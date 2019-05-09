@@ -20,7 +20,7 @@ public class Trigger : MonoBehaviour
     private StunAbility stunAbility;
     private MercControls mercControls;
     public bool IsSpawned = false;
-    private BoxCollider roomCollider;
+    public GameObject tracker;
 
     private void Start()
     {
@@ -32,16 +32,16 @@ public class Trigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "RoomColliders")
+        if(other.gameObject.tag == "Tracker")
         {
-            roomCollider = other.gameObject.GetComponent<BoxCollider>();
+            tracker = other.gameObject;
         }
 
         if (!IsSpawned)
         {
             if (other.gameObject.tag == "Spy")
             {
-                if (triggerType == TriggerType.Tracker)
+                if (triggerType == TriggerType.Tracker && tracker != null)
                 {
                     isDetected = true;
                     Debug.Log("Spy detected: " + gameObject.transform.position);
@@ -88,6 +88,11 @@ public class Trigger : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
+        if(!tracker.activeInHierarchy)
+        {
+            tracker = null;
+        }
+
         if(other.gameObject.tag == "Merc")
         {
             if (triggerType == TriggerType.Stun)

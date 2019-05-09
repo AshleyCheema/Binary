@@ -13,8 +13,7 @@ GameObject:
   - component: {fileID: 692459277777247414}
   - component: {fileID: 692459277777247401}
   - component: {fileID: 692459277777247412}
-  - component: {fileID: 2748810831626748681}
-  - component: {fileID: 674382510693796306}
+  - component: {fileID: 66810680524293808}
   m_Layer: 0
   m_Name: Tracker
   m_TagString: Untagged
@@ -31,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 692459277777247403}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 4.75, y: 1, z: -19.86}
-  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_LocalScale: {x: 4, y: 4, z: 4}
   m_Children:
   - {fileID: 7361570281094626993}
   m_Father: {fileID: 0}
@@ -102,7 +101,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 692459277777247403}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 603291d495b0ac24ea7a3c4a58cb01e3, type: 3}
   m_Name: 
@@ -112,20 +111,8 @@ MonoBehaviour:
   isDetected: 0
   isStunned: 0
   IsSpawned: 0
---- !u!135 &2748810831626748681
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 692459277777247403}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.1
-  m_Center: {x: 0.0039668027, y: -0.0062708627, z: 0.089640945}
---- !u!54 &674382510693796306
+  tracker: {fileID: 0}
+--- !u!54 &66810680524293808
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -136,7 +123,7 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 126
@@ -207,6 +194,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4653638179971057122, guid: f1aaeb66540be904a834cae9063818b4,
+        type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f1aaeb66540be904a834cae9063818b4, type: 3}
