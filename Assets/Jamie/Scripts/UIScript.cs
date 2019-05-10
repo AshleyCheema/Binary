@@ -16,18 +16,20 @@ public class UIScript : MonoBehaviour
     public GameObject Borders;
     public GameObject MercAbil;
     public GameObject SpyAbil;
+    public GameObject MercName;
+    public GameObject SpyName;
 
     // Start is called before the first frame update
     private void Start()
     {
         if (!isSpy)
         {
-            PlayerText.text = "Merc01 - " + PlayerName;
+            PlayerText.text = "Merc 01 - " + PlayerName;
             MercAbil.SetActive(true);
         }
         else
         {
-            PlayerText.text = "Spy01 - " + PlayerName;
+            PlayerText.text = "Spy 01 - " + PlayerName;
             SpyAbil.SetActive(true);
         }
     }
