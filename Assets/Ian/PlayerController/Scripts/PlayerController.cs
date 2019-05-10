@@ -75,6 +75,8 @@ public class PlayerController : MonoBehaviour
         //Maybe add a client check if need
         if (player == Player.PlayerTwo)
         {
+            animator.SetBool("isRunning", isRunning);
+
             if (Input.GetButton("Crouching"))
             {
                 currentSpeed = crouchingSpeed;
@@ -91,7 +93,6 @@ public class PlayerController : MonoBehaviour
                 currentSpeed = normalSpeed;
             }
         }
-        animator.SetBool("isRunning", isRunning);
         velocity = InputManager.MovementRelativeToCamera(InputManager.Joystick(player, animator));
         Quaternion oldRot = transform.rotation;
 

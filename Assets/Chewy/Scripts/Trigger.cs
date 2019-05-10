@@ -88,7 +88,7 @@ public class Trigger : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if(!tracker.activeInHierarchy)
+        if(tracker != null && !tracker.activeInHierarchy)
         {
             tracker = null;
         }

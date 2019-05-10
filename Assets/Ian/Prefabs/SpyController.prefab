@@ -1,5 +1,21 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &3487630653299269552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 614528025514262709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 2
+  eraseRenderer: 0
+  originalLayer: 0
+  originalMaterials: []
 --- !u!82 &1374595477340531314
 AudioSource:
   m_ObjectHideFlags: 0
@@ -575,6 +591,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3011942314590609167}
     m_Modifications:
+    - target: {fileID: 100072, guid: c30af275bacc8e04b9068e0eba2d8e3c, type: 3}
+      propertyPath: m_Name
+      value: SpyModel
+      objectReference: {fileID: 0}
+    - target: {fileID: 100072, guid: c30af275bacc8e04b9068e0eba2d8e3c, type: 3}
+      propertyPath: m_TagString
+      value: Spy
+      objectReference: {fileID: 0}
     - target: {fileID: 400072, guid: c30af275bacc8e04b9068e0eba2d8e3c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -619,14 +643,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 100072, guid: c30af275bacc8e04b9068e0eba2d8e3c, type: 3}
-      propertyPath: m_Name
-      value: SpyModel
-      objectReference: {fileID: 0}
-    - target: {fileID: 100072, guid: c30af275bacc8e04b9068e0eba2d8e3c, type: 3}
-      propertyPath: m_TagString
-      value: Spy
-      objectReference: {fileID: 0}
     - target: {fileID: 9500000, guid: c30af275bacc8e04b9068e0eba2d8e3c, type: 3}
       propertyPath: m_Controller
       value: 
@@ -652,6 +668,12 @@ Transform:
 --- !u!95 &614528025523762019 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 9500000, guid: c30af275bacc8e04b9068e0eba2d8e3c,
+    type: 3}
+  m_PrefabInstance: {fileID: 614528025514296835}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &614528025514262709 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100022, guid: c30af275bacc8e04b9068e0eba2d8e3c,
     type: 3}
   m_PrefabInstance: {fileID: 614528025514296835}
   m_PrefabAsset: {fileID: 0}
