@@ -324,7 +324,7 @@ namespace LLAPI
                             localPlayer.avater.tag = (localPlayer.team == Team.Merc) ? "Merc" : "Spy";
                             localPlayer.avaterObjects = new List<GameObject>();
 
-                            Camera.main.GetComponent<CameraScript>().SetTarget(localPlayer.avater.transform);
+                            //Camera.main.GetComponent<CameraScript>().SetTarget(localPlayer.avater.transform.GetChild(0).transform);
                             //Camera.main.transform.position = localPlayer.avater.transform.position; //+ new Vector3(-15, 33, -15);
                             //Camera.main.transform.rotation = Quaternion.Euler(56, 45, 0);
                         }

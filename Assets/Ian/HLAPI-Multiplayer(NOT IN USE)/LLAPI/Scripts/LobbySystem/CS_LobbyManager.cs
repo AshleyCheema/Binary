@@ -103,6 +103,8 @@ public class CS_LobbyManager : MonoBehaviour
 
     private void OnNameChange(TMP_InputField a_i, LocalPlayer aPlayer)
     {
+        PlayerPrefs.SetString("PlayerName", a_i.text);
+
         Msg_ClientNameChange nc = new Msg_ClientNameChange();
         nc.connectionID = aPlayer.connectionId;
         nc.name = a_i.text;

@@ -25,11 +25,11 @@ public class FOWAdaptiveRender : MonoBehaviour
                 {
                     if (angle <= 120)
                     {
-                        other.transform.GetChild(5).gameObject.GetComponent<SkinnedMeshRenderer>().enabled = true;
+                        other.transform.GetChild(0).transform.GetChild(5).gameObject.GetComponent<SkinnedMeshRenderer>().enabled = true;
                     }
                     else if (hit.distance <= 2.5f)
                     {
-                        other.transform.GetChild(5).gameObject.GetComponent<SkinnedMeshRenderer>().enabled = true;
+                        other.transform.GetChild(0).transform.GetChild(5).gameObject.GetComponent<SkinnedMeshRenderer>().enabled = true;
                     }
                 }
                 CheckForGameObject(other.transform.GetChild(5).gameObject);
@@ -44,8 +44,8 @@ public class FOWAdaptiveRender : MonoBehaviour
             }
             if (other.tag == "Spy")
             {
-                other.transform.GetChild(5).gameObject.GetComponent<SkinnedMeshRenderer>().enabled = true;
-                CheckForGameObject(other.transform.GetChild(5).gameObject);
+                other.transform.GetChild(0).transform.GetChild(5).gameObject.GetComponent<SkinnedMeshRenderer>().enabled = true;
+                CheckForGameObject(other.transform.GetChild(0).transform.GetChild(5).gameObject);
             }
         }
     }
@@ -59,8 +59,8 @@ public class FOWAdaptiveRender : MonoBehaviour
                 //other.transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().enabled = false;
                 CoutDownMeshObj c = new CoutDownMeshObj
                 {
-                    GameObject = other.transform.GetChild(5).gameObject,
-                    Coroutine = StartCoroutine(CountdownMesh(other.transform.GetChild(5).gameObject))
+                    GameObject = other.transform.GetChild(0).transform.GetChild(5).gameObject,
+                    Coroutine = StartCoroutine(CountdownMesh(other.transform.GetChild(0).transform.GetChild(5).gameObject))
                 };
                 activeMeshes.Add(c);
             }
@@ -82,8 +82,8 @@ public class FOWAdaptiveRender : MonoBehaviour
                 //other.transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().enabled = false;
                 CoutDownMeshObj c = new CoutDownMeshObj
                 {
-                    GameObject = other.transform.GetChild(5).gameObject,
-                    Coroutine = StartCoroutine(CountdownMesh(other.transform.GetChild(5).gameObject))
+                    GameObject = other.transform.GetChild(0).transform.GetChild(5).gameObject,
+                    Coroutine = StartCoroutine(CountdownMesh(other.transform.GetChild(0).transform.GetChild(5).gameObject))
                 };
                 activeMeshes.Add(c);
             }

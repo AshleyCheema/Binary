@@ -48,6 +48,10 @@ public class Trigger : MonoBehaviour
 
                     //tell merc that the tracker has been set off
                     //spy tracked
+                    if(ClientManager.Instance?.LocalPlayer.playerTeam == Team.Merc)
+                    {
+                        ClientManager.Instance?.LocalPlayer.gameAvatar.transform.GetChild(0).gameObject.GetComponent<TrackerAbility>().SetFeedback(tracker.transform.position);
+                    }
                 }
                 else if (triggerType == TriggerType.Bullet)
                 {

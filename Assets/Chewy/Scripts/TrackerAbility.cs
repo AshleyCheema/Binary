@@ -32,7 +32,7 @@ public class TrackerAbility : Cooldown
         //arrowRect = arrowPointer.GetComponent<RectTransform>();
         trackerActive = false;
         trackingDevice = GameObject.Find("Tracker");
-        trackerTrigger = trackingDevice.GetComponent<Trigger>();
+        //trackerTrigger = trackingDevice.GetComponent<Trigger>();
         trackingDevice.SetActive(false);
         deviceCollider = trackingDevice.GetComponent<Collider>();
         deviceCollider.enabled = false;
@@ -47,7 +47,7 @@ public class TrackerAbility : Cooldown
         {
             if (!isCooldown && !trackerActive) //&& cooldown == tracker.abilityDuration)
             {
-                trackerTrigger.isDetected = false;
+                //trackerTrigger.isDetected = false;
                 trackingDevice.SetActive(true);
                 trackerActive = true;
                 //isCooldown = true;
@@ -66,7 +66,7 @@ public class TrackerAbility : Cooldown
 
             if(cooldown <= 0)
             {
-                trackerTrigger.isDetected = false;
+                //trackerTrigger.isDetected = false;
                 trackerDown = false;
                 trackingDevice.SetActive(false);
                 cooldown = tracker.abilityDuration;

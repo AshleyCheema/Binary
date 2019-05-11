@@ -126,7 +126,8 @@ public class ClientManager : NetworkManager
             gameOverUI.SetActive(false);
             //Spawn local avatar        
             mLocalPlayer.gameAvatar = SpawnPlayerObject(mLocalPlayer);
-            Camera.main.GetComponent<CameraScript>().SetTarget(mLocalPlayer.gameAvatar.transform);
+            Camera.main.GetComponent<CameraScript>().SetTarget(mLocalPlayer.gameAvatar.transform.GetChild(0), 
+                                                               mLocalPlayer.gameAvatar.transform);
 
             NO_CapturePoint[] capturePoints = GameObject.FindObjectsOfType<NO_CapturePoint>();
 
@@ -357,6 +358,7 @@ public class ClientManager : NetworkManager
 
     public void OnReceivePlayerABFire(NetworkMessage aMsg)
     {
+        return;
         aMsg.reader.SeekZero();
         Msg_AB_ClientFire cf = aMsg.ReadMessage<Msg_AB_ClientFire>();
 
@@ -411,8 +413,8 @@ public class ClientManager : NetworkManager
 
         if (stun == null)
         {
-            GameObject go = Instantiate(MiniModule_SpawableObjects.Instance.SpawnableObjects.ObjectsToSpawn[cs.StunObjectIndex],
-                Players[cs.ConnectionID].gameAvatar.transform.position, Quaternion.identity);
+            GameObject go = Instantiate(MiniModule_SpawableObjects.Instance.SpawnableObjects.ObjectsToSpawn[cs.StunObjectIndex]);
+            go.transform.position = Players[cs.ConnectionID].gameAvatar.transform.position;
             go.GetComponent<StunAbility>().isSpawned = true;
             go.GetComponent<StunAbility>().stunDropped = true;
             go.GetComponent<StunAbility>().SetShell();
@@ -453,9 +455,8 @@ public class ClientManager : NetworkManager
 
         if (tracker == null)
         {
-            tracker = Instantiate(MiniModule_SpawableObjects.Instance.SpawnableObjects.ObjectsToSpawn[ct.TrackerObjectIndex],
-                ct.TrackerPosition, Quaternion.identity);
-
+            tracker = Instantiate(MiniModule_SpawableObjects.Instance.SpawnableObjects.ObjectsToSpawn[ct.TrackerObjectIndex]);
+            tracker.transform.position = ct.TrackerPosition;
             tracker.GetComponent<Trigger>().IsSpawned = true;
             tracker.GetComponent<Trigger>().enabled = false;
             tracker.name = "Merc_Tracker";

@@ -11,15 +11,15 @@ public class Usernames : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!isSpy)
-        {
-            username = gameObject.GetComponentInChildren<TMP_InputField>().text;
-            PlayerPrefs.SetString("MercName", username);
-        }
-        else
-        {
-            username = gameObject.GetComponentInChildren<TMP_InputField>().text;
-            PlayerPrefs.SetString("SpyName", username);
-        }
+        //if(!isSpy)
+        //{
+        //    username = gameObject.GetComponentInChildren<TMP_InputField>().text;
+        //    PlayerPrefs.SetString("MercName", username);
+        //}
+        //else
+        //{
+        //    username = gameObject.GetComponentInChildren<TMP_InputField>().text;
+        //    PlayerPrefs.SetString("SpyName", username);
+        //}
     }
 }
