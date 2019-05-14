@@ -94,6 +94,7 @@ public class SpyController : PlayerController
         {
             walking.SetSourceProperties(audioSource);
             audioSource.Play();
+            PlayerStats.Instance.Steps += 1;
         }
     }
     
@@ -103,6 +104,7 @@ public class SpyController : PlayerController
         {
             run.SetSourceProperties(audioSource);
             audioSource.Play();
+            PlayerStats.Instance.Steps += 1;
         }
     }
 }

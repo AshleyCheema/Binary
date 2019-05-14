@@ -122,6 +122,8 @@ public class TrackerAbility : Cooldown
                         StopCoroutine(trackerFeedbackCoro);
                     }
 
+                    PlayerStats.Instance.AbililitesUsed++;
+
                     #region NetMsg_Tracker
                     Msg_Client_AB_Tracker ab_Tracker = new Msg_Client_AB_Tracker();
                     if (ClientManager.Instance != null)

@@ -137,6 +137,7 @@ public class StunAbility : Cooldown
 
             if (abilityDuration <= 0)
             {
+                PlayerStats.Instance.AbililitesUsed += 1;
                 //flash.Play();
                 stunActive = true;
                 audioSource.Play();

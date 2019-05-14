@@ -56,6 +56,8 @@ public class CS_Lobby : Singleton<CS_Lobby>
 
         ClientManager.Instance?.client.Send(MSGTYPE.LOBBY_TEAM_CHANGE, ctc);
 
+        PlayerStats.Instance.PlayerTeam = aPlayer.playerTeam;
+
         //NetMsg_TeamChangeLB lb = new NetMsg_TeamChangeLB();
         //lb.ConnectionID = a_p.connectionId;
         //lb.Team = a_p.team;

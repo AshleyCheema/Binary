@@ -38,6 +38,7 @@ public class MiniModule_GameOver : Singleton<MiniModule_GameOver>
             //Send mesage tell all clients to fade in game over screen
             //send all imformation if need be
             Msg_ClientGameOver cgo = new Msg_ClientGameOver();
+            cgo.spiesWon = false;
             HostManager.Instance?.SendAll(MSGTYPE.CLIENT_GAME_OVER, cgo);
 
             HostManager.Instance?.OnGameLoadLobby();
@@ -56,6 +57,7 @@ public class MiniModule_GameOver : Singleton<MiniModule_GameOver>
         {
             Debug.Log("Spyies have left the level");
             Msg_ClientGameOver cgo = new Msg_ClientGameOver();
+            cgo.spiesWon = true;
             HostManager.Instance?.SendAll(MSGTYPE.CLIENT_GAME_OVER, cgo);
 
             HostManager.Instance?.OnGameLoadLobby();

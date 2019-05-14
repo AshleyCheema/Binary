@@ -122,7 +122,8 @@ public class CS_LobbyManager : MonoBehaviour
 
     public void SetName(TMP_InputField a_i, LocalPlayer aPlayer)
     {
-        aPlayer.playerName = a_i.name;
+        aPlayer.playerName = a_i.text;
+        PlayerStats.Instance.PlayerName = aPlayer.playerName;
     }
 
     public void SetPlayerName(LocalPlayer aPlayer)

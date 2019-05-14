@@ -55,7 +55,7 @@ public class NO_Exit : MonoBehaviour
         {
             if (exitOpen)
             {
-                if (other.transform.parent.gameObject == ClientManager.Instance?.LocalPlayer.gameAvatar &&
+                if (other.gameObject == ClientManager.Instance?.LocalPlayer.gameAvatar &&
                     other.tag == "Spy")
                 {
                     //leave level completed
@@ -68,7 +68,7 @@ public class NO_Exit : MonoBehaviour
                 }
             }
 
-            if (other.transform.parent.gameObject == ClientManager.Instance?.LocalPlayer.gameAvatar &&
+            if (other.gameObject == ClientManager.Instance?.LocalPlayer.gameAvatar &&
                 other.tag == "Spy")
             {
                 if (ClientManager.Instance != null)
@@ -83,7 +83,7 @@ public class NO_Exit : MonoBehaviour
     {
         if (isOpen)
         {
-            if (other.transform.parent.gameObject == ClientManager.Instance?.LocalPlayer.gameAvatar &&
+            if (other.gameObject == ClientManager.Instance?.LocalPlayer.gameAvatar &&
                 other.tag == "Spy")
             {
                 if (ClientManager.Instance != null)

@@ -6,4 +6,5 @@ using UnityEngine.Networking;
 public class Msg_ClientGameOver : MessageBase
 {
     //all stats needed to be sent
+    public bool spiesWon;
 }

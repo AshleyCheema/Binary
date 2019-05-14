@@ -518,6 +518,23 @@ public class ClientManager : NetworkManager
         aMsg.reader.SeekZero();
         Msg_ClientGameOver cgo = aMsg.ReadMessage<Msg_ClientGameOver>();
 
+        if (mLocalPlayer.playerTeam == LLAPI.Team.Merc)
+        {
+            PlayerStats.Instance.HasWon = !cgo.spiesWon;
+        }
+        else
+        {
+            PlayerStats.Instance.HasWon = cgo.spiesWon;
+        }
+
+        Debug.Log("Player Name: " + PlayerStats.Instance.PlayerName);
+        Debug.Log("Player Team: " + PlayerStats.Instance.PlayerTeam);
+        Debug.Log("Has Won: " + PlayerStats.Instance.HasWon);
+        Debug.Log("Steps: " + PlayerStats.Instance.Steps);
+        Debug.Log("Shots: " + PlayerStats.Instance.ShotsFired);
+        Debug.Log("Has Abililites: " + PlayerStats.Instance.AbililitesUsed);
+        Debug.Log("Capture Amount: " + PlayerStats.Instance.CaptureedAmount);
+
         //enable the UI fade and show the game over screen 
         //ths is where all the state can be shown in need.
         if (gameOverUI)

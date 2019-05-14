@@ -47,6 +47,11 @@ public class NO_CapturePoint : MonoBehaviour
         {
             capturePercentage += captureAmount * Time.deltaTime;
 
+            if (capturePercentage < 100.0f)
+            {
+                PlayerStats.Instance.CaptureedAmount += captureAmount * Time.deltaTime;
+            }
+
             if (capturePercentage > 100.0f)
             {
                 capturePercentage = 100.0f;

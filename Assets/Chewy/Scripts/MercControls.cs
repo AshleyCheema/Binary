@@ -131,6 +131,9 @@ public class MercControls : PlayerController
                 audioSource.Play();
             }
 
+            PlayerStats.Instance.ShotsFired++;
+            PlayerStats.Instance.AbililitesUsed++;
+
             #region NetMsg_Fire
             Msg_AB_ClientFire ab_Fire = new Msg_AB_ClientFire();
             if (ClientManager.Instance != null)
@@ -198,6 +201,7 @@ public class MercControls : PlayerController
 
             if (speedDuration <= 0)
             {
+                PlayerStats.Instance.AbililitesUsed++;
                 laser.SetActive(true);
                 cooldown = speedDuration;
                 canSprint = false;
@@ -213,6 +217,8 @@ public class MercControls : PlayerController
         {
             walkingSound.SetSourceProperties(audioSource);
             audioSource.Play();
+
+            PlayerStats.Instance.Steps++;
         }
     }
 
