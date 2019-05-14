@@ -33,8 +33,8 @@ public class CameraScript : MonoBehaviour {
         target = a_parent;
         transform.position = target.position;
 
-        transform.position += new Vector3(-8.5f, 10, -8.5f);
-        transform.rotation = Quaternion.Euler(35, 45, 0);
+        transform.position += new Vector3(-15f, 20, -15f);
+        transform.rotation = Quaternion.Euler(40, 45, 0);
 
         offset = transform.position - target.position;
     }

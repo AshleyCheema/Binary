@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1956285387732383810}
   - component: {fileID: 8183437193215482547}
   - component: {fileID: 5650410812474190644}
+  - component: {fileID: 1134118307255269858}
   m_Layer: 0
   m_Name: ServerCabinet_Open
   m_TagString: Untagged
@@ -91,3 +92,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.75274134, y: 0.92390984, z: 1.857404}
   m_Center: {x: -0.086314365, y: 0, z: 0}
+--- !u!114 &1134118307255269858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9086521745727862066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 0
+  eraseRenderer: 0
+  originalLayer: 0
+  originalMaterials: []

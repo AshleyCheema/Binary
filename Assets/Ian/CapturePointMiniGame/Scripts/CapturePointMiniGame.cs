@@ -88,9 +88,9 @@ public class CapturePointMiniGame : MonoBehaviour
     /// </summary>
     private void Start()
     {
-        SetInputs();
         spyController = GameObject.FindGameObjectWithTag("Spy").GetComponentInChildren<SpyController>();
         audioSource = gameObject.GetComponent<AudioSource>();
+        SetInputs();
     }
 
     /// <summary>
@@ -101,7 +101,7 @@ public class CapturePointMiniGame : MonoBehaviour
         if (!inCoroutine)
         {
             bool doneInput = false;
-            if (!isCompleted) //&& //Input.GetKeyDown(inputsNeeded[inputsIndex]))
+            if (!isCompleted && Input.GetKeyDown(inputsNeeded[inputsIndex]))
             {
                 if(ClientManager.Instance != null && ClientManager.Instance.LocalPlayer.gameAvatar.tag == "Spy")
                 {                 
@@ -223,7 +223,7 @@ public class CapturePointMiniGame : MonoBehaviour
     /// </summary>
     private void SetInputs()
     {
-        inputsNeeded = new KeyCode[6];
+        inputsNeeded = new KeyCode[5];
 
         for (int i = 0; i < inputsNeeded.Length; i++)
         {

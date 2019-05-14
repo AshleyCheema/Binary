@@ -15,6 +15,7 @@ public class CooldownScript : MonoBehaviour
     public TrackerAbility trackerAbility;
     public Sprite trackerActiveSprite;
     public Sprite burstActiveSprite;
+    //public Sprite sprintActiveSprite;
     private Image sprite;
     private Color activeColor = new Color(127, 194, 233, 255);
     private Sprite notActiveSprite;
@@ -28,6 +29,7 @@ public class CooldownScript : MonoBehaviour
         //Spy
         SPRINT,
         STUN,
+        HACK,
         //Merc
         TRACKER,
         BURST,
@@ -76,13 +78,28 @@ public class CooldownScript : MonoBehaviour
             //Debug.Log("Skill '" + Action.name + "' has been clicked");
             if (spyController.isRunning && Action.interactable && abilityType == AbilityType.SPRINT)
             {
-                Action.interactable = false;
-                currentCooldown = 0;
+                sprite.sprite = burstActiveSprite;
+                //Action.interactable = false;
+                //currentCooldown = 0;
             }
+            else if(abilityType == AbilityType.SPRINT)
+            {
+                sprite.sprite = notActiveSprite;
+            }
+
             if(spyController.stunDrop && Action.interactable && abilityType == AbilityType.STUN)
             {
                 Action.interactable = false;
                 currentCooldown = 0;
+            }
+
+            if(spyController.isHacking && abilityType == AbilityType.HACK)
+            {
+                sprite.sprite = trackerActiveSprite;
+            }
+            else if(abilityType == AbilityType.HACK)
+            {
+                sprite.sprite = notActiveSprite;
             }
         }
 

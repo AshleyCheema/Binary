@@ -923,6 +923,8 @@ MonoBehaviour:
   spyController: {fileID: 0}
   mercControls: {fileID: 0}
   trackerAbility: {fileID: 0}
+  trackerActiveSprite: {fileID: 0}
+  burstActiveSprite: {fileID: 0}
   abilityType: 4
 --- !u!1 &2114616451882984745
 GameObject:
@@ -1075,6 +1077,8 @@ MonoBehaviour:
   spyController: {fileID: 0}
   mercControls: {fileID: 0}
   trackerAbility: {fileID: 0}
+  trackerActiveSprite: {fileID: 0}
+  burstActiveSprite: {fileID: 0}
   abilityType: 1
 --- !u!1 &2114616451905442643
 GameObject:
@@ -1642,11 +1646,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CooldownImage: {fileID: 2114616453555485542}
-  CooldownTime: 60
+  CooldownTime: 30
   Action: {fileID: 2114616452149704715}
   spyController: {fileID: 0}
   mercControls: {fileID: 0}
   trackerAbility: {fileID: 0}
+  trackerActiveSprite: {fileID: 21300000, guid: 7a21244b1b2a8614ebdf6241f0b7c92b,
+    type: 3}
+  burstActiveSprite: {fileID: 0}
   abilityType: 0
 --- !u!1 &2114616452261418978
 GameObject:
@@ -1960,6 +1967,8 @@ MonoBehaviour:
   spyController: {fileID: 0}
   mercControls: {fileID: 0}
   trackerAbility: {fileID: 0}
+  trackerActiveSprite: {fileID: 0}
+  burstActiveSprite: {fileID: 21300000, guid: 445e6ef74b6ca0d46be70c5bad5c8f36, type: 3}
   abilityType: 3
 --- !u!1 &2114616452398418101
 GameObject:
@@ -3661,6 +3670,8 @@ MonoBehaviour:
   spyController: {fileID: 0}
   mercControls: {fileID: 0}
   trackerAbility: {fileID: 0}
+  trackerActiveSprite: {fileID: 0}
+  burstActiveSprite: {fileID: 0}
   abilityType: 0
 --- !u!1 &2114616453410666756
 GameObject:
@@ -4138,7 +4149,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2114616453641962168
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5294,7 +5305,9 @@ MonoBehaviour:
   spyController: {fileID: 0}
   mercControls: {fileID: 0}
   trackerAbility: {fileID: 0}
-  abilityType: 1
+  trackerActiveSprite: {fileID: 0}
+  burstActiveSprite: {fileID: 0}
+  abilityType: 2
 --- !u!1 &5437266232279147324
 GameObject:
   m_ObjectHideFlags: 0
@@ -5512,7 +5525,7 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 1
+  m_havePropertiesChanged: 0
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}

@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: HackingDone
   m_EditorClassIdentifier: 
   AudioName: 
-  clip: []
+  clip:
+  - {fileID: 8300000, guid: 4cfd4c244fd34794ba4f1c773f69507f, type: 3}
   volume: 1
   pitch: 1
   loop: 0

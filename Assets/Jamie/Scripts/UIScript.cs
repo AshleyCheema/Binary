@@ -28,13 +28,13 @@ public class UIScript : MonoBehaviour
     {
         if (!isSpy)
         {
-            PlayerName = PlayerPrefs.GetString("MercName");
+            PlayerName = PlayerPrefs.GetString("PlayerName");
             PlayerText.text = "Merc 01 - " + PlayerName;
             MercAbil.SetActive(true);
         }
         else
         {
-            PlayerName = PlayerPrefs.GetString("SpyName");
+            PlayerName = PlayerPrefs.GetString("PlayerName");
             PlayerText.text = "Spy 01 - " + PlayerName;
             SpyAbil.SetActive(true);
         }

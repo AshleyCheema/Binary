@@ -16,7 +16,7 @@ public class NO_CapturePoint : MonoBehaviour
     [SerializeField]
     public float capturePercentage = 0.0f;
     [SerializeField]
-    private TextMeshPro tm;
+    private TextMeshProUGUI tm;
 
     [SerializeField]
     private GameObject miniGame;
@@ -41,7 +41,7 @@ public class NO_CapturePoint : MonoBehaviour
     {
         if (tm != null)
         {
-            tm.text = ((int)capturePercentage).ToString();
+            tm.text = ((int)capturePercentage).ToString() + "%";
         }
         if (isBeingCaptured)
         {
@@ -104,7 +104,7 @@ public class NO_CapturePoint : MonoBehaviour
 
                 ClientManager.Instance.client.Send(MSGTYPE.CLIENT_CAPTURE_POINT, ccp);
 
-                if (ClientManager.Instance.LocalPlayer.gameAvatar == other.transform.parent.gameObject)
+                if (ClientManager.Instance.LocalPlayer.gameAvatar == other.gameObject)
                 {
                     miniGame.SetActive(true);
                 }
@@ -152,7 +152,7 @@ public class NO_CapturePoint : MonoBehaviour
                     ccp.ID = ID;
                     ClientManager.Instance.client.Send(MSGTYPE.CLIENT_CAPTURE_POINT, ccp);
 
-                    if (ClientManager.Instance.LocalPlayer.gameAvatar == other.transform.parent.gameObject)
+                    if (ClientManager.Instance.LocalPlayer.gameAvatar == other.gameObject)
                     {
                         miniGame.SetActive(false);
                     }
