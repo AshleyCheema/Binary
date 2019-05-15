@@ -161,7 +161,7 @@ public class CapturePointMiniGame : MonoBehaviour
             scroll.horizontalNormalizedPosition = 0;
         }
 
-        scroll.horizontalNormalizedPosition += 1.0f / (inputsNeeded.Length + 1);
+        scroll.horizontalNormalizedPosition += 0.9f / (inputsNeeded.Length + 1);
 
         if (inputsIndex > inputsNeeded.Length - 1)
         {
