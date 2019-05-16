@@ -18,6 +18,8 @@ public class NO_CapturePoint : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI tm;
 
+    private SpyController spyController;
+
     [SerializeField]
     private GameObject miniGame;
 
@@ -39,6 +41,12 @@ public class NO_CapturePoint : MonoBehaviour
     /// </summary>
     private void Update()
     {
+        if(Input.GetKeyDown(KeyCode.E) && isBeingCaptured == false)
+        {
+            StartHacking();
+        }
+
+
         if (tm != null)
         {
             tm.text = ((int)capturePercentage).ToString() + "%";
@@ -98,27 +106,40 @@ public class NO_CapturePoint : MonoBehaviour
         {
             if (other.tag == "Spy")
             {
-                isBeingCaptured = true;
+                spyController = other.gameObject.GetComponentInChildren<SpyController>();
+                spyController.cooldownScript.canHack = true;
+               //if (spyController.hackingKeyPressed == true)
+               //{
+               //
+               //    //NetMsg_CP_Capture capture = new NetMsg_CP_Capture();
+               //    //capture.ID = ID;
+               //    //capture.IsBeingCaptured = isBeingCaptured;
+               //    //capture.Percentage = (int)capturePercentage;
+               //    //
+               //    //Server.Instance.Send(capture, Server.Instance.ReliableChannel);
+               //}
+            }
+        }
+    }
 
-                GetComponent<MeshRenderer>().material.color = Color.red;
+    private void StartHacking()
+    {
+        isBeingCaptured = true;
+        GetComponent<MeshRenderer>().material.color = Color.red;
 
-                Msg_ClientCapaturePoint ccp = new Msg_ClientCapaturePoint();
-                ccp.connectId = ClientManager.Instance.LocalPlayer.connectionId;
-                ccp.IsBeingCaptured = true;
-                ccp.ID = ID;
+        Msg_ClientCapaturePoint ccp = new Msg_ClientCapaturePoint();
+        ccp.connectId = ClientManager.Instance.LocalPlayer.connectionId;
+        ccp.IsBeingCaptured = true;
+        ccp.ID = ID;
 
-                ClientManager.Instance.client.Send(MSGTYPE.CLIENT_CAPTURE_POINT, ccp);
+        ClientManager.Instance.client.Send(MSGTYPE.CLIENT_CAPTURE_POINT, ccp);
+        if (spyController != null)
+        {
+            spyController.cooldownScript.gameObject.SetActive(false);
 
-                if (ClientManager.Instance.LocalPlayer.gameAvatar == other.gameObject)
-                {
-                    miniGame.SetActive(true);
-                }
-                //NetMsg_CP_Capture capture = new NetMsg_CP_Capture();
-                //capture.ID = ID;
-                //capture.IsBeingCaptured = isBeingCaptured;
-                //capture.Percentage = (int)capturePercentage;
-                //
-                //Server.Instance.Send(capture, Server.Instance.ReliableChannel);
+            if (ClientManager.Instance.LocalPlayer.gameAvatar == spyController.transform.parent.gameObject)
+            {
+                miniGame.SetActive(true);
             }
         }
     }
@@ -133,7 +154,7 @@ public class NO_CapturePoint : MonoBehaviour
         {
             if (other.tag == "Spy")
             {
-                Collider[] allColls = Physics.OverlapSphere(transform.position, GetComponent<SphereCollider>().radius);
+                Collider[] allColls = Physics.OverlapSphere(transform.position, GetComponent<SphereCollider>().radius - 0.5f);
                 bool reset = true;
                 for (int i = 0; i < allColls.Length; i++)
                 {
@@ -148,8 +169,9 @@ public class NO_CapturePoint : MonoBehaviour
                 {
                     captureAmount = 0.5f;
                     GetComponent<MeshRenderer>().material.color = Color.white;
-
                     isBeingCaptured = false;
+                    spyController.cooldownScript.canHack = false;
+                    spyController.cooldownScript.gameObject.SetActive(true);
 
                     Msg_ClientCapaturePoint ccp = new Msg_ClientCapaturePoint();
                     ccp.connectId = ClientManager.Instance.LocalPlayer.connectionId;

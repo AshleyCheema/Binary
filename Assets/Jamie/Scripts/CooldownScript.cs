@@ -20,6 +20,7 @@ public class CooldownScript : MonoBehaviour
     private Color activeColor = new Color(127, 194, 233, 255);
     private Sprite notActiveSprite;
 
+    public bool canHack;
     private bool isSpy;
     private bool isMerc;
     public AbilityType abilityType;
@@ -93,9 +94,10 @@ public class CooldownScript : MonoBehaviour
                 currentCooldown = 0;
             }
 
-            if(spyController.isHacking && abilityType == AbilityType.HACK)
+            if(canHack && abilityType == AbilityType.HACK)
             {
                 sprite.sprite = trackerActiveSprite;
+
             }
             else if(abilityType == AbilityType.HACK)
             {

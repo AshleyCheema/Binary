@@ -143,6 +143,7 @@ MonoBehaviour:
   rb: {fileID: 3011942314590609163}
   isHacking: 0
   stun: {fileID: 0}
+  cooldownScript: {fileID: 7168841668304983634}
   stunDrop: 0
   walking: {fileID: 11400000, guid: 256c532da8d680f4eacf1d823dbced93, type: 2}
   run: {fileID: 11400000, guid: 2fd8bddd7cd567d439dfad460962b30e, type: 2}
@@ -690,11 +691,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3011942314590609167}
     m_Modifications:
-    - target: {fileID: 2114616452955906415, guid: 0aa654d45d8ba1d40b24d1e755fb39da,
-        type: 3}
-      propertyPath: m_Name
-      value: UI thin
-      objectReference: {fileID: 0}
     - target: {fileID: 2114616452955906323, guid: 0aa654d45d8ba1d40b24d1e755fb39da,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -800,6 +796,11 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2114616452955906415, guid: 0aa654d45d8ba1d40b24d1e755fb39da,
+        type: 3}
+      propertyPath: m_Name
+      value: UI thin
+      objectReference: {fileID: 0}
     - target: {fileID: 2114616451882984748, guid: 0aa654d45d8ba1d40b24d1e755fb39da,
         type: 3}
       propertyPath: spyController
@@ -832,17 +833,6 @@ PrefabInstance:
       propertyPath: spyController
       value: 
       objectReference: {fileID: 3999682921971188250}
-    - target: {fileID: 6541105282636285723, guid: 0aa654d45d8ba1d40b24d1e755fb39da,
-        type: 3}
-      propertyPath: CooldownTime
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6541105282636285723, guid: 0aa654d45d8ba1d40b24d1e755fb39da,
-        type: 3}
-      propertyPath: trackerActiveSprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 090a823f8a51b924b9229833ce468587,
-        type: 3}
     - target: {fileID: 2114616452573148149, guid: 0aa654d45d8ba1d40b24d1e755fb39da,
         type: 3}
       propertyPath: m_havePropertiesChanged
@@ -873,6 +863,36 @@ PrefabInstance:
       propertyPath: m_havePropertiesChanged
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2114616452133761678, guid: 0aa654d45d8ba1d40b24d1e755fb39da,
+        type: 3}
+      propertyPath: m_havePropertiesChanged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2114616452133761678, guid: 0aa654d45d8ba1d40b24d1e755fb39da,
+        type: 3}
+      propertyPath: m_isInputParsingRequired
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2114616452261418976, guid: 0aa654d45d8ba1d40b24d1e755fb39da,
+        type: 3}
+      propertyPath: m_havePropertiesChanged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2114616452261418976, guid: 0aa654d45d8ba1d40b24d1e755fb39da,
+        type: 3}
+      propertyPath: m_isInputParsingRequired
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2114616453571805619, guid: 0aa654d45d8ba1d40b24d1e755fb39da,
+        type: 3}
+      propertyPath: m_havePropertiesChanged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2114616453571805619, guid: 0aa654d45d8ba1d40b24d1e755fb39da,
+        type: 3}
+      propertyPath: m_isInputParsingRequired
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0aa654d45d8ba1d40b24d1e755fb39da, type: 3}
 --- !u!224 &2657928000309555290 stripped
@@ -881,3 +901,15 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 4159772560845820233}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7168841668304983634 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6541105282636285723, guid: 0aa654d45d8ba1d40b24d1e755fb39da,
+    type: 3}
+  m_PrefabInstance: {fileID: 4159772560845820233}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9827f9ca37ec7404faf112f0d7bc2ca2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

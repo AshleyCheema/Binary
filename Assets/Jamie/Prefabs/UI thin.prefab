@@ -925,6 +925,7 @@ MonoBehaviour:
   trackerAbility: {fileID: 0}
   trackerActiveSprite: {fileID: 0}
   burstActiveSprite: {fileID: 0}
+  canHack: 0
   abilityType: 4
 --- !u!1 &2114616451882984745
 GameObject:
@@ -1079,6 +1080,7 @@ MonoBehaviour:
   trackerAbility: {fileID: 0}
   trackerActiveSprite: {fileID: 0}
   burstActiveSprite: {fileID: 0}
+  canHack: 0
   abilityType: 1
 --- !u!1 &2114616451905442643
 GameObject:
@@ -1654,6 +1656,7 @@ MonoBehaviour:
   trackerActiveSprite: {fileID: 21300000, guid: 7a21244b1b2a8614ebdf6241f0b7c92b,
     type: 3}
   burstActiveSprite: {fileID: 0}
+  canHack: 0
   abilityType: 0
 --- !u!1 &2114616452261418978
 GameObject:
@@ -1969,6 +1972,7 @@ MonoBehaviour:
   trackerAbility: {fileID: 0}
   trackerActiveSprite: {fileID: 0}
   burstActiveSprite: {fileID: 21300000, guid: 445e6ef74b6ca0d46be70c5bad5c8f36, type: 3}
+  canHack: 0
   abilityType: 3
 --- !u!1 &2114616452398418101
 GameObject:
@@ -3672,6 +3676,7 @@ MonoBehaviour:
   trackerAbility: {fileID: 0}
   trackerActiveSprite: {fileID: 0}
   burstActiveSprite: {fileID: 0}
+  canHack: 0
   abilityType: 0
 --- !u!1 &2114616453410666756
 GameObject:
@@ -5269,7 +5274,7 @@ MonoBehaviour:
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 3121507173735313960}
   m_OnClick:
     m_PersistentCalls:
@@ -5300,13 +5305,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CooldownImage: {fileID: 4607742955794958248}
-  CooldownTime: 10.1
+  CooldownTime: 1
   Action: {fileID: 3061575026422792563}
   spyController: {fileID: 0}
   mercControls: {fileID: 0}
   trackerAbility: {fileID: 0}
-  trackerActiveSprite: {fileID: 0}
+  trackerActiveSprite: {fileID: 21300000, guid: 090a823f8a51b924b9229833ce468587,
+    type: 3}
   burstActiveSprite: {fileID: 0}
+  canHack: 0
   abilityType: 2
 --- !u!1 &5437266232279147324
 GameObject:
@@ -5868,7 +5875,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &7959014440281474300
 RectTransform:
   m_ObjectHideFlags: 0

@@ -220,7 +220,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1735523099659874123}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -27.92, y: 0, z: -10.15}
+  m_LocalPosition: {x: -16.5, y: 0, z: 21.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1286794353442885968}
@@ -284,7 +284,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 6
+  m_Radius: 4
   m_Center: {x: 0.5, y: 0, z: 0}
 --- !u!114 &5264783226817145285
 MonoBehaviour:
@@ -2229,11 +2229,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2812482496066967304}
     m_Modifications:
-    - target: {fileID: 4737293036025294143, guid: 8fac69d40bba8de42993a797ef1097bd,
-        type: 3}
-      propertyPath: m_Name
-      value: Exit_1
-      objectReference: {fileID: 0}
     - target: {fileID: 4737293036025294142, guid: 8fac69d40bba8de42993a797ef1097bd,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2288,6 +2283,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4737293036025294143, guid: 8fac69d40bba8de42993a797ef1097bd,
+        type: 3}
+      propertyPath: m_Name
+      value: Exit_1
       objectReference: {fileID: 0}
     - target: {fileID: 3661650177291371549, guid: 8fac69d40bba8de42993a797ef1097bd,
         type: 3}
@@ -2750,11 +2750,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2812482496066967304}
     m_Modifications:
-    - target: {fileID: 4737293036025294143, guid: 8fac69d40bba8de42993a797ef1097bd,
-        type: 3}
-      propertyPath: m_Name
-      value: Exit_2
-      objectReference: {fileID: 0}
     - target: {fileID: 4737293036025294142, guid: 8fac69d40bba8de42993a797ef1097bd,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2809,6 +2804,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4737293036025294143, guid: 8fac69d40bba8de42993a797ef1097bd,
+        type: 3}
+      propertyPath: m_Name
+      value: Exit_2
       objectReference: {fileID: 0}
     - target: {fileID: 3661650177291371549, guid: 8fac69d40bba8de42993a797ef1097bd,
         type: 3}
@@ -2895,17 +2895,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3126095382192189248, guid: 5d13507df2cc3c54883887ba7098ab8f,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 112
+      objectReference: {fileID: 0}
     - target: {fileID: 3126095382192189249, guid: 5d13507df2cc3c54883887ba7098ab8f,
         type: 3}
       propertyPath: bulletSound
       value: 
       objectReference: {fileID: 11400000, guid: 4835d93a7342ad74388309a81f79bb28,
         type: 2}
-    - target: {fileID: 3126095382192189248, guid: 5d13507df2cc3c54883887ba7098ab8f,
-        type: 3}
-      propertyPath: m_Constraints
-      value: 112
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5d13507df2cc3c54883887ba7098ab8f, type: 3}
 --- !u!4 &6885845580782824920 stripped
