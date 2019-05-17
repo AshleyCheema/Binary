@@ -37,6 +37,9 @@ public class CapturePointMiniGame : MonoBehaviour
     [SerializeField]
     private Image feedback;
 
+    [SerializeField]
+    private Image timerImage;
+
     //Which input is the player at
     [SerializeField]
     private int inputsIndex = 0;
@@ -60,14 +63,18 @@ public class CapturePointMiniGame : MonoBehaviour
     public AudioSO completeSound;
     private AudioSource audioSource;
 
+    Coroutine c = null;
+    private float maxTime = 8.0f;
+
     /// <summary>
     /// Show this mini game
     /// </summary>
     public void Show()
     {
-        parent.SetActive(true);
-        parent.transform.LookAt(parent.transform.position+ Camera.main.transform.rotation * Vector3.forward,
-            Camera.main.transform.rotation * Vector3.up);
+        ResetGame();
+       // parent.SetActive(true);
+       // parent.transform.LookAt(parent.transform.position+ Camera.main.transform.rotation * Vector3.forward,
+       //     Camera.main.transform.rotation * Vector3.up);
     }
 
     /// <summary>
@@ -76,7 +83,10 @@ public class CapturePointMiniGame : MonoBehaviour
     public void Hide()
     {
         parent.SetActive(false);
-
+        if(c != null)
+        {
+            StopCoroutine(c);
+        }
         if(!isCompleted)
         {
             inputsIndex = 0;
@@ -118,6 +128,10 @@ public class CapturePointMiniGame : MonoBehaviour
                 {
                     hackingSound.audioMaxDistance += 5;
                 }
+                if(inputsIndex == 0 && c == null)
+                {
+                    c = StartCoroutine(FailTimer());
+                }
                 //GameObject.FindGameObjectWithTag("Spy").GetComponentInChildren<Animator>().SetBool("isHacking", true);
                 inCoroutine = true;
                 //start coroutine to change colour
@@ -130,6 +144,8 @@ public class CapturePointMiniGame : MonoBehaviour
                 StartCoroutine(Feedback(false));
                 inputsIndex = 0;
                 scroll.horizontalNormalizedPosition = 0;
+
+                parentCapturePoint.ResetCaptureAmount();
 
                 //error. Wrong key pressed
                 Msg_ClientMercFeedback cmf = new Msg_ClientMercFeedback();
@@ -165,9 +181,8 @@ public class CapturePointMiniGame : MonoBehaviour
 
         if (inputsIndex > inputsNeeded.Length - 1)
         {
+            
             isCompleted = true;
-            inputsIndex = 0;
-
             //Mini Game is completed
             //transform.parent.gameObject.SetActive(false);
 
@@ -177,6 +192,24 @@ public class CapturePointMiniGame : MonoBehaviour
             //reset
             ResetGame();
         }
+    }
+
+    private IEnumerator FailTimer()
+    {
+        float duration;
+        duration = maxTime;
+        while (duration > 0)
+        {
+            duration -= Time.deltaTime;
+            timerImage.fillAmount = duration / maxTime;
+            yield return null;
+        }
+
+        inCoroutine = true;
+        StartCoroutine(Feedback(false));
+        parentCapturePoint.ResetCaptureAmount();
+        
+        ResetGame();
     }
 
     /// <summary>
@@ -212,9 +245,15 @@ public class CapturePointMiniGame : MonoBehaviour
     /// </summary>
     private void ResetGame()
     {
+        if(c != null)
+        {
+            StopCoroutine(c);
+            c = null;
+        }
         isCompleted = false;
         scroll.horizontalNormalizedPosition = 0;
-
+        timerImage.fillAmount = 1f;
+        inputsIndex = 0;
         SetInputs();
     }
 

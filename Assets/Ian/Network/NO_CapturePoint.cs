@@ -96,6 +96,11 @@ public class NO_CapturePoint : MonoBehaviour
         }
     }
 
+    public void ResetCaptureAmount()
+    {
+        captureAmount = 0.5f;
+    }
+
     /// <summary>
     /// Enter trigger
     /// </summary>
@@ -140,6 +145,7 @@ public class NO_CapturePoint : MonoBehaviour
             if (ClientManager.Instance.LocalPlayer.gameAvatar == spyController.transform.parent.gameObject)
             {
                 miniGame.SetActive(true);
+                miniGame.GetComponentInChildren<CapturePointMiniGame>().Show();
             }
         }
     }
