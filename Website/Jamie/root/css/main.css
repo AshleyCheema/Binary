@@ -33,7 +33,6 @@ body {
 
 hr {
     border-color: #272727;
-    padding-bottom: 25px;
 }
 
 .button {
@@ -390,8 +389,27 @@ footer p {
     min-height: calc(100vh - 260px);
 }
 
+.player {
+    font-size: 18pt;
+}
 
-/* TEST Classes */
+.player1 {
+    color: gold;
+    font-size: 30pt;
+}
+
+.player2 {
+    color: silver;
+    font-size: 25pt;
+}
+
+.player3 {
+    color: burlywood;
+    font-size: 22pt;
+}
+
+
+/* Reuasable Classes */
 
 .green {
     background-color: green;
@@ -437,6 +455,9 @@ footer p {
     color: #0f0f0f;
 }
 
+.ta-r {
+    text-align: right;
+}
 
 
 
@@ -526,6 +547,8 @@ footer p {
 .filter {
     margin: 0;
     color: #fff !important;
+    z-index: 99999;
+
 
 }
 
@@ -535,6 +558,8 @@ footer p {
     float: right;
     margin-right: 10px;
     position: relative;
+    z-index: 99999;
+    background-color: rgb(33, 37, 41, .75);
 }
 
 .filter li a {
@@ -546,7 +571,7 @@ footer p {
     padding: 10px 15px 10px 25px;
     display: block;
     width: 150px;
-    z-index: 5000;
+    z-index: 99999;
 }
 
 .filter li a i {

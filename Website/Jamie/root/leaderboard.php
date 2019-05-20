@@ -1,7 +1,7 @@
 <?php
 
 //includes login script
-include( 'cms/functions.php' );
+include( 'binary/functions.php' );
 
 ?>
 <!DOCTYPE html>
@@ -85,14 +85,54 @@ include( 'cms/functions.php' );
                     </ul>
                 </div>
                 <hr>
+                <?php
+                    leaderBoard();
+                ?>
+                <!-- <div class="player player1">
+                    <div class="row">
+                        <div class="col-3">#1</div>
+                        <div class="col-6">Jamiee</div>
+                        <div class="col-3  ta-r">100</div>
+                    </div>
+                </div>
+                <hr>
+                <div class="player player2">
+                    <div class="row">
+                        <div class="col-3">#2</div>
+                        <div class="col-6">James</div>
+                        <div class="col-3  ta-r">96</div>
+                    </div>
+                </div>
+                <hr>
+                <div class="player player3">
+                    <div class="row">
+                        <div class="col-3">#3</div>
+                        <div class="col-6">Ian</div>
+                        <div class="col-3  ta-r">76</div>
+                    </div>
+                </div>
+                <hr>
+                <div class="player">
+                    <div class="row">
+                        <div class="col-3">#4</div>
+                        <div class="col-6">Jess</div>
+                        <div class="col-3  ta-r">54</div>
+                    </div>
+                </div>
+                <hr>
+                <div class="player">
+                    <div class="row">
+                        <div class="col-3">#5</div>
+                        <div class="col-6">Chewy</div>
+                        <div class="col-3  ta-r">32</div>
+                    </div>
+                </div>
+                <hr style="padding-top:25px;"> -->
+
+
             </div>
         </div>
         <!--End-->
-        <div id="newBody">
-
-
-
-        </div>
     </div>
     <footer class="footer">
         <p class="highlight">&copy Retro Gecko 2019, all rights reserved</p>
