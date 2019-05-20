@@ -54,7 +54,7 @@ include( 'cms/functions.php' );
                             <a class="nav-link" href="blog.php">Blog</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="leaderboard.html">Leaderboard</a>
+                            <a class="nav-link" href="leaderboard.php">Leaderboard</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/cms">Sign in</a>
