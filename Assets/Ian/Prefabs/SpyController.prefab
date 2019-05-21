@@ -893,6 +893,26 @@ PrefabInstance:
       propertyPath: m_isInputParsingRequired
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2114616452133761672, guid: 0aa654d45d8ba1d40b24d1e755fb39da,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2114616452853059680, guid: 0aa654d45d8ba1d40b24d1e755fb39da,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2114616453155406236, guid: 0aa654d45d8ba1d40b24d1e755fb39da,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2213103121897821348, guid: 0aa654d45d8ba1d40b24d1e755fb39da,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0aa654d45d8ba1d40b24d1e755fb39da, type: 3}
 --- !u!224 &2657928000309555290 stripped
