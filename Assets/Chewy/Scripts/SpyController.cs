@@ -13,6 +13,7 @@ public class SpyController : PlayerController
 {
     public bool isHacking;
     public GameObject stun;
+    public GameObject tablet;
     private Trigger bulletTrigger;
     public CooldownScript cooldownScript;
     private SpyState currentState;
@@ -56,13 +57,17 @@ public class SpyController : PlayerController
 
         if (isHacking == true)
         {
+            tablet.SetActive(true);
             if (!audioSource.isPlaying)
             {
                 hacking.SetSourceProperties(audioSource);
                 audioSource.Play();
             }
         }
-
+        else
+        {
+            tablet.SetActive(false);
+        }
     }
 
     public void Shot()

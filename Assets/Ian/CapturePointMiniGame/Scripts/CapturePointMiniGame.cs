@@ -63,7 +63,7 @@ public class CapturePointMiniGame : MonoBehaviour
     public AudioSO completeSound;
     private AudioSource audioSource;
 
-    Coroutine c = null;
+    private Coroutine c = null;
     private float maxTime = 8.0f;
 
     /// <summary>

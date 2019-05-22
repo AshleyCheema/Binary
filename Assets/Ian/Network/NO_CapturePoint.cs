@@ -18,6 +18,8 @@ public class NO_CapturePoint : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI tm;
 
+    public Renderer[] objectsAround;
+    private Coroutine c_lerpColor;
     private SpyController spyController;
 
     [SerializeField]
@@ -144,10 +146,41 @@ public class NO_CapturePoint : MonoBehaviour
 
             if (ClientManager.Instance.LocalPlayer.gameAvatar == spyController.transform.parent.gameObject)
             {
+
+                c_lerpColor = StartCoroutine(LerpColor(Color.red, Color.green));
                 miniGame.SetActive(true);
                 miniGame.GetComponentInChildren<CapturePointMiniGame>().Show();
             }
         }
+    }
+
+    private IEnumerator LerpColor(Color start, Color end)
+    {
+        float lerpTimer = 0f;
+        float inten = 25.0f;
+
+        while (lerpTimer <= 1f)
+        {
+            lerpTimer = capturePercentage / 100;
+            Debug.Log(lerpTimer);
+            Color newColor = Color.Lerp(start, end, lerpTimer);
+
+            newColor *= inten;
+            for (int i = 0; i < objectsAround.Length - 1; i++)
+            {
+                objectsAround[i].material.SetColor("_EmissionColor", newColor);
+            }
+
+            yield return null;
+        }
+
+        end *= inten;
+        for (int i = 0; i < objectsAround.Length - 1; i++)
+        {
+            objectsAround[i].material.SetColor("_EmissionColor", end);
+        }
+
+        yield return null;
     }
 
     /// <summary>
@@ -178,7 +211,7 @@ public class NO_CapturePoint : MonoBehaviour
                     isBeingCaptured = false;
                     spyController.cooldownScript.canHack = false;
                     spyController.cooldownScript.gameObject.SetActive(true);
-
+                    StopCoroutine(c_lerpColor);
                     Msg_ClientCapaturePoint ccp = new Msg_ClientCapaturePoint();
                     ccp.connectId = ClientManager.Instance.LocalPlayer.connectionId;
                     ccp.IsBeingCaptured = isBeingCaptured;
