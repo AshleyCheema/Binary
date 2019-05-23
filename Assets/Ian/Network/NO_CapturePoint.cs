@@ -18,7 +18,7 @@ public class NO_CapturePoint : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI tm;
 
-    public Renderer[] objectsAround;
+    public GameObject[] objectsAround;
     private Coroutine c_lerpColor;
     private SpyController spyController;
 
@@ -144,8 +144,8 @@ public class NO_CapturePoint : MonoBehaviour
         {
             spyController.cooldownScript.gameObject.SetActive(false);
 
-            if (ClientManager.Instance.LocalPlayer.gameAvatar == spyController.transform.parent.gameObject)
-            {
+           if (ClientManager.Instance.LocalPlayer.gameAvatar == spyController.transform.parent.gameObject)
+           {
 
                 c_lerpColor = StartCoroutine(LerpColor(Color.red, Color.green));
                 miniGame.SetActive(true);
@@ -157,27 +157,29 @@ public class NO_CapturePoint : MonoBehaviour
     private IEnumerator LerpColor(Color start, Color end)
     {
         float lerpTimer = 0f;
-        float inten = 25.0f;
 
         while (lerpTimer <= 1f)
         {
             lerpTimer = capturePercentage / 100;
-            Debug.Log(lerpTimer);
+
             Color newColor = Color.Lerp(start, end, lerpTimer);
 
-            newColor *= inten;
-            for (int i = 0; i < objectsAround.Length - 1; i++)
+            for (int i = 0; i < objectsAround.Length; i++)
             {
-                objectsAround[i].material.SetColor("_EmissionColor", newColor);
+                objectsAround[i].GetComponent<EmissionChange>().ColourChange(newColor);
             }
 
             yield return null;
         }
 
-        end *= inten;
-        for (int i = 0; i < objectsAround.Length - 1; i++)
+        for (int i = 0; i < objectsAround.Length; i++)
         {
-            objectsAround[i].material.SetColor("_EmissionColor", end);
+            objectsAround[i].GetComponent<EmissionChange>().ColourChange(end);
+
+            if(objectsAround[i].GetComponent<cakeslice.Outline>() != null)
+            {
+                objectsAround[i].GetComponent<cakeslice.Outline>().color = 1;
+            }
         }
 
         yield return null;

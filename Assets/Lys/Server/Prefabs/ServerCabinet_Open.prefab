@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8183437193215482547}
   - component: {fileID: 5650410812474190644}
   - component: {fileID: 1134118307255269858}
+  - component: {fileID: 7948123607659034005}
   m_Layer: 0
   m_Name: ServerCabinet_Open
   m_TagString: Untagged
@@ -108,3 +109,16 @@ MonoBehaviour:
   eraseRenderer: 0
   originalLayer: 0
   originalMaterials: []
+--- !u!114 &7948123607659034005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9086521745727862066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e06e894bfe5c0ff49a3571440c32bc80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  emissionColour: 30

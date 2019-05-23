@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 928109326758607772}
   - component: {fileID: 9016954711782939224}
   - component: {fileID: 5839079089959727704}
+  - component: {fileID: 6366763317132046241}
   m_Layer: 0
   m_Name: ClutterPile_1
   m_TagString: Untagged
@@ -78,3 +79,16 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &6366763317132046241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4415158225987937931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e06e894bfe5c0ff49a3571440c32bc80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  emissionColour: 2

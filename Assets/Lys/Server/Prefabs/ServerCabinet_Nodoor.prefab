@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8387859738264905492}
   - component: {fileID: 5293570383783400097}
   - component: {fileID: 6011649985739925377}
+  - component: {fileID: 3480303992137901608}
   m_Layer: 0
   m_Name: ServerCabinet_Nodoor
   m_TagString: Untagged
@@ -108,3 +109,16 @@ MonoBehaviour:
   eraseRenderer: 0
   originalLayer: 0
   originalMaterials: []
+--- !u!114 &3480303992137901608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4189521614678562757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e06e894bfe5c0ff49a3571440c32bc80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  emissionColour: 30
