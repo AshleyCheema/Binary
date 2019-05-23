@@ -535,6 +535,16 @@ public class ClientManager : NetworkManager
         Debug.Log("Has Abililites: " + PlayerStats.Instance.AbililitesUsed);
         Debug.Log("Capture Amount: " + PlayerStats.Instance.CaptureedAmount);
 
+        DB_UpdatePlayer updateDB = FindObjectOfType<DB_UpdatePlayer>();
+        updateDB.playerName = PlayerStats.Instance.PlayerName;
+        updateDB.matchResult = PlayerStats.Instance.HasWon == true ? "win" : "lose";
+        updateDB.playerClass = PlayerStats.Instance.PlayerTeam == LLAPI.Team.Merc ? "merc" : "spy";
+        updateDB.stepsTaken = PlayerStats.Instance.Steps;
+        updateDB.shotsFired = PlayerStats.Instance.ShotsFired;
+        updateDB.ablitiesUsed = PlayerStats.Instance.AbililitesUsed;
+        updateDB.pointsCaptured = (int)PlayerStats.Instance.CaptureedAmount;
+        updateDB.CallUpdatePlayerStats();
+
         //enable the UI fade and show the game over screen 
         //ths is where all the state can be shown in need.
         if (gameOverUI)

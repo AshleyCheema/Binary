@@ -159,7 +159,7 @@ public class HostManager : NetworkManager
             }
 
             Debug.Log("Add all player shells");
-            Camera.main.transform.position = new Vector3(-16, 100, -13);
+            Camera.main.transform.position = new Vector3(-16, -100, -13);
             Camera.main.transform.rotation = Quaternion.Euler(90, 0, 0);
             Camera.main.GetComponent<Camera>().orthographicSize = 53;
 
@@ -200,9 +200,9 @@ public class HostManager : NetworkManager
                 go.transform.position = spawnPosition;
                 Players[pKey].gameAvatar = go;
                 go.tag = Players[pKey].playerTeam == LLAPI.Team.Merc ? "Merc" : "Spy";
+                go.GetComponentInChildren<Animator>().enabled = false;
 
                 MonoBehaviour[] allMonos = go.GetComponentsInChildren<MonoBehaviour>();
-
                 for (int i = 0; i < allMonos.Length; i++)
                 {
                     allMonos[i].enabled = false;
