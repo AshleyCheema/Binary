@@ -46,30 +46,35 @@ public class PlayerController : MonoBehaviour
         //rb = GetComponent<Rigidbody>();
     }
     Coroutine c = null;
+    float sendTime = 0.0f;
     IEnumerator SendPosition()
      {
          while(true)
          {
-             if (ClientManager.Instance?.LocalPlayer.gameAvatar != null)
-             {
-                Msg_ClientMove playerMovement = new Msg_ClientMove();
-                playerMovement.connectId = ClientManager.Instance.LocalPlayer.connectionId;
-                playerMovement.position = rb.position;
-                playerMovement.Time = DateTime.UtcNow.Millisecond;
-                //ClientManager.Instance.client?.SendUnreliable(MSGTYPE.CLIENT_MOVE, playerMovement);
-             }
-             yield return new WaitForSeconds(1f);
+            sendTime += Time.deltaTime;
+
+            if (sendTime > 0.03f)
+            {
+                if (ClientManager.Instance?.LocalPlayer.gameAvatar != null)
+                {
+                    Msg_ClientMove playerMovement = new Msg_ClientMove();
+                    playerMovement.connectId = ClientManager.Instance.LocalPlayer.connectionId;
+                    playerMovement.position = rb.position;
+                    playerMovement.Time = DateTime.UtcNow.Millisecond;
+                    ClientManager.Instance.client?.SendUnreliable(MSGTYPE.CLIENT_MOVE, playerMovement);
+                }
+                sendTime = 0.0f;
+            }
+            yield return null;
          }
      }
-
-    float sendTime = 0.0f;
     int sendAmount = 0;
     // Update is called once per frame
     public virtual void Update()
     {
         if(c == null)
         {
-            //c = StartCoroutine(SendPosition());
+            c = StartCoroutine(SendPosition());
         }
 
         //Maybe add a client check if need
@@ -110,7 +115,7 @@ public class PlayerController : MonoBehaviour
                 playerMovement.connectId = ClientManager.Instance.LocalPlayer.connectionId;
                 playerMovement.position = rb.position;
                 playerMovement.Time = DateTime.UtcNow.Millisecond;
-                ClientManager.Instance.client?.Send(MSGTYPE.CLIENT_MOVE, playerMovement);
+                //ClientManager.Instance.client?.Send(MSGTYPE.CLIENT_MOVE, playerMovement);
                 sendAmount++;
             }
         }
