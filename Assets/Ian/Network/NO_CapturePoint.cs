@@ -211,7 +211,11 @@ public class NO_CapturePoint : MonoBehaviour
                     isBeingCaptured = false;
                     spyController.cooldownScript.canHack = false;
                     spyController.cooldownScript.gameObject.SetActive(true);
-                    StopCoroutine(c_lerpColor);
+                    if (c_lerpColor != null)
+                    {
+                        StopCoroutine(c_lerpColor);
+                        c_lerpColor = null;
+                    }
                     Msg_ClientCapaturePoint ccp = new Msg_ClientCapaturePoint();
                     ccp.connectId = ClientManager.Instance.LocalPlayer.connectionId;
                     ccp.IsBeingCaptured = isBeingCaptured;
