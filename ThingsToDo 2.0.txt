@@ -1,0 +1,7 @@
+Terminals bugged
+Flash won't drop
+
+Lights do not update for Merc
+Tracker not detecting Spy
+
+Implement player pickup

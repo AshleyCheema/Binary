@@ -1605,11 +1605,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 80722652396774930}
     m_Modifications:
-    - target: {fileID: 2114616452955906415, guid: 0aa654d45d8ba1d40b24d1e755fb39da,
-        type: 3}
-      propertyPath: m_Name
-      value: UI thin
-      objectReference: {fileID: 0}
     - target: {fileID: 2114616452955906323, guid: 0aa654d45d8ba1d40b24d1e755fb39da,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1715,10 +1710,55 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2114616452955906415, guid: 0aa654d45d8ba1d40b24d1e755fb39da,
+        type: 3}
+      propertyPath: m_Name
+      value: UI thin
+      objectReference: {fileID: 0}
+    - target: {fileID: 2114616452573148149, guid: 0aa654d45d8ba1d40b24d1e755fb39da,
+        type: 3}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2114616452841460368, guid: 0aa654d45d8ba1d40b24d1e755fb39da,
+        type: 3}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2114616452953449489, guid: 0aa654d45d8ba1d40b24d1e755fb39da,
+        type: 3}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2114616453132332246, guid: 0aa654d45d8ba1d40b24d1e755fb39da,
+        type: 3}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2114616453669912505, guid: 0aa654d45d8ba1d40b24d1e755fb39da,
+        type: 3}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2934378859833172145, guid: 0aa654d45d8ba1d40b24d1e755fb39da,
+        type: 3}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2114616453155406236, guid: 0aa654d45d8ba1d40b24d1e755fb39da,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2114616452955906322, guid: 0aa654d45d8ba1d40b24d1e755fb39da,
+        type: 3}
+      propertyPath: isSpy
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4187937082808180525, guid: 0aa654d45d8ba1d40b24d1e755fb39da,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2114616451759763333, guid: 0aa654d45d8ba1d40b24d1e755fb39da,
         type: 3}
@@ -1764,36 +1804,6 @@ PrefabInstance:
         type: 3}
       propertyPath: abilityType
       value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 2114616452573148149, guid: 0aa654d45d8ba1d40b24d1e755fb39da,
-        type: 3}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2114616452841460368, guid: 0aa654d45d8ba1d40b24d1e755fb39da,
-        type: 3}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2114616452953449489, guid: 0aa654d45d8ba1d40b24d1e755fb39da,
-        type: 3}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2114616453132332246, guid: 0aa654d45d8ba1d40b24d1e755fb39da,
-        type: 3}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2114616453669912505, guid: 0aa654d45d8ba1d40b24d1e755fb39da,
-        type: 3}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2934378859833172145, guid: 0aa654d45d8ba1d40b24d1e755fb39da,
-        type: 3}
-      propertyPath: m_havePropertiesChanged
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0aa654d45d8ba1d40b24d1e755fb39da, type: 3}
