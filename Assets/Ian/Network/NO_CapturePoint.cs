@@ -21,7 +21,7 @@ public class NO_CapturePoint : MonoBehaviour
     public GameObject[] objectsAround;
     private Coroutine c_lerpColor;
     private SpyController spyController;
-    private Msg_ClientCapaturePoint ccp;
+    private Msg_ClientCapaturePoint ccp = new Msg_ClientCapaturePoint();
 
     [SerializeField]
     private GameObject miniGame;
@@ -39,6 +39,11 @@ public class NO_CapturePoint : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        ccp.ID = -1;
+    }
+
     /// <summary>
     /// Update
     /// </summary>
@@ -47,6 +52,14 @@ public class NO_CapturePoint : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.E) && !IsCaptured)
         {
             StartHacking();
+
+            if (ccp.ID == -1)
+            {
+                ccp.connectId = ClientManager.Instance.LocalPlayer.connectionId;
+                ccp.IsBeingCaptured = true;
+                ccp.ID = ID;
+                ClientManager.Instance.client.Send(MSGTYPE.CLIENT_CAPTURE_POINT, ccp);
+            }
         }
 
 
@@ -117,11 +130,11 @@ public class NO_CapturePoint : MonoBehaviour
                 spyController = other.gameObject.GetComponentInChildren<SpyController>();
                 spyController.cooldownScript.canHack = true;
 
-                ccp = new Msg_ClientCapaturePoint();
-                ccp.connectId = ClientManager.Instance.LocalPlayer.connectionId;
-                ccp.IsBeingCaptured = true;
-                ccp.ID = ID;
-                ClientManager.Instance.client.Send(MSGTYPE.CLIENT_CAPTURE_POINT, ccp);
+                //ccp = new Msg_ClientCapaturePoint();
+                //ccp.connectId = ClientManager.Instance.LocalPlayer.connectionId;
+                //ccp.IsBeingCaptured = true;
+                //ccp.ID = ID;
+                //ClientManager.Instance.client.Send(MSGTYPE.CLIENT_CAPTURE_POINT, ccp);
 
                 //if (spyController.hackingKeyPressed == true)
                 //{
@@ -139,10 +152,10 @@ public class NO_CapturePoint : MonoBehaviour
 
     private void StartHacking()
     {
-        if(ccp != null)
-        {
-            isBeingCaptured = ccp.IsBeingCaptured;
-        }
+        //if(ccp != null)
+        //{
+        //    isBeingCaptured = ccp.IsBeingCaptured;
+        //}
 
         GetComponent<MeshRenderer>().material.color = Color.red;
 
@@ -152,7 +165,7 @@ public class NO_CapturePoint : MonoBehaviour
 
            if (ClientManager.Instance.LocalPlayer.gameAvatar == spyController.transform.parent.gameObject)
            {
-                if(ccp.ID == ID)
+                if(!isBeingCaptured)
                 {
                     c_lerpColor = StartCoroutine(LerpColor(Color.red, Color.green));
                     miniGame.SetActive(true);
@@ -160,6 +173,8 @@ public class NO_CapturePoint : MonoBehaviour
                 }
             }
         }
+
+        isBeingCaptured = true;//ccp.IsBeingCaptured;
     }
 
     private IEnumerator LerpColor(Color start, Color end)
@@ -226,11 +241,12 @@ public class NO_CapturePoint : MonoBehaviour
                         StopCoroutine(c_lerpColor);
                         c_lerpColor = null;
                     }
-                    //Msg_ClientCapaturePoint ccp = new Msg_ClientCapaturePoint();
+                   
                     ccp.connectId = ClientManager.Instance.LocalPlayer.connectionId;
                     ccp.IsBeingCaptured = isBeingCaptured;
                     ccp.ID = ID;
                     ClientManager.Instance.client.Send(MSGTYPE.CLIENT_CAPTURE_POINT, ccp);
+                    ccp.ID = -1;
 
                     if (ClientManager.Instance.LocalPlayer.gameAvatar == other.gameObject)
                     {
