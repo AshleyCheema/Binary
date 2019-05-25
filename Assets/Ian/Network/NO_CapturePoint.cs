@@ -23,6 +23,9 @@ public class NO_CapturePoint : MonoBehaviour
     private SpyController spyController;
     private Msg_ClientCapaturePoint ccp = new Msg_ClientCapaturePoint();
 
+    //list of all spies in this capture point
+    private List<GameObject> currentSpies = new List<GameObject>();
+
     [SerializeField]
     private GameObject miniGame;
 
@@ -51,14 +54,17 @@ public class NO_CapturePoint : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.E) && !IsCaptured)
         {
-            StartHacking();
-
-            if (ccp.ID == -1)
+            if (currentSpies.Contains(ClientManager.Instance?.LocalPlayer.gameAvatar))
             {
-                ccp.connectId = ClientManager.Instance.LocalPlayer.connectionId;
-                ccp.IsBeingCaptured = true;
-                ccp.ID = ID;
-                ClientManager.Instance.client.Send(MSGTYPE.CLIENT_CAPTURE_POINT, ccp);
+                StartHacking();
+
+                if (ccp.ID == -1)
+                {
+                    ccp.connectId = ClientManager.Instance.LocalPlayer.connectionId;
+                    ccp.IsBeingCaptured = true;
+                    ccp.ID = ID;
+                    ClientManager.Instance.client.Send(MSGTYPE.CLIENT_CAPTURE_POINT, ccp);
+                }
             }
         }
 
@@ -129,6 +135,8 @@ public class NO_CapturePoint : MonoBehaviour
             {
                 spyController = other.gameObject.GetComponentInChildren<SpyController>();
                 spyController.cooldownScript.canHack = true;
+
+                currentSpies.Add(other.gameObject);
 
                 //ccp = new Msg_ClientCapaturePoint();
                 //ccp.connectId = ClientManager.Instance.LocalPlayer.connectionId;
@@ -218,6 +226,8 @@ public class NO_CapturePoint : MonoBehaviour
         {
             if (other.tag == "Spy")
             {
+                currentSpies.Remove(other.gameObject);
+
                 Collider[] allColls = Physics.OverlapSphere(transform.position, GetComponent<SphereCollider>().radius - 0.5f);
                 bool reset = true;
                 for (int i = 0; i < allColls.Length; i++)
