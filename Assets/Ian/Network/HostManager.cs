@@ -444,6 +444,8 @@ public class HostManager : NetworkManager
         aMsg.reader.SeekZero();
         Msg_ClientCapaturePoint ccp = aMsg.ReadMessage<Msg_ClientCapaturePoint>();
 
+        Send(ccp.connectId, MSGTYPE.CLIENT_CAPTURE_POINT, ccp, false);
+
         if (ccp.IsBeingCaptured)
         {
             capturePoints[ccp.ID].GetComponent<NO_CapturePoint>().IsBeingCaptured = true;

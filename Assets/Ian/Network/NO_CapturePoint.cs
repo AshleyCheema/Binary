@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class NO_CapturePoint : MonoBehaviour
 {
@@ -171,7 +172,7 @@ public class NO_CapturePoint : MonoBehaviour
         {
             spyController.cooldownScript.gameObject.SetActive(false);
 
-           if (ClientManager.Instance.LocalPlayer.gameAvatar == spyController.transform.parent.gameObject)
+            if (ClientManager.Instance.LocalPlayer.gameAvatar == spyController.transform.parent.gameObject)
            {
                 if(!isBeingCaptured)
                 {
@@ -228,24 +229,33 @@ public class NO_CapturePoint : MonoBehaviour
             {
                 currentSpies.Remove(other.gameObject);
 
-                Collider[] allColls = Physics.OverlapSphere(transform.position, GetComponent<SphereCollider>().radius - 0.5f);
+                //Collider[] allColls = Physics.OverlapSphere(transform.position, GetComponent<SphereCollider>().radius - 0.5f);
                 bool reset = true;
-                for (int i = 0; i < allColls.Length; i++)
+                if(currentSpies.Count > 0)
                 {
-                    if (allColls[i].gameObject.tag == "Spy")
-                    {
-                        reset = false;
-                        break;
-                    }
+                    reset = false;
+                }
+                //for (int i = 0; i < allColls.Length; i++)
+                //{
+                //    if (allColls[i].gameObject.tag == "Spy")
+                //    {
+                //        reset = false;
+                //        break;
+                //    }
+                //}
+
+                if (ClientManager.Instance.LocalPlayer.gameAvatar == other.gameObject)
+                {
+                    miniGame.SetActive(false);
+                    spyController.cooldownScript.canHack = false;
+                    spyController.cooldownScript.gameObject.SetActive(true);
                 }
 
                 if (reset)
                 {
-                    captureAmount = 0.5f;
+                    
                     GetComponent<MeshRenderer>().material.color = Color.white;
                     isBeingCaptured = false;
-                    spyController.cooldownScript.canHack = false;
-                    spyController.cooldownScript.gameObject.SetActive(true);
                     if (c_lerpColor != null)
                     {
                         StopCoroutine(c_lerpColor);
@@ -258,10 +268,9 @@ public class NO_CapturePoint : MonoBehaviour
                     ClientManager.Instance.client.Send(MSGTYPE.CLIENT_CAPTURE_POINT, ccp);
                     ccp.ID = -1;
 
-                    if (ClientManager.Instance.LocalPlayer.gameAvatar == other.gameObject)
-                    {
-                        miniGame.SetActive(false);
-                    }
+                    //maybe not here
+                    captureAmount = 0.5f;
+
                     //NetMsg_CP_Capture capture = new NetMsg_CP_Capture();
                     //capture.ID = ID;
                     //capture.IsBeingCaptured = isBeingCaptured;
