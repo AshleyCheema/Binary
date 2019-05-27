@@ -1,6 +1,6 @@
 Terminals bugged
 Adjust Audio Levels
-Flashbang effect
+Flashbang effect - Done
 Lights do not update for Merc
 
 Implement player pickup
