@@ -222,6 +222,7 @@ public class ClientManager : NetworkManager
             go.GetComponentInChildren<FOWMask>().gameObject.SetActive(false);
             go.GetComponentInChildren<UIScript>().gameObject.SetActive(false);
             go.GetComponentInChildren<FOWAdaptiveRender>().gameObject.SetActive(false);
+            go.GetComponentInChildren<AudioListener>().enabled = false;
             if (go.tag == "Merc")
             {
                 go.transform.GetChild(0).GetChild(7).gameObject.GetComponent<SkinnedMeshRenderer>().enabled = false;
@@ -300,7 +301,7 @@ public class ClientManager : NetworkManager
             go.GetComponentInChildren<FOWMask>().gameObject.SetActive(false);
             go.GetComponentInChildren<UIScript>().gameObject.SetActive(false);
             go.GetComponentInChildren<FOWAdaptiveRender>().gameObject.SetActive(false);
-
+            go.GetComponentInChildren<AudioListener>().enabled = false;
             if (go.tag == "Merc")
             {
                 go.transform.GetChild(0).GetChild(7).gameObject.GetComponent<SkinnedMeshRenderer>().enabled = false;
