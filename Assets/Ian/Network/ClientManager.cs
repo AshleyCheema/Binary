@@ -223,6 +223,7 @@ public class ClientManager : NetworkManager
             go.GetComponentInChildren<UIScript>().gameObject.SetActive(false);
             go.GetComponentInChildren<FOWAdaptiveRender>().gameObject.SetActive(false);
             go.GetComponentInChildren<AudioListener>().enabled = false;
+            go.AddComponent<ShellAnimationController>();
             if (go.tag == "Merc")
             {
                 go.transform.GetChild(0).GetChild(7).gameObject.GetComponent<SkinnedMeshRenderer>().enabled = false;
@@ -302,6 +303,8 @@ public class ClientManager : NetworkManager
             go.GetComponentInChildren<UIScript>().gameObject.SetActive(false);
             go.GetComponentInChildren<FOWAdaptiveRender>().gameObject.SetActive(false);
             go.GetComponentInChildren<AudioListener>().enabled = false;
+            go.AddComponent<ShellAnimationController>();
+
             if (go.tag == "Merc")
             {
                 go.transform.GetChild(0).GetChild(7).gameObject.GetComponent<SkinnedMeshRenderer>().enabled = false;
@@ -335,9 +338,9 @@ public class ClientManager : NetworkManager
         else
         {
             //create the game object
-            SpawnOtherPlayerObject(Players[cm.connectId]);
-            Players[cm.connectId].gameAvatar.transform.position = Vector3.Lerp(Players[cm.connectId].gameAvatar.transform.position,
-                                                                             cm.position, 0.5f);
+            //SpawnOtherPlayerObject(Players[cm.connectId]);
+            //Players[cm.connectId].gameAvatar.transform.position = Vector3.Lerp(Players[cm.connectId].gameAvatar.transform.position,
+            //                                                                cm.position, 0.5f);
         }
     }
 
@@ -353,8 +356,8 @@ public class ClientManager : NetworkManager
         else
         {
             //create the game object
-            SpawnOtherPlayerObject(Players[cm.connectId]);
-            Players[cm.connectId].gameAvatar.transform.rotation = cm.rot;
+            //SpawnOtherPlayerObject(Players[cm.connectId]);
+            //Players[cm.connectId].gameAvatar.transform.rotation = cm.rot;
         }
     }
 

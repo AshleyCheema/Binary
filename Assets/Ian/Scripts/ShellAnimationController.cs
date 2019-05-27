@@ -14,17 +14,29 @@ public class ShellAnimationController : MonoBehaviour
         animatorController = transform.GetChild(0).gameObject.GetComponent<Animator>();
     }
 
+    //bool VectorWithinRange(Vector3 aVector, Vector3 aRangeVector, float aRange)
+    //{
+    //    if(Mathf.Abs(aVector.x - aRangeVector.x) < aRange &&
+    //       Mathf.Abs(aVector.x - aRangeVector.x) < aRange)
+    //    {
+    //        return true;
+    //    }
+    //    return false;
+    //}
+
     // Update is called once per frame
     void LateUpdate()
     {
         //if the current poisiton in not equal to lastPosition
         //then the position has changed
-        if (transform.position != lastPosition)
+        float x = Mathf.Abs(transform.position.x - lastPosition.x);
+        float z = Mathf.Abs(transform.position.x - lastPosition.x);
+        if (x > 0.01f && z > 0.01f)
         {
             Vector3 dir = lastPosition - transform.position;
             dir.Normalize();
             lastPosition = transform.position;
-            Debug.Log(dir);
+            //Debug.Log(dir);
 
             if (Mathf.Sign(dir.z) == -1)
             {

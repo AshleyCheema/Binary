@@ -11,7 +11,32 @@ public class NO_CapturePoint : MonoBehaviour
     [SerializeField]
     private bool isBeingCaptured = false;
     public bool IsBeingCaptured
-    { get { return isBeingCaptured; } set { isBeingCaptured = value; } }
+    {
+        get
+        {
+            return isBeingCaptured;
+        }
+        set
+        {
+            isBeingCaptured = value;
+
+            if(isBeingCaptured)
+            {
+                if (c_lerpColor == null)
+                {
+                    c_lerpColor = StartCoroutine(LerpColor(Color.red, Color.green));
+                }
+            }
+            else
+            {
+                if (c_lerpColor != null)
+                {
+                    StopCoroutine(c_lerpColor);
+                    c_lerpColor = null;
+                }
+            }
+        }
+    }
     [SerializeField]
     private float captureAmount = 0.5f;
     [SerializeField]
@@ -20,7 +45,7 @@ public class NO_CapturePoint : MonoBehaviour
     private TextMeshProUGUI tm;
 
     public GameObject[] objectsAround;
-    private Coroutine c_lerpColor;
+    private Coroutine c_lerpColor = null;
     private SpyController spyController;
     private Msg_ClientCapaturePoint ccp = new Msg_ClientCapaturePoint();
 
@@ -69,9 +94,25 @@ public class NO_CapturePoint : MonoBehaviour
             }
         }
         //another spy is capturing
-        else if(Input.GetKeyDown(KeyCode.E) && !IsCaptured && isBeingCaptured)
+        if(Input.GetKeyDown(KeyCode.E) && !IsCaptured && IsBeingCaptured)
         {
-            StartHacking();
+            GetComponent<MeshRenderer>().material.color = Color.red;
+
+            if (spyController != null)
+            {
+                spyController.cooldownScript.gameObject.SetActive(false);
+                spyController.isHacking = true;
+
+                if (ClientManager.Instance.LocalPlayer.gameAvatar == spyController.transform.parent.gameObject)
+                {
+                    miniGame.SetActive(true);
+                    miniGame.GetComponentInChildren<CapturePointMiniGame>().Show();
+                    if (c_lerpColor == null)
+                    {
+                        //c_lerpColor = StartCoroutine(LerpColor(Color.red, Color.green));
+                    }
+                }
+            }
         }
 
 
@@ -182,14 +223,14 @@ public class NO_CapturePoint : MonoBehaviour
            {
                 if(!isBeingCaptured)
                 {
-                    c_lerpColor = StartCoroutine(LerpColor(Color.red, Color.green));
+                    //c_lerpColor = StartCoroutine(LerpColor(Color.red, Color.green));
                     miniGame.SetActive(true);
                     miniGame.GetComponentInChildren<CapturePointMiniGame>().Show();
                 }
             }
         }
 
-        isBeingCaptured = true;//ccp.IsBeingCaptured;
+        IsBeingCaptured = true;//ccp.IsBeingCaptured;
     }
 
     private IEnumerator LerpColor(Color start, Color end)
@@ -263,12 +304,12 @@ public class NO_CapturePoint : MonoBehaviour
                 {
                     
                     GetComponent<MeshRenderer>().material.color = Color.white;
-                    isBeingCaptured = false;
-                    if (c_lerpColor != null)
-                    {
-                        StopCoroutine(c_lerpColor);
-                        c_lerpColor = null;
-                    }
+                    IsBeingCaptured = false;
+                    //if (c_lerpColor != null)
+                   // {
+                   //     StopCoroutine(c_lerpColor);
+                   //     c_lerpColor = null;
+                   // }
                    
                     ccp.connectId = ClientManager.Instance.LocalPlayer.connectionId;
                     ccp.IsBeingCaptured = isBeingCaptured;
