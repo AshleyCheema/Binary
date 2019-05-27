@@ -114,7 +114,8 @@ public class CapturePointMiniGame : MonoBehaviour
             if (!isCompleted && Input.GetKeyDown(inputsNeeded[inputsIndex]))
             {
                 if(ClientManager.Instance != null && ClientManager.Instance.LocalPlayer.gameAvatar.tag == "Spy")
-                {                 
+                {
+                    //Move this to the other script
                     spyController.animator.SetBool("isHacking", true);
                 }
                 //Need to test if the if statement is needed and then increment min + max distacne and volume
@@ -148,7 +149,7 @@ public class CapturePointMiniGame : MonoBehaviour
 
                 //error. Wrong key pressed
                 Msg_ClientMercFeedback cmf = new Msg_ClientMercFeedback();
-                cmf.Location = transform.position;
+                cmf.Location = spyController.transform.position;
 
                 ClientManager.Instance?.client.Send(MSGTYPE.CLIENT_FEEDBACK, cmf);
             }

@@ -66,6 +66,7 @@ public class SpyController : PlayerController
         }
         else
         {
+            audioSource.Stop();
             tablet.SetActive(false);
         }
     }
