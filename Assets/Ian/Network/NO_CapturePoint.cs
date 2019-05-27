@@ -171,6 +171,7 @@ public class NO_CapturePoint : MonoBehaviour
         if (spyController != null)
         {
             spyController.cooldownScript.gameObject.SetActive(false);
+            spyController.isHacking = true;
 
             if (ClientManager.Instance.LocalPlayer.gameAvatar == spyController.transform.parent.gameObject)
            {
@@ -249,6 +250,7 @@ public class NO_CapturePoint : MonoBehaviour
                     miniGame.SetActive(false);
                     spyController.cooldownScript.canHack = false;
                     spyController.cooldownScript.gameObject.SetActive(true);
+                    spyController.isHacking = false;
                 }
 
                 if (reset)

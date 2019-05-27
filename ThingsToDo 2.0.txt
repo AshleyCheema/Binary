@@ -1,5 +1,5 @@
 Terminals bugged
-Flash won't drop
+Flash won't drop - Done
 
 Lights do not update for Merc
 Tracker not detecting Spy

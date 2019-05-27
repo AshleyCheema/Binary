@@ -116,7 +116,6 @@ public class CapturePointMiniGame : MonoBehaviour
                 if(ClientManager.Instance != null && ClientManager.Instance.LocalPlayer.gameAvatar.tag == "Spy")
                 {                 
                     spyController.animator.SetBool("isHacking", true);
-                    spyController.isHacking = parentCapturePoint.IsBeingCaptured;
                 }
                 //Need to test if the if statement is needed and then increment min + max distacne and volume
                 if (!audioSource.isPlaying)
