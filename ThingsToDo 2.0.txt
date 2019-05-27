@@ -1,7 +1,9 @@
 Terminals bugged
-Flash won't drop - Done
-
+Adjust Audio Levels
+Flashbang effect
 Lights do not update for Merc
-Tracker not detecting Spy
 
 Implement player pickup
+
+Flash won't drop - Done
+Tracker not detecting Spy - Done
