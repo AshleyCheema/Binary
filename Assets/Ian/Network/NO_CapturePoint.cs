@@ -68,6 +68,11 @@ public class NO_CapturePoint : MonoBehaviour
                 }
             }
         }
+        //another spy is capturing
+        else if(Input.GetKeyDown(KeyCode.E) && !IsCaptured && isBeingCaptured)
+        {
+            StartHacking();
+        }
 
 
         if (tm != null)
@@ -249,6 +254,7 @@ public class NO_CapturePoint : MonoBehaviour
                 {
                     miniGame.SetActive(false);
                     spyController.cooldownScript.canHack = false;
+                    spyController.cooldownScript.gameObject.SetActive(false);              
                     spyController.cooldownScript.gameObject.SetActive(true);
                     spyController.isHacking = false;
                 }
