@@ -1,7 +1,3 @@
-Terminals bugged
-Flash won't drop - Done
-
-Lights do not update for Merc
-Tracker not detecting Spy
-
-Implement player pickup
+Merc's feedback from capture point is not pointing to the capture point
+Audio listner for merc might not be working - Done
+Make new script for audio to call events
