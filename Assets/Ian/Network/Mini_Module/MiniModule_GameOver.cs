@@ -42,6 +42,8 @@ public class MiniModule_GameOver : Singleton<MiniModule_GameOver>
             HostManager.Instance?.SendAll(MSGTYPE.CLIENT_GAME_OVER, cgo);
 
             HostManager.Instance?.OnGameLoadLobby();
+
+            spyiesDead.Clear();
         }
     }
 
@@ -61,6 +63,8 @@ public class MiniModule_GameOver : Singleton<MiniModule_GameOver>
             HostManager.Instance?.SendAll(MSGTYPE.CLIENT_GAME_OVER, cgo);
 
             HostManager.Instance?.OnGameLoadLobby();
+
+            spyiesCompleted.Clear();
         }
     }
 }

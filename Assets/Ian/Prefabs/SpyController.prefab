@@ -149,6 +149,23 @@ MonoBehaviour:
   walking: {fileID: 11400000, guid: 256c532da8d680f4eacf1d823dbced93, type: 2}
   run: {fileID: 11400000, guid: 2fd8bddd7cd567d439dfad460962b30e, type: 2}
   hacking: {fileID: 11400000, guid: 8033d2f84d9194141ad3886fafe5d0dd, type: 2}
+--- !u!114 &5127984476682044293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 614528025514262763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49ebdd04da83a7846bd001e755f0d797, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  walkingSound: {fileID: 11400000, guid: 256c532da8d680f4eacf1d823dbced93, type: 2}
+  fireSound: {fileID: 0}
+  burstRunSound: {fileID: 11400000, guid: 2fd8bddd7cd567d439dfad460962b30e, type: 2}
+  tinnitus: {fileID: 0}
+  hacking: {fileID: 11400000, guid: 8033d2f84d9194141ad3886fafe5d0dd, type: 2}
 --- !u!1 &747239420701823996
 GameObject:
   m_ObjectHideFlags: 0
@@ -166,7 +183,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7699702780602286048
 Transform:
   m_ObjectHideFlags: 0

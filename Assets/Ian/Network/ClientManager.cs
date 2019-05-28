@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class LocalPlayer
 {
@@ -98,6 +99,7 @@ public class ClientManager : NetworkManager
         this.client.RegisterHandler(MSGTYPE.CLIENT_CAPTURE_POINT, OnSpyStartCapture);
         this.client.RegisterHandler(MSGTYPE.CLIENT_FEEDBACK, OnReceivePlayerFeedback);
         this.client.RegisterHandler(MSGTYPE.CLIENT_ANIM_CHANGE, OnReceiveClientAnim);
+        this.client.RegisterHandler(MSGTYPE.CLIENT_EXIT_AVAL, OnReceiveClientExtiAval);
 
         this.client.RegisterHandler(MSGTYPE.PING_PONG, OnPingPong);
     }
@@ -168,6 +170,8 @@ public class ClientManager : NetworkManager
                 MiniModule_Lobby.Instance.OnLobbyPlayerAdd(v);
                 CS_Lobby.Instance.SetPlayerTeam(v);
             }
+
+            mLocalPlayer.playerName = "";
         }
     }
 
@@ -221,22 +225,23 @@ public class ClientManager : NetworkManager
 
             go.GetComponentInChildren<FOWMask>().gameObject.SetActive(false);
             go.GetComponentInChildren<UIScript>().gameObject.SetActive(false);
-            go.GetComponentInChildren<FOWAdaptiveRender>().gameObject.SetActive(false);
+            //go.GetComponentInChildren<FOWAdaptiveRender>().gameObject.SetActive(false);
             go.GetComponentInChildren<AudioListener>().enabled = false;
             go.AddComponent<ShellAnimationController>();
             if (go.tag == "Merc")
             {
-                go.transform.GetChild(0).GetChild(7).gameObject.GetComponent<SkinnedMeshRenderer>().enabled = false;
+                //go.transform.GetChild(0).GetChild(7).gameObject.GetComponent<SkinnedMeshRenderer>().enabled = false;
             }
             else
             {
-                go.transform.GetChild(0).GetChild(5).gameObject.GetComponent<SkinnedMeshRenderer>().enabled = false;
+                //go.transform.GetChild(0).GetChild(5).gameObject.GetComponent<SkinnedMeshRenderer>().enabled = false;
             }
 
             for (int i = 0; i < allMonos.Length; i++)
             {
                 allMonos[i].enabled = false;
             }
+            go.GetComponentInChildren<AudioEvents>().enabled = true;
         }
     }
 
@@ -301,23 +306,25 @@ public class ClientManager : NetworkManager
 
             go.GetComponentInChildren<FOWMask>().gameObject.SetActive(false);
             go.GetComponentInChildren<UIScript>().gameObject.SetActive(false);
-            go.GetComponentInChildren<FOWAdaptiveRender>().gameObject.SetActive(false);
+            //go.GetComponentInChildren<FOWAdaptiveRender>().gameObject.SetActive(false);
             go.GetComponentInChildren<AudioListener>().enabled = false;
             go.AddComponent<ShellAnimationController>();
 
             if (go.tag == "Merc")
             {
-                go.transform.GetChild(0).GetChild(7).gameObject.GetComponent<SkinnedMeshRenderer>().enabled = false;
+                //go.transform.GetChild(0).GetChild(7).gameObject.GetComponent<SkinnedMeshRenderer>().enabled = false;
             }
             else
             {
-                go.transform.GetChild(0).GetChild(5).gameObject.GetComponent<SkinnedMeshRenderer>().enabled = false;
+                //go.transform.GetChild(0).GetChild(5).gameObject.GetComponent<SkinnedMeshRenderer>().enabled = false;
             }
 
             for (int i = 0; i < allMonos.Length; i++)
             {
                 allMonos[i].enabled = false;
             }
+            go.GetComponentInChildren<AudioEvents>().enabled = true;
+
         }
     }
 
@@ -338,9 +345,9 @@ public class ClientManager : NetworkManager
         else
         {
             //create the game object
-            //SpawnOtherPlayerObject(Players[cm.connectId]);
-            //Players[cm.connectId].gameAvatar.transform.position = Vector3.Lerp(Players[cm.connectId].gameAvatar.transform.position,
-            //                                                                cm.position, 0.5f);
+            SpawnOtherPlayerObject(Players[cm.connectId]);
+            Players[cm.connectId].gameAvatar.transform.position = Vector3.Lerp(Players[cm.connectId].gameAvatar.transform.position,
+                                                                            cm.position, 0.5f);
         }
     }
 
@@ -356,8 +363,8 @@ public class ClientManager : NetworkManager
         else
         {
             //create the game object
-            //SpawnOtherPlayerObject(Players[cm.connectId]);
-            //Players[cm.connectId].gameAvatar.transform.rotation = cm.rot;
+            SpawnOtherPlayerObject(Players[cm.connectId]);
+            Players[cm.connectId].gameAvatar.transform.rotation = cm.rot;
         }
     }
 
@@ -540,6 +547,7 @@ public class ClientManager : NetworkManager
         Debug.Log("Has Abililites: " + PlayerStats.Instance.AbililitesUsed);
         Debug.Log("Capture Amount: " + PlayerStats.Instance.CaptureedAmount);
 
+        //set data to upload to database
         DB_UpdatePlayer updateDB = FindObjectOfType<DB_UpdatePlayer>();
         updateDB.playerName = PlayerStats.Instance.PlayerName;
         updateDB.matchResult = PlayerStats.Instance.HasWon == true ? "win" : "lose";
@@ -555,6 +563,26 @@ public class ClientManager : NetworkManager
         if (gameOverUI)
         {
             gameOverUI.SetActive(true);
+            if (LocalPlayer.playerTeam == LLAPI.Team.Merc)
+            {
+                gameOverUI.transform.GetChild(3).gameObject.SetActive(false);
+                gameOverUI.transform.GetChild(2).transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "Name - " + PlayerStats.Instance.PlayerName;
+                gameOverUI.transform.GetChild(2).transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = "Team - " + PlayerStats.Instance.PlayerTeam;
+                gameOverUI.transform.GetChild(2).transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = "Result - " + PlayerStats.Instance.HasWon.ToString();
+                gameOverUI.transform.GetChild(2).transform.GetChild(4).GetComponent<TextMeshProUGUI>().text = "Steps Taken - " + PlayerStats.Instance.Steps.ToString();
+                gameOverUI.transform.GetChild(2).transform.GetChild(5).GetComponent<TextMeshProUGUI>().text = "Shots Fired - " + PlayerStats.Instance.ShotsFired.ToString();
+                gameOverUI.transform.GetChild(2).transform.GetChild(6).GetComponent<TextMeshProUGUI>().text = "Abilities Used - " + PlayerStats.Instance.AbililitesUsed.ToString();
+            }
+            else
+            {
+                gameOverUI.transform.GetChild(2).gameObject.SetActive(false);
+                gameOverUI.transform.GetChild(3).transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "Name - " + PlayerStats.Instance.PlayerName;
+                gameOverUI.transform.GetChild(3).transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = "Team - " + PlayerStats.Instance.PlayerTeam;
+                gameOverUI.transform.GetChild(3).transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = "Result - " + PlayerStats.Instance.HasWon.ToString();
+                gameOverUI.transform.GetChild(3).transform.GetChild(4).GetComponent<TextMeshProUGUI>().text = "Steps Taken - " + PlayerStats.Instance.Steps.ToString();
+                gameOverUI.transform.GetChild(3).transform.GetChild(5).GetComponent<TextMeshProUGUI>().text = "Abilities Used - " + PlayerStats.Instance.AbililitesUsed.ToString();
+                gameOverUI.transform.GetChild(3).transform.GetChild(6).GetComponent<TextMeshProUGUI>().text = "Data Stolen - " + PlayerStats.Instance.CaptureedAmount.ToString();
+            }
         }
     }
 
@@ -603,6 +631,21 @@ public class ClientManager : NetworkManager
                 }
             }
             Players[cac.connectId].gameAvatar.transform.GetChild(0).gameObject.GetComponent<Animator>().Play(cac.hash);
+        }
+    }
+
+    public void OnReceiveClientExtiAval(NetworkMessage aMsg)
+    {
+        aMsg.reader.SeekZero();
+        Msg_ClientExitAval cea = aMsg.ReadMessage<Msg_ClientExitAval>();
+
+        NO_Exit[] exits = FindObjectsOfType<NO_Exit>();
+        for (int i = 0; i < exits.Length; i++)
+        {
+            if(exits[i].ID == cea.ExitID)
+            {
+                exits[i].ExitOpen = true;
+            }
         }
     }
 
