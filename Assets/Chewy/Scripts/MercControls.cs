@@ -110,7 +110,7 @@ public class MercControls : PlayerController
         }
 
         //}
-        if (Input.GetKeyDown(KeyCode.Mouse0) && !noShoot && !trackerAbility.trackerActive && !buttonPressed)
+        if (Input.GetAxisRaw("MercFire") > 0.5f && !noShoot && !trackerAbility.trackerActive && !buttonPressed)
         {
             //Sound?
             if (bullet != null)
@@ -151,6 +151,7 @@ public class MercControls : PlayerController
             #endregion
 
         }
+
         if(noShoot)
         {
             shotCooldown -= Time.deltaTime;
@@ -181,7 +182,7 @@ public class MercControls : PlayerController
             }
         }
         //When sprint is pressed the merc will be able to run for a short period of time
-        if (Input.GetKey(KeyCode.LeftShift) && canSprint)
+        if (Input.GetButton("Sprint") && canSprint)
         {
             buttonPressed = true;
             laser.SetActive(false);

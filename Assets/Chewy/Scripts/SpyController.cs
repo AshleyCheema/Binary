@@ -46,7 +46,7 @@ public class SpyController : PlayerController
         base.Update();
         animator.SetInteger("currentState", (int)currentState);
 
-        if (Input.GetKeyDown(KeyCode.Q) && !isHacking)
+        if (Input.GetButton("Flashbang") && !isHacking)
         {
             if (stun.GetComponent<StunAbility>().IsActive == false)
             {

@@ -78,7 +78,7 @@ public class NO_CapturePoint : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.E) && !IsCaptured)
+        if(Input.GetButton("Hacking") && !IsCaptured)
         {
             if (currentSpies.Contains(ClientManager.Instance?.LocalPlayer.gameAvatar))
             {

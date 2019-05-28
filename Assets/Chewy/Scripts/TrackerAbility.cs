@@ -43,7 +43,7 @@ public class TrackerAbility : Cooldown
     {
         base.Update();
 
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetButtonDown("Tracker"))
         {
             if (!isCooldown && !trackerActive) //&& cooldown == tracker.abilityDuration)
             {
@@ -62,7 +62,6 @@ public class TrackerAbility : Cooldown
 
         if(trackerDown)
         {
-            trackerActive = false;
 
             if(cooldown <= 0)
             {
@@ -83,62 +82,74 @@ public class TrackerAbility : Cooldown
                 }
                 //deviceCollider.enabled = false;
             }
+
+            if(cooldown < 29)
+            {
+                trackerActive = false;
+            }
         }
 
         if (!isCooldown)
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-            if (Physics.Raycast(ray, out RaycastHit hit))
+            if (Input.GetJoystickNames().Length > 0)
             {
-                float radius = 10;
-                Vector3 centerPosition = transform.position;
-                float distance = Vector3.Distance(hit.point, centerPosition);
+                trackingDevice.transform.position = new Vector3(transform.position.x + 2, 0, transform.position.z);
+            }
+            else
+            {
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-                if (distance > radius)
+                if (Physics.Raycast(ray, out RaycastHit hit))
                 {
-                    Vector3 fromOrigin = hit.point - centerPosition;
-                    fromOrigin *= radius / distance;
-                    hit.point = centerPosition + fromOrigin;
-                }
+                    float radius = 10;
+                    Vector3 centerPosition = transform.position;
+                    float distance = Vector3.Distance(hit.point, centerPosition);
 
-                if (trackingDevice)
-                {
-                    trackingDevice.transform.position = new Vector3(hit.point.x, 0, hit.point.z);
-                }
-                else
-                {
-                    trackingDevice = GameObject.Find("Tracker");
-                    deviceCollider = trackingDevice.GetComponent<Collider>();
-                }
-
-                if (Input.GetMouseButtonDown(0) && trackerActive)
-                {
-                    trackerPos = trackingDevice.transform.position;
-                    deviceCollider.enabled = true;
-                    trackerDown = true;
-                    if (trackerFeedbackCoro != null)
+                    if (distance > radius)
                     {
-                        StopCoroutine(trackerFeedbackCoro);
+                        Vector3 fromOrigin = hit.point - centerPosition;
+                        fromOrigin *= radius / distance;
+                        hit.point = centerPosition + fromOrigin;
                     }
 
-                    PlayerStats.Instance.AbililitesUsed++;
-
-                    #region NetMsg_Tracker
-                    Msg_Client_AB_Tracker ab_Tracker = new Msg_Client_AB_Tracker();
-                    if (ClientManager.Instance != null)
+                    if (trackingDevice)
                     {
-                        ab_Tracker.ConnectionID = ClientManager.Instance.LocalPlayer.connectionId;
-                        ab_Tracker.TrackerPosition = trackerPos;
-                        ab_Tracker.TrackerTriggered = true;
-                        ab_Tracker.TrackerObjectIndex = 3;
-
-                        ClientManager.Instance.client.Send(MSGTYPE.CLIENT_AB_TRACKER, ab_Tracker);
+                        trackingDevice.transform.position = new Vector3(hit.point.x, 0, hit.point.z);
                     }
-                    #endregion
-
-                    isCooldown = true;
+                    else
+                    {
+                        trackingDevice = GameObject.Find("Tracker");
+                        deviceCollider = trackingDevice.GetComponent<Collider>();
+                    }
                 }
+            }
+
+            if (Input.GetButtonDown("TrackerDown") && trackerActive)
+            {
+                trackerPos = trackingDevice.transform.position;
+                deviceCollider.enabled = true;
+                trackerDown = true;
+                if (trackerFeedbackCoro != null)
+                {
+                    StopCoroutine(trackerFeedbackCoro);
+                }
+
+                PlayerStats.Instance.AbililitesUsed++;
+
+                #region NetMsg_Tracker
+                Msg_Client_AB_Tracker ab_Tracker = new Msg_Client_AB_Tracker();
+                if (ClientManager.Instance != null)
+                {
+                    ab_Tracker.ConnectionID = ClientManager.Instance.LocalPlayer.connectionId;
+                    ab_Tracker.TrackerPosition = trackerPos;
+                    ab_Tracker.TrackerTriggered = true;
+                    ab_Tracker.TrackerObjectIndex = 3;
+
+                    ClientManager.Instance.client.Send(MSGTYPE.CLIENT_AB_TRACKER, ab_Tracker);
+                }
+                #endregion
+
+                isCooldown = true;
             }
         }
     }

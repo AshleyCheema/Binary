@@ -25,7 +25,7 @@ public class NO_Exit : MonoBehaviour
     {
         if (isOpen && allowMiniGame)
         {
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetButton("Hacking"))
             {
                 miniGame.SetActive(!miniGame.activeInHierarchy);
             }

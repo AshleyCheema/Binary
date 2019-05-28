@@ -108,7 +108,10 @@ public class PlayerController : MonoBehaviour
         if (velocity != Vector3.zero)
         {
             isMoving = true;
-            animator.SetBool("isHacking", false);
+            if (player == Player.PlayerTwo)
+            {
+                animator.SetBool("isHacking", false);
+            }
             //Update server setting for this object
             Msg_ClientMove playerMovement = new Msg_ClientMove();
             if (ClientManager.Instance != null)
