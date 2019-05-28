@@ -26,6 +26,7 @@ public class MSGTYPE
     public const short CLIENT_CAPTURE_POINT_INCREASE = 116;
     public const short CLIENT_FEEDBACK = 117;
     public const short CLIENT_ANIM_CHANGE = 118;
+    public const short CLIENT_EXIT_AVAL = 119;
     public const short PING_PONG = 250;
 }
 
@@ -469,6 +470,15 @@ public class HostManager : NetworkManager
 
     public void OnSpyExitedLevel(NetworkMessage aMsg)
     {
+        //tell other clients that the exit it open and can be used
+
+        aMsg.reader.SeekZero();
+        Msg_ClientExitAval cea = aMsg.ReadMessage<Msg_ClientExitAval>();
+        if(cea != null && cea.ExitID != 101)
+        {
+            Send(cea.ConectID, MSGTYPE.CLIENT_EXIT_AVAL, cea, false);
+        }
+
         MiniModule_GameOver.Instance.SpyExitedLevel(aMsg.conn.connectionId);
     }
 

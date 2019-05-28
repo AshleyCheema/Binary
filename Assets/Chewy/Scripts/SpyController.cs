@@ -58,15 +58,18 @@ public class SpyController : PlayerController
         if (isHacking == true)
         {
             tablet.SetActive(true);
-            if (!audioSource.isPlaying)
-            {
-                hacking.SetSourceProperties(audioSource);
-                audioSource.Play();
-            }
+
+            //if (!audioSource.isPlaying)
+            //{
+            //    hacking.SetSourceProperties(audioSource);
+            //    audioSource.Play();
+            //}
+            GetComponent<AudioEvents>().PlayHackingSound();
         }
         else
         {
-            audioSource.Stop();
+            GetComponent<AudioEvents>().StopHackingSound();
+            //audioSource.Stop();
             tablet.SetActive(false);
         }
     }

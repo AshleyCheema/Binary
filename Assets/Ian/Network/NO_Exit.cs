@@ -18,6 +18,8 @@ public class NO_Exit : MonoBehaviour
 
     private bool allowMiniGame;
     private bool exitOpen;
+    public bool ExitOpen
+    { get { return exitOpen; } set { exitOpen = value; } }
 
     private void Update()
     {
@@ -41,7 +43,9 @@ public class NO_Exit : MonoBehaviour
             miniGame.SetActive(false);
 
             //tell every one that the exit is open
-            EmptyMessage msg = new EmptyMessage();
+            Msg_ClientExitAval msg = new Msg_ClientExitAval();
+            msg.ConectID = (byte)ClientManager.Instance?.LocalPlayer.connectionId;
+            msg.ExitID = (byte)ID;
             ClientManager.Instance.client.Send(MSGTYPE.CLIENT_EXITED_LEVEL, msg);
 
             //exit level do something 
@@ -60,8 +64,8 @@ public class NO_Exit : MonoBehaviour
                 {
                     //leave level completed
                     //tell every one that the exit is open
-                    //tell every one that the exit is open
-                    EmptyMessage msg = new EmptyMessage();
+                    Msg_ClientExitAval msg = new Msg_ClientExitAval();
+                    msg.ExitID = 101;
                     ClientManager.Instance.client.Send(MSGTYPE.CLIENT_EXITED_LEVEL, msg);
 
                     //exit level do something 

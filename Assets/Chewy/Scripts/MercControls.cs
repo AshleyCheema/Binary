@@ -125,11 +125,12 @@ public class MercControls : PlayerController
             }
             noShoot = true;
 
-            if (fireSound != null)
-            {
-                fireSound.SetSourceProperties(audioSource);
-                audioSource.Play();
-            }
+            GetComponent<AudioEvents>().PlayFireSound();
+            //if (fireSound != null)
+            //{
+            //    fireSound.SetSourceProperties(audioSource);
+            //    audioSource.Play();
+            //}
 
             PlayerStats.Instance.ShotsFired++;
             PlayerStats.Instance.AbililitesUsed++;
@@ -213,21 +214,21 @@ public class MercControls : PlayerController
 
     private void Step()
     {
-        if (audioSource != null && !audioSource.isPlaying)
-        {
-            walkingSound.SetSourceProperties(audioSource);
-            audioSource.Play();
+        //if (audioSource != null && !audioSource.isPlaying)
+        //{
+        //    walkingSound.SetSourceProperties(audioSource);
+        //    audioSource.Play();
 
-            PlayerStats.Instance.Steps++;
-        }
+        //    PlayerStats.Instance.Steps++;
+        //}
     }
 
     private void Run()
     {
-        if (audioSource != null && !audioSource.isPlaying)
-        {
-            burstRunSound.SetSourceProperties(audioSource);
-            audioSource.Play();
-        }
+        //if (audioSource != null && !audioSource.isPlaying)
+        //{
+        //    burstRunSound.SetSourceProperties(audioSource);
+        //    audioSource.Play();
+        //}
     }
 }

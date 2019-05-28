@@ -294,8 +294,7 @@ public class NO_CapturePoint : MonoBehaviour
                 if (ClientManager.Instance.LocalPlayer.gameAvatar == other.gameObject)
                 {
                     miniGame.SetActive(false);
-                    spyController.cooldownScript.canHack = false;
-                    spyController.cooldownScript.gameObject.SetActive(false);              
+                    spyController.cooldownScript.canHack = false;            
                     spyController.cooldownScript.gameObject.SetActive(true);
                     spyController.isHacking = false;
                 }
