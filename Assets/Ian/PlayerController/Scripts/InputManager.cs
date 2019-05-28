@@ -46,45 +46,56 @@ public static class InputManager
     /// <returns></returns>
     public static Vector3 Joystick(Player a_player, Animator animator)
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-        
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+        if (Input.GetJoystickNames().Length > 0)
         {
-            //Vector3 forward = hit.point - a_pos;
-            //forward.y = 0;
-            //forward.Normalize();
-            //Vector3 right = Vector3.Cross(forward, Vector3.up);
-            //right.Normalize();
+            Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+            
+            animator.SetFloat("InputX+", movement.x);
+            animator.SetFloat("InputX-", movement.z);
 
-            Vector3 returnV = Vector3.zero;
-            if (Input.GetKey(KeyCode.W))
+            return movement.normalized;
+        }
+        else
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity))
             {
-                //returnV += forward;
-                returnV.z += 1f;
+                //Vector3 forward = hit.point - a_pos;
+                //forward.y = 0;
+                //forward.Normalize();
+                //Vector3 right = Vector3.Cross(forward, Vector3.up);
+                //right.Normalize();
+
+                Vector3 returnV = Vector3.zero;
+                if (Input.GetKey(KeyCode.W))
+                {
+                    //returnV += forward;
+                    returnV.z += 1f;
+                }
+                if (Input.GetKey(KeyCode.A))
+                {
+                    //returnV += right;
+                    returnV.x -= 1f;
+                }
+                if (Input.GetKey(KeyCode.D))
+                {
+                    //returnV += -right;
+                    returnV.x += 1f;
+                }
+                if (Input.GetKey(KeyCode.S))
+                {
+                    //returnV += -forward;
+                    returnV.z -= 1f;
+                }
+                animator.SetFloat("InputX+", returnV.x);
+                animator.SetFloat("InputX-", returnV.z);
+                return returnV.normalized;
             }
-            if (Input.GetKey(KeyCode.A))
-            {
-                //returnV += right;
-                returnV.x -= 1f;
-            }
-            if (Input.GetKey(KeyCode.D))
-            {
-                //returnV += -right;
-                returnV.x += 1f;
-            }
-            if (Input.GetKey(KeyCode.S))
-            {
-                //returnV += -forward;
-                returnV.z -= 1f;
-            }
-            animator.SetFloat("InputX+", returnV.x);
-            animator.SetFloat("InputX-", returnV.z);
-            return returnV.normalized;
         }
         return Vector3.zero;
         // return new Vector3(Horizontal(a_player), 0, Vertical(a_player));
-
     }
 
     public static Vector3 MovementRelativeToCamera(Vector3 a_input)

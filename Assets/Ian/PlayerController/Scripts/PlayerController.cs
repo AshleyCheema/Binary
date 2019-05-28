@@ -98,6 +98,7 @@ public class PlayerController : MonoBehaviour
                 currentSpeed = normalSpeed;
             }
         }
+
         velocity = InputManager.MovementRelativeToCamera(InputManager.Joystick(player, animator));
         Quaternion oldRot = transform.rotation;
 
@@ -158,31 +159,48 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
-    /// Update the directio that the character is facing,
+    /// Update the direction that the character is facing,
     /// This locks the character not to rotate on the x plane
     /// </summary>
     public void UpdateDirection()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit[] hits = Physics.RaycastAll(ray,1000);
-
-        for (int i = hits.Length - 1; i >= 0; --i)
+        if (Input.GetJoystickNames().Length > 0)
         {
-            if (hits[i].collider.gameObject.layer == 9)
+            Vector3 rotate = InputManager.MovementRelativeToCamera(InputManager.Joystick(player, animator));
+            if (rotate != Vector3.zero)
             {
-                Vector3 newDirection = transform.position - hits[i].point;
-                newDirection.y = 0.5f;
-                transform.forward = newDirection;
-                transform.right = Vector3.Cross(transform.forward, transform.up);
+                 transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(rotate), Time.deltaTime * 10.0f);
+            }
 
-                //Vector3 playerToMouse = hit.point - transform.position;
-                //
-                //playerToMouse.y = 0f;
-                //
-                //Quaternion newRotation = Quaternion.LookRotation(playerToMouse);
-                //
-                //transform.rotation = newRotation;
-                break;
+            if (player == Player.PlayerOne)
+            {
+                Vector3 rotation = new Vector3(0, Input.GetAxisRaw("P2Horizontal"), 0);
+                transform.Rotate(rotation * 300.0f * Time.deltaTime);
+            }
+        }
+        else
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit[] hits = Physics.RaycastAll(ray, 1000);
+
+            for (int i = hits.Length - 1; i >= 0; --i)
+            {
+                if (hits[i].collider.gameObject.layer == 9)
+                {
+                    Vector3 newDirection = transform.position - hits[i].point;
+                    newDirection.y = 0.5f;
+                    transform.forward = newDirection;
+                    transform.right = Vector3.Cross(transform.forward, transform.up);
+
+                    //Vector3 playerToMouse = hit.point - transform.position;
+                    //
+                    //playerToMouse.y = 0f;
+                    //
+                    //Quaternion newRotation = Quaternion.LookRotation(playerToMouse);
+                    //
+                    //transform.rotation = newRotation;
+                    break;
+                }
             }
         }
     }
