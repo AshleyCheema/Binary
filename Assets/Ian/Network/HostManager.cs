@@ -208,6 +208,14 @@ public class HostManager : NetworkManager
                 {
                     allMonos[i].enabled = false;
                 }
+
+                //mute all audio#
+                AudioListener.pause = true;
+                //AudioListener[] listeners = FindObjectsOfType<AudioListener>();
+                //foreach (var item in listeners)
+                //{
+                //    Destroy(item);
+                //}
             }
         }
         else if (sceneName == "ClientLobby")

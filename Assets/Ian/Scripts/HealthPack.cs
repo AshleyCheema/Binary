@@ -12,9 +12,9 @@ public class HealthPack : MonoBehaviour
             Debug.Log("Health pack picked up");
             //if this spy is hurt then change it's state to
             //normal
-            if (other.GetComponent<SpyController>().CurrentState == SpyState.Hurt)
+            if (other.transform.GetChild(0).gameObject.GetComponent<SpyController>().CurrentState == SpyState.Hurt)
             {
-                other.GetComponent<SpyController>().CurrentState = SpyState.Normal;
+                other.transform.GetChild(0).gameObject.GetComponent<SpyController>().CurrentState = SpyState.Normal;
             }
         }
     }

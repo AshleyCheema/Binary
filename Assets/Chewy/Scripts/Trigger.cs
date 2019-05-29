@@ -63,11 +63,11 @@ public class Trigger : MonoBehaviour
                         //if true we have found the gameObejct hit
                         if (other.gameObject == ClientManager.Instance.Players[key].gameAvatar)
                         {
-                            Msg_ClientTrigger ct = new Msg_ClientTrigger();
-                            ct.ConnectionID = key;
-                            ct.Trigger = true;
-                            ct.Type = TriggerType.Bullet;
-                            ClientManager.Instance.client.Send(MSGTYPE.CLIENT_AB_TRIGGER, ct);
+                            //Msg_ClientTrigger ct = new Msg_ClientTrigger();
+                            //ct.ConnectionID = key;
+                            //ct.Trigger = true;
+                            //ct.Type = TriggerType.Bullet;
+                            //ClientManager.Instance.client.Send(MSGTYPE.CLIENT_AB_TRIGGER, ct);
 
                             //Create the new message to send to the client who was shot
                             //NetMsg_AB_Trigger trigger = new NetMsg_AB_Trigger();
@@ -80,6 +80,14 @@ public class Trigger : MonoBehaviour
                         }
                     }
                     Debug.Log("Shot");
+                }
+            }
+            else
+            {
+                if(triggerType == TriggerType.Bullet)
+                {
+                        //gameObject.transform.position = new Vector3(0, -20, 0);
+                        //gameObject.SetActive(false);
                 }
             }
         }
