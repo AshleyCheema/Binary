@@ -925,6 +925,8 @@ MonoBehaviour:
   trackerAbility: {fileID: 0}
   trackerActiveSprite: {fileID: 0}
   burstActiveSprite: {fileID: 0}
+  keyboardButton: {fileID: 0}
+  ControllerButton: {fileID: 0}
   canHack: 0
   abilityType: 4
 --- !u!1 &2114616451882984745
@@ -1080,6 +1082,8 @@ MonoBehaviour:
   trackerAbility: {fileID: 0}
   trackerActiveSprite: {fileID: 0}
   burstActiveSprite: {fileID: 0}
+  keyboardButton: {fileID: 0}
+  ControllerButton: {fileID: 0}
   canHack: 0
   abilityType: 1
 --- !u!1 &2114616451905442643
@@ -1656,6 +1660,8 @@ MonoBehaviour:
   trackerActiveSprite: {fileID: 21300000, guid: 7a21244b1b2a8614ebdf6241f0b7c92b,
     type: 3}
   burstActiveSprite: {fileID: 0}
+  keyboardButton: {fileID: 0}
+  ControllerButton: {fileID: 0}
   canHack: 0
   abilityType: 0
 --- !u!1 &2114616452261418978
@@ -1972,6 +1978,8 @@ MonoBehaviour:
   trackerAbility: {fileID: 0}
   trackerActiveSprite: {fileID: 0}
   burstActiveSprite: {fileID: 21300000, guid: 445e6ef74b6ca0d46be70c5bad5c8f36, type: 3}
+  keyboardButton: {fileID: 0}
+  ControllerButton: {fileID: 0}
   canHack: 0
   abilityType: 3
 --- !u!1 &2114616452398418101
@@ -3676,6 +3684,8 @@ MonoBehaviour:
   trackerAbility: {fileID: 0}
   trackerActiveSprite: {fileID: 0}
   burstActiveSprite: {fileID: 0}
+  keyboardButton: {fileID: 0}
+  ControllerButton: {fileID: 0}
   canHack: 0
   abilityType: 0
 --- !u!1 &2114616453410666756
@@ -5313,6 +5323,8 @@ MonoBehaviour:
   trackerActiveSprite: {fileID: 21300000, guid: 090a823f8a51b924b9229833ce468587,
     type: 3}
   burstActiveSprite: {fileID: 0}
+  keyboardButton: {fileID: 0}
+  ControllerButton: {fileID: 0}
   canHack: 0
   abilityType: 2
 --- !u!1 &5437266232279147324
@@ -5615,7 +5627,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: Enter
+  m_text: E
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5692,11 +5704,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:

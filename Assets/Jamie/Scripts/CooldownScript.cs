@@ -20,6 +20,9 @@ public class CooldownScript : MonoBehaviour
     private Color activeColor = new Color(127, 194, 233, 255);
     private Sprite notActiveSprite;
 
+    public GameObject keyboardButton;
+    public GameObject ControllerButton;
+
     public bool canHack;
     private bool isSpy;
     private bool isMerc;
@@ -55,6 +58,15 @@ public class CooldownScript : MonoBehaviour
         Action.interactable = false;
         currentCooldown = CooldownTime;
         CooldownImage.fillAmount = Mathf.InverseLerp(0, 1, CooldownTime);
+
+        if(Input.GetJoystickNames().Length > 0)
+        {
+            ControllerButton.SetActive(true);
+        }
+        else
+        {
+            keyboardButton.SetActive(true);
+        }
     }
 
     // Update is called once per frame
