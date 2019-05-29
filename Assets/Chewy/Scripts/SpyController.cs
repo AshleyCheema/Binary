@@ -44,6 +44,7 @@ public class SpyController : PlayerController
     public override void Update()
     {
         base.Update();
+        Debug.Log(Input.GetAxis("HorizontalPad"));
         animator.SetInteger("currentState", (int)currentState);
 
         if (Input.GetButton("Flashbang") && !isHacking)
