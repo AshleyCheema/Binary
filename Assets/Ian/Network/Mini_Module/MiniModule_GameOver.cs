@@ -66,5 +66,17 @@ public class MiniModule_GameOver : Singleton<MiniModule_GameOver>
 
             spyiesCompleted.Clear();
         }
+
+        if(spyiesDead.Count == 1)
+        {
+            Debug.Log("Spyies have left the level");
+            Msg_ClientGameOver cgo = new Msg_ClientGameOver();
+            cgo.spiesWon = true;
+            HostManager.Instance?.SendAll(MSGTYPE.CLIENT_GAME_OVER, cgo);
+
+            HostManager.Instance?.OnGameLoadLobby();
+
+            spyiesCompleted.Clear();
+        }
     }
 }

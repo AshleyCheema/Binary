@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 using TMPro;
+using cakeslice;
 
 public class LocalPlayer
 {
@@ -252,6 +253,7 @@ public class ClientManager : NetworkManager
                 allMonos[i].enabled = false;
             }
             go.GetComponentInChildren<AudioEvents>().enabled = true;
+            go.GetComponentInChildren<Outline>().enabled = true;
         }
     }
 
@@ -576,7 +578,7 @@ public class ClientManager : NetworkManager
         updateDB.shotsFired = PlayerStats.Instance.ShotsFired;
         updateDB.ablitiesUsed = PlayerStats.Instance.AbililitesUsed;
         updateDB.pointsCaptured = (int)PlayerStats.Instance.CaptureedAmount;
-       // updateDB.CallUpdatePlayerStats();
+        updateDB.CallUpdatePlayerStats();
 
         //enable the UI fade and show the game over screen 
         //ths is where all the state can be shown in need.
@@ -604,6 +606,12 @@ public class ClientManager : NetworkManager
                 gameOverUI.transform.GetChild(2).transform.GetChild(6).GetComponent<TextMeshProUGUI>().text = "Data Stolen - " + PlayerStats.Instance.CaptureedAmount.ToString();
             }
         }
+
+        //reset stats
+        PlayerStats.Instance.Steps = 0;
+        PlayerStats.Instance.ShotsFired = 0;
+        PlayerStats.Instance.AbililitesUsed = 0;
+        PlayerStats.Instance.CaptureedAmount = 0;
     }
 
     public void OnSpyCaptureIncrease(NetworkMessage aMsg)

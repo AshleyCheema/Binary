@@ -130,14 +130,41 @@ public class MercControls : PlayerController
             //Sound?
             if (bullet != null)
             {
-                bullet.transform.position = firePosition.transform.position;//transform.GetChild(0).transform.position;//new Vector3(transform.position.x, transform.position.y, transform.position.z);
+                //bullet.transform.position = firePosition.transform.position;//transform.GetChild(0).transform.position;//new Vector3(transform.position.x, transform.position.y, transform.position.z);
                // bullet.transform.position += transform.forward * 2.5f;//transform.GetChild(0).transform.forward * 2.5f;
-                bullet.transform.rotation = firePosition.transform.rotation;//transform.GetChild(0).transform.rotation;
-                bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * 20;
-                bullet.SetActive(true);
+                //bullet.transform.rotation = firePosition.transform.rotation;//transform.GetChild(0).transform.rotation;
+                //bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * 20;
+                //bullet.SetActive(true);
 
-                bulletEffect.Play();
+                
             }
+
+            //raycast
+            RaycastHit[] hits = Physics.RaycastAll(firePosition.transform.position,
+                                 firePosition.transform.forward, 25.0f);
+            Debug.DrawRay(firePosition.transform.position, firePosition.transform.forward, Color.red, 30.0f);
+
+            foreach (var item in hits)
+            {
+                if(item.collider.gameObject.tag == "Spy")
+                {
+                    foreach (var key in ClientManager.Instance?.Players.Keys)
+                    {
+                        //if true we have found the gameObejct hit
+                        if (item.collider.gameObject == ClientManager.Instance.Players[key].gameAvatar)
+                        {
+                            Msg_ClientTrigger ct = new Msg_ClientTrigger();
+                            ct.ConnectionID = key;
+                            ct.Trigger = true;
+                            ct.Type = TriggerType.Bullet;
+                            ClientManager.Instance.client.Send(MSGTYPE.CLIENT_AB_TRIGGER, ct);
+                        }
+                    }
+                }
+            }
+
+
+            bulletEffect.Play();
             noShoot = true;
 
             GetComponent<AudioEvents>().PlayFireSound();

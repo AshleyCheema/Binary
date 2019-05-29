@@ -12,6 +12,9 @@ public class CS_LobbyMainMenu : Singleton<CS_LobbyMainMenu>
     private TMP_InputField ipInput = null;
 
     [SerializeField]
+    RectTransform mainPanel = null;
+
+    [SerializeField]
     RectTransform lobbyPanel = null;
     public RectTransform LobbyPanel
     { get { return lobbyPanel; } }
@@ -43,5 +46,22 @@ public class CS_LobbyMainMenu : Singleton<CS_LobbyMainMenu>
 
         CS_LobbyManager.Instance.ChangeTo(lobbyPanel);
         //SceneManager.LoadScene(1);
+    }
+
+    public void Back()
+    {
+        if(HostManager.Instance != null)
+        {
+            HostManager.Instance.StopServer();
+            HostManager.Instance.gameObject.SetActive(false);
+        }
+        else if(ClientManager.Instance != null)
+        {
+            ClientManager.Instance.StopClient();
+            ClientManager.Instance.gameObject.SetActive(false);
+        }
+
+
+        CS_LobbyManager.Instance.ChangeTo(mainPanel);
     }
 }
