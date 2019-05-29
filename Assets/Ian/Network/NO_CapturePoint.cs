@@ -55,6 +55,8 @@ public class NO_CapturePoint : MonoBehaviour
     [SerializeField]
     private GameObject miniGame;
 
+    private bool ishacking = false;
+
     //has this capture point been captured
     public bool IsCaptured
     {
@@ -78,7 +80,7 @@ public class NO_CapturePoint : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        if(Input.GetButton("Hacking") && !IsCaptured)
+        if(Input.GetButtonDown("Hacking") && !IsCaptured && !ishacking)
         {
             if (currentSpies.Contains(ClientManager.Instance?.LocalPlayer.gameAvatar))
             {
@@ -94,8 +96,9 @@ public class NO_CapturePoint : MonoBehaviour
             }
         }
         //another spy is capturing
-        if(Input.GetKeyDown(KeyCode.E) && !IsCaptured && IsBeingCaptured)
+        if(Input.GetButtonDown("Hacking") && !IsCaptured && IsBeingCaptured && !ishacking)
         {
+            ishacking = true;
             GetComponent<MeshRenderer>().material.color = Color.red;
 
             if (spyController != null)
@@ -132,6 +135,8 @@ public class NO_CapturePoint : MonoBehaviour
             if (capturePercentage > 100.0f)
             {
                 capturePercentage = 100.0f;
+
+                miniGame.SetActive(false);
 
                 //if we are the host/server
                 if (HostManager.Instance != null)
@@ -229,7 +234,7 @@ public class NO_CapturePoint : MonoBehaviour
                 }
             }
         }
-
+        ishacking = true;
         IsBeingCaptured = true;//ccp.IsBeingCaptured;
     }
 
@@ -297,6 +302,7 @@ public class NO_CapturePoint : MonoBehaviour
                     spyController.cooldownScript.canHack = false;            
                     spyController.cooldownScript.gameObject.SetActive(true);
                     spyController.isHacking = false;
+                    ishacking = false;
                 }
 
                 if (reset)
