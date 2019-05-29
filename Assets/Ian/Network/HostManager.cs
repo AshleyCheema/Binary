@@ -27,6 +27,7 @@ public class MSGTYPE
     public const short CLIENT_FEEDBACK = 117;
     public const short CLIENT_ANIM_CHANGE = 118;
     public const short CLIENT_EXIT_AVAL = 119;
+    public const short CLIENT_HIDE_SPY = 120;
     public const short PING_PONG = 250;
 }
 

@@ -52,6 +52,11 @@ public class MiniModule_GameOver : Singleton<MiniModule_GameOver>
         if(!spyiesCompleted.Contains(a_spy))
         {
             spyiesCompleted.Add(a_spy);
+
+            //send message to other players
+            Msg_ClientHideSpy chs = new Msg_ClientHideSpy();
+            chs.SpyToHide = a_spy;
+            HostManager.Instance.Send(a_spy, MSGTYPE.CLIENT_HIDE_SPY, chs, false);
         }
 
         // if false then all the spyies have exited the level

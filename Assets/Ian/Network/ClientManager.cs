@@ -102,6 +102,7 @@ public class ClientManager : NetworkManager
         this.client.RegisterHandler(MSGTYPE.CLIENT_FEEDBACK, OnReceivePlayerFeedback);
         this.client.RegisterHandler(MSGTYPE.CLIENT_ANIM_CHANGE, OnReceiveClientAnim);
         this.client.RegisterHandler(MSGTYPE.CLIENT_EXIT_AVAL, OnReceiveClientExtiAval);
+        this.client.RegisterHandler(MSGTYPE.CLIENT_HIDE_SPY, OnReceiveHideSpy);
 
         this.client.RegisterHandler(MSGTYPE.PING_PONG, OnPingPong);
     }
@@ -675,6 +676,14 @@ public class ClientManager : NetworkManager
                 exits[i].ExitOpen = true;
             }
         }
+    }
+
+    public void OnReceiveHideSpy(NetworkMessage aMsg)
+    {
+        aMsg.reader.SeekZero();
+        Msg_ClientHideSpy chs = aMsg.ReadMessage<Msg_ClientHideSpy>();
+
+        Players[chs.SpyToHide].gameAvatar.SetActive(false);
     }
 
     public void OnPingPong(NetworkMessage aMsg)
