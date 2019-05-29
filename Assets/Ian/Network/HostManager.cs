@@ -116,6 +116,11 @@ public class HostManager : NetworkManager
     public override void OnServerDisconnect(NetworkConnection conn)
     {
         Debug.Log("Client has disconnected: " + conn.connectionId);
+
+        Destroy(Players[conn.connectionId].lobbyAvatar);
+        Destroy(Players[conn.connectionId].gameAvatar);
+
+        Players.Remove(conn.connectionId);
     }
 
     public override void OnServerReady(NetworkConnection conn)

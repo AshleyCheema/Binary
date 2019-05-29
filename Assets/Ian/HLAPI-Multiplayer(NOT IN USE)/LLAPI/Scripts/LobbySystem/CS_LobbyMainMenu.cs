@@ -53,15 +53,14 @@ public class CS_LobbyMainMenu : Singleton<CS_LobbyMainMenu>
         if(HostManager.Instance != null)
         {
             HostManager.Instance.StopServer();
-            HostManager.Instance.gameObject.SetActive(false);
         }
         else if(ClientManager.Instance != null)
         {
             ClientManager.Instance.StopClient();
-            ClientManager.Instance.gameObject.SetActive(false);
         }
 
+        Destroy(GameObject.Find("Network"));
 
-        CS_LobbyManager.Instance.ChangeTo(mainPanel);
+        SceneManager.LoadScene(0);
     }
 }
