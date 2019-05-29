@@ -25,7 +25,7 @@ public class NO_Exit : MonoBehaviour
     {
         if (isOpen && allowMiniGame)
         {
-            if (Input.GetButton("Hacking"))
+            if (Input.GetButtonDown("Hacking"))
             {
                 miniGame.SetActive(!miniGame.activeInHierarchy);
             }
@@ -81,6 +81,8 @@ public class NO_Exit : MonoBehaviour
                 if (ClientManager.Instance != null)
                 {
                     allowMiniGame = true;
+
+                    other.transform.GetChild(0).gameObject.GetComponent<SpyController>().cooldownScript.canHack = true;
                 }
             }
         }
@@ -96,6 +98,7 @@ public class NO_Exit : MonoBehaviour
                 if (ClientManager.Instance != null)
                 {
                     allowMiniGame = false;
+                    other.transform.GetChild(0).gameObject.GetComponent<SpyController>().cooldownScript.canHack = false;
                 }
             }
         }
