@@ -16,5 +16,5 @@ MonoBehaviour:
   aClip: {fileID: 0}
   cooldown: 5
   isCooldown: 1
-  abilityDuration: 2
+  abilityDuration: 5
   uiImage: {fileID: 0}
