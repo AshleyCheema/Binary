@@ -46,6 +46,8 @@ public class SpyController : PlayerController
     // Update is called once per frame
     public override void Update()
     {
+        base.Update();
+        Debug.Log(Input.GetAxis("HorizontalPad"));
         animator.SetInteger("currentState", (int)currentState);
         if(animLastState != animator.GetCurrentAnimatorStateInfo(0).fullPathHash)
         {

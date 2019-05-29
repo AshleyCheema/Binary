@@ -103,6 +103,41 @@ public class CapturePointMiniGame : MonoBehaviour
         SetInputs();
     }
 
+    private KeyCode GetkeyCode()
+    {
+        int pad = (int)Input.GetAxis("VerticalPad");
+        if (pad != 0)
+        {
+            if(pad == -1)
+            {
+                //left key was pressed
+                return KeyCode.DownArrow;
+            }
+            else if(pad == 1)
+            {
+                //right key was pressed
+                return KeyCode.UpArrow;
+            }
+        }
+
+        pad = (int)Input.GetAxis("HorizontalPad");
+        if (pad != 0)
+        {
+            if (pad == -1)
+            {
+                //left key was pressed
+                return KeyCode.LeftArrow;
+            }
+            else if (pad == 1)
+            {
+                //right key was pressed
+                return KeyCode.RightArrow;
+            }
+        }
+
+        return 0;
+    }
+
     /// <summary>
     /// Update is called once per frame
     /// </summary>
@@ -111,7 +146,7 @@ public class CapturePointMiniGame : MonoBehaviour
         if (!inCoroutine)
         {
             bool doneInput = false;
-            if (!isCompleted && Input.GetKeyDown(inputsNeeded[inputsIndex]))
+            if (!isCompleted && Input.GetKeyDown(inputsNeeded[inputsIndex]) || !isCompleted && GetkeyCode() == inputsNeeded[inputsIndex])
             {
                 if(ClientManager.Instance != null && ClientManager.Instance.LocalPlayer.gameAvatar.tag == "Spy")
                 {
@@ -280,7 +315,7 @@ public class CapturePointMiniGame : MonoBehaviour
     {
         for (int i = 0; i < inputsAllowed.Length; i++)
         {
-            if (Input.GetKeyDown(inputsAllowed[i].KeyCode))
+            if (Input.GetKeyDown(inputsAllowed[i].KeyCode) || GetkeyCode() == inputsAllowed[i].KeyCode)
             {
                 return true;
             }
