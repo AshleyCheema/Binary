@@ -170,6 +170,15 @@ public class ClientManager : NetworkManager
             {
                 MiniModule_Lobby.Instance.OnLobbyPlayerAdd(v);
                 CS_Lobby.Instance.SetPlayerTeam(v);
+
+                foreach (var item in v.lobbyAvatar.GetComponentsInChildren<TextMeshProUGUI>())
+                {
+                    if (item.text == "Enter name...")
+                    {
+                        item.text = "";
+                        break;
+                    }
+                }
             }
 
             mLocalPlayer.playerName = "";
