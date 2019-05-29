@@ -224,7 +224,7 @@ public class MercControls : PlayerController
             }
         }
         //When sprint is pressed the merc will be able to run for a short period of time
-        if (Input.GetButton("Sprint") && canSprint)
+        if (Input.GetButtonDown("Sprint") && canSprint && !buttonPressed)
         {
             buttonPressed = true;
             laser.SetActive(false);
@@ -238,6 +238,11 @@ public class MercControls : PlayerController
            }
            #endregion
         }
+        else if (Input.GetButtonDown("Sprint") && speedDuration > 0)
+        {
+            speedDuration = 0;
+        }
+
         if (buttonPressed)
         {
             currentSpeed = runningSpeed;
