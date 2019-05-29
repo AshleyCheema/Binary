@@ -75,6 +75,11 @@ public class StunAbility : Cooldown
     // Update is called once per frame
     protected override void Update()
     {
+        //if (spyControllerSc.CurrentState == SpyState.Dead)
+        //{
+        //    return;
+        //}
+
         base.Update();
 
         if (spyControllerSc != null && spyControllerSc.stunDrop)

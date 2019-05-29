@@ -49,7 +49,8 @@ public class NO_Exit : MonoBehaviour
             ClientManager.Instance.client.Send(MSGTYPE.CLIENT_EXITED_LEVEL, msg);
 
             //exit level do something 
-
+            //disable spy
+            ClientManager.Instance?.LocalPlayer.gameAvatar.SetActive(false);
         }
     }
 
@@ -69,6 +70,8 @@ public class NO_Exit : MonoBehaviour
                     ClientManager.Instance.client.Send(MSGTYPE.CLIENT_EXITED_LEVEL, msg);
 
                     //exit level do something 
+                    //disable spy
+                    ClientManager.Instance?.LocalPlayer.gameAvatar.SetActive(false);
                 }
             }
 

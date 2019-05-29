@@ -28,6 +28,9 @@ public class SpyController : PlayerController
     public AudioSO run;
     public AudioSO hacking;
 
+    //animation last state
+    private int animLastState = -1;
+
     // Start is called before the first frame update
     public override void Start()
     {
@@ -43,9 +46,27 @@ public class SpyController : PlayerController
     // Update is called once per frame
     public override void Update()
     {
-        base.Update();
         animator.SetInteger("currentState", (int)currentState);
+        if(animLastState != animator.GetCurrentAnimatorStateInfo(0).fullPathHash)
+        {
+            animLastState = animator.GetCurrentAnimatorStateInfo(0).fullPathHash;
 
+            //send animation message
+            Debug.Log("Animation state changed");
+
+            Msg_ClientAnimChange cac = new Msg_ClientAnimChange();
+            cac.hash = animLastState;
+            cac.connectId = (byte)ClientManager.Instance?.LocalPlayer.connectionId;
+            cac.direction = (byte)(animator.GetFloat("InputX+") + 2);
+            ClientManager.Instance?.client.Send(MSGTYPE.CLIENT_ANIM_CHANGE, cac);
+        }
+
+        if (currentState == SpyState.Dead)
+        {
+            return;
+        }
+
+        base.Update();
         if (Input.GetButton("Flashbang") && !isHacking)
         {
             if (stun.GetComponent<StunAbility>().IsActive == false)

@@ -7,12 +7,12 @@ public class AnimationCallBack : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        Debug.Log("Animation state has changed");
-        Msg_ClientAnimChange cac = new Msg_ClientAnimChange();
-        cac.hash = stateInfo.fullPathHash;
-        cac.connectId = (byte)ClientManager.Instance?.LocalPlayer.connectionId;
-        cac.direction = (byte)(animator.GetFloat("InputX+") + 2);
-        ClientManager.Instance?.client.Send(MSGTYPE.CLIENT_ANIM_CHANGE, cac);
+        //Debug.Log("Animation state has changed");
+        //Msg_ClientAnimChange cac = new Msg_ClientAnimChange();
+        //cac.hash = stateInfo.fullPathHash;
+        //cac.connectId = (byte)ClientManager.Instance?.LocalPlayer.connectionId;
+        //cac.direction = (byte)(animator.GetFloat("InputX+") + 2);
+        //ClientManager.Instance?.client.Send(MSGTYPE.CLIENT_ANIM_CHANGE, cac);
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

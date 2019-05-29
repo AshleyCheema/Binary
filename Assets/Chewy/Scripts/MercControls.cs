@@ -51,6 +51,9 @@ public class MercControls : PlayerController
 
     public Abilities sprint;
 
+    //animation last state
+    private int animLastState = -1;
+
     // Start is called before the first frame update
     public override void Start()
     {
@@ -71,6 +74,18 @@ public class MercControls : PlayerController
     // Update is called once per frame
     public override void Update()
     {
+        if(animLastState != animator.GetCurrentAnimatorStateInfo(0).fullPathHash)
+        {
+            animLastState = animator.GetCurrentAnimatorStateInfo(0).fullPathHash;
+
+            //send animation message
+            Msg_ClientAnimChange cac = new Msg_ClientAnimChange();
+            cac.hash = animLastState;
+            cac.connectId = (byte)ClientManager.Instance?.LocalPlayer.connectionId;
+            cac.direction = (byte)(animator.GetFloat("InputX+") + 2);
+            ClientManager.Instance?.client.Send(MSGTYPE.CLIENT_ANIM_CHANGE, cac);
+        }
+
         //UpdateDirection();
         base.Update();
 

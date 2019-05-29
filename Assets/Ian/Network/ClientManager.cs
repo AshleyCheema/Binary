@@ -44,6 +44,7 @@ public class ClientManager : NetworkManager
 
     [SerializeField]
     private RuntimeAnimatorController spyShellAnim;
+    private RuntimeAnimatorController spyShellAnim1;
     [SerializeField]
     private RuntimeAnimatorController mercShellAnim;
 
@@ -258,7 +259,17 @@ public class ClientManager : NetworkManager
             localPlayer.gameObjects = new List<GameObject>();
             Players.Add(localPlayer.connectionId, localPlayer);
 
+
             MiniModule_Lobby.Instance.OnLobbyPlayerAdd(localPlayer);
+
+            foreach (var item in localPlayer.lobbyAvatar.GetComponentsInChildren<TextMeshProUGUI>())
+            {
+                if (item.text == "Enter name...")
+                {
+                    item.text = "";
+                    break;
+                }
+            }
         }
         else
         {
@@ -556,32 +567,32 @@ public class ClientManager : NetworkManager
         updateDB.shotsFired = PlayerStats.Instance.ShotsFired;
         updateDB.ablitiesUsed = PlayerStats.Instance.AbililitesUsed;
         updateDB.pointsCaptured = (int)PlayerStats.Instance.CaptureedAmount;
-        updateDB.CallUpdatePlayerStats();
+       // updateDB.CallUpdatePlayerStats();
 
         //enable the UI fade and show the game over screen 
         //ths is where all the state can be shown in need.
         if (gameOverUI)
         {
             gameOverUI.SetActive(true);
+
+            string result = (PlayerStats.Instance.HasWon == true) ? "Won" : "Lost";
             if (LocalPlayer.playerTeam == LLAPI.Team.Merc)
             {
-                gameOverUI.transform.GetChild(3).gameObject.SetActive(false);
                 gameOverUI.transform.GetChild(2).transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "Name - " + PlayerStats.Instance.PlayerName;
                 gameOverUI.transform.GetChild(2).transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = "Team - " + PlayerStats.Instance.PlayerTeam;
-                gameOverUI.transform.GetChild(2).transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = "Result - " + PlayerStats.Instance.HasWon.ToString();
+                gameOverUI.transform.GetChild(2).transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = "Result - " + result;
                 gameOverUI.transform.GetChild(2).transform.GetChild(4).GetComponent<TextMeshProUGUI>().text = "Steps Taken - " + PlayerStats.Instance.Steps.ToString();
                 gameOverUI.transform.GetChild(2).transform.GetChild(5).GetComponent<TextMeshProUGUI>().text = "Shots Fired - " + PlayerStats.Instance.ShotsFired.ToString();
                 gameOverUI.transform.GetChild(2).transform.GetChild(6).GetComponent<TextMeshProUGUI>().text = "Abilities Used - " + PlayerStats.Instance.AbililitesUsed.ToString();
             }
             else
             {
-                gameOverUI.transform.GetChild(2).gameObject.SetActive(false);
-                gameOverUI.transform.GetChild(3).transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "Name - " + PlayerStats.Instance.PlayerName;
-                gameOverUI.transform.GetChild(3).transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = "Team - " + PlayerStats.Instance.PlayerTeam;
-                gameOverUI.transform.GetChild(3).transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = "Result - " + PlayerStats.Instance.HasWon.ToString();
-                gameOverUI.transform.GetChild(3).transform.GetChild(4).GetComponent<TextMeshProUGUI>().text = "Steps Taken - " + PlayerStats.Instance.Steps.ToString();
-                gameOverUI.transform.GetChild(3).transform.GetChild(5).GetComponent<TextMeshProUGUI>().text = "Abilities Used - " + PlayerStats.Instance.AbililitesUsed.ToString();
-                gameOverUI.transform.GetChild(3).transform.GetChild(6).GetComponent<TextMeshProUGUI>().text = "Data Stolen - " + PlayerStats.Instance.CaptureedAmount.ToString();
+                gameOverUI.transform.GetChild(2).transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "Name - " + PlayerStats.Instance.PlayerName;
+                gameOverUI.transform.GetChild(2).transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = "Team - " + PlayerStats.Instance.PlayerTeam;
+                gameOverUI.transform.GetChild(2).transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = "Result - " + result;
+                gameOverUI.transform.GetChild(2).transform.GetChild(4).GetComponent<TextMeshProUGUI>().text = "Steps Taken - " + PlayerStats.Instance.Steps.ToString();
+                gameOverUI.transform.GetChild(2).transform.GetChild(5).GetComponent<TextMeshProUGUI>().text = "Abilities Used - " + PlayerStats.Instance.AbililitesUsed.ToString();
+                gameOverUI.transform.GetChild(2).transform.GetChild(6).GetComponent<TextMeshProUGUI>().text = "Data Stolen - " + PlayerStats.Instance.CaptureedAmount.ToString();
             }
         }
     }

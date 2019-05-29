@@ -17,6 +17,8 @@ TagManager:
   - HealthPack
   - RoomColliders
   - Tracker
+  - MercStats
+  - SpyStats
   layers:
   - Default
   - TransparentFX
