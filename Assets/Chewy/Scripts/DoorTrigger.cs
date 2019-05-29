@@ -15,6 +15,16 @@ public class DoorTrigger : MonoBehaviour
             GetComponent<Animator>().SetTrigger("OpenDoor");
         }
     }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.tag == "Spy" ||
+            other.gameObject.tag == "Merc")
+        {
+            GetComponent<Animator>().SetTrigger("OpenDoor");
+        }
+    }
+
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.tag == "Spy" ||
