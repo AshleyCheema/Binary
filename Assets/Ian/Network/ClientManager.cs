@@ -353,7 +353,7 @@ public class ClientManager : NetworkManager
                 allMonos[i].enabled = false;
             }
             go.GetComponentInChildren<AudioEvents>().enabled = true;
-
+            go.GetComponentInChildren<Outline>().enabled = true;
         }
     }
 

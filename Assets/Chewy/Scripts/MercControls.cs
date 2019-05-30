@@ -131,34 +131,25 @@ public class MercControls : PlayerController
         //It uses a raycast to detect whether it has hit the Spy
         if (Input.GetAxisRaw("MercFire") > 0.5f && !noShoot && !trackerAbility.trackerActive && !buttonPressed)
         {
+            RaycastHit hit;
             //raycast
-            RaycastHit[] hits = Physics.RaycastAll(firePosition.transform.position,
-                                 firePosition.transform.forward, 25.0f);
-            Debug.DrawRay(firePosition.transform.position, firePosition.transform.forward, Color.red, 30.0f);
-
-            foreach (var item in hits)
+            if(Physics.Raycast(firePosition.transform.position, firePosition.transform.forward, out hit, 1 << 13))
             {
-                if (item.collider.gameObject.GetComponent<MeshRenderer>())
+                Debug.Log(hit.collider.gameObject);
+                foreach (var key in ClientManager.Instance?.Players.Keys)
                 {
-                    if (item.collider.gameObject.tag == "Spy")
+                    //if true we have found the gameObejct hit
+                    if (hit.collider.gameObject == ClientManager.Instance.Players[key].gameAvatar)
                     {
-                        foreach (var key in ClientManager.Instance?.Players.Keys)
-                        {
-                            //if true we have found the gameObejct hit
-                            if (item.collider.gameObject == ClientManager.Instance.Players[key].gameAvatar)
-                            {
-                                Msg_ClientTrigger ct = new Msg_ClientTrigger();
-                                ct.ConnectionID = key;
-                                ct.Trigger = true;
-                                ct.Type = TriggerType.Bullet;
-                                ClientManager.Instance.client.Send(MSGTYPE.CLIENT_AB_TRIGGER, ct);
-                            }
-                        }
+                        Msg_ClientTrigger ct = new Msg_ClientTrigger();
+                        ct.ConnectionID = key;
+                        ct.Trigger = true;
+                        ct.Type = TriggerType.Bullet;
+                        ClientManager.Instance.client.Send(MSGTYPE.CLIENT_AB_TRIGGER, ct);
                     }
                 }
             }
-
-
+            
             bulletEffect.Play();
             noShoot = true;
 
