@@ -34,8 +34,8 @@ public class HackingPuzzleManager : MonoBehaviour
         startTile = FindStartTile();
         endTile = FindEndTile();
 
-        startTile.ChangeColour(Color.blue);
-        endTile.ChangeColour(Color.red);
+        //startTile.ChangeColour(Color.blue);
+        //endTile.ChangeColour(Color.red);
     }
 
     /// <summary>
