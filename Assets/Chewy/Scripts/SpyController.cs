@@ -21,6 +21,8 @@ public class SpyController : PlayerController
     { get { return currentState; } set { currentState = value; } }
 
     public bool stunDrop;
+    public bool isSpawned = false;
+
 
     //Audio
     private AudioSource audioSource;

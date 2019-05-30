@@ -56,15 +56,22 @@ public class StunAbility : Cooldown
     {
         client = FindObjectOfType<Client>();
         stunG = GameObject.Find("StunG");
-        spyController = GameObject.FindGameObjectWithTag("Spy");
-        if (spyController)
+        GameObject[] spyControllers = GameObject.FindGameObjectsWithTag("Spy");
+        foreach (var item in spyControllers)
         {
-            spyControllerSc = spyController.GetComponent<SpyController>();
-            if (stunG != null)
+            //if true then this is a shell object
+            if (!item.GetComponent<ShellAnimationController>())
             {
-                IsActive = false;
+                spyControllerSc = item.GetComponentInChildren<SpyController>();
+                if (stunG != null)
+                {
+                    IsActive = false;
+                    spyController = item;
+                }
+                break;
             }
         }
+
         audioSource = gameObject.GetComponent<AudioSource>();
         flash = gameObject.transform.GetChild(0).GetComponent<ParticleSystem>();
         trigger = gameObject.GetComponent<Trigger>();
@@ -106,16 +113,18 @@ public class StunAbility : Cooldown
         }
         else if (spyControllerSc == null)
         {
-            spyController = GameObject.FindGameObjectWithTag("Spy");
-            if (spyController)
+            GameObject[] spyControllers = GameObject.FindGameObjectsWithTag("Spy");
+            foreach (var item in spyControllers)
             {
-                spyControllerSc = spyController.GetComponentInChildren<SpyController>();
-                if (stunG != null)
+                //if true then this is a shell object
+                if (!item.GetComponentInChildren<SpyController>().isSpawned)
                 {
-                    spyControllerSc.stun = stunG;
-                    //stunG.SetActive(false);
-
-                    IsActive = false;
+                    spyControllerSc = item.GetComponentInChildren<SpyController>();
+                    if (stunG != null)
+                    {
+                        IsActive = false;
+                        spyController = item;
+                    }
                 }
             }
         }

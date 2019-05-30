@@ -247,6 +247,7 @@ public class ClientManager : NetworkManager
             else
             {
                 //go.transform.GetChild(0).GetChild(5).gameObject.GetComponent<SkinnedMeshRenderer>().enabled = false;
+                go.GetComponentInChildren<SpyController>().isSpawned = true;
             }
 
             for (int i = 0; i < allMonos.Length; i++)
@@ -340,6 +341,7 @@ public class ClientManager : NetworkManager
             else
             {
                 //go.transform.GetChild(0).GetChild(5).gameObject.GetComponent<SkinnedMeshRenderer>().enabled = false;
+                go.GetComponentInChildren<SpyController>().isSpawned = true;
             }
 
             for (int i = 0; i < allMonos.Length; i++)
