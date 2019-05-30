@@ -44,9 +44,6 @@ public class MercControls : PlayerController
 
     //Audio
     private AudioSource audioSource;
-    public AudioSO walkingSound;
-    public AudioSO fireSound;
-    public AudioSO burstRunSound;
     public AudioSO /*Thats How You Get*/ tinnitus;
 
     public Abilities sprint;
@@ -74,6 +71,7 @@ public class MercControls : PlayerController
     // Update is called once per frame
     public override void Update()
     {
+        //Networking for the Merc animations
         if(animLastState != animator.GetCurrentAnimatorStateInfo(0).fullPathHash)
         {
             animLastState = animator.GetCurrentAnimatorStateInfo(0).fullPathHash;
@@ -103,8 +101,11 @@ public class MercControls : PlayerController
             triggerScript = GameObject.Find("StunG").GetComponent<Trigger>();
         }
 
+        //If this are true they will be their designated animation
         animator.SetBool("isBurst", buttonPressed);
         animator.SetBool("isBlinded", triggerScript.isStunned);
+
+        //If the Merc is stunned by the Spy then they will slowed, deafened and blinded temporarily
         if (triggerScript.isStunned)
         {
             currentSpeed = reloadSpeed;
@@ -125,20 +126,11 @@ public class MercControls : PlayerController
         }
 
         //}
+
+        //This if statement checks if the Spy can fire their weapon
+        //It uses a raycast to detect whether it has hit the Spy
         if (Input.GetAxisRaw("MercFire") > 0.5f && !noShoot && !trackerAbility.trackerActive && !buttonPressed)
         {
-            //Sound?
-            if (bullet != null)
-            {
-                //bullet.transform.position = firePosition.transform.position;//transform.GetChild(0).transform.position;//new Vector3(transform.position.x, transform.position.y, transform.position.z);
-               // bullet.transform.position += transform.forward * 2.5f;//transform.GetChild(0).transform.forward * 2.5f;
-                //bullet.transform.rotation = firePosition.transform.rotation;//transform.GetChild(0).transform.rotation;
-                //bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * 20;
-                //bullet.SetActive(true);
-
-                
-            }
-
             //raycast
             RaycastHit[] hits = Physics.RaycastAll(firePosition.transform.position,
                                  firePosition.transform.forward, 25.0f);
@@ -197,6 +189,7 @@ public class MercControls : PlayerController
 
         }
 
+        //If this is true the Spy will walk slowly for a second
         if(noShoot)
         {
             shotCooldown -= Time.deltaTime;
@@ -241,11 +234,12 @@ public class MercControls : PlayerController
            }
            #endregion
         }
+        //The player can cancel their sprint
         else if (Input.GetButtonDown("Sprint") && speedDuration > 0)
         {
             speedDuration = 0;
         }
-
+        //If sprinting
         if (buttonPressed)
         {
             currentSpeed = runningSpeed;

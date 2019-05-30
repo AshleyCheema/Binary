@@ -39,8 +39,10 @@ public class SpyController : PlayerController
     // Update is called once per frame
     public override void Update()
     {
-        Debug.Log(Input.GetAxis("HorizontalPad"));
+        //Sets the animation to reflect to the Spy's current state
         animator.SetInteger("currentState", (int)currentState);
+
+        //Networking for the Spy animations
         if(animLastState != animator.GetCurrentAnimatorStateInfo(0).fullPathHash)
         {
             animLastState = animator.GetCurrentAnimatorStateInfo(0).fullPathHash;
@@ -61,6 +63,7 @@ public class SpyController : PlayerController
         }
         base.Update();
 
+        //The spy cannot use their flashbang while hacking
         if (Input.GetButton("Flashbang") && !isHacking)
         {
             if (stun.GetComponent<StunAbility>().IsActive == false)
@@ -70,6 +73,7 @@ public class SpyController : PlayerController
             }
         }
 
+        //If hacking play audio
         if (isHacking == true)
         {
 
@@ -87,6 +91,8 @@ public class SpyController : PlayerController
         }
     }
 
+    //The function is called when the player is shot by the Merc
+    //If the shot once go into a hurt state otherwise the Spy is now dead
     public void Shot()
     {
         if (currentState == SpyState.Normal)
