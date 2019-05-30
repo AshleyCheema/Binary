@@ -57,8 +57,10 @@ public class CapturePointMiniGame : MonoBehaviour
     //Keep track if we are in a coroutine
     private bool inCoroutine = false;
 
+    //spy reference
     private SpyController spyController;
 
+    //audio 
     public AudioSO hackingSound;
     public AudioSO completeSound;
     private AudioSource audioSource;
@@ -103,6 +105,7 @@ public class CapturePointMiniGame : MonoBehaviour
         SetInputs();
     }
 
+    //translate a controller input to a keyboard input
     private KeyCode GetkeyCode()
     {
         int pad = (int)Input.GetAxis("VerticalPad");
@@ -143,6 +146,7 @@ public class CapturePointMiniGame : MonoBehaviour
     /// </summary>
     void Update()
     {
+        //cooldown 
         if (!inCoroutine)
         {
             bool doneInput = false;

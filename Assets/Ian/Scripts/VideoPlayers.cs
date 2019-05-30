@@ -6,16 +6,16 @@ using UnityEngine.Video;
 
 public class VideoPlayers : MonoBehaviour
 {
+    //video players 
     [SerializeField]
     private VideoPlayer mercVideo;
     [SerializeField]
     private VideoPlayer spyVideo;
 
-    float videoLength;
-
     // Start is called before the first frame update
     void Awake()
     {
+        //set the video for the player depending on the team
         if (ClientManager.Instance != null)
         {
             if (ClientManager.Instance.LocalPlayer.playerTeam == LLAPI.Team.Merc)
@@ -30,11 +30,12 @@ public class VideoPlayers : MonoBehaviour
             }
         }
 
+        //if server, invoke function
         if(HostManager.Instance != null)
         {
             mercVideo.enabled = false;
             spyVideo.enabled = false;
-            Invoke(nameof(VideoFinshed), 70.0f);
+            Invoke(nameof(VideoFinshed), 65.0f);
         }
     }
 
@@ -44,6 +45,7 @@ public class VideoPlayers : MonoBehaviour
         //load new level
         if(HostManager.Instance != null)
         {
+            //change scene
             HostManager.Instance.ServerChangeScene("NewLevel");
         }
     }
