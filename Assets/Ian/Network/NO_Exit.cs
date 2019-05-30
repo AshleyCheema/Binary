@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.Networking.NetworkSystem;
 
 public class NO_Exit : MonoBehaviour
@@ -31,6 +32,9 @@ public class NO_Exit : MonoBehaviour
             if (Input.GetButtonDown("Hacking"))
             {
                 miniGame.SetActive(!miniGame.activeInHierarchy);
+
+                EventSystem es = FindObjectOfType<EventSystem>();
+                es.SetSelectedGameObject(miniGame.GetComponentInChildren<TileEditor>().gameObject);
             }
         }
     }
@@ -103,6 +107,7 @@ public class NO_Exit : MonoBehaviour
                 if (ClientManager.Instance != null)
                 {
                     allowMiniGame = false;
+                    miniGame.SetActive(!miniGame.activeInHierarchy);
                     other.transform.GetChild(0).gameObject.GetComponent<SpyController>().cooldownScript.canHack = false;
                 }
             }
