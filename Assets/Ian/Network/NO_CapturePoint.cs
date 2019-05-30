@@ -7,7 +7,8 @@ using UnityEngine.UI;
 public class NO_CapturePoint : MonoBehaviour
 {
     public int ID;
-
+    
+    //variables
     [SerializeField]
     private bool isBeingCaptured = false;
     public bool IsBeingCaptured
@@ -55,6 +56,7 @@ public class NO_CapturePoint : MonoBehaviour
     [SerializeField]
     private GameObject miniGame;
 
+    //player is currently hacking
     private bool ishacking = false;
 
     //has this capture point been captured
@@ -82,10 +84,12 @@ public class NO_CapturePoint : MonoBehaviour
     {
         if(Input.GetButtonDown("Hacking") && !IsCaptured && !ishacking)
         {
+            //if the local player is within this capture point. Allow them to hack
             if (currentSpies.Contains(ClientManager.Instance?.LocalPlayer.gameAvatar))
             {
                 StartHacking();
 
+                //send message. This capture point is being hacked
                 if (ccp.ID == -1)
                 {
                     ccp.connectId = ClientManager.Instance.LocalPlayer.connectionId;
@@ -101,11 +105,14 @@ public class NO_CapturePoint : MonoBehaviour
             ishacking = true;
             GetComponent<MeshRenderer>().material.color = Color.red;
 
+            //null check
             if (spyController != null)
             {
                 //spyController.cooldownScript.gameObject.SetActive(false);
                 spyController.isHacking = true;
 
+                //if spy contoller is local player 
+                //active mini game
                 if (ClientManager.Instance.LocalPlayer.gameAvatar == spyController.transform.parent.gameObject)
                 {
                     miniGame.SetActive(true);
@@ -118,40 +125,48 @@ public class NO_CapturePoint : MonoBehaviour
             }
         }
 
-
-        if (tm != null)
-        {
-            tm.text = ((int)capturePercentage).ToString() + "%";
-        }
+        //if capture ibeing captured
+        //increase capture percentage
         if (isBeingCaptured)
         {
             capturePercentage += captureAmount * Time.deltaTime;
 
+            //increase player stats
             if (capturePercentage < 100.0f)
             {
                 PlayerStats.Instance.CaptureedAmount += captureAmount * Time.deltaTime;
             }
 
+            if(tm != null)
+            {
+                tm.text = ((int)capturePercentage).ToString() + "%";
+            }
+            //clamp capture percentage
             if (capturePercentage > 100.0f)
             {
                 capturePercentage = 100.0f;
 
+                //deactive mini game
                 miniGame.SetActive(false);
+                IsBeingCaptured = false;
+
+                //set all objects colour to clue
+                for (int i = 0; i < objectsAround.Length; i++)
+                {
+                    objectsAround[i].GetComponent<EmissionChange>().ColourChange(Color.blue);
+                }
 
                 //if we are the host/server
                 if (HostManager.Instance != null)
                 {
+                    //tell exit manager capture point has been captured
                     ExitManager.Instance.CapturePointCaptured();
-                    //check for the exit manager
-                    //if (isServer)
-                    //{
-                    //    ExitManager.Insntane.CapturePointCaptured();
-                    //}
                 }
             }
         }
     }
 
+    //increase capture amount per second
     public void IncreaseCaptureAmount(bool aSend = true)
     {
         captureAmount += 0.5f;
@@ -170,6 +185,7 @@ public class NO_CapturePoint : MonoBehaviour
         }
     }
 
+    //reset capture amount
     public void ResetCaptureAmount()
     {
         captureAmount = 0.5f;
@@ -189,55 +205,31 @@ public class NO_CapturePoint : MonoBehaviour
                 spyController.cooldownScript.canHack = true;
 
                 currentSpies.Add(other.gameObject);
-
-                //ccp = new Msg_ClientCapaturePoint();
-                //ccp.connectId = ClientManager.Instance.LocalPlayer.connectionId;
-                //ccp.IsBeingCaptured = true;
-                //ccp.ID = ID;
-                //ClientManager.Instance.client.Send(MSGTYPE.CLIENT_CAPTURE_POINT, ccp);
-
-                //if (spyController.hackingKeyPressed == true)
-                //{
-                //
-                //    //NetMsg_CP_Capture capture = new NetMsg_CP_Capture();
-                //    //capture.ID = ID;
-                //    //capture.IsBeingCaptured = isBeingCaptured;
-                //    //capture.Percentage = (int)capturePercentage;
-                //    //
-                //    //Server.Instance.Send(capture, Server.Instance.ReliableChannel);
-                //}
             }
         }
     }
 
+    //enable the mini game ui, and set objects colours
     private void StartHacking()
     {
-        //if(ccp != null)
-        //{
-        //    isBeingCaptured = ccp.IsBeingCaptured;
-        //}
-
         GetComponent<MeshRenderer>().material.color = Color.red;
 
         if (spyController != null)
         {
-            //spyController.cooldownScript.gameObject.SetActive(false);
             spyController.isHacking = true;
 
             if (ClientManager.Instance.LocalPlayer.gameAvatar == spyController.transform.parent.gameObject)
-           {
-                //if(!isBeingCaptured)
-                //{
-                    //c_lerpColor = StartCoroutine(LerpColor(Color.red, Color.green));
-                    miniGame.SetActive(true);
-                    miniGame.GetComponentInChildren<CapturePointMiniGame>().Show();
-                //}
+            {
+                miniGame.SetActive(true);
+                miniGame.GetComponentInChildren<CapturePointMiniGame>().Show();
             }
         }
         ishacking = true;
         IsBeingCaptured = true;//ccp.IsBeingCaptured;
     }
 
+    //lerp the objects colour between a start and end colour depending on
+    //capture percentage
     private IEnumerator LerpColor(Color start, Color end)
     {
         float lerpTimer = 0f;
@@ -281,40 +273,27 @@ public class NO_CapturePoint : MonoBehaviour
             {
                 currentSpies.Remove(other.gameObject);
 
-                //Collider[] allColls = Physics.OverlapSphere(transform.position, GetComponent<SphereCollider>().radius - 0.5f);
                 bool reset = true;
                 if(currentSpies.Count > 0)
                 {
                     reset = false;
                 }
-                //for (int i = 0; i < allColls.Length; i++)
-                //{
-                //    if (allColls[i].gameObject.tag == "Spy")
-                //    {
-                //        reset = false;
-                //        break;
-                //    }
-                //}
 
+                //if this is the local player then disable the mini game ui
                 if (ClientManager.Instance.LocalPlayer.gameAvatar == other.gameObject)
                 {
                     miniGame.SetActive(false);
                     spyController.cooldownScript.canHack = false;            
-                    //spyController.cooldownScript.gameObject.SetActive(true);
                     spyController.isHacking = false;
                     ishacking = false;
                 }
 
+                //if no spy is within capture point range
+                //set IsBeingCaptured to false and send message to other clients
                 if (reset)
                 {
-                    
                     GetComponent<MeshRenderer>().material.color = Color.white;
                     IsBeingCaptured = false;
-                    //if (c_lerpColor != null)
-                   // {
-                   //     StopCoroutine(c_lerpColor);
-                   //     c_lerpColor = null;
-                   // }
                    
                     ccp.connectId = ClientManager.Instance.LocalPlayer.connectionId;
                     ccp.IsBeingCaptured = isBeingCaptured;
@@ -324,15 +303,7 @@ public class NO_CapturePoint : MonoBehaviour
 
                     capturePercentage = Mathf.FloorToInt(capturePercentage);
 
-                    //maybe not here
                     captureAmount = 0.5f;
-
-                    //NetMsg_CP_Capture capture = new NetMsg_CP_Capture();
-                    //capture.ID = ID;
-                    //capture.IsBeingCaptured = isBeingCaptured;
-                    //capture.Percentage = (int)capturePercentage;
-                    //
-                    //Server.Instance.Send(capture, Server.Instance.ReliableChannel);
                 }
             }
         }
