@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class HealthPack : MonoBehaviour
 {
+    public int ID;
+
     private void OnTriggerEnter(Collider other)
     {
         //check if the spy enters a health pack trigger
@@ -15,6 +17,16 @@ public class HealthPack : MonoBehaviour
             if (other.transform.GetChild(0).gameObject.GetComponent<SpyController>().CurrentState == SpyState.Hurt)
             {
                 other.transform.GetChild(0).gameObject.GetComponent<SpyController>().CurrentState = SpyState.Normal;
+
+                gameObject.SetActive(false);
+
+                if(ClientManager.Instance != null)
+                {
+                    Msg_ClientDestroyHealth cdh = new Msg_ClientDestroyHealth();
+                    cdh.ConnectID = ClientManager.Instance.LocalPlayer.connectionId;
+                    cdh.ID = ID;
+                    ClientManager.Instance.client.Send(MSGTYPE.CLIENT_DESTROY_HEALTH, cdh);
+                }
             }
         }
     }

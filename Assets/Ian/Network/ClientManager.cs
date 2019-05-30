@@ -103,6 +103,7 @@ public class ClientManager : NetworkManager
         this.client.RegisterHandler(MSGTYPE.CLIENT_ANIM_CHANGE, OnReceiveClientAnim);
         this.client.RegisterHandler(MSGTYPE.CLIENT_EXIT_AVAL, OnReceiveClientExtiAval);
         this.client.RegisterHandler(MSGTYPE.CLIENT_HIDE_SPY, OnReceiveHideSpy);
+        this.client.RegisterHandler(MSGTYPE.CLIENT_DESTROY_HEALTH, OnReceiveDestroyHealth);
 
         this.client.RegisterHandler(MSGTYPE.PING_PONG, OnPingPong);
     }
@@ -263,7 +264,10 @@ public class ClientManager : NetworkManager
             }
             go.GetComponentInChildren<AudioEvents>().enabled = true;
             go.GetComponentInChildren<Outline>().enabled = true;
-            go.GetComponentInChildren<Laser>().enabled = true;
+            if (go.GetComponentInChildren<Laser>())
+            {
+                go.GetComponentInChildren<Laser>().enabled = true;
+            }
         }
     }
 
@@ -361,7 +365,10 @@ public class ClientManager : NetworkManager
             }
             go.GetComponentInChildren<AudioEvents>().enabled = true;
             go.GetComponentInChildren<Outline>().enabled = true;
-            go.GetComponentInChildren<Laser>().enabled = true;
+            if (go.GetComponentInChildren<Laser>())
+            {
+                go.GetComponentInChildren<Laser>().enabled = true;
+            }
         }
     }
 
@@ -698,6 +705,22 @@ public class ClientManager : NetworkManager
         Msg_ClientHideSpy chs = aMsg.ReadMessage<Msg_ClientHideSpy>();
 
         Players[chs.SpyToHide].gameAvatar.SetActive(false);
+    }
+
+    public void OnReceiveDestroyHealth(NetworkMessage aMsg)
+    {
+        aMsg.reader.SeekZero();
+        Msg_ClientDestroyHealth cdh = aMsg.ReadMessage<Msg_ClientDestroyHealth>();
+
+        HealthPack[] healthPacks = FindObjectsOfType<HealthPack>();
+        foreach (var item in healthPacks)
+        {
+            if (item.ID == cdh.ID)
+            {
+                item.gameObject.SetActive(false);
+                break;
+            }
+        }
     }
 
     public void OnPingPong(NetworkMessage aMsg)

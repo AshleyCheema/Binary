@@ -28,6 +28,7 @@ public class MSGTYPE
     public const short CLIENT_ANIM_CHANGE = 118;
     public const short CLIENT_EXIT_AVAL = 119;
     public const short CLIENT_HIDE_SPY = 120;
+    public const short CLIENT_DESTROY_HEALTH = 121;
     public const short PING_PONG = 250;
 }
 
@@ -77,6 +78,7 @@ public class HostManager : NetworkManager
         NetworkServer.RegisterHandler(MSGTYPE.CLIENT_CAPTURE_POINT_INCREASE, OnSpyCaptureIncrease);
         NetworkServer.RegisterHandler(MSGTYPE.CLIENT_FEEDBACK, OnClientFeedback);
         NetworkServer.RegisterHandler(MSGTYPE.CLIENT_ANIM_CHANGE, OnClientAnimChange);
+        NetworkServer.RegisterHandler(MSGTYPE.CLIENT_DESTROY_HEALTH, OnReceiveDestroyHealth);
 
         //NetworkServer.RegisterHandler(MSGTYPE.PING_PONG, OnPingPong);
     }
@@ -539,6 +541,24 @@ public class HostManager : NetworkManager
         Msg_ClientAnimChange cac = aMsg.ReadMessage<Msg_ClientAnimChange>();
 
         Send(aMsg.conn.connectionId, MSGTYPE.CLIENT_ANIM_CHANGE, cac, false);
+    }
+
+    public void OnReceiveDestroyHealth(NetworkMessage aMsg)
+    {
+        aMsg.reader.SeekZero();
+        Msg_ClientDestroyHealth cdh = aMsg.ReadMessage<Msg_ClientDestroyHealth>();
+
+        Send(cdh.ConnectID, MSGTYPE.CLIENT_DESTROY_HEALTH, cdh, false);
+
+        HealthPack[] healthPacks = FindObjectsOfType<HealthPack>();
+        foreach (var item in healthPacks)
+        {
+            if(item.ID == cdh.ID)
+            {
+                item.gameObject.SetActive(false);
+                break;
+            }
+        }
     }
 
     private void Update()
