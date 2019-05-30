@@ -139,6 +139,21 @@ BlendTree:
   m_UseAutomaticThresholds: 1
   m_NormalizedBlendValues: 0
   m_BlendType: 0
+--- !u!206 &206088837567339526
+BlendTree:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: BlendTree
+  m_Childs: []
+  m_BlendParameter: InputX+
+  m_BlendParameterY: Blend
+  m_MinThreshold: 0
+  m_MaxThreshold: 1
+  m_UseAutomaticThresholds: 1
+  m_NormalizedBlendValues: 0
+  m_BlendType: 0
 --- !u!206 &206291988167927686
 BlendTree:
   m_ObjectHideFlags: 1
@@ -226,7 +241,7 @@ BlendTree:
   m_Name: Blend Tree
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: c30af275bacc8e04b9068e0eba2d8e3c, type: 3}
+    m_Motion: {fileID: 7400000, guid: 04deb4c178dddcf41ac76de870d31832, type: 3}
     m_Threshold: 0
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -234,7 +249,7 @@ BlendTree:
     m_DirectBlendParameter: Blend
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400002, guid: c30af275bacc8e04b9068e0eba2d8e3c, type: 3}
+    m_Motion: {fileID: 7400002, guid: 04deb4c178dddcf41ac76de870d31832, type: 3}
     m_Threshold: 1
     m_Position: {x: 0.01, y: 0}
     m_TimeScale: 1
@@ -242,17 +257,33 @@ BlendTree:
     m_DirectBlendParameter: Blend
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400002, guid: c30af275bacc8e04b9068e0eba2d8e3c, type: 3}
+    m_Motion: {fileID: 7400014, guid: 04deb4c178dddcf41ac76de870d31832, type: 3}
     m_Threshold: 2
     m_Position: {x: -0.01, y: 0}
-    m_TimeScale: -1
+    m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: Blend
+    m_Mirror: 0
+  - serializedVersion: 2
+    m_Motion: {fileID: 7400016, guid: 04deb4c178dddcf41ac76de870d31832, type: 3}
+    m_Threshold: 3
+    m_Position: {x: 0, y: -0.01}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_DirectBlendParameter: InputX+
+    m_Mirror: 0
+  - serializedVersion: 2
+    m_Motion: {fileID: 7400018, guid: 04deb4c178dddcf41ac76de870d31832, type: 3}
+    m_Threshold: 4
+    m_Position: {x: 0, y: 0.01}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_DirectBlendParameter: InputX+
     m_Mirror: 0
   m_BlendParameter: InputX+
   m_BlendParameterY: InputX-
   m_MinThreshold: 0
-  m_MaxThreshold: 2
+  m_MaxThreshold: 4
   m_UseAutomaticThresholds: 0
   m_NormalizedBlendValues: 0
   m_BlendType: 2
