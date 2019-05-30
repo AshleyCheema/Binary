@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace LLAPI
 {
+    //spawn player message
     [System.Serializable]
     public class NetMsg_SpawnPlayerLB : NetMsg
     {

@@ -1,5 +1,6 @@
 ﻿namespace LLAPI
 {
+    //message types
     public static class NetOP
     {
         public const int NONE = 0;
@@ -28,6 +29,7 @@
 
     }
 
+    //base message
     [System.Serializable]
     public abstract class NetMsg
     {

@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace LLAPI
 {
+    //player rotation message
     [System.Serializable]
     public class NetMsg_PlayerRotation : NetMsg
     {

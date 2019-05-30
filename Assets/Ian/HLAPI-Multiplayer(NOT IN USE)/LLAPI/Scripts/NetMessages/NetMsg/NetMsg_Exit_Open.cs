@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace LLAPI
 {
+    //exit open message
     [System.Serializable]
     public class NetMsg_Exit_Open : NetMsg_NetworkObject
     {

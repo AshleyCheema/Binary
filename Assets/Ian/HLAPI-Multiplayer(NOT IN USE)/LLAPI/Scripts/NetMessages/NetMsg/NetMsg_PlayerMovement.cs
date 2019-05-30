@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace LLAPI
 {
+    //player movement message
     [System.Serializable]
     public class NetMsg_PlayerMovement : NetMsg
     {

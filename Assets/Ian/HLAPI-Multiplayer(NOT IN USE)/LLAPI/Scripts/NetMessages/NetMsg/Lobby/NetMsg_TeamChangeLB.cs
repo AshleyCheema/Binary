@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace LLAPI
 {
+    //player team change message
     [System.Serializable]
     public class NetMsg_TeamChangeLB : NetMsg
     {

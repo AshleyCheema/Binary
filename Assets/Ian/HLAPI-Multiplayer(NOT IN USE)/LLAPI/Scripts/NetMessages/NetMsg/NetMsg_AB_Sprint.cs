@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace LLAPI
 {
+    //sprint ability message
     [System.Serializable]
     public class NetMsg_AB_Sprint : NetMsg
     {

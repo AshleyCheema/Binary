@@ -4,17 +4,22 @@ using UnityEngine;
 
 public class FOWAdaptiveRender : MonoBehaviour
 {
+    //count down for when the mesh needs to be turned on
     [SerializeField]
     private float countdownMesh = 5.0f;
 
+    //all meshes effected
     List<CoutDownMeshObj> activeMeshes = new List<CoutDownMeshObj>();
 
+    //enter
     private void OnTriggerEnter(Collider other)
     {
+        //if local player is merc
         if (ClientManager.Instance?.LocalPlayer.playerTeam == LLAPI.Team.Merc)
         {
             if (other.tag == "Spy")
             {
+                //get angle 
                 Vector3 dir = (other.gameObject.transform.position - transform.position).normalized;
                 float angle = Vector3.Angle(dir, transform.forward);
 
@@ -23,6 +28,7 @@ public class FOWAdaptiveRender : MonoBehaviour
                                     dir,
                                     out hit))
                 {
+                    //if within angle. show spy
                     if (angle <= 120)
                     {
                         other.transform.GetChild(0).transform.GetChild(5).gameObject.GetComponent<SkinnedMeshRenderer>().enabled = true;
@@ -35,8 +41,10 @@ public class FOWAdaptiveRender : MonoBehaviour
                 CheckForGameObject(other.transform.GetChild(5).gameObject);
             }
         }
+        //if local player is spy
         else if (ClientManager.Instance?.LocalPlayer.playerTeam == LLAPI.Team.Spy)
         {
+            //disable other character
             if (other.tag == "Merc")
             {
                 other.transform.GetChild(0).transform.GetChild(7).gameObject.GetComponent<SkinnedMeshRenderer>().enabled = true;
@@ -50,13 +58,14 @@ public class FOWAdaptiveRender : MonoBehaviour
         }
     }
 
+    //exit
     private void OnTriggerExit(Collider other)
     {
+        //if local player is merc
         if (ClientManager.Instance?.LocalPlayer.playerTeam == LLAPI.Team.Merc)
         {
             if (other.tag == "Spy")
             {
-                //other.transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().enabled = false;
                 CoutDownMeshObj c = new CoutDownMeshObj
                 {
                     GameObject = other.transform.GetChild(0).transform.GetChild(5).gameObject,
@@ -65,11 +74,11 @@ public class FOWAdaptiveRender : MonoBehaviour
                 activeMeshes.Add(c);
             }
         }
+        //if local player is spy
         else if (ClientManager.Instance?.LocalPlayer.playerTeam == LLAPI.Team.Spy)
         {
             if (other.tag == "Merc" && other.name == "Merc(Clone)")
             {
-                //other.transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().enabled = false;
                 CoutDownMeshObj c = new CoutDownMeshObj
                 {
                     GameObject = other.transform.GetChild(0).transform.GetChild(7).gameObject,
@@ -79,7 +88,6 @@ public class FOWAdaptiveRender : MonoBehaviour
             }
             if (other.tag == "Spy")
             {
-                //other.transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().enabled = false;
                 CoutDownMeshObj c = new CoutDownMeshObj
                 {
                     GameObject = other.transform.GetChild(0).transform.GetChild(5).gameObject,
@@ -90,6 +98,7 @@ public class FOWAdaptiveRender : MonoBehaviour
         }
     }
 
+    //check if object is in activeMeshes
     private void CheckForGameObject(GameObject aGameObject)
     {
         for (int i = 0; i < activeMeshes.Count; i++)
@@ -102,6 +111,7 @@ public class FOWAdaptiveRender : MonoBehaviour
         }
     }
 
+    //cool down to turn mesh on
     IEnumerator CountdownMesh(GameObject mesh)
     {
         float step = countdownMesh;
@@ -110,6 +120,7 @@ public class FOWAdaptiveRender : MonoBehaviour
             step -= Time.deltaTime;
             yield return null;
         }
+
         //turn mesh off
         mesh.GetComponent<SkinnedMeshRenderer>().enabled = false;
 

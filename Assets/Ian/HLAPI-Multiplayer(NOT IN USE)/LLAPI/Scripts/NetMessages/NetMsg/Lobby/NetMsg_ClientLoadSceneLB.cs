@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace LLAPI
 {
+    //client has loaded scene message
     [System.Serializable]
     public class NetMsg_ClientLoadSceneLB : NetMsg
     {

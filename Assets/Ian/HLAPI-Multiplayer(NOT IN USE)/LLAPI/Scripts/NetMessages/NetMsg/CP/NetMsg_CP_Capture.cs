@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace LLAPI
 {
+    //capture point message
     [System.Serializable]
     public class NetMsg_CP_Capture : NetMsg_NetworkObject
     {

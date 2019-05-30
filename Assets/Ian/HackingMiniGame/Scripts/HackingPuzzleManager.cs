@@ -160,6 +160,7 @@ public class HackingPuzzleManager : MonoBehaviour
         return isCompleted;
     }
 
+    //tile cool down for colour change
     IEnumerator PuzzleColourCooldown()
     {
         float step = 1.5f;
@@ -180,6 +181,7 @@ public class HackingPuzzleManager : MonoBehaviour
 
     }
 
+    //distance between tiles
     private int GetDistance(Tile a_tileOne, Tile a_tileTwo)
     {
         //Get both the distance on the x and y axis

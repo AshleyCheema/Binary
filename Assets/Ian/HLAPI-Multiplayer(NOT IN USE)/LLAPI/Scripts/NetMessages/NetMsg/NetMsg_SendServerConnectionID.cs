@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace LLAPI
 {
+    //connected to server message
     [System.Serializable]
     public class NetMsg_SendServerConnectionID : NetMsg
     {

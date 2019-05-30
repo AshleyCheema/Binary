@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace LLAPI
 {
+    //player is ready message
     [System.Serializable]
     public class NetMsg_IsReadyLB : NetMsg
     {

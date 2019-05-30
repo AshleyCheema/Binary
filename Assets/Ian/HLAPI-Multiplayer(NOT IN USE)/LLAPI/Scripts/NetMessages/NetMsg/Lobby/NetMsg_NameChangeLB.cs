@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace LLAPI
 {
+    //player name change message
     [System.Serializable]
     public class NetMsg_NameChangeLB : NetMsg
     {
