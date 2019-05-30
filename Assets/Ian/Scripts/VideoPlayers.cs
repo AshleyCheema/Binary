@@ -35,7 +35,7 @@ public class VideoPlayers : MonoBehaviour
         {
             mercVideo.enabled = false;
             spyVideo.enabled = false;
-            Invoke(nameof(VideoFinshed), 1.0f);
+            Invoke(nameof(VideoFinshed), 65.0f);
         }
     }
 

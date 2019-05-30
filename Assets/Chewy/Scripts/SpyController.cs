@@ -95,6 +95,8 @@ public class SpyController : PlayerController
     //If the shot once go into a hurt state otherwise the Spy is now dead
     public void Shot()
     {
+        GetComponent<AudioEvents>().PlayFireSound();
+
         if (currentState == SpyState.Normal)
         {
             //Change animation
