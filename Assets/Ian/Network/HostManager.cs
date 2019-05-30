@@ -274,7 +274,7 @@ public class HostManager : NetworkManager
 
         if (ready)
         {
-            ServerChangeScene("NewLevel");
+            ServerChangeScene("Video");
         }
     }
 

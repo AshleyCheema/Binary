@@ -103,7 +103,7 @@ public class NO_CapturePoint : MonoBehaviour
 
             if (spyController != null)
             {
-                spyController.cooldownScript.gameObject.SetActive(false);
+                //spyController.cooldownScript.gameObject.SetActive(false);
                 spyController.isHacking = true;
 
                 if (ClientManager.Instance.LocalPlayer.gameAvatar == spyController.transform.parent.gameObject)
@@ -221,17 +221,17 @@ public class NO_CapturePoint : MonoBehaviour
 
         if (spyController != null)
         {
-            spyController.cooldownScript.gameObject.SetActive(false);
+            //spyController.cooldownScript.gameObject.SetActive(false);
             spyController.isHacking = true;
 
             if (ClientManager.Instance.LocalPlayer.gameAvatar == spyController.transform.parent.gameObject)
            {
-                if(!isBeingCaptured)
-                {
+                //if(!isBeingCaptured)
+                //{
                     //c_lerpColor = StartCoroutine(LerpColor(Color.red, Color.green));
                     miniGame.SetActive(true);
                     miniGame.GetComponentInChildren<CapturePointMiniGame>().Show();
-                }
+                //}
             }
         }
         ishacking = true;
@@ -300,7 +300,7 @@ public class NO_CapturePoint : MonoBehaviour
                 {
                     miniGame.SetActive(false);
                     spyController.cooldownScript.canHack = false;            
-                    spyController.cooldownScript.gameObject.SetActive(true);
+                    //spyController.cooldownScript.gameObject.SetActive(true);
                     spyController.isHacking = false;
                     ishacking = false;
                 }
@@ -321,6 +321,8 @@ public class NO_CapturePoint : MonoBehaviour
                     ccp.ID = ID;
                     ClientManager.Instance.client.Send(MSGTYPE.CLIENT_CAPTURE_POINT, ccp);
                     ccp.ID = -1;
+
+                    capturePercentage = Mathf.FloorToInt(capturePercentage);
 
                     //maybe not here
                     captureAmount = 0.5f;

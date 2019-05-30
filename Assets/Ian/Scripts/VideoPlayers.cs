@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Video;
 
 public class VideoPlayers : MonoBehaviour
@@ -13,26 +14,37 @@ public class VideoPlayers : MonoBehaviour
     float videoLength;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        if (ClientManager.Instance.LocalPlayer.playerTeam == LLAPI.Team.Merc)
+        if (ClientManager.Instance != null)
         {
-            mercVideo.enabled = true;
-            spyVideo.enabled = false;
-
-           
-
+            if (ClientManager.Instance.LocalPlayer.playerTeam == LLAPI.Team.Merc)
+            {
+                mercVideo.enabled = true;
+                spyVideo.enabled = false;
+            }
+            else
+            {
+                mercVideo.enabled = false;
+                spyVideo.enabled = true;
+            }
         }
-        else
+
+        if(HostManager.Instance != null)
         {
             mercVideo.enabled = false;
-            spyVideo.enabled = true;
+            spyVideo.enabled = false;
+            Invoke(nameof(VideoFinshed), 70.0f);
         }
     }
 
-    // Update is called once per frame
-    void Update()
+
+    void VideoFinshed()
     {
-        
+        //load new level
+        if(HostManager.Instance != null)
+        {
+            HostManager.Instance.ServerChangeScene("NewLevel");
+        }
     }
 }

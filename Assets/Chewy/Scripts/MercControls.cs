@@ -146,18 +146,21 @@ public class MercControls : PlayerController
 
             foreach (var item in hits)
             {
-                if(item.collider.gameObject.tag == "Spy")
+                if (item.collider.gameObject.GetComponent<MeshRenderer>())
                 {
-                    foreach (var key in ClientManager.Instance?.Players.Keys)
+                    if (item.collider.gameObject.tag == "Spy")
                     {
-                        //if true we have found the gameObejct hit
-                        if (item.collider.gameObject == ClientManager.Instance.Players[key].gameAvatar)
+                        foreach (var key in ClientManager.Instance?.Players.Keys)
                         {
-                            Msg_ClientTrigger ct = new Msg_ClientTrigger();
-                            ct.ConnectionID = key;
-                            ct.Trigger = true;
-                            ct.Type = TriggerType.Bullet;
-                            ClientManager.Instance.client.Send(MSGTYPE.CLIENT_AB_TRIGGER, ct);
+                            //if true we have found the gameObejct hit
+                            if (item.collider.gameObject == ClientManager.Instance.Players[key].gameAvatar)
+                            {
+                                Msg_ClientTrigger ct = new Msg_ClientTrigger();
+                                ct.ConnectionID = key;
+                                ct.Trigger = true;
+                                ct.Type = TriggerType.Bullet;
+                                ClientManager.Instance.client.Send(MSGTYPE.CLIENT_AB_TRIGGER, ct);
+                            }
                         }
                     }
                 }
