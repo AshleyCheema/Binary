@@ -239,7 +239,10 @@ public class ClientManager : NetworkManager
             
             MonoBehaviour[] allMonos = go.GetComponentsInChildren<MonoBehaviour>();
 
-            go.GetComponentInChildren<FOWMask>().gameObject.SetActive(false);
+            if (go.GetComponentInChildren<FOWMask>())
+            {
+                go.GetComponentInChildren<FOWMask>().gameObject.SetActive(false);
+            }
             go.GetComponentInChildren<UIScript>().gameObject.SetActive(false);
             //go.GetComponentInChildren<FOWAdaptiveRender>().gameObject.SetActive(false);
             go.GetComponentInChildren<AudioListener>().enabled = false;
@@ -260,6 +263,7 @@ public class ClientManager : NetworkManager
             }
             go.GetComponentInChildren<AudioEvents>().enabled = true;
             go.GetComponentInChildren<Outline>().enabled = true;
+            go.GetComponentInChildren<Laser>().enabled = true;
         }
     }
 
@@ -332,7 +336,10 @@ public class ClientManager : NetworkManager
 
             MonoBehaviour[] allMonos = go.GetComponentsInChildren<MonoBehaviour>();
 
-            go.GetComponentInChildren<FOWMask>().gameObject.SetActive(false);
+            if (go.GetComponentInChildren<FOWMask>())
+            {
+                go.GetComponentInChildren<FOWMask>().gameObject.SetActive(false);
+            }
             go.GetComponentInChildren<UIScript>().gameObject.SetActive(false);
             //go.GetComponentInChildren<FOWAdaptiveRender>().gameObject.SetActive(false);
             go.GetComponentInChildren<AudioListener>().enabled = false;
@@ -354,6 +361,7 @@ public class ClientManager : NetworkManager
             }
             go.GetComponentInChildren<AudioEvents>().enabled = true;
             go.GetComponentInChildren<Outline>().enabled = true;
+            go.GetComponentInChildren<Laser>().enabled = true;
         }
     }
 

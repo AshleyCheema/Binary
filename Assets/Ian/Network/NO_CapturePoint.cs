@@ -301,8 +301,6 @@ public class NO_CapturePoint : MonoBehaviour
                     ClientManager.Instance.client.Send(MSGTYPE.CLIENT_CAPTURE_POINT, ccp);
                     ccp.ID = -1;
 
-                    capturePercentage = Mathf.FloorToInt(capturePercentage);
-
                     captureAmount = 0.5f;
                 }
             }

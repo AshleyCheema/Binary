@@ -16,6 +16,9 @@ public class NO_Exit : MonoBehaviour
     [SerializeField]
     private HackingPuzzleManager hackingGame;
 
+    [SerializeField]
+    private GameObject mesh;
+
     private bool allowMiniGame;
     private bool exitOpen;
     public bool ExitOpen
@@ -51,6 +54,8 @@ public class NO_Exit : MonoBehaviour
             //exit level do something 
             //disable spy
             ClientManager.Instance?.LocalPlayer.gameAvatar.SetActive(false);
+
+            mesh.GetComponentInChildren<cakeslice.Outline>().color = 1;
         }
     }
 
