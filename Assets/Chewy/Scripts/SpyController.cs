@@ -23,13 +23,6 @@ public class SpyController : PlayerController
     public bool stunDrop;
     public bool isSpawned = false;
 
-
-    //Audio
-    private AudioSource audioSource;
-    public AudioSO walking;
-    public AudioSO run;
-    public AudioSO hacking;
-
     //animation last state
     private int animLastState = -1;
 
@@ -37,7 +30,6 @@ public class SpyController : PlayerController
     public override void Start()
     {
         base.Start();
-        audioSource = gameObject.GetComponent<AudioSource>();
         if (stun == null)
         {
             stun = GameObject.Find("StunG");
@@ -122,23 +114,23 @@ public class SpyController : PlayerController
         }
     }
 
-    private void Step()
-    {
-        if (audioSource != null && !audioSource.isPlaying)
-        {
-            walking.SetSourceProperties(audioSource);
-            audioSource.Play();
-            PlayerStats.Instance.Steps += 1;
-        }
-    }
+    //private void Step()
+    //{
+    //    if (audioSource != null && !audioSource.isPlaying)
+    //    {
+    //        walking.SetSourceProperties(audioSource);
+    //        audioSource.Play();
+    //        PlayerStats.Instance.Steps += 1;
+    //    }
+    //}
     
-    private void Run()
-    {
-        if (audioSource != null && !audioSource.isPlaying)
-        {
-            run.SetSourceProperties(audioSource);
-            audioSource.Play();
-            PlayerStats.Instance.Steps += 1;
-        }
-    }
+    //private void Run()
+    //{
+    //    if (audioSource != null && !audioSource.isPlaying)
+    //    {
+    //        run.SetSourceProperties(audioSource);
+    //        audioSource.Play();
+    //        PlayerStats.Instance.Steps += 1;
+    //    }
+    //}
 }
