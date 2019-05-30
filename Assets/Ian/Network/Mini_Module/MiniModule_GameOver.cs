@@ -18,6 +18,25 @@ public class MiniModule_GameOver : Singleton<MiniModule_GameOver>
             spyiesDead.Add(a_spy);
         }
 
+        //if one spy has died change the capture amount for the server rooms
+        if(spyiesDead.Count == 1)
+        {
+            //send message to change capture amount for server rooms
+            //this is for host
+            if(HostManager.Instance != null)
+            {
+                foreach (var item in HostManager.Instance.capturePoints)
+                {
+                    item.Value.GetComponent<NO_CapturePoint>().baseCaptureAmount = 5.0f;
+                    item.Value.GetComponent<NO_CapturePoint>().maxCaptureAmount = 5.0f;
+                }
+                Msg_ClientCaptureAmountOR cca = new Msg_ClientCaptureAmountOR();
+                cca.BaseCaptureAmount = 5.0f;
+                cca.MaxCaptureAmount = 5.0f;
+                HostManager.Instance.SendAll(MSGTYPE.CLIENT_CAPTURE_AMOUNT_OR, cca); ;
+            }
+        }
+
         bool allSpyiesDead = true;
         foreach (var key in HostManager.Instance.Players.Keys)
         {

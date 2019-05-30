@@ -85,6 +85,8 @@ public class ClientManager : NetworkManager
             networkAddress = aIPAdress;
         }
         StartClient();
+
+        //register all handlers
         this.client.RegisterHandler(MSGTYPE.ADD_NEW_LOBBY_PLAYER, OnReceiveNewPlayerLobby);
         this.client.RegisterHandler(MSGTYPE.LOBBY_TEAM_CHANGE, OnReceivePlayerChangeTeam);
         this.client.RegisterHandler(MSGTYPE.LOBBY_NAME_CHANGE, OnReceivePlayerChangeName);
@@ -104,6 +106,8 @@ public class ClientManager : NetworkManager
         this.client.RegisterHandler(MSGTYPE.CLIENT_EXIT_AVAL, OnReceiveClientExtiAval);
         this.client.RegisterHandler(MSGTYPE.CLIENT_HIDE_SPY, OnReceiveHideSpy);
         this.client.RegisterHandler(MSGTYPE.CLIENT_DESTROY_HEALTH, OnReceiveDestroyHealth);
+        this.client.RegisterHandler(MSGTYPE.CLIENT_CAPTURE_AMOUNT_OR, OnReceiveCaptureAmountOR);
+        this.client.RegisterHandler(MSGTYPE.CLIENT_DISCONNECT, OnReceiveClientDisconnect);
 
         this.client.RegisterHandler(MSGTYPE.PING_PONG, OnPingPong);
     }
@@ -209,7 +213,7 @@ public class ClientManager : NetworkManager
 
     private GameObject SpawnPlayerObject(LocalPlayer aPlayer)
     {
-        Vector3 spawnPosition = Vector3.zero;
+        Vector3 spawnPosition = new Vector3(0, 0, 0);
         GameObject go;
         if (mLocalPlayer.playerTeam == LLAPI.Team.Merc)
         {
@@ -229,7 +233,7 @@ public class ClientManager : NetworkManager
         return go;
     }
 
-    private void SpawnOtherPlayerObject(LocalPlayer aPlayer)
+    private void SpawnOtherPlayerObject(LocalPlayer aPlayer, Vector3 aSpawnPosition)
     {
         if (Players[aPlayer.connectionId].gameAvatar == null)
         {
@@ -237,7 +241,9 @@ public class ClientManager : NetworkManager
                 MiniModule_SpawableObjects.Instance.SpawnableObjects.ObjectsToSpawn[aPlayer.playerTeam == LLAPI.Team.Merc ? 0 : 5]);
             Players[aPlayer.connectionId].gameAvatar = go;
             go.tag = Players[aPlayer.connectionId].playerTeam == LLAPI.Team.Merc ? "Merc" : "Spy";
-            
+
+            go.transform.position = aSpawnPosition;
+
             MonoBehaviour[] allMonos = go.GetComponentsInChildren<MonoBehaviour>();
 
             if (go.GetComponentInChildren<FOWMask>())
@@ -280,12 +286,14 @@ public class ClientManager : NetworkManager
         {
             LocalPlayer localPlayer = new LocalPlayer();
             localPlayer.connectionId = (int)cc.connectID;
-            localPlayer.playerTeam = LLAPI.Team.Unassigned;
+            localPlayer.playerName = cc.Name;
+            localPlayer.playerTeam = cc.Team;
             localPlayer.gameObjects = new List<GameObject>();
             Players.Add(localPlayer.connectionId, localPlayer);
-
-
             MiniModule_Lobby.Instance.OnLobbyPlayerAdd(localPlayer);
+
+            CS_LobbyManager.Instance.SetPlayerTeam(localPlayer);
+            CS_LobbyManager.Instance.SetPlayerName(localPlayer);
 
             foreach (var item in localPlayer.lobbyAvatar.GetComponentsInChildren<TextMeshProUGUI>())
             {
@@ -389,7 +397,7 @@ public class ClientManager : NetworkManager
         else
         {
             //create the game object
-            SpawnOtherPlayerObject(Players[cm.connectId]);
+            SpawnOtherPlayerObject(Players[cm.connectId], cm.position);
             Players[cm.connectId].gameAvatar.transform.position = Vector3.Lerp(Players[cm.connectId].gameAvatar.transform.position,
                                                                             cm.position, 0.5f);
         }
@@ -407,8 +415,8 @@ public class ClientManager : NetworkManager
         else
         {
             //create the game object
-            SpawnOtherPlayerObject(Players[cm.connectId]);
-            Players[cm.connectId].gameAvatar.transform.rotation = cm.rot;
+            //SpawnOtherPlayerObject(Players[cm.connectId]);
+           // Players[cm.connectId].gameAvatar.transform.rotation = cm.rot;
         }
     }
 
@@ -721,6 +729,35 @@ public class ClientManager : NetworkManager
                 break;
             }
         }
+    }
+
+    public void OnReceiveCaptureAmountOR(NetworkMessage aMsg)
+    {
+        aMsg.reader.SeekZero();
+        Msg_ClientCaptureAmountOR cca = aMsg.ReadMessage<Msg_ClientCaptureAmountOR>();
+
+        foreach (var item in capturePoints)
+        {
+            item.Value.GetComponent<NO_CapturePoint>().baseCaptureAmount = 5.0f;
+            item.Value.GetComponent<NO_CapturePoint>().maxCaptureAmount = 5.0f;
+        }
+    }
+
+    public void OnReceiveClientDisconnect(NetworkMessage aMsg)
+    {
+        aMsg.reader.SeekZero();
+        Msg_ClientDisconnection cd = aMsg.ReadMessage<Msg_ClientDisconnection>();
+
+        if(players[cd.ConnectID].lobbyAvatar != null)
+        {
+            Destroy(players[cd.ConnectID].lobbyAvatar);
+        }
+        if (players[cd.ConnectID].gameAvatar != null)
+        {
+            Destroy(players[cd.ConnectID].gameAvatar);
+        }
+
+        players.Remove(cd.ConnectID);
     }
 
     public void OnPingPong(NetworkMessage aMsg)

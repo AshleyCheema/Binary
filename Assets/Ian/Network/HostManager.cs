@@ -29,6 +29,9 @@ public class MSGTYPE
     public const short CLIENT_EXIT_AVAL = 119;
     public const short CLIENT_HIDE_SPY = 120;
     public const short CLIENT_DESTROY_HEALTH = 121;
+    public const short CLIENT_CAPTURE_AMOUNT_OR = 122;
+    public const short CLIENT_CAPTURE_PERCENTAGE = 123;
+    public const short CLIENT_DISCONNECT = 124;
     public const short PING_PONG = 250;
 }
 
@@ -42,7 +45,7 @@ public class HostManager : NetworkManager
     public Dictionary<int, LocalPlayer> Players
     { get { return players; } }
 
-    private Dictionary<int, GameObject> capturePoints = new Dictionary<int, GameObject>();
+    public Dictionary<int, GameObject> capturePoints = new Dictionary<int, GameObject>();
 
     private void Awake()
     {
@@ -79,6 +82,7 @@ public class HostManager : NetworkManager
         NetworkServer.RegisterHandler(MSGTYPE.CLIENT_FEEDBACK, OnClientFeedback);
         NetworkServer.RegisterHandler(MSGTYPE.CLIENT_ANIM_CHANGE, OnClientAnimChange);
         NetworkServer.RegisterHandler(MSGTYPE.CLIENT_DESTROY_HEALTH, OnReceiveDestroyHealth);
+        NetworkServer.RegisterHandler(MSGTYPE.CLIENT_CAPTURE_PERCENTAGE, OnReceiveCapturePercentage);
 
         //NetworkServer.RegisterHandler(MSGTYPE.PING_PONG, OnPingPong);
     }
@@ -111,6 +115,8 @@ public class HostManager : NetworkManager
             if (item != conn.connectionId)
             {
                 cc.connectID = (int)item;
+                cc.Name = players[item].playerName;
+                cc.Team = players[item].playerTeam;
                 Send(conn.connectionId, MSGTYPE.ADD_NEW_LOBBY_PLAYER, cc);
             }
         }
@@ -124,6 +130,11 @@ public class HostManager : NetworkManager
         Destroy(Players[conn.connectionId].gameAvatar);
 
         Players.Remove(conn.connectionId);
+
+        Msg_ClientDisconnection cd = new Msg_ClientDisconnection();
+        cd.ConnectID = conn.connectionId;
+        //remove from all clients
+        SendAll(MSGTYPE.CLIENT_DISCONNECT, cd);
     }
 
     public override void OnServerReady(NetworkConnection conn)
@@ -559,6 +570,15 @@ public class HostManager : NetworkManager
                 break;
             }
         }
+    }
+
+    public void OnReceiveCapturePercentage(NetworkMessage aMsg)
+    {
+        aMsg.reader.SeekZero();
+        Msg_ClientCaptureStats ccs = aMsg.ReadMessage<Msg_ClientCaptureStats>();
+
+        capturePoints[ccs.ID].GetComponent<NO_CapturePoint>().capturePercentage = 100.0f;
+        capturePoints[ccs.ID].GetComponent<NO_CapturePoint>().IsBeingCaptured = true;
     }
 
     private void Update()

@@ -6,4 +6,6 @@ using UnityEngine.Networking;
 public class Msg_ClientConnection : MessageBase
 {
     public int connectID;
+    public string Name;
+    public LLAPI.Team Team;
 }

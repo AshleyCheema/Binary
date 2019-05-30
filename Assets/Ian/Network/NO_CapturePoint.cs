@@ -38,8 +38,10 @@ public class NO_CapturePoint : MonoBehaviour
             }
         }
     }
+    public float baseCaptureAmount = 0.5f;
+    public float maxCaptureAmount = 4.0f;
     [SerializeField]
-    private float captureAmount = 0.5f;
+    private float captureAmount;
     [SerializeField]
     public float capturePercentage = 0.0f;
     [SerializeField]
@@ -75,6 +77,7 @@ public class NO_CapturePoint : MonoBehaviour
     private void Start()
     {
         ccp.ID = -1;
+        captureAmount = baseCaptureAmount;
     }
 
     /// <summary>
@@ -162,6 +165,16 @@ public class NO_CapturePoint : MonoBehaviour
                     //tell exit manager capture point has been captured
                     ExitManager.Instance.CapturePointCaptured();
                 }
+                else
+                {
+                    if(ClientManager.Instance != null)
+                    {
+                        Msg_ClientCaptureStats ccs = new Msg_ClientCaptureStats();
+                        ccs.ID = ID;
+                        ccs.CapturePercentage = (int)capturePercentage;
+                        ClientManager.Instance.client.Send(MSGTYPE.CLIENT_CAPTURE_PERCENTAGE, ccs);
+                    }
+                }
             }
         }
     }
@@ -170,9 +183,9 @@ public class NO_CapturePoint : MonoBehaviour
     public void IncreaseCaptureAmount(bool aSend = true)
     {
         captureAmount += 0.5f;
-        if (captureAmount > 3.0f)
+        if (captureAmount > maxCaptureAmount)
         {
-            captureAmount = 3.0f;
+            captureAmount = maxCaptureAmount;
         }
 
         if (aSend)
@@ -188,7 +201,7 @@ public class NO_CapturePoint : MonoBehaviour
     //reset capture amount
     public void ResetCaptureAmount()
     {
-        captureAmount = 0.5f;
+        captureAmount = baseCaptureAmount;
     }
 
     /// <summary>
@@ -301,7 +314,7 @@ public class NO_CapturePoint : MonoBehaviour
                     ClientManager.Instance.client.Send(MSGTYPE.CLIENT_CAPTURE_POINT, ccp);
                     ccp.ID = -1;
 
-                    captureAmount = 0.5f;
+                    captureAmount = baseCaptureAmount;
                 }
             }
         }
