@@ -13,7 +13,6 @@ public class SpyController : PlayerController
 {
     public bool isHacking;
     public GameObject stun;
-    public GameObject tablet;
     private Trigger bulletTrigger;
     public CooldownScript cooldownScript;
     private SpyState currentState;
@@ -23,13 +22,6 @@ public class SpyController : PlayerController
     public bool stunDrop;
     public bool isSpawned = false;
 
-
-    //Audio
-    private AudioSource audioSource;
-    public AudioSO walking;
-    public AudioSO run;
-    public AudioSO hacking;
-
     //animation last state
     private int animLastState = -1;
 
@@ -37,7 +29,6 @@ public class SpyController : PlayerController
     public override void Start()
     {
         base.Start();
-        audioSource = gameObject.GetComponent<AudioSource>();
         if (stun == null)
         {
             stun = GameObject.Find("StunG");
@@ -48,8 +39,10 @@ public class SpyController : PlayerController
     // Update is called once per frame
     public override void Update()
     {
-        Debug.Log(Input.GetAxis("HorizontalPad"));
+        //Sets the animation to reflect to the Spy's current state
         animator.SetInteger("currentState", (int)currentState);
+
+        //Networking for the Spy animations
         if(animLastState != animator.GetCurrentAnimatorStateInfo(0).fullPathHash)
         {
             animLastState = animator.GetCurrentAnimatorStateInfo(0).fullPathHash;
@@ -70,6 +63,7 @@ public class SpyController : PlayerController
         }
         base.Update();
 
+        //The spy cannot use their flashbang while hacking
         if (Input.GetButton("Flashbang") && !isHacking)
         {
             if (stun.GetComponent<StunAbility>().IsActive == false)
@@ -79,9 +73,9 @@ public class SpyController : PlayerController
             }
         }
 
+        //If hacking play audio
         if (isHacking == true)
         {
-            tablet.SetActive(true);
 
             //if (!audioSource.isPlaying)
             //{
@@ -94,10 +88,11 @@ public class SpyController : PlayerController
         {
             GetComponent<AudioEvents>().StopHackingSound();
             //audioSource.Stop();
-            tablet.SetActive(false);
         }
     }
 
+    //The function is called when the player is shot by the Merc
+    //If the shot once go into a hurt state otherwise the Spy is now dead
     public void Shot()
     {
         if (currentState == SpyState.Normal)
@@ -122,23 +117,23 @@ public class SpyController : PlayerController
         }
     }
 
-    private void Step()
-    {
-        if (audioSource != null && !audioSource.isPlaying)
-        {
-            walking.SetSourceProperties(audioSource);
-            audioSource.Play();
-            PlayerStats.Instance.Steps += 1;
-        }
-    }
+    //private void Step()
+    //{
+    //    if (audioSource != null && !audioSource.isPlaying)
+    //    {
+    //        walking.SetSourceProperties(audioSource);
+    //        audioSource.Play();
+    //        PlayerStats.Instance.Steps += 1;
+    //    }
+    //}
     
-    private void Run()
-    {
-        if (audioSource != null && !audioSource.isPlaying)
-        {
-            run.SetSourceProperties(audioSource);
-            audioSource.Play();
-            PlayerStats.Instance.Steps += 1;
-        }
-    }
+    //private void Run()
+    //{
+    //    if (audioSource != null && !audioSource.isPlaying)
+    //    {
+    //        run.SetSourceProperties(audioSource);
+    //        audioSource.Play();
+    //        PlayerStats.Instance.Steps += 1;
+    //    }
+    //}
 }

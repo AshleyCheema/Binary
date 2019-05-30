@@ -127,7 +127,11 @@ public class ClientManager : NetworkManager
 
     public override void OnClientSceneChanged(NetworkConnection conn)
     {
-        if (SceneManager.GetActiveScene().name == leveToLoad)
+        if(SceneManager.GetActiveScene().name == "Video")
+        {
+            gameOverUI.SetActive(false);
+        }
+        else if (SceneManager.GetActiveScene().name == leveToLoad)
         {
             gameOverUI.SetActive(false);
             //Spawn local avatar        
