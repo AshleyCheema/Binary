@@ -178,7 +178,7 @@ public class PlayerController : MonoBehaviour
             if (player == Player.PlayerOne)
             {
                 Vector3 rotation = new Vector3(0, Input.GetAxisRaw("P2Horizontal"), 0);
-                transform.Rotate(rotation * 300.0f * Time.deltaTime);
+                transform.Rotate(rotation * 200.0f * Time.deltaTime);
             }
         }
         else

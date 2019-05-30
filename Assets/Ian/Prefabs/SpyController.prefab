@@ -134,7 +134,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   normalSpeed: 4
   crouchingSpeed: 2.5
-  runningSpeed: 6
+  runningSpeed: 5.5
   isRunning: 0
   currentSpeed: 4
   animator: {fileID: 614528025523762019}
@@ -588,10 +588,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3011942314590609167}
     m_Modifications:
-    - target: {fileID: 2114616452955906415, guid: 0aa654d45d8ba1d40b24d1e755fb39da,
+    - target: {fileID: 2114616452841460370, guid: 0aa654d45d8ba1d40b24d1e755fb39da,
         type: 3}
-      propertyPath: m_Name
-      value: UI thin
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2114616452955906323, guid: 0aa654d45d8ba1d40b24d1e755fb39da,
         type: 3}
@@ -698,6 +698,21 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2114616453669912507, guid: 0aa654d45d8ba1d40b24d1e755fb39da,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 879266605078260744, guid: 0aa654d45d8ba1d40b24d1e755fb39da,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2114616452955906415, guid: 0aa654d45d8ba1d40b24d1e755fb39da,
+        type: 3}
+      propertyPath: m_Name
+      value: UI thin
+      objectReference: {fileID: 0}
     - target: {fileID: 2114616452853059680, guid: 0aa654d45d8ba1d40b24d1e755fb39da,
         type: 3}
       propertyPath: m_IsActive
@@ -778,11 +793,6 @@ PrefabInstance:
       propertyPath: ControllerButton
       value: 
       objectReference: {fileID: 3857811691885329729}
-    - target: {fileID: 2114616452841460370, guid: 0aa654d45d8ba1d40b24d1e755fb39da,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2114616453402851463, guid: 0aa654d45d8ba1d40b24d1e755fb39da,
         type: 3}
       propertyPath: spyController
@@ -810,11 +820,6 @@ PrefabInstance:
       propertyPath: ControllerButton
       value: 
       objectReference: {fileID: 4176317184467786566}
-    - target: {fileID: 2114616453669912507, guid: 0aa654d45d8ba1d40b24d1e755fb39da,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2114616453571805619, guid: 0aa654d45d8ba1d40b24d1e755fb39da,
         type: 3}
       propertyPath: m_havePropertiesChanged
@@ -845,11 +850,6 @@ PrefabInstance:
       propertyPath: ControllerButton
       value: 
       objectReference: {fileID: 6569977239179470199}
-    - target: {fileID: 879266605078260744, guid: 0aa654d45d8ba1d40b24d1e755fb39da,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 22299473995500047, guid: 0aa654d45d8ba1d40b24d1e755fb39da,
         type: 3}
       propertyPath: m_IsActive
@@ -971,16 +971,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3011942314590609167}
     m_Modifications:
-    - target: {fileID: 1100763476572689580, guid: 66d0dd0ede24b834184957d60d836215,
-        type: 3}
-      propertyPath: m_Name
-      value: Tablet
-      objectReference: {fileID: 0}
-    - target: {fileID: 1100763476572689580, guid: 66d0dd0ede24b834184957d60d836215,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4828477442360300524, guid: 66d0dd0ede24b834184957d60d836215,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1035,6 +1025,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -81.50098
+      objectReference: {fileID: 0}
+    - target: {fileID: 1100763476572689580, guid: 66d0dd0ede24b834184957d60d836215,
+        type: 3}
+      propertyPath: m_Name
+      value: Tablet
+      objectReference: {fileID: 0}
+    - target: {fileID: 1100763476572689580, guid: 66d0dd0ede24b834184957d60d836215,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 66d0dd0ede24b834184957d60d836215, type: 3}
