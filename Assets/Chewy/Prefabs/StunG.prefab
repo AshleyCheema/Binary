@@ -130,6 +130,7 @@ MonoBehaviour:
   isDetected: 0
   isStunned: 0
   IsSpawned: 0
+  tracker: {fileID: 0}
 --- !u!114 &8519871034857106576
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -147,7 +148,7 @@ MonoBehaviour:
   stunActive: 0
   stunDropped: 0
   stunAbility: {fileID: 11400000, guid: dcb674641ca9fc7498c21cc58a8a4d86, type: 2}
-  flash: {fileID: 312546652755104691, guid: 4d0d07280e019bf4b950e4016b056a09, type: 3}
+  flash: {fileID: 6136993007574470398}
   isSpawned: 0
 --- !u!82 &2321195348134607983
 AudioSource:
@@ -256,7 +257,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.052849818, y: 0.08025625, z: 0.18330896}
+  m_Size: {x: 0.05, y: 0.05, z: 0.05}
   m_Center: {x: 0, y: 0.008917552, z: 0.09165448}
 --- !u!1001 &5871736404160863565
 PrefabInstance:
@@ -330,6 +331,12 @@ PrefabInstance:
 --- !u!4 &6136993007574470399 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 312546652755104690, guid: 4d0d07280e019bf4b950e4016b056a09,
+    type: 3}
+  m_PrefabInstance: {fileID: 5871736404160863565}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &6136993007574470398 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 312546652755104691, guid: 4d0d07280e019bf4b950e4016b056a09,
     type: 3}
   m_PrefabInstance: {fileID: 5871736404160863565}
   m_PrefabAsset: {fileID: 0}
