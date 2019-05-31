@@ -59,6 +59,7 @@ public class SpyController : PlayerController
 
         if (currentState == SpyState.Dead)
         {
+            Velocity = Vector3.zero;
             return;
         }
         base.Update();
