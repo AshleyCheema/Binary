@@ -265,6 +265,23 @@ public class NO_CapturePoint : MonoBehaviour
         }
     }
 
+    private void OnTriggerStay(Collider other)
+    {
+        if (ClientManager.Instance != null)
+        {
+            if (other.tag == "Spy")
+            {
+                if (!currentSpies.Contains(other.gameObject))
+                {
+                    spyController = other.gameObject.GetComponentInChildren<SpyController>();
+                    spyController.cooldownScript.canHack = true;
+
+                    currentSpies.Add(other.gameObject);
+                }
+            }
+        }
+    }
+
     //enable the mini game ui, and set objects colours
     private void StartHacking()
     {
