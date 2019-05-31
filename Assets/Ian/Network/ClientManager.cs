@@ -775,8 +775,15 @@ public class ClientManager : NetworkManager
         aMsg.reader.SeekZero();
         Msg_ClientCaptureStats ccs = aMsg.ReadMessage<Msg_ClientCaptureStats>();
 
-        capturePoints[ccs.ID].GetComponent<NO_CapturePoint>().capturePercentage = 100.0f;
-        capturePoints[ccs.ID].GetComponent<NO_CapturePoint>().IsBeingCaptured = true;
+        if (ccs.CapturePercentage == 100)
+        {
+            capturePoints[ccs.ID].GetComponent<NO_CapturePoint>().capturePercentage = 100.0f;
+            capturePoints[ccs.ID].GetComponent<NO_CapturePoint>().IsBeingCaptured = true;
+        }
+        else
+        {
+            capturePoints[ccs.ID].GetComponent<NO_CapturePoint>().capturePercentage = ccs.CapturePercentage;
+        }
     }
 
     public void OnPingPong(NetworkMessage aMsg)

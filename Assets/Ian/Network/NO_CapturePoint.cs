@@ -160,6 +160,11 @@ public class NO_CapturePoint : MonoBehaviour
                         ClientManager.Instance.client.Send(MSGTYPE.CLIENT_CAPTURE_POINT, ccp);
                         ccp.ID = -1;
 
+                        Msg_ClientCaptureStats ccs = new Msg_ClientCaptureStats();
+                        ccs.CapturePercentage = (int)capturePercentage;
+                        ccs.ID = ID;
+                        ClientManager.Instance.client.Send(MSGTYPE.CLIENT_CAPTURE_PERCENTAGE, ccs);
+
                         captureAmount = baseCaptureAmount;
                     }
                 }
@@ -351,6 +356,11 @@ public class NO_CapturePoint : MonoBehaviour
                     ccp.ID = ID;
                     ClientManager.Instance.client.Send(MSGTYPE.CLIENT_CAPTURE_POINT, ccp);
                     ccp.ID = -1;
+
+                    Msg_ClientCaptureStats ccs = new Msg_ClientCaptureStats();
+                    ccs.CapturePercentage = (int)capturePercentage;
+                    ccs.ID = ID;
+                    ClientManager.Instance.client.Send(MSGTYPE.CLIENT_CAPTURE_PERCENTAGE, ccs);
 
                     captureAmount = baseCaptureAmount;
                 }

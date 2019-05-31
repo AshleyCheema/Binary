@@ -575,8 +575,15 @@ public class HostManager : NetworkManager
         aMsg.reader.SeekZero();
         Msg_ClientCaptureStats ccs = aMsg.ReadMessage<Msg_ClientCaptureStats>();
 
-        capturePoints[ccs.ID].GetComponent<NO_CapturePoint>().capturePercentage = 100.0f;
-        capturePoints[ccs.ID].GetComponent<NO_CapturePoint>().IsBeingCaptured = true;
+        if (ccs.CapturePercentage == 100.0f)
+        {
+            capturePoints[ccs.ID].GetComponent<NO_CapturePoint>().capturePercentage = 100.0f;
+            capturePoints[ccs.ID].GetComponent<NO_CapturePoint>().IsBeingCaptured = true;
+        }
+        else
+        {
+            capturePoints[ccs.ID].GetComponent<NO_CapturePoint>().capturePercentage = ccs.CapturePercentage;
+        }
 
         //Send(aMsg.conn.connectionId, MSGTYPE.CLIENT_CAPTURE_PERCENTAGE, ccs, false);
     }
