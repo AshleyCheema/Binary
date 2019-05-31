@@ -50,6 +50,7 @@ public class NO_CapturePoint : MonoBehaviour
     public GameObject[] objectsAround;
     private Coroutine c_lerpColor = null;
     private SpyController spyController;
+    [SerializeField]
     private bool localCanHack = false;
     private Msg_ClientCapaturePoint ccp = new Msg_ClientCapaturePoint();
 
@@ -367,8 +368,10 @@ public class NO_CapturePoint : MonoBehaviour
                 if (ClientManager.Instance.LocalPlayer.gameAvatar == other.gameObject)
                 {
                     miniGame.SetActive(false);
-                    spyController.cooldownScript.canHack = false;            
-                    spyController.isHacking = false;
+                    //spyController.cooldownScript.canHack = false;            
+                    //spyController.isHacking = false;
+                    ClientManager.Instance.LocalPlayer.gameAvatar.GetComponentInChildren<SpyController>().cooldownScript.canHack = false;
+                    ClientManager.Instance.LocalPlayer.gameAvatar.GetComponentInChildren<SpyController>().isHacking = false;
                     ishacking = false;
                     localCanHack = false;
                 }
