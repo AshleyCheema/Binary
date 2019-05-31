@@ -38,6 +38,8 @@ public class PlayerController : MonoBehaviour
     protected Rigidbody rb;
 
     private Vector3 velocity;
+    public Vector3 Velocity
+    { get { return velocity; } set { velocity = value; } }
 
     // Start is called before the first frame update
     public virtual void Start()
