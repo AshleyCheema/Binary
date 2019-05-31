@@ -740,9 +740,12 @@ public class ClientManager : NetworkManager
 
         foreach (var item in capturePoints)
         {
-            if(item.Value.GetComponent<NO_CapturePoint>().currentSpies.Contains(Players[cca.ConnectID].gameAvatar))
+            if (cca.ConnectID != mLocalPlayer.connectionId)
             {
-                item.Value.GetComponent<NO_CapturePoint>().currentSpies.Remove(Players[cca.ConnectID].gameAvatar);
+                if (item.Value.GetComponent<NO_CapturePoint>().currentSpies.Contains(Players[cca.ConnectID].gameAvatar))
+                {
+                    item.Value.GetComponent<NO_CapturePoint>().currentSpies.Remove(Players[cca.ConnectID].gameAvatar);
+                }
             }
             item.Value.GetComponent<NO_CapturePoint>().baseCaptureAmount = 5.0f;
             item.Value.GetComponent<NO_CapturePoint>().maxCaptureAmount = 5.0f;
