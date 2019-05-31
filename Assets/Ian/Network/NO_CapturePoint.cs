@@ -50,6 +50,7 @@ public class NO_CapturePoint : MonoBehaviour
     public GameObject[] objectsAround;
     private Coroutine c_lerpColor = null;
     private SpyController spyController;
+    private bool localCanHack = false;
     private Msg_ClientCapaturePoint ccp = new Msg_ClientCapaturePoint();
 
     //list of all spies in this capture point
@@ -88,7 +89,7 @@ public class NO_CapturePoint : MonoBehaviour
         if (Input.GetButtonDown("Hacking") && !IsCaptured && !ishacking)
         {
             //if the local player is within this capture point. Allow them to hack
-            if (currentSpies.Contains(ClientManager.Instance?.LocalPlayer.gameAvatar))
+            if (localCanHack)
             {
                 StartHacking();
 
@@ -260,6 +261,11 @@ public class NO_CapturePoint : MonoBehaviour
                 spyController = other.gameObject.GetComponentInChildren<SpyController>();
                 spyController.cooldownScript.canHack = true;
 
+                if(ClientManager.Instance.LocalPlayer.gameAvatar == other.gameObject)
+                {
+                    localCanHack = true;
+                }
+
                 currentSpies.Add(other.gameObject);
             }
         }
@@ -275,6 +281,11 @@ public class NO_CapturePoint : MonoBehaviour
                 {
                     spyController = other.gameObject.GetComponentInChildren<SpyController>();
                     spyController.cooldownScript.canHack = true;
+
+                    if (ClientManager.Instance.LocalPlayer.gameAvatar == other.gameObject)
+                    {
+                        localCanHack = true;
+                    }
 
                     currentSpies.Add(other.gameObject);
                 }
@@ -359,6 +370,7 @@ public class NO_CapturePoint : MonoBehaviour
                     spyController.cooldownScript.canHack = false;            
                     spyController.isHacking = false;
                     ishacking = false;
+                    localCanHack = false;
                 }
 
                 //if no spy is within capture point range
