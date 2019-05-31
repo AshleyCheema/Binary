@@ -33,8 +33,12 @@ public class VideoPlayers : MonoBehaviour
         //if server, invoke function
         if(HostManager.Instance != null)
         {
+            mercVideo.SetDirectAudioMute(0, true);
+            spyVideo.SetDirectAudioMute(0, true);
+
             mercVideo.enabled = false;
             spyVideo.enabled = false;
+            
             Invoke(nameof(VideoFinshed), 65.0f);
         }
     }
