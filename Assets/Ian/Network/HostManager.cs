@@ -518,9 +518,6 @@ public class HostManager : NetworkManager
         if (cs.state == SpyState.Dead)
         {
             MiniModule_GameOver.Instance.SpyDead(cs.connectId);
-
-            //send message to other clients
-
         }
     }
 
@@ -581,7 +578,7 @@ public class HostManager : NetworkManager
         capturePoints[ccs.ID].GetComponent<NO_CapturePoint>().capturePercentage = 100.0f;
         capturePoints[ccs.ID].GetComponent<NO_CapturePoint>().IsBeingCaptured = true;
 
-        Send(aMsg.conn.connectionId, MSGTYPE.CLIENT_CAPTURE_PERCENTAGE, ccs, false);
+        //Send(aMsg.conn.connectionId, MSGTYPE.CLIENT_CAPTURE_PERCENTAGE, ccs, false);
     }
 
     private void Update()

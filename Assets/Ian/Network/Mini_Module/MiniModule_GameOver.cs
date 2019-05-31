@@ -27,6 +27,10 @@ public class MiniModule_GameOver : Singleton<MiniModule_GameOver>
             {
                 foreach (var item in HostManager.Instance.capturePoints)
                 {
+                    if(item.Value.GetComponent<NO_CapturePoint>().currentSpies.Contains(HostManager.Instance.Players[a_spy].gameAvatar))
+                    {
+                        item.Value.GetComponent<NO_CapturePoint>().currentSpies.Remove(HostManager.Instance.Players[a_spy].gameAvatar);
+                    }
                     item.Value.GetComponent<NO_CapturePoint>().baseCaptureAmount = 5.0f;
                     item.Value.GetComponent<NO_CapturePoint>().maxCaptureAmount = 5.0f;
                     item.Value.GetComponent<NO_CapturePoint>().ResetCaptureAmount();
@@ -35,7 +39,7 @@ public class MiniModule_GameOver : Singleton<MiniModule_GameOver>
                 cca.ConnectID = a_spy;
                 cca.BaseCaptureAmount = 5.0f;
                 cca.MaxCaptureAmount = 5.0f;
-                HostManager.Instance.SendAll(MSGTYPE.CLIENT_CAPTURE_AMOUNT_OR, cca); ;
+                HostManager.Instance.SendAll(MSGTYPE.CLIENT_CAPTURE_AMOUNT_OR, cca);
             }
         }
 
