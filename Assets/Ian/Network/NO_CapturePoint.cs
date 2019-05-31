@@ -194,7 +194,7 @@ public class NO_CapturePoint : MonoBehaviour
                 //set all objects colour to clue
                 for (int i = 0; i < objectsAround.Length; i++)
                 {
-                    objectsAround[i].GetComponent<EmissionChange>().ColourChange(Color.blue);
+                    objectsAround[i].GetComponent<EmissionChange>().ColourChange(Color.cyan);
                 }
 
                 //if we are the host/server
