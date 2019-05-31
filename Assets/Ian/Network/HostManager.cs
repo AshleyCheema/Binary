@@ -585,7 +585,7 @@ public class HostManager : NetworkManager
             capturePoints[ccs.ID].GetComponent<NO_CapturePoint>().capturePercentage = ccs.CapturePercentage;
         }
 
-        //Send(aMsg.conn.connectionId, MSGTYPE.CLIENT_CAPTURE_PERCENTAGE, ccs, false);
+        SendAll(MSGTYPE.CLIENT_CAPTURE_PERCENTAGE, ccs);
     }
 
     private void Update()
