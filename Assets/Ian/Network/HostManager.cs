@@ -62,6 +62,7 @@ public class HostManager : NetworkManager
     public void StartNewServer()
     {
         StartServer();
+        connectionConfig.DisconnectTimeout = 10000;
 
         Debug.Log("Server stated");
 

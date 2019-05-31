@@ -85,6 +85,7 @@ public class ClientManager : NetworkManager
             networkAddress = aIPAdress;
         }
         StartClient();
+        connectionConfig.DisconnectTimeout = 10000;
 
         //register all handlers
         this.client.RegisterHandler(MSGTYPE.ADD_NEW_LOBBY_PLAYER, OnReceiveNewPlayerLobby);
