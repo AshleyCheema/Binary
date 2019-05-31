@@ -53,7 +53,7 @@ public class NO_CapturePoint : MonoBehaviour
     private Msg_ClientCapaturePoint ccp = new Msg_ClientCapaturePoint();
 
     //list of all spies in this capture point
-    private List<GameObject> currentSpies = new List<GameObject>();
+    public List<GameObject> currentSpies = new List<GameObject>();
 
     [SerializeField]
     private GameObject miniGame;
@@ -85,7 +85,7 @@ public class NO_CapturePoint : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        if(Input.GetButtonDown("Hacking") && !IsCaptured && !ishacking)
+        if (Input.GetButtonDown("Hacking") && !IsCaptured && !ishacking)
         {
             //if the local player is within this capture point. Allow them to hack
             if (currentSpies.Contains(ClientManager.Instance?.LocalPlayer.gameAvatar))
@@ -103,7 +103,7 @@ public class NO_CapturePoint : MonoBehaviour
             }
         }
         //another spy is capturing
-        if(Input.GetButtonDown("Hacking") && !IsCaptured && IsBeingCaptured && !ishacking)
+        if (Input.GetButtonDown("Hacking") && !IsCaptured && IsBeingCaptured && !ishacking)
         {
             ishacking = true;
             GetComponent<MeshRenderer>().material.color = Color.red;
@@ -128,6 +128,44 @@ public class NO_CapturePoint : MonoBehaviour
             }
         }
 
+        //check if spy is dead
+        if (ClientManager.Instance != null)
+        {
+            if (currentSpies.Contains(ClientManager.Instance.LocalPlayer.gameAvatar))
+            {
+                if (ClientManager.Instance.LocalPlayer.gameAvatar.GetComponentInChildren<SpyController>().CurrentState == SpyState.Dead)
+                {
+                    currentSpies.Remove(ClientManager.Instance.LocalPlayer.gameAvatar);
+
+                    bool reset = true;
+                    if (currentSpies.Count > 0)
+                    {
+                        reset = false;
+                    }
+                    miniGame.SetActive(false);
+                    spyController.cooldownScript.canHack = false;
+                    spyController.isHacking = false;
+                    ishacking = false;
+
+                    //if no spy is within capture point range
+                    //set IsBeingCaptured to false and send message to other clients
+                    if (reset)
+                    {
+                        GetComponent<MeshRenderer>().material.color = Color.white;
+                        IsBeingCaptured = false;
+
+                        ccp.connectId = ClientManager.Instance.LocalPlayer.connectionId;
+                        ccp.IsBeingCaptured = isBeingCaptured;
+                        ccp.ID = ID;
+                        ClientManager.Instance.client.Send(MSGTYPE.CLIENT_CAPTURE_POINT, ccp);
+                        ccp.ID = -1;
+
+                        captureAmount = baseCaptureAmount;
+                    }
+                }
+            }
+        }
+
         //if capture ibeing captured
         //increase capture percentage
         if (isBeingCaptured)
@@ -140,7 +178,7 @@ public class NO_CapturePoint : MonoBehaviour
                 PlayerStats.Instance.CaptureedAmount += captureAmount * Time.deltaTime;
             }
 
-            if(tm != null)
+            if (tm != null)
             {
                 tm.text = ((int)capturePercentage).ToString() + "%";
             }
@@ -167,7 +205,7 @@ public class NO_CapturePoint : MonoBehaviour
                 }
                 else
                 {
-                    if(ClientManager.Instance != null)
+                    if (ClientManager.Instance != null)
                     {
                         Msg_ClientCaptureStats ccs = new Msg_ClientCaptureStats();
                         ccs.ID = ID;
@@ -177,7 +215,7 @@ public class NO_CapturePoint : MonoBehaviour
                 }
             }
         }
-    }
+    } 
 
     //increase capture amount per second
     public void IncreaseCaptureAmount(bool aSend = true)

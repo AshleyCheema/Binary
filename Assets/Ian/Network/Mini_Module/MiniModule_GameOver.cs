@@ -31,6 +31,7 @@ public class MiniModule_GameOver : Singleton<MiniModule_GameOver>
                     item.Value.GetComponent<NO_CapturePoint>().maxCaptureAmount = 5.0f;
                 }
                 Msg_ClientCaptureAmountOR cca = new Msg_ClientCaptureAmountOR();
+                cca.ConnectID = a_spy;
                 cca.BaseCaptureAmount = 5.0f;
                 cca.MaxCaptureAmount = 5.0f;
                 HostManager.Instance.SendAll(MSGTYPE.CLIENT_CAPTURE_AMOUNT_OR, cca); ;
