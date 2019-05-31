@@ -107,24 +107,28 @@ public class NO_CapturePoint : MonoBehaviour
         //another spy is capturing
         if (Input.GetButtonDown("Hacking") && !IsCaptured && IsBeingCaptured && !ishacking)
         {
-            ishacking = true;
-            GetComponent<MeshRenderer>().material.color = Color.red;
-
-            //null check
-            if (spyController != null)
+            //if the local player is within this capture point. Allow them to hack
+            if (localCanHack)
             {
-                //spyController.cooldownScript.gameObject.SetActive(false);
-                spyController.isHacking = true;
+                ishacking = true;
+                GetComponent<MeshRenderer>().material.color = Color.red;
 
-                //if spy contoller is local player 
-                //active mini game
-                if (ClientManager.Instance.LocalPlayer.gameAvatar == spyController.transform.parent.gameObject)
+                //null check
+                if (spyController != null)
                 {
-                    miniGame.SetActive(true);
-                    miniGame.GetComponentInChildren<CapturePointMiniGame>().Show();
-                    if (c_lerpColor == null)
+                    //spyController.cooldownScript.gameObject.SetActive(false);
+                    spyController.isHacking = true;
+
+                    //if spy contoller is local player 
+                    //active mini game
+                    if (ClientManager.Instance.LocalPlayer.gameAvatar == spyController.transform.parent.gameObject)
                     {
-                        //c_lerpColor = StartCoroutine(LerpColor(Color.red, Color.green));
+                        miniGame.SetActive(true);
+                        miniGame.GetComponentInChildren<CapturePointMiniGame>().Show();
+                        if (c_lerpColor == null)
+                        {
+                            //c_lerpColor = StartCoroutine(LerpColor(Color.red, Color.green));
+                        }
                     }
                 }
             }
