@@ -29,6 +29,7 @@ public class MiniModule_GameOver : Singleton<MiniModule_GameOver>
                 {
                     item.Value.GetComponent<NO_CapturePoint>().baseCaptureAmount = 5.0f;
                     item.Value.GetComponent<NO_CapturePoint>().maxCaptureAmount = 5.0f;
+                    item.Value.GetComponent<NO_CapturePoint>().ResetCaptureAmount();
                 }
                 Msg_ClientCaptureAmountOR cca = new Msg_ClientCaptureAmountOR();
                 cca.ConnectID = a_spy;

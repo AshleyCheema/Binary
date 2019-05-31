@@ -744,6 +744,7 @@ public class ClientManager : NetworkManager
             }
             item.Value.GetComponent<NO_CapturePoint>().baseCaptureAmount = 5.0f;
             item.Value.GetComponent<NO_CapturePoint>().maxCaptureAmount = 5.0f;
+            item.Value.GetComponent<NO_CapturePoint>().ResetCaptureAmount();
         }
     }
 
