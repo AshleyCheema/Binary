@@ -109,6 +109,7 @@ public class ClientManager : NetworkManager
         this.client.RegisterHandler(MSGTYPE.CLIENT_DESTROY_HEALTH, OnReceiveDestroyHealth);
         this.client.RegisterHandler(MSGTYPE.CLIENT_CAPTURE_AMOUNT_OR, OnReceiveCaptureAmountOR);
         this.client.RegisterHandler(MSGTYPE.CLIENT_DISCONNECT, OnReceiveClientDisconnect);
+        this.client.RegisterHandler(MSGTYPE.CLIENT_CAPTURE_PERCENTAGE, OnReceiveCapturePercentage);
 
         this.client.RegisterHandler(MSGTYPE.PING_PONG, OnPingPong);
     }
@@ -764,6 +765,15 @@ public class ClientManager : NetworkManager
         }
 
         players.Remove(cd.ConnectID);
+    }
+
+    public void OnReceiveCapturePercentage(NetworkMessage aMsg)
+    {
+        aMsg.reader.SeekZero();
+        Msg_ClientCaptureStats ccs = aMsg.ReadMessage<Msg_ClientCaptureStats>();
+
+        capturePoints[ccs.ID].GetComponent<NO_CapturePoint>().capturePercentage = 100.0f;
+        capturePoints[ccs.ID].GetComponent<NO_CapturePoint>().IsBeingCaptured = true;
     }
 
     public void OnPingPong(NetworkMessage aMsg)
