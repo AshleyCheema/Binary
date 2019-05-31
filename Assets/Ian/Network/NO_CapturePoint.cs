@@ -270,16 +270,16 @@ public class NO_CapturePoint : MonoBehaviour
     {
         GetComponent<MeshRenderer>().material.color = Color.red;
 
-        if (spyController != null)
-        {
+        //if (spyController != null)
+        //{
             spyController.isHacking = true;
 
-            if (ClientManager.Instance.LocalPlayer.gameAvatar == spyController.transform.parent.gameObject)
-            {
+            //if (ClientManager.Instance.LocalPlayer.gameAvatar)
+            //{
                 miniGame.SetActive(true);
                 miniGame.GetComponentInChildren<CapturePointMiniGame>().Show();
-            }
-        }
+            //}
+        //}
         ishacking = true;
         IsBeingCaptured = true;//ccp.IsBeingCaptured;
     }
