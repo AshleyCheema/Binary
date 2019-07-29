@@ -8,7 +8,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FogOgWarMesh : MonoBehaviour
+public class FogOfWarMesh : MonoBehaviour
 {
     public float viewRadius;
     [Range(0, 360)]
